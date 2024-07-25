@@ -20,7 +20,7 @@ const EMPTY_TENANT_DATA: ITentant = {
   name: "",
   password: "",
   role: "ADMIN",
-  tenantName: "",
+  companyName: "",
   userName: "",
   image: "",
 };
@@ -104,7 +104,7 @@ export default function RegisterForm() {
             />
             <FormField
               control={form.control}
-              name="tenantName"
+              name="companyName"
               render={({ field }) => (
                 <FormItem>
                   <Label htmlFor="email">Company Name</Label>

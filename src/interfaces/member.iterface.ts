@@ -12,7 +12,8 @@ export const ZodTenantSchema = z.object({
   role: z.enum(ROLES_VALUES),
   userName: z.string(),
   password: z.string(),
-  tenantName: z.string(),
+  tenantName: z.string().optional(),
+  companyName: z.string(),
   image: z.string().optional(),
 });
 export type ITentant = z.infer<typeof ZodTenantSchema>;
