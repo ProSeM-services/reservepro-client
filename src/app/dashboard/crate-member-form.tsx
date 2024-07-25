@@ -33,6 +33,7 @@ const INITIAL_MEMBER_DATA: IMember = {
   name: "",
   password: "",
   role: "BASIC",
+  companyName: "",
   userName: "",
   image: "",
   phone: "",
