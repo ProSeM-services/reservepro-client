@@ -168,7 +168,7 @@ export default function RegisterForm() {
           <Button type="submit" className="w-full text-white">
             Create account
           </Button>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" disabled>
             Sign Up with Google
           </Button>
         </div>

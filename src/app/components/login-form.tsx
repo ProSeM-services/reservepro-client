@@ -91,7 +91,7 @@ export default function LoginForm() {
           <Button type="submit" className="w-full text-white">
             Login
           </Button>
-          <Button variant="outline" className="w-full">
+          <Button variant="outline" className="w-full" disabled>
             Login with Google
           </Button>
         </div>
