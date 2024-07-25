@@ -4,6 +4,7 @@ import "./globals.css";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/app/components/SessionProvider";
 import { ThemeProvider } from "./components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <main className="flex ">{children}</main>
+            <Toaster />
           </ThemeProvider>
         </SessionProvider>
       </body>

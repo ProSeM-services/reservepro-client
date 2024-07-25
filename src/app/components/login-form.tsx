@@ -11,8 +11,10 @@ import { Form, FormField, FormItem } from "@/components/ui/form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect, useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 export default function LoginForm() {
   const router = useRouter();
+  const { toast } = useToast();
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const res = await signIn("credentials", {
       email: values.email,
@@ -21,6 +23,12 @@ export default function LoginForm() {
     });
     if (res?.ok) {
       router.push("/dashboard");
+    } else {
+      toast({
+        title: "Invalid credentials",
+        description: "Please try again",
+        variant: "destructive",
+      });
     }
   }
   const formSchema = z.object({

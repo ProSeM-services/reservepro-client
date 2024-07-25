@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { ITentant, ZodTenantSchema } from "@/interfaces/member.iterface";
 import { AuthServices } from "@/services/auth.services";
+import { useToast } from "@/components/ui/use-toast";
 
 const EMPTY_TENANT_DATA: ITentant = {
   email: "",
@@ -31,6 +32,8 @@ export default function RegisterForm() {
     defaultValues: EMPTY_TENANT_DATA,
   });
 
+  const { toast } = useToast();
+
   const onSubmit = async (values: ITentant) => {
     try {
       await AuthServices.register(values);
@@ -39,7 +42,12 @@ export default function RegisterForm() {
       //@ts-ignore
       if (error.response.data.message) {
         //@ts-ignore
-        alert(error.response.data.message);
+        const message = error.response.data.message;
+        toast({
+          title: "Error at credentials",
+          description: message,
+          variant: "destructive",
+        });
       }
     }
   };
