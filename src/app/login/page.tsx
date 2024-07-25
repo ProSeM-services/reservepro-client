@@ -10,7 +10,7 @@ export default function LoginPage() {
         <div className="  lg:hidden  -z-0 ">
           <BackgroundMark opacity={5} />
         </div>
-        <div className="mx-auto grid w-[450px] gap-6 z-10">
+        <div className="mx-auto grid md:w-[450px] max-md:w-5/6  gap-6 z-10">
           <div className="grid gap-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
             <p className="text-balance text-muted-foreground">
