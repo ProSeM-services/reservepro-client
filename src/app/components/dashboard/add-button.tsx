@@ -34,7 +34,7 @@ export default function AddButton({ type }: AddButtonProps) {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="bg-foreground/85 p-1 px-4 rounded-md flex items-center text-xs font-semibold gap-2 text-background">
+        <div className="bg-secondary text-primary hover:bg-sky-100 transition-all duration-150 p-1 px-4 rounded-md flex items-center text-xs font-semibold gap-2 ">
           {btnText}
           <PlusIcon className="size-4 " />
         </div>

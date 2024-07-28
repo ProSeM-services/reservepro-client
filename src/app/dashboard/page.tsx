@@ -17,28 +17,23 @@ export default async function page() {
         </strong>
       </p>
       <div className="flex py-4 gap-4">
-        <Suspense fallback={"Loading ..."}>
-          <DashboardStats type="company" />
-        </Suspense>
-        <Suspense fallback={"Loading ..."}>
-          <DashboardStats type="member" />
-        </Suspense>
-      </div>
-      <hr />
-      <div className="flex  flex-col py-2 ">
-        <p className="font-bold text-lg text-accent-foreground">Sucursales</p>
+        <div className="w-1/2 bg-background p-2 border border-accent rounded-md">
+          <Suspense fallback={"Loading ..."}>
+            <DashboardStats type="company" />
+            <Suspense fallback={"Loading ..."}>
+              <CompanyList />
+            </Suspense>
+          </Suspense>
+        </div>
+        <div className="w-1/2 bg-background p-2 border border-accent rounded-md">
+          <Suspense fallback={"Loading ..."}>
+            <DashboardStats type="member" />
+          </Suspense>
 
-        <Suspense fallback={"Loading ..."}>
-          <CompanyList />
-        </Suspense>
-      </div>
-
-      <div className="flex  flex-col py-2">
-        <p className="font-bold text-lg text-accent-foreground">Miembros</p>
-
-        <Suspense fallback={"Loading ..."}>
-          <MemberList />
-        </Suspense>
+          <Suspense fallback={"Loading ..."}>
+            <MemberList />
+          </Suspense>
+        </div>
       </div>
     </div>
   );
