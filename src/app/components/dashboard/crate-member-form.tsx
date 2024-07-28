@@ -56,7 +56,7 @@ export default function MemberForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 text-left"
+        className="flex flex-col gap-2 text-left  h-full max-h-full overflow-auto"
       >
         <section className=" space-y-3">
           <div className="flex flex-col ">

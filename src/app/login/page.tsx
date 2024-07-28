@@ -8,7 +8,7 @@ export default function LoginPage() {
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]  h-screen bg-background ">
       <div className="flex items-center justify-center py-12  h-full ">
         <div className="  lg:hidden  -z-0 ">
-          <BackgroundMark opacity={5} />
+          <BackgroundMark />
         </div>
         <div className="mx-auto grid md:w-[450px] max-md:w-5/6  gap-6 z-10">
           <div className="grid gap-2 text-center">
@@ -28,7 +28,7 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="hidden  lg:block relative ">
-        <BackgroundMark opacity={5} />
+        <BackgroundMark />
       </div>
     </div>
   );

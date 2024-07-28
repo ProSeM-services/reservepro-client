@@ -11,8 +11,6 @@ export const middleware: NextMiddleware = async (req) => {
 
       return NextResponse.redirect(url);
     }
-
-    console.log("en middleware ===> ", session.user);
   } else {
     if (session) {
       const url = req.nextUrl.clone();

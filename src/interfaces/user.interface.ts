@@ -3,6 +3,7 @@ export const ROLES_VALUES = ["BASIC", "ADMIN"] as const;
 export const UserZodSchema = z.object({
   _id: z.string(),
   name: z.string(),
+  lastName: z.string(),
   email: z.string(),
   role: z.enum(ROLES_VALUES),
   image: z.string().optional(),

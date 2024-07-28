@@ -1,6 +1,12 @@
 "use client";
 
-import { HomeIcon, GroupIcon, DockIcon, HouseIcon } from "lucide-react";
+import {
+  HomeIcon,
+  GroupIcon,
+  DockIcon,
+  BellElectric,
+  FactoryIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,13 +18,14 @@ const links = [
     icon: DockIcon,
   },
   { name: "Customers", href: "/dashboard/customers", icon: GroupIcon },
-  { name: "Comapny", href: "/dashboard/company", icon: HouseIcon },
+  { name: "Company", href: "/dashboard/company", icon: FactoryIcon },
+  { name: "Services", href: "/dashboard/services", icon: BellElectric },
 ];
 
 export default function NavLinks() {
   const pathname = usePathname();
   return (
-    <>
+    <section className="flex grow flex-row max-md:justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
@@ -34,6 +41,6 @@ export default function NavLinks() {
           </Link>
         );
       })}
-    </>
+    </section>
   );
 }

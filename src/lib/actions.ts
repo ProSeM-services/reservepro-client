@@ -1,9 +1,11 @@
 "use server";
 import { authOptions } from "@/config/auth.config";
 import { setAuthInterceptor } from "@/config/axios.config";
+import { ICompany, ICreateCompany } from "@/interfaces";
 import { IMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
+import axios from "axios";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
@@ -22,6 +24,24 @@ export async function getComapnies() {
   revalidatePath("/dashboard");
   return companies;
 }
+
+export async function companiesCount() {
+  await setAuthtoken();
+  const count = await CompanyServices.getCount();
+  revalidatePath("/dashboard");
+  return count;
+}
+export async function membersCount() {
+  await setAuthtoken();
+  const count = await MemberServices.getCount();
+  revalidatePath("/dashboard");
+  return count;
+}
+export async function getCompanyData(id: string) {
+  await setAuthtoken();
+  const companies = await CompanyServices.getCopanyById(id);
+  return companies;
+}
 export async function getMembers() {
   await setAuthtoken();
 
@@ -36,6 +56,13 @@ export async function createMember(data: IMember) {
 
   return res;
 }
+export async function createCompany(data: ICreateCompany) {
+  await setAuthtoken();
+  const res = await CompanyServices.createcompany(data);
+  revalidatePath("/dashboard");
+
+  return res;
+}
 
 export const clearCookies = () => {
   const cookieStore = cookies();
@@ -44,4 +71,30 @@ export const clearCookies = () => {
 
   cookiesNames.forEach((e) => cookieStore.delete(e));
   console.log(cookiesNames);
+};
+
+export const getGeocodeLocation = async function (address: string) {
+  try {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json`,
+      {
+        params: {
+          address,
+          key: process.env.NEXT_PUBLIC_APIMAPS,
+        },
+      }
+    );
+
+    if (response.data.status !== "OK") {
+      throw new Error(`Geocodificación fallida: ${response.data.status}`);
+    }
+
+    const location = response.data.results[0].geometry.location;
+    return {
+      lat: location.lat,
+      lng: location.lng,
+    };
+  } catch (error) {
+    throw new Error("Error en la geocodificación: ");
+  }
 };

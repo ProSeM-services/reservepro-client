@@ -28,7 +28,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         className={`
             truncate rounded-xl bg-accent/15 px-4 py-8 text-center text-xl`}
       >
-        {company.address}
+        {company.address.value}
       </p>
     </div>
   );
@@ -38,7 +38,6 @@ interface MemberCardProps {
   member: IMember;
 }
 export function MemberCard({ member }: MemberCardProps) {
-  const router = useRouter();
   return (
     <div className="bg-accent flex gap-4 h-40 w-80 rounded-md items-center p-2 max-md:flex-col  max-md:w-full">
       <UserCircle2 className="size-24 " strokeWidth={1} />
@@ -46,7 +45,7 @@ export function MemberCard({ member }: MemberCardProps) {
         <p className="text-sm ml-auto bg-yellow-400/85 text-center rounded-sm px-4">
           {member.role}
         </p>
-        <p className="text-md font-medium">
+        <p className="text-md font-medium overflow-hidden text-ellipsis whitespace-nowrap w-full ">
           {member.name}, {member.lastName}
         </p>
         <div className=" text-sm overflow-hidden text-ellipsis whitespace-nowrap w-full">

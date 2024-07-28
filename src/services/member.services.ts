@@ -11,6 +11,11 @@ export class MemberServices {
       console.log(error);
     }
   }
+  static async getCount(): Promise<number> {
+    const res = await axiosInstance.get(`${BASE_URL}/members/count`);
+
+    return res.data;
+  }
 
   static async createMember(data: IMember) {
     const res = await axiosInstance.post(`${BASE_URL}/members`, data);

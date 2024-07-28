@@ -1,10 +1,7 @@
-import React, { Suspense } from "react";
+import React from "react";
 
-export default function page() {
+export default function Page() {
   return (
-    <div>
-      company list
-      <Suspense fallback={"loading"}></Suspense>
-    </div>
+    <section className="flex gap-2 bg-accent h-full flex-grow rounded-xl"></section>
   );
 }
