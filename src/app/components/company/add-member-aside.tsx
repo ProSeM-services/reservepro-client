@@ -8,7 +8,6 @@ import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function AddMemberAside({ company }: { company: ICompany }) {
-  if (!company._id) return null;
   const [members, setMembers] = useState<IMember[]>([]);
   const [selecetedMembers, setSelectedMembers] = useState<string[]>([]);
   useEffect(() => {
@@ -50,6 +49,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
       });
     }
   };
+  if (!company._id) return null;
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto re ">
       {members && !members.length

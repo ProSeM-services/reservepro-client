@@ -57,8 +57,8 @@ export default function Filter() {
             <SelectGroup>
               <SelectLabel>{"Categorias"}</SelectLabel>
               {CATEGORY_VALUES.map((cat) => (
-                <SelectItem value={cat}>
-                  <div key={cat}>
+                <SelectItem value={cat} key={cat}>
+                  <div>
                     <CategoryCard
                       category={cat}
                       selected={categoryFilter === cat}

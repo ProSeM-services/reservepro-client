@@ -17,7 +17,10 @@ export default async function SearchTable({
   return (
     <section className="  grid grid-cols-3 gap-2 flex-wrap max-w-full w-full  ">
       {companies?.map((company) => (
-        <div className=" flex flex-col justify-center items-center gap-3 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    h-40 bg-white max-lg:w-full ">
+        <div
+          className=" flex flex-col justify-center items-center gap-3 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    h-40 bg-white max-lg:w-full "
+          key={company._id}
+        >
           <section className="flex w-full flex-col text-[14px]">
             <div className="flex items-center gap-2  font-bold ">
               <HomeIcon className=" size-4" />
@@ -43,7 +46,11 @@ export default async function SearchTable({
             </div>
             <div className="flex items-center gap-2 w-full max-w-full overflow-y-auto my-2 text-[11px]  ">
               {company.category.map((category) => (
-                <CategoryCard category={category} selected={false} />
+                <CategoryCard
+                  category={category}
+                  selected={false}
+                  key={category}
+                />
               ))}
             </div>
           </section>
