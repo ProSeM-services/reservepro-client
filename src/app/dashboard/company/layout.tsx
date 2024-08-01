@@ -6,8 +6,8 @@ export default async function Page({ children }: PropsWithChildren) {
   const allComapnies = await getComapnies();
 
   return (
-    <section className="flex max-md:flex-col gap-2  h-full">
-      <div className="flex flex-col gap-4 w-1/4 max-md:w-full">
+    <section className="flex max-lg:flex-col gap-2  h-full">
+      <div className="flex flex-col gap-4 w-1/4 max-lg:w-full">
         <p>Sucursales</p>
         <hr />
 
@@ -23,7 +23,7 @@ export default async function Page({ children }: PropsWithChildren) {
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full max-w-[75%]">
+      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full lg:max-w-[75%] ">
         {children}
       </div>
     </section>

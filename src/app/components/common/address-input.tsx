@@ -8,7 +8,8 @@ import React, {
 } from "react";
 import { Input } from "@/components/ui/input";
 import { MapPinIcon, MapPinOffIcon } from "lucide-react";
-import DynamicMap from "./dynamic-map";
+import DynamicMap from "../dashboard/dynamic-map";
+import { useSearchParams } from "next/navigation";
 
 interface Prediction {
   place_id: string;
@@ -17,9 +18,15 @@ interface Prediction {
 
 interface AddressInputProps {
   handleSelect: (address: string) => void;
+  onlyInput?: boolean;
 }
-export default function AddressInput({ handleSelect }: AddressInputProps) {
-  const [query, setQuery] = useState("");
+export function AddressInput({
+  handleSelect,
+  onlyInput = false,
+}: AddressInputProps) {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const [query, setQuery] = useState(params.get("city") || "");
   const [mapValue, setMapValue] = useState("");
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -117,7 +124,7 @@ export default function AddressInput({ handleSelect }: AddressInputProps) {
   }, []);
 
   return (
-    <div className="relative w-full space-y-2" ref={containerRef}>
+    <div className="relative w-full space-y-2 " ref={containerRef}>
       <Input
         type="text"
         value={query}
@@ -151,18 +158,20 @@ export default function AddressInput({ handleSelect }: AddressInputProps) {
         </ul>
       )}
 
-      <div className="size-80 w-full bg-accent rounded-md  ">
-        {mapValue.length ? (
-          <div className="size-full">
-            <DynamicMap address={mapValue} />
-          </div>
-        ) : (
-          <div className="flex flex-col items-center justify-center w-full h-full text-sm gap-4 ">
-            <MapPinOffIcon />
-            <p>Seleccione una dirección para verla en el mapa</p>
-          </div>
-        )}
-      </div>
+      {!onlyInput ? (
+        <div className="size-80 w-full bg-accent rounded-md  ">
+          {mapValue.length ? (
+            <div className="size-full">
+              <DynamicMap address={mapValue} />
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center w-full h-full text-sm gap-4 ">
+              <MapPinOffIcon />
+              <p>Seleccione una dirección para verla en el mapa</p>
+            </div>
+          )}
+        </div>
+      ) : null}
     </div>
   );
 }

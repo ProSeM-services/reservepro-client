@@ -1,7 +1,7 @@
 "use server";
 import { authOptions } from "@/config/auth.config";
 import { setAuthInterceptor } from "@/config/axios.config";
-import { ICompany, ICreateCompany } from "@/interfaces";
+import { IAddMember, ICompany, ICreateCompany } from "@/interfaces";
 import { IMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
@@ -45,9 +45,15 @@ export async function getCompanyData(id: string) {
 export async function getMembers() {
   await setAuthtoken();
 
-  const companies = await MemberServices.getMembers();
+  const members = await MemberServices.getMembers();
   revalidatePath("/dashboard");
-  return companies;
+  return members;
+}
+export async function getFreeMembers() {
+  await setAuthtoken();
+
+  const members = await MemberServices.getFree();
+  return members;
 }
 export async function createMember(data: IMember) {
   await setAuthtoken();
@@ -63,14 +69,18 @@ export async function createCompany(data: ICreateCompany) {
 
   return res;
 }
+export async function addMemberToCompany(data: IAddMember) {
+  await setAuthtoken();
+  const res = await CompanyServices.addMember(data);
+  revalidatePath("/dashboard");
+  return res;
+}
 
 export const clearCookies = () => {
   const cookieStore = cookies();
   const cookiesNames = cookieStore.getAll().map((cookie) => cookie.name);
-  console.log(cookiesNames);
 
   cookiesNames.forEach((e) => cookieStore.delete(e));
-  console.log(cookiesNames);
 };
 
 export const getGeocodeLocation = async function (address: string) {

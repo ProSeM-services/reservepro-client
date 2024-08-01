@@ -9,8 +9,8 @@ export default async function CompanyList() {
   return (
     <div className="  max-h-[30vh]  overflow-y-auto ">
       {companies.length === 0 ? (
-        <div className="bg-accent    h-52 w-80 rounded-md flex flex-col items-center justify-center   ">
-          <HousePlugIcon className="size-10" />
+        <div className="bg-accent     p-4 py-8 w-full rounded-md flex flex-col items-center justify-center text-center text-sm ">
+          <HousePlugIcon className="size-8" />
           No tenes surucsales creadas{" "}
         </div>
       ) : (

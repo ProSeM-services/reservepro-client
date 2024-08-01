@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Category, CATEGORY_VALUES } from "@/interfaces/categeory.interface";
 import CategoryCard from "./category-card";
-import AddressInput from "./search-map";
+import { AddressInput } from "../common/address-input";
 import { useToast } from "@/components/ui/use-toast";
 import { createCompany } from "@/lib/actions";
 
@@ -38,11 +38,8 @@ export default function CompanyForm() {
   });
 
   const onSubmit = async (values: ICreateCompany) => {
-    console.log("values", values);
-
     const company = await createCompany(values);
 
-    console.log({ company });
     toast({
       title: "Sucursal creada exitosamente!",
       description: `Se agregó ${values.name} a tu lista de sucursales`,

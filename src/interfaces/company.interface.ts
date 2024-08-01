@@ -34,3 +34,9 @@ export const CreateCompanyZodSchema = z.object({
 
 export type ICompany = z.infer<typeof CompanyZodSchema>;
 export type ICreateCompany = z.infer<typeof CreateCompanyZodSchema>;
+
+export const AddMemberSchema = z.object({
+  companyId: z.string(),
+  memberId: z.string(),
+});
+export type IAddMember = z.infer<typeof AddMemberSchema>;

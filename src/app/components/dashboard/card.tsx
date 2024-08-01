@@ -17,7 +17,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
         <span className="  font-medium">{company.name}</span>
         <p
           className={`
-            truncate rounded-xl bg-accent/15  text-gray-400   w-80 text-left`}
+            truncate rounded-xl bg-accent/15  text-gray-400   w-80 max-lg:w-56 text-left`}
         >
           {company.address.value}
         </p>

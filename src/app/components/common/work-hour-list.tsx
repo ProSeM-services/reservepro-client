@@ -16,7 +16,7 @@ export default function WorkhourList({
     { short: "sab", long: "sábado" },
   ];
   return (
-    <div className={`flex w-full bg-primary text-background `}>
+    <div className={`flex w-full bg-accent  `}>
       {worhHours.map(({ day, segments }) => (
         <div
           key={day + segments.length}
@@ -24,12 +24,12 @@ export default function WorkhourList({
         >
           <p className="border w-full text-center p-2 ">{DAYS[day].short}</p>
           <div className="flex flex-col gap-2 py-4 font-light ">
-            {/* {segments.map((seg) => (
+            {segments.map((seg) => (
               <div className="">
-                <div>{seg.startime}</div>
-                <div>{seg.endTime}</div>
+                <div>{seg.startime} hs</div>
+                <div>{seg.endTime} hs</div>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       ))}

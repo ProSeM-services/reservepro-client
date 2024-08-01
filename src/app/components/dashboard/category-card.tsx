@@ -82,14 +82,14 @@ export default function CategoryCard({
       <div
         className={`${
           selected ? "bg-primary text-white" : "bg-muted"
-        } text-foreground p-2 rounded-md transition-all duration-200 cursor-pointer  flex  items-center gap-2 `}
+        } text-foreground p-2 rounded-md transition-all duration-200 cursor-pointer  flex  items-center gap-2 text-nowrap `}
       >
         <Icon className="size-4" strokeWidth={1} />
         {category}
       </div>
       {selected && (
-        <div className="bg-background border border-primary text-primary absolute size-4 rounded-full flex items-center justify-center -top-1 -right-1">
-          <Check className="size-3" />
+        <div className="bg-background border border-primary text-primary absolute size-4 rounded-full flex items-center justify-center -top-0 -right-0">
+          <Check className="size-2" />
         </div>
       )}
     </div>

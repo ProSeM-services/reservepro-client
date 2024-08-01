@@ -1,5 +1,5 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
-import { ICompany, ICreateCompany } from "@/interfaces";
+import { IAddMember, ICompany, ICreateCompany } from "@/interfaces";
 
 export class CompanyServices {
   static async getCompanies(): Promise<ICompany[]> {
@@ -12,24 +12,23 @@ export class CompanyServices {
 
     return res.data;
   }
-  static async getCopanyById(id: string): Promise<ICompany | undefined> {
-    try {
-      const res = await axiosInstance.get(`${BASE_URL}/company/details/${id}`);
 
-      return res.data;
-    } catch (error) {
-      console.log(error);
-    }
+  static async getCopanyById(id: string): Promise<ICompany> {
+    const res = await axiosInstance.get(`${BASE_URL}/company/details/${id}`);
+
+    return res.data;
   }
-  static async createcompany(
-    data: ICreateCompany
-  ): Promise<ICompany | undefined> {
-    try {
-      const res = await axiosInstance.post(`${BASE_URL}/company`, data);
+  static async createcompany(data: ICreateCompany): Promise<ICompany> {
+    const res = await axiosInstance.post(`${BASE_URL}/company`, data);
 
-      return res.data;
-    } catch (error) {
-      console.log(error);
-    }
+    return res.data;
+  }
+  static async addMember(data: IAddMember): Promise<ICompany | undefined> {
+    const res = await axiosInstance.post(
+      `${BASE_URL}/company/add-member`,
+      data
+    );
+
+    return res.data;
   }
 }

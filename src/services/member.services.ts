@@ -2,14 +2,15 @@ import { axiosInstance, BASE_URL } from "@/config/axios.config";
 import { IMember } from "@/interfaces/member.iterface";
 
 export class MemberServices {
-  static async getMembers(): Promise<IMember[] | undefined> {
-    try {
-      const res = await axiosInstance.get(`${BASE_URL}/members`);
+  static async getMembers(): Promise<IMember[]> {
+    const res = await axiosInstance.get(`${BASE_URL}/members`);
 
-      return res.data;
-    } catch (error) {
-      console.log(error);
-    }
+    return res.data;
+  }
+  static async getFree(): Promise<IMember[]> {
+    const res = await axiosInstance.get(`${BASE_URL}/members/free`);
+
+    return res.data;
   }
   static async getCount(): Promise<number> {
     const res = await axiosInstance.get(`${BASE_URL}/members/count`);

@@ -16,20 +16,19 @@ export default async function page() {
           {user?.user.name}, {user?.user.lastName}{" "}
         </strong>
       </p>
-      <div className="flex py-4 gap-4">
-        <div className="w-1/2 bg-background p-2 border border-accent rounded-md">
+      <div className="flex py-4 gap-4  max-lg:flex-col">
+        <div className="w-1/2 max-lg:w-full bg-background p-2 border border-accent rounded-md">
           <Suspense fallback={"Loading ..."}>
             <DashboardStats type="company" />
-            <Suspense fallback={"Loading ..."}>
-              <CompanyList />
-            </Suspense>
+          </Suspense>
+          <Suspense fallback={"Loading ..."}>
+            <CompanyList />
           </Suspense>
         </div>
-        <div className="w-1/2 bg-background p-2 border border-accent rounded-md">
+        <div className="w-1/2 max-lg:w-full bg-background p-2 border border-accent rounded-md">
           <Suspense fallback={"Loading ..."}>
             <DashboardStats type="member" />
           </Suspense>
-
           <Suspense fallback={"Loading ..."}>
             <MemberList />
           </Suspense>

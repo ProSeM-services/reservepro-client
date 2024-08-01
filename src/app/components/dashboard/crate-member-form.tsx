@@ -50,7 +50,6 @@ export default function MemberForm() {
     if (res.status === 400) {
       alert(res.response.message);
     }
-    console.log(res);
   };
   return (
     <Form {...form}>
