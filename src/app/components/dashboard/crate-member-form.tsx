@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/select";
 import { BaselineIcon, ShieldCheck } from "lucide-react";
 import { createMember } from "@/lib/actions";
+import { useToast } from "@/components/ui/use-toast";
 const INITIAL_MEMBER_DATA: IMember = {
   email: "",
   lastName: "",
@@ -40,6 +41,7 @@ const INITIAL_MEMBER_DATA: IMember = {
   workhours: [],
 };
 export default function MemberForm() {
+  const { toast } = useToast();
   const form = useForm<IMember>({
     resolver: zodResolver(MemberZodSchema),
     mode: "onChange",
@@ -50,6 +52,11 @@ export default function MemberForm() {
     if (res.status === 400) {
       alert(res.response.message);
     }
+    toast({
+      title: "Miembro agregado exitosamente!",
+      description: `Se agregó ${values.name} a tu lista de miembros`,
+      variant: "default",
+    });
   };
   return (
     <Form {...form}>
@@ -202,7 +209,7 @@ export default function MemberForm() {
             <Button type="button" variant={"outline"} className="w-1/4">
               Cancelar
             </Button>
-            <Button type="submit" className="flex-grow">
+            <Button type="submit" className="flex-grow text-white">
               Crear
             </Button>
           </div>

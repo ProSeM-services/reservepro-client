@@ -15,10 +15,10 @@ export default async function SearchTable({
   const companies = await getClientComapnies({ query, category, city });
 
   return (
-    <section className="  grid grid-cols-3 gap-2 flex-wrap max-w-full w-full  ">
+    <section className="  grid grid-cols-3 max-md:grid-cols-2 gap-2 flex-wrap max-w-full w-full  ">
       {companies?.map((company) => (
         <div
-          className=" flex flex-col justify-center items-center gap-3 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    h-40 bg-white max-lg:w-full "
+          className=" flex flex-col justify-center items-center gap-3 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    h-40 bg-background max-lg:w-full "
           key={company._id}
         >
           <section className="flex w-full flex-col text-[14px]">

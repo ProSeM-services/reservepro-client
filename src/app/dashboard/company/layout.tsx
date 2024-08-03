@@ -1,5 +1,5 @@
+import CompanyLinks from "@/app/components/company/company-links";
 import { getComapnies } from "@/lib/actions";
-import Link from "next/link";
 import React, { PropsWithChildren } from "react";
 
 export default async function Page({ children }: PropsWithChildren) {
@@ -7,23 +7,12 @@ export default async function Page({ children }: PropsWithChildren) {
 
   return (
     <section className="flex max-lg:flex-col gap-2  h-full">
-      <div className="flex flex-col gap-4 w-1/4 max-lg:w-full">
-        <p>Sucursales</p>
+      <div className="flex flex-col gap-4 w-1/4 max-lg:w-full p-6">
+        <p className="font-semibold text-lg">Sucursales</p>
         <hr />
-
-        <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
-          {allComapnies.map((company) => (
-            <Link
-              href={`/dashboard/company/${company._id}`}
-              key={company._id}
-              className="bg-accent hover:bg-sky-100 hover:text-primary  rounded-md p-4"
-            >
-              {company.name}
-            </Link>
-          ))}
-        </div>
+        <CompanyLinks companies={allComapnies} />
       </div>
-      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full lg:max-w-[75%] ">
+      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full lg:max-w-[75%]  bg-background rounded-md p-6 border border-border">
         {children}
       </div>
     </section>

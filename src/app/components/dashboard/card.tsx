@@ -12,12 +12,14 @@ export function CompanyCard({ company }: CompanyCardProps) {
   const router = useRouter();
   return (
     <div className=" flex justify-between items-center p-2 rounded-sm border border-accent shadow-sm w-full  text-sm">
-      <div className="flex items-center gap-2">
-        <HomeIcon className="h-5 w-5 text-primary" />
-        <span className="  font-medium">{company.name}</span>
+      <div className="flex items-center gap-4  max-md:flex-grow   w-3/4 justify-between">
+        <div className="flex items-center gap-2">
+          <HomeIcon className="h-5 w-5 text-primary" />
+          <span className="  font-medium">{company.name}</span>
+        </div>
         <p
           className={`
-            truncate rounded-xl bg-accent/15  text-gray-400   w-80 max-lg:w-56 text-left`}
+              truncate rounded-sm px-2   text-gray-400 max-md:w-40  w-80 text-left`}
         >
           {company.address.value}
         </p>
@@ -39,14 +41,16 @@ export function MemberCard({ member }: MemberCardProps) {
   const router = useRouter();
   return (
     <div className=" flex justify-between items-center p-2 rounded-sm border border-accent shadow-sm w-full  text-sm">
-      <div className="flex items-center gap-2">
-        <UserCircle2 className="h-5 w-5 text-primary" />
-        <span className="  font-medium">
-          {member.name}, {member.lastName}
-        </span>
+      <div className="flex items-center gap-4  max-md:flex-grow  w-3/4 max-md:justify-between ">
+        <div className="flex items-center gap-2">
+          <UserCircle2 className="h-5 w-5 text-primary" />
+          <span className="  font-medium">
+            {member.name}, {member.lastName}
+          </span>
+        </div>
         <p
           className={`
-            truncate rounded-xl bg-accent/15  text-gray-400   w-80 text-left`}
+            truncate rounded-sm px-2   text-gray-400 max-md:w-40  w-80 text-left`}
         >
           {member.email}
         </p>

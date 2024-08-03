@@ -1,11 +1,11 @@
 import React from "react";
 import CategoryCard from "@/app/components/dashboard/category-card";
-import DynamicMap from "@/app/components/dashboard/dynamic-map";
 import { getCompanyData } from "@/lib/actions";
-import { MailCheck, MapPinnedIcon, Users2Icon } from "lucide-react";
+import { HomeIcon, MailCheck, MapPinnedIcon, Users2Icon } from "lucide-react";
 import WorkhourList from "@/app/components/common/work-hour-list";
 import { MemberCard } from "@/app/components/dashboard/card";
 import AddMeber from "@/app/components/company/add-member";
+import { MapComponent } from "@/app/components/common/map";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -13,10 +13,13 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   if (!company) return null;
   return (
-    <div className="flex flex-col gap-4 flex-grow">
-      <p className="text-xl font-bold">{company?.name}</p>
+    <div className="flex flex-col gap-4 flex-grow relative ">
+      <div className="flex items-center gap-2">
+        <HomeIcon className="size-5" />
+        <p className="text-lg font-semibold ">{company?.name}</p>
+      </div>
       <hr />
-      <p>Categorias</p>
+
       <div className="flex gap-2">
         {company.category.map((cat) => (
           <CategoryCard key={cat} category={cat} selected />
@@ -35,9 +38,9 @@ export default async function Page({ params }: { params: { id: string } }) {
           <p>{company.address.value}</p>
         </div>
         <div className="h-[40vh] w-full">
-          {company.address.value && (
-            <DynamicMap address={company.address.value} />
-          )}
+          {company.address.lat && company.address.lng ? (
+            <MapComponent lat={company.address.lat} lng={company.address.lng} />
+          ) : null}
         </div>
 
         <hr />

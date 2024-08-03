@@ -162,7 +162,7 @@ export function AddressInput({
         <div className="size-80 w-full bg-accent rounded-md  ">
           {mapValue.length ? (
             <div className="size-full">
-              <DynamicMap address={mapValue} />
+              <DynamicMap address={query} />
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center w-full h-full text-sm gap-4 ">
