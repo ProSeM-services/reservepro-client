@@ -1,6 +1,5 @@
 import { ClientServices } from "@/services/client.services";
 import { revalidatePath } from "next/cache";
-import { stringify } from "postcss";
 
 export async function getClientComapnies({
   query,

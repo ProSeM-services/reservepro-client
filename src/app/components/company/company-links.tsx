@@ -15,9 +15,9 @@ export default function CompanyLinks({ companies }: { companies: ICompany[] }) {
           key={company._id}
           className={` ${
             pathname === `/dashboard/company/${company._id}`
-              ? "bg-background text-secondary-foreground border border-border "
-              : " bg-secondary-foreground  text-secondary"
-          }   transition-all duration-300  rounded-md p-2 flex items-center gap-2`}
+              ? " text-primary  bg-sky-100 "
+              : " border-border  text-secondary-foreground "
+          }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}
         >
           <HomeIcon />
           {company.name}

@@ -13,7 +13,6 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
   useEffect(() => {
     const fetchMembers = async () => {
       const response = await getFreeMembers();
-      console.log(response);
       setMembers(response);
     };
 

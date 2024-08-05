@@ -1,10 +1,16 @@
 "use server";
 import { authOptions } from "@/config/auth.config";
 import { setAuthInterceptor } from "@/config/axios.config";
-import { IAddMember, ICompany, ICreateCompany } from "@/interfaces";
+import {
+  IAddMember,
+  IAddService,
+  ICreateCompany,
+  ICreateService,
+} from "@/interfaces";
 import { IMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
+import { ServicesServices } from "@/services/services.services";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
@@ -49,6 +55,26 @@ export async function getMembers() {
   revalidatePath("/dashboard");
   return members;
 }
+export async function getServices() {
+  await setAuthtoken();
+
+  const services = await ServicesServices.getAll();
+  revalidatePath("/dashboard");
+  return services;
+}
+export async function createService(data: ICreateService) {
+  await setAuthtoken();
+
+  const services = await ServicesServices.createService(data);
+  revalidatePath("/dashboard");
+  return services;
+}
+export async function addServiceToComapny(data: IAddService) {
+  await setAuthtoken();
+  const res = await ServicesServices.addToCompany(data);
+  revalidatePath("/dashboard");
+  return res;
+}
 export async function getFreeMembers() {
   await setAuthtoken();
 
@@ -69,6 +95,7 @@ export async function createCompany(data: ICreateCompany) {
 
   return res;
 }
+
 export async function addMemberToCompany(data: IAddMember) {
   await setAuthtoken();
   const res = await CompanyServices.addMember(data);

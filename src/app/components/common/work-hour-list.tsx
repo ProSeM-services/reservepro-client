@@ -1,4 +1,5 @@
 import { IWorkhour } from "@/interfaces";
+import { ArrowRight } from "lucide-react";
 import React from "react";
 
 export default function WorkhourList({
@@ -16,14 +17,20 @@ export default function WorkhourList({
     { short: "sab", long: "sábado" },
   ];
   return (
-    <div className={`flex w-full bg-accent  `}>
+    <div
+      className={`grid grid-cols-4 max-md:grid-cols-2 rounded-md  gap-2  py-2`}
+    >
       {worhHours.map(({ day, segments }) => (
-        <div key={day} className="flex flex-col items-center w-full  ">
-          <p className="border w-full text-center p-2 ">{DAYS[day].short}</p>
-          <div className="flex flex-col gap-2 py-4 font-light ">
+        <div
+          key={day}
+          className="flex flex-col justify-center rounded-md  items-start  shadow-md bg-accent text-secondary-foreground  p-2 "
+        >
+          <p className=" font-bold uppercase ">{DAYS[day].short}</p>
+          <div className="flex flex-col font-light ">
             {segments.map((seg) => (
-              <div className="" key={seg.duration}>
+              <div className="flex items-center" key={seg.duration}>
                 <div>{seg.startime} hs</div>
+                <ArrowRight className="size-4" strokeWidth={1} />
                 <div>{seg.endTime} hs</div>
               </div>
             ))}

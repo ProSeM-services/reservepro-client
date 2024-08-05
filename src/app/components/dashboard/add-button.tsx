@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -10,7 +9,8 @@ import {
 import { PlusIcon } from "lucide-react";
 import MemberForm from "@/app/components/dashboard/crate-member-form";
 import CompanyForm from "@/app/components/dashboard/create-company-form";
-export type ICreateType = "member" | "company";
+import CreateServicesForm from "../services/create-services";
+export type ICreateType = "member" | "company" | "services";
 interface AddButtonProps {
   type: ICreateType;
 }
@@ -27,6 +27,11 @@ const config: Record<
     btnText: "Agregar Sucursal",
     title: "Crear una sucursal nueva",
     Content: CompanyForm,
+  },
+  services: {
+    btnText: "Crear servicio",
+    title: "Crear servicio",
+    Content: CreateServicesForm,
   },
 };
 export default function AddButton({ type }: AddButtonProps) {

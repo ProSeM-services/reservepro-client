@@ -7,7 +7,7 @@ export default async function MemberList() {
   const members = await getMembers();
 
   return (
-    <div className=" max-h-[30vh]  overflow-y-auto ">
+    <div className=" max-h-full   overflow-y-auto ">
       {members?.length === 0 ? (
         <div className="bg-accent     p-4 py-8 w-full rounded-md flex flex-col items-center justify-center text-center text-sm  ">
           <Users2Icon className="size-8" />

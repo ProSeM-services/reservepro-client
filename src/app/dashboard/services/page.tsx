@@ -1,5 +1,22 @@
+import AddButton from "@/app/components/dashboard/add-button";
+import ServiceCard from "@/app/components/services/services-card";
+import { getServices } from "@/lib/actions";
 import React from "react";
 
-export default function Page() {
-  return <div>services page</div>;
+export default async function Page() {
+  const services = await getServices();
+  return (
+    <div>
+      <div className="flex justify-between items-center p-2">
+        <h2>Servicios</h2>
+        <AddButton type="services" />
+      </div>
+      <hr />
+      <div className="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 flex-wrap max-w-full w-full p-4">
+        {services.map((service) => (
+          <ServiceCard service={service} key={service._id} />
+        ))}
+      </div>
+    </div>
+  );
 }

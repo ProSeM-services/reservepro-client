@@ -3,6 +3,7 @@ import { WorkhourZodSchema } from "./workhour.interface";
 import { CATEGORY_VALUES } from "./categeory.interface";
 import { LocationZodSchema } from "./location.interface";
 import { MemberZodSchema } from "./member.iterface";
+import { ServiceZodSchema } from "./services.interface";
 
 export const CompanyZodSchema = z.object({
   _id: z.string().optional(),
@@ -17,6 +18,7 @@ export const CompanyZodSchema = z.object({
   email: z.string().email("Correo electrónico no válido").optional(),
   workhours: z.array(WorkhourZodSchema).optional(),
   members: z.array(MemberZodSchema).optional(),
+  services: z.array(ServiceZodSchema).optional(),
 });
 export const CreateCompanyZodSchema = z.object({
   _id: z.string().optional(),
