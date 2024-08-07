@@ -3,7 +3,6 @@ import { CreateCompanyZodSchema, ICreateCompany } from "@/interfaces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
 import {
   Form,
   FormControl,
@@ -38,7 +37,7 @@ export default function CompanyForm() {
   });
 
   const onSubmit = async (values: ICreateCompany) => {
-    const company = await createCompany(values);
+    await createCompany(values);
 
     toast({
       title: "Sucursal creada exitosamente!",

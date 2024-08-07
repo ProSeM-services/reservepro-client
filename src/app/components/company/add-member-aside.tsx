@@ -6,18 +6,29 @@ import { IMember } from "@/interfaces/member.iterface";
 import { Button } from "@/components/ui/button";
 import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
+import { LoaderSpinner } from "../common/loader-spinner";
+import { BarLoader } from "../common/bar-loader";
 
 export default function AddMemberAside({ company }: { company: ICompany }) {
+  const [loading, setLoading] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const [selecetedMembers, setSelectedMembers] = useState<string[]>([]);
   useEffect(() => {
     const fetchMembers = async () => {
-      const response = await getFreeMembers();
-      setMembers(response);
+      setLoading(true);
+      try {
+        const response = await getFreeMembers();
+        setMembers(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    fetchMembers();
-  }, [company.members]);
+    if (!isAdding) fetchMembers();
+  }, [isAdding]);
   const { toast } = useToast();
   const handleSelectMember = (memberId: string) => {
     let res = [];
@@ -31,6 +42,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
   };
 
   const handleAddMembers = async () => {
+    setIsAdding(true);
     try {
       const allMembersToAdd = selecetedMembers.map((memberId) =>
         addMemberToCompany({ companyId: company._id!, memberId })
@@ -47,13 +59,16 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
         description: `Hubo un error al agregar los miembors en ${company.name}!`,
         variant: "destructive",
       });
+    } finally {
+      setIsAdding(false);
     }
   };
   if (!company._id) return null;
 
   return (
-    <div className="space-y-2 h-full max-h-full overflow-auto re ">
-      {members && !members.length ? (
+    <div className="space-y-2 h-full max-h-full overflow-auto  ">
+      {loading ? <BarLoader /> : null}
+      {!loading && members && !members.length ? (
         <p>no hay miembros</p>
       ) : (
         members?.map((member) => (
@@ -87,6 +102,8 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
         <Button
           onClick={handleAddMembers}
           disabled={selecetedMembers.length === 0}
+          className="text-white"
+          isLoading={isAdding}
         >
           Agregar
         </Button>

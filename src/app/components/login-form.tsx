@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,25 +11,35 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
+import { LoaderSpinner } from "./common/loader-spinner";
 export default function LoginForm() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { toast } = useToast();
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const res = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
-    if (res?.ok) {
+    setLoading(true);
+    try {
+      const res = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
+      if (!res?.ok) {
+        throw new Error("Invalid Credentials");
+      }
       router.push("/dashboard");
-    } else {
-      toast({
+    } catch (error) {
+      return toast({
         title: "Invalid credentials",
         description: "Please try again",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   }
+
   const formSchema = z.object({
     email: z.string().min(2, {
       message: "Username must be at least 2 characters.",
@@ -87,7 +97,12 @@ export default function LoginForm() {
               )}
             />
           </div>
-          <Button type="submit" className="w-full text-white">
+          <Button
+            type="submit"
+            className="w-full text-white"
+            disabled={loading}
+            isLoading={loading}
+          >
             Login
           </Button>
           <Button variant="outline" className="w-full" disabled>

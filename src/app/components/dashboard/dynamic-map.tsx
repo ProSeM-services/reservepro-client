@@ -1,13 +1,23 @@
-import React from "react";
-import { MapProvider } from "../providers/map-provider";
+"use client";
+import React, { useEffect, useState } from "react";
 import { MapComponent } from "../common/map";
 import { GeocodeServices } from "@/services/geocode.services";
 
-export default async function DynamicMap({ address }: { address: string }) {
-  const { lat, lng } = await GeocodeServices.getAdressGeocode(address);
+export default function DynamicMap({ address }: { address: string }) {
+  const [location, setLocation] = useState<{ lat: number; lng: number }>();
+  useEffect(() => {
+    const getLoaction = async () => {
+      const location = await GeocodeServices.getAdressGeocode(address);
+      setLocation(location);
+    };
+    getLoaction();
+  }, [address]);
+
   return (
-    <MapProvider>
-      <MapComponent lat={lat} lng={lng} />
-    </MapProvider>
+    <>
+      {location?.lat && location.lng ? (
+        <MapComponent lat={location.lat} lng={location.lng} />
+      ) : null}
+    </>
   );
 }

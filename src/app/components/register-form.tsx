@@ -1,21 +1,24 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User2Icon, KeyIcon, Mail, HouseIcon } from "lucide-react";
-
-import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { Form, FormField, FormItem } from "@/components/ui/form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { ITentant, ZodTenantSchema } from "@/interfaces/member.iterface";
+import {
+  CreateTenantZodSchema,
+  ICreateTentant,
+  ITentant,
+  ZodTenantSchema,
+} from "@/interfaces/member.iterface";
 import { AuthServices } from "@/services/auth.services";
 import { useToast } from "@/components/ui/use-toast";
+import { LoaderSpinner } from "./common/loader-spinner";
 
-const EMPTY_TENANT_DATA: ITentant = {
+const EMPTY_TENANT_DATA: ICreateTentant = {
   email: "",
   lastName: "",
   name: "",
@@ -26,15 +29,17 @@ const EMPTY_TENANT_DATA: ITentant = {
   image: "",
 };
 export default function RegisterForm() {
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const form = useForm<ITentant>({
-    resolver: zodResolver(ZodTenantSchema),
+  const form = useForm<ICreateTentant>({
+    resolver: zodResolver(CreateTenantZodSchema),
     defaultValues: EMPTY_TENANT_DATA,
   });
 
   const { toast } = useToast();
 
-  const onSubmit = async (values: ITentant) => {
+  const onSubmit = async (values: ICreateTentant) => {
+    setLoading(true);
     try {
       await AuthServices.register(values);
       router.push("/login");
@@ -49,6 +54,8 @@ export default function RegisterForm() {
           variant: "destructive",
         });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -165,7 +172,12 @@ export default function RegisterForm() {
               />
             </div>
           </div>
-          <Button type="submit" className="w-full text-white">
+          <Button
+            type="submit"
+            className="w-full text-white"
+            disabled={loading}
+            isLoading={loading}
+          >
             Create account
           </Button>
           <Button variant="outline" className="w-full" disabled>

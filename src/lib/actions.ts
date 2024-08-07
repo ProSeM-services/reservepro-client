@@ -7,7 +7,8 @@ import {
   ICreateCompany,
   ICreateService,
 } from "@/interfaces";
-import { IMember } from "@/interfaces/member.iterface";
+import { ICreateMember, IMember } from "@/interfaces/member.iterface";
+import { ClientServices } from "@/services/client.services";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
 import { ServicesServices } from "@/services/services.services";
@@ -48,6 +49,13 @@ export async function getCompanyData(id: string) {
   const companies = await CompanyServices.getCopanyById(id);
   return companies;
 }
+export async function deleteCompany(id: string) {
+  await setAuthtoken();
+  const companies = await CompanyServices.delete(id);
+  revalidatePath("/dashboard");
+  return companies;
+}
+
 export async function getMembers() {
   await setAuthtoken();
 
@@ -75,13 +83,19 @@ export async function addServiceToComapny(data: IAddService) {
   revalidatePath("/dashboard");
   return res;
 }
+export async function removeServiceFromComapny(data: IAddService) {
+  await setAuthtoken();
+  const res = await ServicesServices.removeFromCompany(data);
+  revalidatePath("/dashboard");
+  return res;
+}
 export async function getFreeMembers() {
   await setAuthtoken();
 
   const members = await MemberServices.getFree();
   return members;
 }
-export async function createMember(data: IMember) {
+export async function createMember(data: ICreateMember) {
   await setAuthtoken();
   const res = await MemberServices.createMember(data);
   revalidatePath("/dashboard");
@@ -99,6 +113,12 @@ export async function createCompany(data: ICreateCompany) {
 export async function addMemberToCompany(data: IAddMember) {
   await setAuthtoken();
   const res = await CompanyServices.addMember(data);
+  revalidatePath("/dashboard");
+  return res;
+}
+export async function removeMemberFromCompany(data: IAddMember) {
+  await setAuthtoken();
+  const res = await CompanyServices.removeMember(data);
   revalidatePath("/dashboard");
   return res;
 }

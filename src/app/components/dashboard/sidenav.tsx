@@ -30,7 +30,7 @@ export default function SideNav() {
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2 ">
         <NavLinks />
 
-        <div className=" rounded-r-2xl bg-primary  text-white  p-2 max-md:px-4 max-md:py-0 flex md:flex-col items-center gap-2 text-md max-md:text-sm ">
+        <div className="  bg-primary  text-white  p-4 max-md:px-4 max-md:py-0 flex md:flex-col items-center gap-2 text-md max-md:text-sm ">
           <section className=" w-full">
             <div className="flex items-center gap-2 font-semibold">
               <UserCircleIcon className="size-5 max-md:size-4" />

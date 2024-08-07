@@ -11,6 +11,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { PhoneInput } from "@/components/ui/phone-input";
 import {
+  CreateMemberZodSchema,
+  ICreateMember,
   IMember,
   MemberZodSchema,
   ROLES_VALUES,
@@ -28,7 +30,7 @@ import {
 import { BaselineIcon, ShieldCheck } from "lucide-react";
 import { createMember } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
-const INITIAL_MEMBER_DATA: IMember = {
+const INITIAL_MEMBER_DATA: ICreateMember = {
   email: "",
   lastName: "",
   name: "",
@@ -42,12 +44,12 @@ const INITIAL_MEMBER_DATA: IMember = {
 };
 export default function MemberForm() {
   const { toast } = useToast();
-  const form = useForm<IMember>({
-    resolver: zodResolver(MemberZodSchema),
+  const form = useForm<ICreateMember>({
+    resolver: zodResolver(CreateMemberZodSchema),
     mode: "onChange",
     defaultValues: INITIAL_MEMBER_DATA,
   });
-  const onSubmit = async (values: IMember) => {
+  const onSubmit = async (values: ICreateMember) => {
     const res = await createMember(values);
     if (res.status === 400) {
       alert(res.response.message);

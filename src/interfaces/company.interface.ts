@@ -6,7 +6,7 @@ import { MemberZodSchema } from "./member.iterface";
 import { ServiceZodSchema } from "./services.interface";
 
 export const CompanyZodSchema = z.object({
-  _id: z.string().optional(),
+  _id: z.string(),
   name: z.string(),
   address: LocationZodSchema,
   status: z.boolean().optional(),

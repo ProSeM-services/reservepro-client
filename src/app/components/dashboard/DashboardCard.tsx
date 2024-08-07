@@ -13,7 +13,7 @@ export default function DashboardCard({
         <DashboardStats type={type} />
       </Suspense>
       <Suspense fallback={"Loading ..."}>
-        <div className="flex-grow  h-[30vh]">
+        <div className="flex-grow  max-h-[30vh]">
           <List type={type} />
         </div>
       </Suspense>

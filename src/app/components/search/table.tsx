@@ -1,6 +1,5 @@
-import { HomeIcon, MailIcon, MapPinned } from "lucide-react";
 import { getClientComapnies } from "@/lib/clienta-actions";
-import CategoryCard from "../dashboard/category-card";
+import CompanyCard from "./company-card";
 
 export default async function SearchTable({
   query,
@@ -17,44 +16,7 @@ export default async function SearchTable({
   return (
     <section className="  grid grid-cols-3 max-md:grid-cols-2 gap-2 flex-wrap max-w-full w-full  ">
       {companies?.map((company) => (
-        <div
-          className=" flex flex-col justify-center items-center gap-3 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    h-40 bg-background max-lg:w-full "
-          key={company._id}
-        >
-          <section className="flex w-full flex-col text-[14px]">
-            <div className="flex items-center gap-2  font-bold ">
-              <HomeIcon className=" size-4" />
-              <span className=" ">{company.name}</span>
-            </div>
-            <div className="flex items-center gap-2 w-full  ">
-              <MapPinned className="size-4 " />
-              <p
-                className={`
-                      truncate   max-w-[90%] max-lg:w-56 text-left`}
-              >
-                {company.address.value}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 w-full   ">
-              <MailIcon className="size-4" />
-              <p
-                className={`
-                      truncate   max-w-[90%] max-lg:w-56 text-left`}
-              >
-                {company.email}
-              </p>
-            </div>
-            <div className="flex items-center gap-2 w-full max-w-full overflow-y-auto my-2 text-[11px]  ">
-              {company.category.map((category) => (
-                <CategoryCard
-                  category={category}
-                  selected={false}
-                  key={category}
-                />
-              ))}
-            </div>
-          </section>
-        </div>
+        <CompanyCard company={company} key={company._id} />
       ))}
     </section>
   );

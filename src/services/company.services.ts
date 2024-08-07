@@ -12,6 +12,11 @@ export class CompanyServices {
 
     return res.data;
   }
+  static async delete(id: string) {
+    const res = await axiosInstance.delete(`${BASE_URL}/company/${id}`);
+
+    return res.data;
+  }
 
   static async getCopanyById(id: string): Promise<ICompany> {
     const res = await axiosInstance.get(`${BASE_URL}/company/details/${id}`);
@@ -26,6 +31,14 @@ export class CompanyServices {
   static async addMember(data: IAddMember): Promise<ICompany | undefined> {
     const res = await axiosInstance.post(
       `${BASE_URL}/company/add-member`,
+      data
+    );
+
+    return res.data;
+  }
+  static async removeMember(data: IAddMember): Promise<ICompany | undefined> {
+    const res = await axiosInstance.post(
+      `${BASE_URL}/company/remove-member`,
       data
     );
 

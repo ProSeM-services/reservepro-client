@@ -17,4 +17,8 @@ export class ClientServices {
     );
     return res.data;
   }
+  static async getCompanyById(id: string): Promise<ICompany> {
+    const res = await axios.get(`${BASE_URL}/client/companies/${id}`);
+    return res.data;
+  }
 }

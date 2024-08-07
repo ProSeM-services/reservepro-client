@@ -14,23 +14,19 @@ import { MemberCard } from "@/app/components/dashboard/card";
 import AddToCompany from "@/app/components/company/add-member";
 import { MapComponent } from "@/app/components/common/map";
 import ServiceCard from "@/app/components/services/services-card";
-import DeleteCompany from "@/app/components/company/delete-compnay";
-import RemoveMember from "@/app/components/company/remove-member";
+import { getClientCompanyData } from "@/lib/clienta-actions";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  const company = await getCompanyData(id);
+  const company = await getClientCompanyData(id);
+
   if (!company) return null;
 
   return (
     <div className="flex flex-col gap-4 flex-grow relative ">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <HomeIcon className="size-5" />
-          <p className="text-lg font-semibold ">{company?.name}</p>
-        </div>
-
-        <DeleteCompany company={company} />
+      <div className="flex items-center gap-2">
+        <HomeIcon className="size-5" />
+        <p className="text-lg font-semibold ">{company?.name}</p>
       </div>
       <hr />
 
@@ -67,15 +63,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                 ({company.members?.length}){" "}
               </span>
             </p>
-            <AddToCompany company={company} type="member" />
+            {/* <AddToCompany company={company} type="member" /> */}
           </div>
           {company.members?.length ? (
             <div>
               {company.members.map((member) => (
-                <div className="flex items-center gap-2" key={member._id}>
-                  <RemoveMember member={member} company={company} />
-                  <MemberCard member={member} />
-                </div>
+                <MemberCard member={member} key={member._id} />
               ))}
             </div>
           ) : (
@@ -96,16 +89,12 @@ export default async function Page({ params }: { params: { id: string } }) {
                 ({company.services?.length}){" "}
               </span>
             </p>
-            <AddToCompany company={company} type="service" />
+            {/* <AddToCompany company={company} type="service" /> */}
           </div>
           {company.services?.length ? (
             <div className="grid grid-cols-2 gap-2 ">
               {company.services.map((service) => (
-                <ServiceCard
-                  service={service}
-                  key={service._id}
-                  selectedCompany={company}
-                />
+                <ServiceCard service={service} key={service._id} />
               ))}
             </div>
           ) : (

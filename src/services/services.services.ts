@@ -20,4 +20,12 @@ export class ServicesServices {
 
     return res.data;
   }
+  static async removeFromCompany(data: IAddService): Promise<IService> {
+    const res = await axiosInstance.post(
+      `${BASE_URL}/services/remove-from-company`,
+      data
+    );
+
+    return res.data;
+  }
 }

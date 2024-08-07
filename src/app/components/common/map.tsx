@@ -1,37 +1,48 @@
 "use client";
+import React, { useCallback } from "react";
+import { Map, useMap, AdvancedMarker, Pin } from "@vis.gl/react-google-maps";
+import MapProvider from "../providers/map-provider";
 
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { MapProvider } from "../providers/map-provider";
+type Poi = { lat: number; lng: number };
 
-export const defaultMapContainerStyle = {
-  width: "100%",
-  height: "100%",
-  borderRadius: "15px 0px 0px 15px",
+const PoiMarkers = ({ pois }: { pois: Poi }) => {
+  const { lat, lng } = pois;
+  const map = useMap();
+
+  const handleClick = useCallback((ev: google.maps.MapMouseEvent) => {
+    if (!map) return;
+    if (!ev.latLng) return;
+    console.log("marker clicked: ", ev.latLng.toString());
+    map.panTo(ev.latLng);
+  }, []);
+
+  return (
+    <>
+      <AdvancedMarker
+        position={{
+          lat,
+          lng,
+        }}
+        clickable={true}
+        onClick={handleClick}
+      >
+        <Pin background={"#FBBC04"} glyphColor={"#000"} borderColor={"#000"} />
+      </AdvancedMarker>
+    </>
+  );
 };
-
-const defaultMapZoom = 14;
-
-const defaultMapOptions: google.maps.MapOptions = {
-  zoomControl: true,
-  tilt: 1,
-};
+// ------------------------------------------
 const MapComponent = ({ lat, lng }: { lat: number; lng: number }) => {
-  const defaultMapCenter = {
-    lat,
-    lng,
-  };
-
   return (
     <MapProvider>
       <div className="w-full border bg-gray-300 h-full">
-        <GoogleMap
-          mapContainerStyle={defaultMapContainerStyle}
-          center={defaultMapCenter}
-          zoom={defaultMapZoom}
-          options={defaultMapOptions}
+        <Map
+          defaultZoom={14}
+          defaultCenter={{ lat, lng }}
+          mapId="da37f3254c6a6d1c"
         >
-          <Marker position={{ lat, lng }} />
-        </GoogleMap>
+          <PoiMarkers pois={{ lat, lng }} />
+        </Map>
       </div>
     </MapProvider>
   );
