@@ -3,6 +3,7 @@ import { z } from "zod";
 const envZodModel = z.object({
   NEXT_PUBLIC_API: z.string().url(),
   NEXTAUTH_SECRET: z.string(),
+  NEXT_PUBLIC_APIMAPS: z.string(),
 });
 
 /*
