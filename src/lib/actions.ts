@@ -3,13 +3,14 @@ import { authOptions } from "@/config/auth.config";
 import { setAuthInterceptor } from "@/config/axios.config";
 import {
   IAddMember,
+  IAddMemberToService,
   IAddService,
   ICreateCompany,
   ICreateService,
 } from "@/interfaces";
-import { ICreateMember, IMember } from "@/interfaces/member.iterface";
-import { ClientServices } from "@/services/client.services";
+import { ICreateMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
+import { CustomerServices } from "@/services/customer.services";
 import { MemberServices } from "@/services/member.services";
 import { ServicesServices } from "@/services/services.services";
 import axios from "axios";
@@ -31,6 +32,18 @@ export async function getComapnies() {
   revalidatePath("/dashboard");
   return companies;
 }
+export async function getCustomers() {
+  await setAuthtoken();
+  const customers = await CustomerServices.getAll();
+  revalidatePath("/dashboard");
+  return customers;
+}
+export async function getCustomerById(id: string) {
+  await setAuthtoken();
+  const customer = await CustomerServices.getById(id);
+  revalidatePath("/dashboard");
+  return customer;
+}
 
 export async function companiesCount() {
   await setAuthtoken();
@@ -49,6 +62,16 @@ export async function getCompanyData(id: string) {
   const companies = await CompanyServices.getCopanyById(id);
   return companies;
 }
+export async function getMembersFromCompany(id: string) {
+  await setAuthtoken();
+  const companies = await CompanyServices.getMembers(id);
+  return companies;
+}
+export async function getServicesFromCompany(id: string) {
+  await setAuthtoken();
+  const companies = await CompanyServices.getServices(id);
+  return companies;
+}
 export async function deleteCompany(id: string) {
   await setAuthtoken();
   const companies = await CompanyServices.delete(id);
@@ -63,10 +86,30 @@ export async function getMembers() {
   revalidatePath("/dashboard");
   return members;
 }
+export async function getMemberById(id: string) {
+  await setAuthtoken();
+  const member = await MemberServices.getById(id);
+  revalidatePath("/dashboard");
+  return member;
+}
 export async function getServices() {
   await setAuthtoken();
 
   const services = await ServicesServices.getAll();
+  revalidatePath("/dashboard");
+  return services;
+}
+export async function getServicesById(id: string) {
+  await setAuthtoken();
+
+  const services = await ServicesServices.getById(id);
+  revalidatePath("/dashboard");
+  return services;
+}
+export async function getMembersFromServices(id: string) {
+  await setAuthtoken();
+
+  const services = await ServicesServices.getMembers(id);
   revalidatePath("/dashboard");
   return services;
 }
@@ -76,6 +119,18 @@ export async function createService(data: ICreateService) {
   const services = await ServicesServices.createService(data);
   revalidatePath("/dashboard");
   return services;
+}
+export async function addMemberToService(data: IAddMemberToService) {
+  await setAuthtoken();
+  const res = await ServicesServices.addMember(data);
+  revalidatePath("/dashboard");
+  return res;
+}
+export async function removeMemberFromService(data: IAddMemberToService) {
+  await setAuthtoken();
+  const res = await ServicesServices.removeMember(data);
+  revalidatePath("/dashboard");
+  return res;
 }
 export async function addServiceToComapny(data: IAddService) {
   await setAuthtoken();

@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ICompany, IService } from "@/interfaces";
 import { removeServiceFromComapny } from "@/lib/actions";
-import { ClockIcon, TrashIcon } from "lucide-react";
-import React, { useState } from "react";
+import { ClockIcon, TrashIcon, UserIcon } from "lucide-react";
+import React, { Suspense, useState } from "react";
+import ServicesMemberList from "./services-members-list";
 interface ServiceCardProps {
   service: IService;
   selectedCompany?: ICompany;
@@ -19,7 +20,7 @@ export default function ServiceCard({
     setDeleting(true);
     try {
       if (selectedCompany) {
-        const res = await removeServiceFromComapny({
+        await removeServiceFromComapny({
           companyId: selectedCompany._id,
           serviceId: service._id,
         });
@@ -35,13 +36,16 @@ export default function ServiceCard({
       setDeleting(false);
     }
   };
+
   return (
-    <div className="flex flex-col justify-between min-h-44 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full">
+    <div className="flex flex-col justify-between gap-1 h-44 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full relative pb-10 ">
       <div className="flex justify-between items-center">
-        <p className="font-semibold">{service.title}</p>
-        <p className="text-xs bg-soft-d rounded-md px-2 py-[1px] felx items-center text-white font-medium ">
-          {service.provision}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="font-semibold">{service.title}</p>
+          <p className="text-xs bg-soft-d rounded-md px-2 py-[1px] felx items-center text-white font-medium ">
+            {service.provision}
+          </p>
+        </div>
       </div>
       <div className="flex items-center gap-1 text-soft-c font-light text-sm">
         <ClockIcon className="size-4" />
@@ -69,6 +73,8 @@ export default function ServiceCard({
           </Button>
         ) : null}
       </div>
+
+      <ServicesMemberList service={service} />
     </div>
   );
 }

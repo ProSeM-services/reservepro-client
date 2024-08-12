@@ -12,6 +12,11 @@ export class MemberServices {
 
     return res.data;
   }
+  static async getById(id: string): Promise<IMember> {
+    const res = await axiosInstance.get(`${BASE_URL}/members/details/${id}`);
+
+    return res.data;
+  }
   static async getCount(): Promise<number> {
     const res = await axiosInstance.get(`${BASE_URL}/members/count`);
 

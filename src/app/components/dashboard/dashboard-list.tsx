@@ -33,7 +33,7 @@ export function EmptyList({
 
   const { description, Icon } = Config[type];
   return (
-    <div className="bg-accent  flex-grow   h-full  w-full rounded-md flex flex-col items-center justify-center text-center text-sm ">
+    <div className="bg-accent  flex-grow   h-52  w-full rounded-md flex flex-col items-center justify-center text-center text-sm ">
       <Icon className="size-8" />
       {description}
     </div>

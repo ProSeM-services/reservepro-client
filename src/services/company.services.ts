@@ -1,5 +1,6 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
-import { IAddMember, ICompany, ICreateCompany } from "@/interfaces";
+import { IAddMember, ICompany, ICreateCompany, IService } from "@/interfaces";
+import { IMember } from "@/interfaces/member.iterface";
 
 export class CompanyServices {
   static async getCompanies(): Promise<ICompany[]> {
@@ -20,6 +21,16 @@ export class CompanyServices {
 
   static async getCopanyById(id: string): Promise<ICompany> {
     const res = await axiosInstance.get(`${BASE_URL}/company/details/${id}`);
+
+    return res.data;
+  }
+  static async getMembers(id: string): Promise<IMember[]> {
+    const res = await axiosInstance.get(`${BASE_URL}/company/members/${id}`);
+
+    return res.data;
+  }
+  static async getServices(id: string): Promise<IService[]> {
+    const res = await axiosInstance.get(`${BASE_URL}/company/services/${id}`);
 
     return res.data;
   }

@@ -41,4 +41,9 @@ export const AddServiceSchema = z.object({
   companyId: z.string(),
   serviceId: z.string(),
 });
+export const AddMemberToService = z.object({
+  serviceId: z.string(),
+  memberId: z.string(),
+});
+export type IAddMemberToService = z.infer<typeof AddMemberToService>;
 export type IAddService = z.infer<typeof AddServiceSchema>;

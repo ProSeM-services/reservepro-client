@@ -1,4 +1,3 @@
-// components/AddressInput.tsx
 import React, {
   useEffect,
   useRef,

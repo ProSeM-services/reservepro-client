@@ -1,21 +1,13 @@
 import React from "react";
 import CategoryCard from "@/app/components/dashboard/category-card";
 import { getCompanyData } from "@/lib/actions";
-import {
-  AxeIcon,
-  Clock2Icon,
-  HomeIcon,
-  MailCheck,
-  MapPinnedIcon,
-  Users2Icon,
-} from "lucide-react";
+import { Clock2Icon, HomeIcon, MailCheck, MapPinnedIcon } from "lucide-react";
 import WorkhourList from "@/app/components/common/work-hour-list";
-import { MemberCard } from "@/app/components/dashboard/card";
 import AddToCompany from "@/app/components/company/add-member";
 import { MapComponent } from "@/app/components/common/map";
-import ServiceCard from "@/app/components/services/services-card";
 import DeleteCompany from "@/app/components/company/delete-compnay";
-import RemoveMember from "@/app/components/company/remove-member";
+import CompnayMemberList from "@/app/components/company/compnay-member-list";
+import CompnayServicesList from "@/app/components/company/company-services-list";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
@@ -69,23 +61,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </p>
             <AddToCompany company={company} type="member" />
           </div>
-          {company.members?.length ? (
-            <div>
-              {company.members.map((member) => (
-                <div className="flex items-center gap-2" key={member._id}>
-                  <RemoveMember member={member} company={company} />
-                  <MemberCard member={member} />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2 bg-background border border-accent    h-52 w-full rounded-md  items-center justify-center    ">
-              <Users2Icon className="size-10" />
-              <p className="font-light text-sm w-60  text-center">
-                No tenes miembros cargados en este equipo.
-              </p>
-            </div>
-          )}
+          <CompnayMemberList company={company} />
         </section>
         <section className="mt-2  bg-background">
           <div className="flex  justify-between p-2">
@@ -98,24 +74,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </p>
             <AddToCompany company={company} type="service" />
           </div>
-          {company.services?.length ? (
-            <div className="grid grid-cols-2 gap-2 ">
-              {company.services.map((service) => (
-                <ServiceCard
-                  service={service}
-                  key={service._id}
-                  selectedCompany={company}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-col gap-2 bg-background border border-accent    h-52 w-full rounded-md  items-center justify-center    ">
-              <AxeIcon className="size-10" />
-              <p className="font-light text-sm w-60  text-center">
-                No tienes servicios cargadados en esta sucursal.
-              </p>
-            </div>
-          )}
+          <CompnayServicesList company={company} />
         </section>
         <div className="mt-2">
           <p className="font-semibold">Horarios</p>
