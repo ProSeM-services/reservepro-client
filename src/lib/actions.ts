@@ -18,7 +18,7 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-const setAuthtoken = async () => {
+export const setAuthtoken = async () => {
   const serverSession = await getServerSession(authOptions);
 
   if (serverSession?.backendTokens.accessToken) {

@@ -38,13 +38,27 @@ export default function ServiceCard({
   };
 
   return (
-    <div className="flex flex-col justify-between gap-1 h-44 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full relative pb-10 ">
+    <div className="flex flex-col justify-between gap-1 h-44 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full relative pb- ">
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <p className="font-semibold">{service.title}</p>
-          <p className="text-xs bg-soft-d rounded-md px-2 py-[1px] felx items-center text-white font-medium ">
-            {service.provision}
-          </p>
+        <div className="flex justify-between w-full">
+          <div className="flex items-center gap-2">
+            <p className="font-semibold">{service.title}</p>
+
+            <p className="text-xs bg-soft-d rounded-md px-2 py-[1px] felx items-center text-white font-medium ">
+              {service.provision}
+            </p>
+          </div>
+          {selectedCompany ? (
+            <Button
+              variant={"destructive"}
+              size={"sm"}
+              className="p-0 size-6"
+              onClick={handleDeleteService}
+              isLoading={deleting}
+            >
+              <TrashIcon className="size-4" />
+            </Button>
+          ) : null}
         </div>
       </div>
       <div className="flex items-center gap-1 text-soft-c font-light text-sm">
@@ -61,17 +75,6 @@ export default function ServiceCard({
       </p>
       <div className="flex items-center justify-between">
         <p className="font-semibold">${service.price}</p>
-        {selectedCompany ? (
-          <Button
-            variant={"destructive"}
-            size={"sm"}
-            className="p-0 size-6"
-            onClick={handleDeleteService}
-            isLoading={deleting}
-          >
-            <TrashIcon className="size-4" />
-          </Button>
-        ) : null}
       </div>
 
       <ServicesMemberList service={service} />

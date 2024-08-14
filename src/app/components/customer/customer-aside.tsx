@@ -1,7 +1,13 @@
-import React, { Suspense } from "react";
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
-import CustomerAsideContent from "./customer-aside-content";
+"use client";
+
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { ICustomer } from "@/interfaces/customer.interface";
+
 export default function CustomerAside({ customer }: { customer: ICustomer }) {
   return (
     <Sheet>
@@ -10,8 +16,28 @@ export default function CustomerAside({ customer }: { customer: ICustomer }) {
           detalles
         </div>
       </SheetTrigger>
+      <SheetContent>
+        <SheetTitle>
+          {customer.firstName}, {customer.lastName}
+        </SheetTitle>
+        <div className="flex-grow h-[85%] space-y-3">
+          <p className=" text-gray-600 text-sm space-x-1">
+            Cliente desde
+            <span className="font-semibold">
+              {" "}
+              {new Date(customer.createdAt).toLocaleDateString()}{" "}
+            </span>
+          </p>
 
-      <CustomerAsideContent customer={customer} />
+          <hr />
+          <b>Lsita de turnos</b>
+          {/* {appointments.length > 0 ? (
+            <AppointmentList apointments={appointments} />
+          ) : (
+            turnos
+          )} */}
+        </div>
+      </SheetContent>
     </Sheet>
   );
 }

@@ -59,14 +59,14 @@ export default function ServicesMemberList({ service }: { service: IService }) {
     }
   };
   return (
-    <div className={`${members.length > 0 ? "" : ""}`}>
+    <div className={`${members.length > 0 ? "h-14" : ""}`}>
       {loading && <BarLoader />}
 
       {members.length && !loading ? (
         <div className="absolute left-0 bottom-0 bg-background  w-[60%] max-h-44 shadow-sm overflow-y-auto p-2 rounded-md">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger>
+              <AccordionTrigger className="h-10">
                 <p className="text-xs">Profecionales ({members.length})</p>
               </AccordionTrigger>
               <AccordionContent>

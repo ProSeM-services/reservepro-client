@@ -3,7 +3,7 @@ import { ICustomer } from "@/interfaces/customer.interface";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 import { RootTable } from "../common/root-table";
-import CustomerAside from "./customer-aside";
+import Link from "next/link";
 
 export default function CustomerTable({
   customers,
@@ -46,7 +46,12 @@ export default function CustomerTable({
       header: "",
       size: 50,
       cell: ({ row, getValue }) => (
-        <CustomerAside customer={{ ...row.original }} />
+        <Link
+          className="bg-secondary text-center text-primary hover:bg-sky-100 transition-all duration-150  flex  justify-center p-1 rounded-md  text-xs font-semibold "
+          href={`/dashboard/customers/${row.original._id}`}
+        >
+          detalles
+        </Link>
       ),
     },
   ];

@@ -1,12 +1,14 @@
 import { SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { ICustomer } from "@/interfaces/customer.interface";
-import React from "react";
 import AppointmentList from "./appointment-list";
+import { IAppointment } from "@/interfaces/appointments.interface";
 
 export default function CustomerAsideContent({
   customer,
+  appointments,
 }: {
   customer: ICustomer;
+  appointments: IAppointment[];
 }) {
   return (
     <SheetContent>
@@ -21,7 +23,11 @@ export default function CustomerAsideContent({
             {new Date(customer.createdAt).toLocaleDateString()}{" "}
           </span>
         </p>
-        <AppointmentList apointments={customer.apointments} />
+        {appointments.length > 0 ? (
+          <AppointmentList apointments={appointments} />
+        ) : (
+          "..."
+        )}
       </div>
     </SheetContent>
   );

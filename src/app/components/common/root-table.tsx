@@ -3,11 +3,8 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
-  getExpandedRowModel,
-  getFilteredRowModel,
   useReactTable,
   RowData,
-  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -93,38 +90,26 @@ export function RootTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <Fragment key={row.id}>
-                  <TableRow
-                    key={row.id}
-                    className={` text-black border-b text-md   border-gray-200 text-left  ${
-                      row.getIsExpanded() &&
-                      "border-l-2 border-l-black bg-hoverBlue"
-                    }`}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="text-xs  ">
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </Fragment>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                  style={{ width: "5px" }}
+            {table.getRowModel().rows.map((row) => (
+              <Fragment key={row.id}>
+                <TableRow
+                  key={row.id}
+                  className={` text-black border-b text-md   border-gray-200 text-left  ${
+                    row.getIsExpanded() &&
+                    "border-l-2 border-l-black bg-hoverBlue"
+                  }`}
                 >
-                  -
-                </TableCell>
-              </TableRow>
-            )}
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className="text-xs  ">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </Fragment>
+            ))}
           </TableBody>
         </Table>
       </div>

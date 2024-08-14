@@ -9,6 +9,7 @@ export const AppointmentZodSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(1),
   time: z.string().min(1),
+  memberId: z.string().min(1),
   canceled: z.boolean(),
   date: z
     .string()
