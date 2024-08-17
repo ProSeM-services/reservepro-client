@@ -1,7 +1,8 @@
 import { IAppointment } from "@/interfaces/appointments.interface";
 import MemberInfo from "./MemberInfo";
 import { Suspense } from "react";
-import { CalendarIcon, ClockIcon } from "lucide-react";
+import { CalendarIcon, ClockIcon, TimerReset } from "lucide-react";
+import ServiceDetail from "./service-details";
 
 export default function AppointmentList({
   apointments,
@@ -38,12 +39,19 @@ export default function AppointmentList({
             </div>
             <div className="">
               <div className="flex items-center gap-2">
+                <ServiceDetail servieId={app.serviceId} />
+              </div>
+              <div className="flex items-center gap-2">
                 <ClockIcon className="size-4" />
                 <p> {app.time}</p>
               </div>
               <div className="flex items-center gap-2">
                 <CalendarIcon className="size-4" />
                 <p> {new Date(app.date).toLocaleDateString()}</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <TimerReset className="size-4" />
+                <p> {app.duration} min</p>
               </div>
             </div>
 

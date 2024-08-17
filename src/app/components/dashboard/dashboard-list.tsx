@@ -6,36 +6,41 @@ import { HousePlugIcon, LucideProps, Users2Icon } from "lucide-react";
 export function EmptyList({
   type,
 }: {
-  type: "members" | "company" | "service";
+  type: "member" | "company" | "service";
 }) {
   const Config: Record<
-    "members" | "company" | "service",
+    "member" | "company" | "service",
     {
       Icon: React.ForwardRefExoticComponent<
         Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>
       >;
+      title: string;
       description: string;
     }
   > = {
     company: {
-      description: "No tenes surucsales creadas",
+      title: "Sin sucursales",
+      description: "Aún no has creado ninguna sucursal",
       Icon: HousePlugIcon,
     },
     service: {
-      description: "No tenes servicios creados",
+      title: "Sin servicios",
+      description: "No tienes servicios creados todavía",
       Icon: HousePlugIcon,
     },
-    members: {
-      description: "No tenes miembros cargados en tu equipo",
+    member: {
+      title: "Equipo vacío",
+      description: "No hay miembros en tu equipo actualmente",
       Icon: Users2Icon,
     },
   };
 
-  const { description, Icon } = Config[type];
+  const { title, description, Icon } = Config[type];
   return (
-    <div className="bg-accent  flex-grow   h-52  w-full rounded-md flex flex-col items-center justify-center text-center text-sm ">
-      <Icon className="size-8" />
-      {description}
+    <div className=" flex-grow h-64 w-full rounded-lg flex flex-col items-center justify-center text-center p-6 transition-all duration-300 ">
+      <Icon className="size-16 mb-4 text-primary " />
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-sm text-muted-foreground">{description}</p>
     </div>
   );
 }
@@ -43,11 +48,12 @@ export function EmptyList({
 export default async function CompanyList({
   type,
 }: {
-  type: "member" | "company";
+  type: "member" | "company" | "service";
 }) {
   const fetchFunction = {
     member: getMembers,
     company: getComapnies,
+    service: getComapnies,
   };
   const list = await fetchFunction[type]();
   const copmpanies = await getComapnies();
@@ -55,7 +61,7 @@ export default async function CompanyList({
   return (
     <div className=" max-h-full h-full   overflow-y-auto ">
       {list.length === 0 ? (
-        <EmptyList type="company" />
+        <EmptyList type={type} />
       ) : (
         <div className="space-y-2">
           {type === "company" &&

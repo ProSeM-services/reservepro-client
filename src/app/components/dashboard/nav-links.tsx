@@ -6,10 +6,16 @@ import {
   DockIcon,
   BellElectric,
   FactoryIcon,
+  Settings,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 const links = [
   { name: "Home", href: "/dashboard", icon: HomeIcon },
   {
@@ -22,25 +28,59 @@ const links = [
   { name: "Services", href: "/dashboard/services", icon: BellElectric },
 ];
 
-export default function NavLinks() {
+export default function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
   const pathname = usePathname();
   return (
-    <section className="flex grow flex-row max-md:justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-      {links.map((link) => {
-        const LinkIcon = link.icon;
-        return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={`flex h-[48px] transition-all duration-200 grow items-center justify-center gap-2 rounded-md bg-accent p-3 text-sm font-medium hover:bg-sky-100 hover:text-primary md:flex-none md:justify-start md:p-2 md:px-3   ${
-              pathname === link.href ? "bg-sky-100 text-primary" : ""
-            } `}
-          >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
-        );
-      })}
-    </section>
+    <TooltipProvider>
+      <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+        {links.map((link) => {
+          const LinkIcon = link.icon;
+          const selected = pathname === link.href;
+          return size === "sm" ? (
+            <Tooltip key={link.name}>
+              <TooltipTrigger asChild>
+                <Link
+                  href={link.href}
+                  className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:text-foreground md:h-8 md:w-8 ${
+                    selected
+                      ? "bg-accent text-foreground"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  <LinkIcon className="size-5" />
+                  <span className="sr-only">{link.name}</span>
+                </Link>
+              </TooltipTrigger>
+              <TooltipContent side="right">{link.name}</TooltipContent>
+            </Tooltip>
+          ) : (
+            <Link
+              key={link.name}
+              href={link.href}
+              className={`flex items-center gap-4 px-2.5 ${
+                selected ? "text-foreground" : "text-muted-foreground"
+              } hover:text-foreground`}
+            >
+              <LinkIcon className="size-5" />
+              {link.name}
+            </Link>
+          );
+        })}
+      </nav>
+      <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Link
+              href="#"
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+            >
+              <Settings className="h-5 w-5" />
+              <span className="sr-only">Settings</span>
+            </Link>
+          </TooltipTrigger>
+          <TooltipContent side="right">Settings</TooltipContent>
+        </Tooltip>
+      </nav>
+    </TooltipProvider>
   );
 }

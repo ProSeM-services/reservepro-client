@@ -53,20 +53,20 @@ export function RootTable<TData, TValue>({
   return (
     <div className="h-full flex-grow  flex flex-col  gap-1 relative bg-background  ">
       <div
-        className={`rounded-md border     w-full  max-h-[85%] mx-auto   overflow-y-auto scrollbar-custom `}
+        className={`rounded-md  border border-border    w-full  max-h-[85%] mx-auto   overflow-y-auto scrollbar-custom `}
       >
         <Table className="table ">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow
                 key={headerGroup.id}
-                className=" border-gray-200 bg-light-grey rounded-md  "
+                className="  bg-light-grey   rounded-md  "
               >
                 {headerGroup.headers.map((header) => (
                   <TableHead
                     key={header.id}
                     style={{ width: `${header.getSize()}px` }}
-                    className={` py-3 px-4 border-r       text-start  text-black font-semibold   `}
+                    className={` py-3 px-4  border-l  border-border text-start   font-semibold   `}
                   >
                     <div className="flex w-full justify-between items-center">
                       <div>
@@ -92,13 +92,7 @@ export function RootTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows.map((row) => (
               <Fragment key={row.id}>
-                <TableRow
-                  key={row.id}
-                  className={` text-black border-b text-md   border-gray-200 text-left  ${
-                    row.getIsExpanded() &&
-                    "border-l-2 border-l-black bg-hoverBlue"
-                  }`}
-                >
+                <TableRow key={row.id} className={`  text-md    text-left  `}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id} className="text-xs  ">
                       {flexRender(

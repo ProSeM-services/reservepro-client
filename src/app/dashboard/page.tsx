@@ -1,20 +1,11 @@
 import React, { Suspense } from "react";
-import { authOptions } from "@/config/auth.config";
-import { getServerSession } from "next-auth";
 import DashboardCard from "../components/dashboard/DashboardCard";
 import ServicesList from "../components/dashboard/services-list";
 import AddButton from "../components/dashboard/add-button";
 
 export default async function page() {
-  const user = await getServerSession(authOptions);
   return (
     <div className=" h-full flex flex-col  gap-4 ">
-      <p className="text-lg">
-        Bienvenido{" "}
-        <strong>
-          {user?.user.name}, {user?.user.lastName}{" "}
-        </strong>
-      </p>
       <section className="flex flex-col   flex-grow">
         <div className="flex py-4 gap-4  max-lg:flex-col  ">
           <DashboardCard type="company" />

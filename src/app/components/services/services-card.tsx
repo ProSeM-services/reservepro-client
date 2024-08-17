@@ -8,11 +8,13 @@ import React, { Suspense, useState } from "react";
 import ServicesMemberList from "./services-members-list";
 interface ServiceCardProps {
   service: IService;
+  readonly?: boolean;
   selectedCompany?: ICompany;
 }
 export default function ServiceCard({
   service,
   selectedCompany,
+  readonly = false,
 }: ServiceCardProps) {
   const [deleting, setDeleting] = useState(false);
   const { toast } = useToast();
@@ -77,7 +79,7 @@ export default function ServiceCard({
         <p className="font-semibold">${service.price}</p>
       </div>
 
-      <ServicesMemberList service={service} />
+      {!readonly && <ServicesMemberList service={service} />}
     </div>
   );
 }

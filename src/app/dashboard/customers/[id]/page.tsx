@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   const customer = await getCustomerById(id);
   const appointments = await getAppointmentsByEmail(customer.email);
   return (
-    <div className="space-y-3 bg-background rounded-md border border-border p-6 h-full">
+    <div className="space-y-3 bg-background rounded-md  p-2 h-full">
       <header className=" text-[14px]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
