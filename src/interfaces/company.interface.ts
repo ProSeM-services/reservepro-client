@@ -17,8 +17,8 @@ export const CompanyZodSchema = z.object({
   image: z.string().optional(),
   email: z.string().email("Correo electrónico no válido").optional(),
   workhours: z.array(WorkhourZodSchema).optional(),
-  members: z.array(MemberZodSchema).optional(),
-  services: z.array(ServiceZodSchema).optional(),
+  members: z.array(z.string()).optional(),
+  services: z.array(z.string()).optional(),
 });
 export const CreateCompanyZodSchema = z.object({
   _id: z.string().optional(),

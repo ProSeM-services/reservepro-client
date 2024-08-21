@@ -18,10 +18,12 @@ interface Prediction {
 interface AddressInputProps {
   handleSelect: (address: string) => void;
   onlyInput?: boolean;
+  placeholder?: string;
 }
 export function AddressInput({
   handleSelect,
   onlyInput = false,
+  placeholder = "Ingresa la dirección",
 }: AddressInputProps) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -122,6 +124,10 @@ export function AddressInput({
     };
   }, []);
 
+  useEffect(() => {
+    setQuery(params.get("city") || "");
+  }, [params.get("city")]);
+
   return (
     <div className="relative w-full space-y-2 " ref={containerRef}>
       <Input
@@ -129,7 +135,7 @@ export function AddressInput({
         value={query}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Ingresa la dirección"
+        placeholder={placeholder}
         autoComplete="shipping family-name"
         ref={inputRef}
       />

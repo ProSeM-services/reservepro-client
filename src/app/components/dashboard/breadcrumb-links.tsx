@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 export default function BreadcrumbLinks() {
   const [pathSegments, setPathSegments] = React.useState<string[]>([]);
   const path = usePathname();
+
   useEffect(() => {
     const segments = path.split("/").filter((segment) => segment !== "");
     setPathSegments(segments);

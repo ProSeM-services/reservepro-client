@@ -107,7 +107,12 @@ export default function ServicesMemberList({ service }: { service: IService }) {
             </AccordionItem>
           </Accordion>
         </div>
-      ) : null}
+      ) : (
+        <AddMemberToService
+          service={service}
+          handleAddMembers={handleAddMembers}
+        />
+      )}
     </div>
   );
 }

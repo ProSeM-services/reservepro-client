@@ -18,7 +18,7 @@ export default async function CompnayList({
     query,
   });
   return (
-    <div>
+    <div className="space-y-4 max-h-full overflow-y-auto">
       {allComapnies.map((comp) => (
         <CompanyCard company={comp} key={comp._id} size="sm" />
       ))}

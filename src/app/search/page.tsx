@@ -1,8 +1,9 @@
 import React, { Suspense } from "react";
 import Search from "../components/search/search";
 import SearchTable from "../components/search/table";
-import Filter from "../components/search/filter";
+import CategoryFilter from "../components/search/category-filter";
 import LocationFilter from "../components/search/location-filter";
+import HomeHeader from "../components/home/home-header";
 interface PageProps {
   searchParams?: {
     query?: string;
@@ -11,43 +12,51 @@ interface PageProps {
     city?: string;
   };
 }
+
 export default function Page({ searchParams }: PageProps) {
   const query = searchParams?.query || "";
   const category = searchParams?.category || "";
   const city = searchParams?.city || "";
   const currentPage = Number(searchParams?.page) || 1;
-  return (
-    <div className=" flex flex-col  items-center h-screen w-[100vw] ">
-      <div className="lg:max-h-[80vh] flex flex-col gap-4 bg-accent w-full items-center ">
-        <div className="h-20  rounded-md flex items-center justify-center">
-          <p className="text-2xl font-semibold">¿Qué estas buscando?</p>
-        </div>
-        <div className="w-1/2">
-          <LocationFilter />
-        </div>
-      </div>
-      <section className="  w-[90vw] max-lg:w-full p-4 h-full">
-        <div className="flex-grow px-4 flex flex-col gap-4 h-full w-full max-w-full ">
-          <Search placeholder="Buscar" />
-          <div className="space-y-2 ">
-            <span className="font-medium text-sm text-gray-500 ">
-              Categorias
-            </span>
 
-            <Filter />
+  return (
+    <div className="flex flex-col   bg-muted">
+      <HomeHeader>
+        <h1 className="text-lg font-light ">Encuentra servicios cerca de ti</h1>
+      </HomeHeader>
+
+      <main className=" h-screen">
+        <div className="container mx-auto px-4 py-8 h-full ">
+          <div className="flex space-x-4 mb-8">
+            <div className="flex-grow">
+              <Search placeholder="Buscar servicios, negocios o tratamientos" />
+            </div>
+            <button className="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700">
+              Buscar
+            </button>
           </div>
-          <div className="p-6 bg-accent flex-grow rounded-md max-h-[90%] h-[90%] lg:max-w-full w-full   ">
-            <Suspense>
-              <SearchTable
-                city={city}
-                query={query}
-                currentPage={currentPage}
-                category={category}
-              />
-            </Suspense>
+
+          <div className="flex space-x-8">
+            <aside className="w-1/4 space-y-4">
+              <h2 className="text-xl font-semibold mb-4">Filtros</h2>
+              <LocationFilter />
+              <CategoryFilter />
+            </aside>
+
+            <div className="w-3/4 ">
+              <Suspense fallback={<div>Cargando resultados...</div>}>
+                <SearchTable
+                  view="grid"
+                  city={city}
+                  query={query}
+                  currentPage={currentPage}
+                  category={category}
+                />
+              </Suspense>
+            </div>
           </div>
         </div>
-      </section>
+      </main>
     </div>
   );
 }

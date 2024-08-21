@@ -20,6 +20,7 @@ const config = {
     extend: {
       colors: {
         soft: {
+          black: "#0d1619",
           a: "#753a6e",
           b: "#ffa38e",
           c: "#91b6dc",

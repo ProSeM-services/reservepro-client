@@ -60,6 +60,9 @@
   }
 }
 
+html{
+  scroll-behavior: smooth;
+}
 ::-webkit-scrollbar {
   width: 0.25rem;
   height: 0.25rem;
@@ -75,4 +78,12 @@
 ::-webkit-scrollbar-thumb {
   background-color: var(--Dark-grey, #5d6470);
   border-radius: 6.25rem;
+}
+
+.gradient-bg{
+  background: linear-gradient(184deg, rgb(200, 248, 203) 27%, rgba(108, 255, 147,.5) 50%, rgba(255, 255, 255,0) 86%);
+  }
+
+.bg-gradient-card {
+  background: radial-gradient(circle, rgba(255, 209, 111, 0.35) 35%, rgb(247, 237, 223) 50%, rgb(255, 255, 255) 100%);
 }
