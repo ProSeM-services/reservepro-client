@@ -66,7 +66,7 @@ export default function AddMembertoServiceAside({
       setIsAdding(false);
     }
   };
-  if (!service._id) return null;
+  if (!service.id) return null;
 
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
@@ -77,12 +77,12 @@ export default function AddMembertoServiceAside({
         members?.map((member) => (
           <div
             className={`flex relative items-center gap-2 border rounded-md border-accent p-2 cursor-pointer hover:bg-secondary transition-all duration-150 ${
-              selecetedMembers.includes(member._id!)
+              selecetedMembers.includes(member.id!)
                 ? "border border-sky-300 "
                 : ""
             }`}
-            key={member._id}
-            onClick={() => handleSelectMember(member._id!)}
+            key={member.id}
+            onClick={() => handleSelectMember(member.id!)}
           >
             <UserCircle className="size-5" />
             <div className="flex items-center gap-1 ">
@@ -94,7 +94,7 @@ export default function AddMembertoServiceAside({
               {member.email}
             </span>
 
-            {selecetedMembers.includes(member._id!) && (
+            {selecetedMembers.includes(member.id!) && (
               <CheckCircleIcon className="text-primary absolute right-2  size-4" />
             )}
           </div>

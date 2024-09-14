@@ -8,7 +8,7 @@ export default async function MemberList({ companyId }: { companyId: string }) {
     <div className="flex items-center gap-2">
       {members.map((member) => (
         <div
-          key={member._id}
+          key={member.id}
           className="  p-4  flex flex-col items-center gap-2"
         >
           <div className="relative size-24 aspect-square ">

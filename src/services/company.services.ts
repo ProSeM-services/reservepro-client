@@ -20,7 +20,7 @@ export class CompanyServices {
   }
 
   static async getCopanyById(id: string): Promise<ICompany> {
-    const res = await axiosInstance.get(`${BASE_URL}/company/details/${id}`);
+    const res = await axiosInstance.get(`${BASE_URL}/company/${id}`);
 
     return res.data;
   }

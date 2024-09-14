@@ -39,7 +39,10 @@ export default function DashboardCard({
   type: "member" | "company";
 }) {
   return (
-    <div className="flex flex-col   w-1/2 max-lg:w-full bg-background p-2 border border-accent rounded-md  ">
+    <div
+      className="flex flex-col gap-3
+       w-1/2 max-lg:w-full bg-background p-2 border border-accent rounded-md  "
+    >
       <Suspense fallback={<DashboardStatsSkeleton />}>
         <DashboardStats type={type} />
       </Suspense>

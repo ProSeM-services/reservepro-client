@@ -21,8 +21,8 @@ export default function RemoveMember({
     setDeleting(true);
     try {
       await removeMemberFromCompany({
-        companyId: company._id,
-        memberId: member._id,
+        companyId: company.id,
+        memberId: member.id,
       });
       toast({
         title: `${member.name}, ${member.lastName} elminado de ${company.name}`,

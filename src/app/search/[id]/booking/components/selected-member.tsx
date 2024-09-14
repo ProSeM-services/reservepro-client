@@ -27,7 +27,7 @@ export default function SelectedMember() {
     );
   return (
     <div
-      key={member._id}
+      key={member.id}
       className="  p-2  flex items-center gap-2 border rounded-xl select-none "
     >
       <div className="relative size-14 aspect-square ">

@@ -15,7 +15,7 @@ export default async function ServicesList() {
       ) : (
         <div className="  grid grid-cols-3 gap-2 max-lg:grid-cols-2   ">
           {services.map((service) => (
-            <ServiceCard service={service} key={service._id} />
+            <ServiceCard service={service} key={service.id} />
           ))}
         </div>
       )}

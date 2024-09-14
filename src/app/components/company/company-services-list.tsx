@@ -10,7 +10,7 @@ export default async function CompnayServicesList({
 }: {
   company: ICompany;
 }) {
-  const services = await getServicesFromCompany(company._id);
+  const services = company.Services;
   return (
     <div>
       {services?.length ? (
@@ -18,7 +18,7 @@ export default async function CompnayServicesList({
           {services.map((service) => (
             <ServiceCard
               service={service}
-              key={service._id}
+              key={service.id}
               selectedCompany={company}
             />
           ))}

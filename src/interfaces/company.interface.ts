@@ -6,7 +6,7 @@ import { MemberZodSchema } from "./member.iterface";
 import { ServiceZodSchema } from "./services.interface";
 
 export const CompanyZodSchema = z.object({
-  _id: z.string(),
+  id: z.string(),
   name: z.string(),
   address: LocationZodSchema,
   status: z.boolean().optional(),
@@ -19,9 +19,10 @@ export const CompanyZodSchema = z.object({
   workhours: z.array(WorkhourZodSchema).optional(),
   members: z.array(z.string()).optional(),
   services: z.array(z.string()).optional(),
+  Users: z.array(MemberZodSchema).optional(),
+  Services: z.array(ServiceZodSchema).optional(),
 });
 export const CreateCompanyZodSchema = z.object({
-  _id: z.string().optional(),
   name: z.string(),
   address: z.string(),
   status: z.boolean().optional(),

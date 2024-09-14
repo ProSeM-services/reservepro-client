@@ -1,7 +1,7 @@
 import { z } from "zod";
 export const ROLES_VALUES = ["BASIC", "ADMIN"] as const;
 export const UserZodSchema = z.object({
-  _id: z.string(),
+  id: z.string(),
   name: z.string(),
   lastName: z.string(),
   email: z.string(),

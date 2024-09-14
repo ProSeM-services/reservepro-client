@@ -5,7 +5,7 @@ export const ROLES_VALUES = ["BASIC", "ADMIN"] as const;
 
 export type Role = (typeof ROLES_VALUES)[number];
 export const ZodTenantSchema = z.object({
-  _id: z.string(),
+  id: z.string(),
   name: z.string(),
   lastName: z.string(),
   email: z.string().email(),
@@ -17,7 +17,7 @@ export const ZodTenantSchema = z.object({
   image: z.string().optional(),
 });
 export const CreateTenantZodSchema = ZodTenantSchema.omit({
-  _id: true,
+  id: true,
 });
 export type ITentant = z.infer<typeof ZodTenantSchema>;
 export type ICreateTentant = z.infer<typeof CreateTenantZodSchema>;
@@ -30,7 +30,7 @@ export const MemberZodSchema = ZodTenantSchema.omit({
 });
 export const CreateMemberZodSchema = ZodTenantSchema.omit({
   tenantName: true,
-  _id: true,
+  id: true,
 }).extend({
   phone: z.string().optional(),
   workhours: z.array(WorkhourZodSchema).optional(),

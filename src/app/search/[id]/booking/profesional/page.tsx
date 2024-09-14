@@ -12,7 +12,7 @@ export default async function page({
   return (
     <div className="space-y-4 ">
       {members.map((member) => (
-        <SelectMemberCard member={member} key={member._id} />
+        <SelectMemberCard member={member} key={member.id} />
       ))}
     </div>
   );

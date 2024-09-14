@@ -12,7 +12,7 @@ export default function SelectService({ service }: { service: IService }) {
 
   const handleSelecServices = () => {
     if (service) {
-      params.set("service", service._id);
+      params.set("service", service.id);
     } else {
       params.delete("service");
     }

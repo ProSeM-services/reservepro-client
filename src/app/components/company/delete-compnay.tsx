@@ -21,7 +21,7 @@ export default function DeleteCompany({ company }: { company: ICompany }) {
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await deleteCompany(company._id);
+      await deleteCompany(company.id);
 
       toast({
         title: "Sucursal elimnada!",

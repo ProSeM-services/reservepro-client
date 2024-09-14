@@ -9,7 +9,7 @@ export const PROVISION_VALUES = [
 export type Provision = (typeof PROVISION_VALUES)[number];
 
 export const ServiceZodSchema = z.object({
-  _id: z.string(),
+  id: z.string(),
   title: z.string().min(1),
   description: z.string().optional(),
   price: z.number(),
@@ -20,12 +20,12 @@ export const ServiceZodSchema = z.object({
 });
 
 export const CreateServiceZodSchema = ServiceZodSchema.omit({
-  _id: true,
+  id: true,
   members: true,
   companyId: true,
 });
 export const UpdateServiceZodSchema = ServiceZodSchema.omit({
-  _id: true,
+  id: true,
   members: true,
 }).partial();
 

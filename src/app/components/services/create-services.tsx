@@ -47,11 +47,11 @@ export default function CreateServicesForm() {
         variant: "success",
       });
     } catch (error) {
-      console.log(error);
+      console.error("Error creating services ---- > ", error);
       toast({
         title: "Error al crear!",
-        description: `.`,
-        variant: "success",
+        description: "Vuelve a intentar en unos minutos.",
+        variant: "destructive",
       });
     }
   };

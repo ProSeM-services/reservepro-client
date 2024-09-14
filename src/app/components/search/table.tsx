@@ -53,7 +53,7 @@ export default async function SearchTable({
     return (
       <div className="grid grid-cols-3 gap-2">
         {companies.map((company, index) => (
-          <div className="h-80" key={company._id}>
+          <div className="h-80" key={company.id}>
             <CompanyCard company={company} index={index} />
           </div>
         ))}
@@ -65,11 +65,11 @@ export default async function SearchTable({
       <CarouselContent className="">
         {companies.map((company, index) => (
           <CarouselItem
-            key={company._id}
+            key={company.id}
             className=" basis-1/3 md:basis-1/2 lg:basis-1/3 "
           >
             <div className="h-80">
-              <CompanyCard company={company} key={company._id} index={index} />
+              <CompanyCard company={company} key={company.id} index={index} />
             </div>
           </CarouselItem>
         ))}

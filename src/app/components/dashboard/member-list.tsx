@@ -16,7 +16,7 @@ export default async function MemberList() {
       ) : (
         <div className="space-y-2">
           {members?.map((member) => (
-            <MemberCard member={member} key={member._id} />
+            <MemberCard member={member} key={member.id} />
           ))}
         </div>
       )}
