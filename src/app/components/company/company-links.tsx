@@ -11,10 +11,10 @@ export default function CompanyLinks({ companies }: { companies: ICompany[] }) {
     <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
       {companies.map((company) => (
         <Link
-          href={`/dashboard/company/${company._id}`}
-          key={company._id}
+          href={`/dashboard/company/${company.id}`}
+          key={company.id}
           className={` ${
-            pathname === `/dashboard/company/${company._id}`
+            pathname === `/dashboard/company/${company.id}`
               ? " text-primary  bg-sky-100 "
               : " border-border  text-secondary-foreground "
           }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}

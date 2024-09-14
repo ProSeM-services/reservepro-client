@@ -24,7 +24,7 @@ export default function ServicesMemberList({ service }: { service: IService }) {
   const fetchMembers = async () => {
     setLoading(true);
     try {
-      const res = await getMembersFromServices(service._id);
+      const res = await getMembersFromServices(service.id);
       setMembers(res);
     } catch (error) {
     } finally {
@@ -38,7 +38,7 @@ export default function ServicesMemberList({ service }: { service: IService }) {
   const handleAddMembers = async (selecetedMembers: string[]) => {
     try {
       const allMembersToAdd = selecetedMembers.map((memberId) =>
-        addMemberToService({ serviceId: service._id!, memberId })
+        addMemberToService({ serviceId: service.id!, memberId })
       );
       await Promise.all(allMembersToAdd);
       await fetchMembers();
@@ -50,7 +50,7 @@ export default function ServicesMemberList({ service }: { service: IService }) {
   const handleRemoveMember = async (memberId: string) => {
     try {
       await removeMemberFromService({
-        serviceId: service._id,
+        serviceId: service.id,
         memberId,
       });
       await fetchMembers();
@@ -81,7 +81,7 @@ export default function ServicesMemberList({ service }: { service: IService }) {
                     {members?.map((member) => (
                       <div
                         className="flex items-center  justify-between"
-                        key={member._id}
+                        key={member.id}
                       >
                         <div className="flex items-center gap-1">
                           <Avvvatars

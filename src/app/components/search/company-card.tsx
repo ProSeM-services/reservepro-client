@@ -23,8 +23,8 @@ export default function CompanyCard({
   return (
     <div
       className={`flex flex-col   justify-start items-center rounded-xl border-2 shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-background max-lg:w-full `}
-      key={company._id}
-      onClick={() => selectCompany(company._id)}
+      key={company.id}
+      onClick={() => selectCompany(company.id)}
     >
       <div className="w-full h-52 mb-2 overflow-hidden rounded-sm">
         <Image

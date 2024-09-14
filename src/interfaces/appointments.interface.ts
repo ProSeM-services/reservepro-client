@@ -3,7 +3,7 @@ import { MemberZodSchema } from "./member.iterface";
 const isoStringRegex =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|([+-]\d{2}:\d{2}))$/;
 export const AppointmentZodSchema = z.object({
-  _id: z.string().min(1),
+  id: z.string().min(1),
   name: z.string().min(1),
   lastName: z.string().min(1),
   email: z.string().email(),

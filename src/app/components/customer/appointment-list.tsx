@@ -16,16 +16,16 @@ export default function AppointmentList({
           fallback={
             <div
               className=" bg-background  w-full  p-4 rounded-md border border-border space-y-2"
-              key={app._id}
+              key={app.id}
             >
               cargandoo..
             </div>
           }
-          key={app._id}
+          key={app.id}
         >
           <div
             className=" bg-background  w-full  p-4 rounded-md border border-border space-y-2"
-            key={app._id}
+            key={app.id}
           >
             <div className="flex items-center justify-between ">
               <MemberInfo memberId={app.memberId} />

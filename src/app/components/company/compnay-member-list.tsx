@@ -1,5 +1,5 @@
 import { ICompany } from "@/interfaces";
-import { getMembersFromCompany } from "@/lib/actions";
+import { getCompanyData, getMembersFromCompany } from "@/lib/actions";
 import React from "react";
 import RemoveMember from "./remove-member";
 import { MemberCard } from "../dashboard/card";
@@ -10,13 +10,13 @@ export default async function CompnayMemberList({
 }: {
   company: ICompany;
 }) {
-  const members = await getMembersFromCompany(company._id);
+  const members = company.Users;
   return (
     <div>
       {members?.length ? (
         <div>
           {members.map((member) => (
-            <div className="flex items-center gap-2" key={member._id}>
+            <div className="flex items-center gap-2" key={member.id}>
               <RemoveMember member={member} company={company} />
               <MemberCard member={member} />
             </div>

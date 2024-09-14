@@ -26,7 +26,7 @@ export function CompanyCard({ company }: CompanyCardProps) {
       </div>
       <Button
         variant={"ghost"}
-        onClick={() => router.push(`/dashboard/company/${company._id}`)}
+        onClick={() => router.push(`/dashboard/company/${company.id}`)}
       >
         <Edit className="size-4" />
       </Button>
@@ -59,7 +59,7 @@ export function MemberCard({ member }: MemberCardProps) {
       <div>
         <Button
           variant={"ghost"}
-          onClick={() => router.push(`/dashboard/company/${member._id}`)}
+          onClick={() => router.push(`/dashboard/company/${member.id}`)}
           disabled
         >
           <Edit className="size-4" />

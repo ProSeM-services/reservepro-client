@@ -6,7 +6,6 @@ import { IMember } from "@/interfaces/member.iterface";
 import { Button } from "@/components/ui/button";
 import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
-import { LoaderSpinner } from "../common/loader-spinner";
 import { BarLoader } from "../common/bar-loader";
 
 export default function AddMemberAside({ company }: { company: ICompany }) {
@@ -45,7 +44,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
     setIsAdding(true);
     try {
       const allMembersToAdd = selecetedMembers.map((memberId) =>
-        addMemberToCompany({ companyId: company._id!, memberId })
+        addMemberToCompany({ companyId: company.id!, memberId })
       );
       await Promise.all(allMembersToAdd);
       toast({
@@ -63,7 +62,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
       setIsAdding(false);
     }
   };
-  if (!company._id) return null;
+  if (!company.id) return null;
 
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
@@ -74,12 +73,12 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
         members?.map((member) => (
           <div
             className={`flex relative items-center gap-2 border rounded-md border-accent p-2 cursor-pointer hover:bg-secondary transition-all duration-150 ${
-              selecetedMembers.includes(member._id!)
+              selecetedMembers.includes(member.id!)
                 ? "border border-sky-300 "
                 : ""
             }`}
-            key={member._id}
-            onClick={() => handleSelectMember(member._id!)}
+            key={member.id}
+            onClick={() => handleSelectMember(member.id!)}
           >
             <UserCircle className="size-5" />
             <div className="flex items-center gap-1 ">
@@ -91,7 +90,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
               {member.email}
             </span>
 
-            {selecetedMembers.includes(member._id!) && (
+            {selecetedMembers.includes(member.id!) && (
               <CheckCircleIcon className="text-primary absolute right-2  size-4" />
             )}
           </div>

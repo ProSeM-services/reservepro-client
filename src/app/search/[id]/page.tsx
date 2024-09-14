@@ -111,7 +111,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Servicios</h2>
                 <Suspense fallback="Loading....">
-                  <SercvicesList companyId={company._id} />
+                  <SercvicesList companyId={company.id} />
                 </Suspense>
               </div>
             )}
@@ -119,7 +119,7 @@ export default async function Page({ params }: { params: { id: string } }) {
               <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Nuestro equipo</h2>
                 <Suspense fallback="Loading....">
-                  <MemberList companyId={company._id} />
+                  <MemberList companyId={company.id} />
                 </Suspense>
               </div>
             )}
@@ -130,7 +130,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             <p className="text-gray-600 ">{company.address.value}</p>
 
             <Link
-              href={`/search/${company._id}/booking`}
+              href={`/search/${company.id}/booking`}
               className="bg-primary text-white text-center p-2 rounded-md font-semibold"
             >
               Reservar ahora

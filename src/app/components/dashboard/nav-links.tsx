@@ -16,6 +16,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ModeToggle } from "../theme-toggler";
 const links = [
   { name: "Home", href: "/dashboard", icon: HomeIcon },
   {
@@ -66,6 +67,9 @@ export default function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
             </Link>
           );
         })}
+        <div className="bg-muted rounded-md">
+          <ModeToggle />
+        </div>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>

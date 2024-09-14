@@ -23,8 +23,8 @@ export default function ServiceCard({
     try {
       if (selectedCompany) {
         await removeServiceFromComapny({
-          companyId: selectedCompany._id,
-          serviceId: service._id,
+          companyId: selectedCompany.id,
+          serviceId: service.id,
         });
       }
 

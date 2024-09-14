@@ -2,7 +2,7 @@ import { z } from "zod";
 import { AppointmentZodSchema } from "./appointments.interface";
 
 export const CustomerZodSchema = z.object({
-  _id: z.string(),
+  id: z.string(),
   firstName: z.string(),
   lastName: z.string(),
   email: z.string(),
@@ -11,11 +11,11 @@ export const CustomerZodSchema = z.object({
   createdAt: z.string(),
 });
 export const CreateCustomerZodSchema = CustomerZodSchema.omit({
-  _id: true,
+  id: true,
   apointments: true,
 });
 export const UpdateCustomerZodSchema = CustomerZodSchema.omit({
-  _id: true,
+  id: true,
   apointments: true,
 }).optional();
 

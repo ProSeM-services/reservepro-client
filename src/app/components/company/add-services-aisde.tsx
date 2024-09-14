@@ -39,7 +39,7 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
   const handleAddServices = async () => {
     try {
       const allServicesToAdd = selectedServices.map((serviceId) =>
-        addServiceToComapny({ companyId: company._id!, serviceId })
+        addServiceToComapny({ companyId: company.id!, serviceId })
       );
       await Promise.all(allServicesToAdd);
       toast({
@@ -56,7 +56,7 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
       });
     }
   };
-  if (!company._id) return null;
+  if (!company.id) return null;
 
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
@@ -66,16 +66,16 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
         services?.map((service) => (
           <div
             className={`flex relative items-center gap-2 border rounded-md border-accent  cursor-pointer hover:bg-secondary transition-all duration-150 ${
-              selectedServices.includes(service._id!)
+              selectedServices.includes(service.id!)
                 ? "border border-sky-300 "
                 : ""
             }`}
-            key={service._id}
-            onClick={() => handleSelectService(service._id!)}
+            key={service.id}
+            onClick={() => handleSelectService(service.id!)}
           >
             <ServiceCard service={service} />
 
-            {selectedServices.includes(service._id!) && (
+            {selectedServices.includes(service.id!) && (
               <CheckCircleIcon className="text-sky-300 absolute right-2 bottom-2  size-6" />
             )}
           </div>

@@ -66,11 +66,11 @@ export default async function CompanyList({
         <div className="space-y-2">
           {type === "company" &&
             copmpanies?.map((company) => (
-              <CompanyCard company={company} key={company._id} />
+              <CompanyCard company={company} key={company.id} />
             ))}
           {type === "member" &&
             members?.map((member) => (
-              <MemberCard member={member} key={member._id} />
+              <MemberCard member={member} key={member.id} />
             ))}
         </div>
       )}

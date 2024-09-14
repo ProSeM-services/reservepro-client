@@ -21,7 +21,7 @@ export default function RemoveMemberButton({
   const handleRemoveMember = async () => {
     setRemoving(true);
     try {
-      await removeAction(member._id);
+      await removeAction(member.id);
 
       toast({
         title: `Miembro removido del servicio  - ${service.title} -  exitosamente`,

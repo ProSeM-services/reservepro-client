@@ -21,7 +21,7 @@ export default function LoginForm() {
     setLoading(true);
     try {
       const res = await signIn("credentials", {
-        email: values.email,
+        user: values.user,
         password: values.password,
         redirect: false,
       });
@@ -41,7 +41,7 @@ export default function LoginForm() {
   }
 
   const formSchema = z.object({
-    email: z.string().min(2, {
+    user: z.string().min(2, {
       message: "Username must be at least 2 characters.",
     }),
     password: z.string().min(2, {
@@ -51,7 +51,7 @@ export default function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      user: "",
       password: "",
     },
   });
@@ -63,7 +63,7 @@ export default function LoginForm() {
           <div className="w-full">
             <FormField
               control={form.control}
-              name="email"
+              name="user"
               render={({ field }) => (
                 <FormItem>
                   <Label htmlFor="email">Email</Label>

@@ -12,7 +12,7 @@ export default function SelectMemberCard({ member }: { member: IMember }) {
 
   const handleSelectMember = () => {
     if (member) {
-      params.set("member", member._id);
+      params.set("member", member.id);
     } else {
       params.delete("member");
     }
@@ -20,8 +20,8 @@ export default function SelectMemberCard({ member }: { member: IMember }) {
   };
   return (
     <div
-      key={member._id}
-      className="  p-2  flex items-center gap-2 border rounded-xl  cursor-pointer hover:bg-soft-black/50 transition-all duration-200"
+      key={member.id}
+      className="  p-2  flex items-center gap-2 border rounded-xl  cursor-pointer hover:bg-muted transition-all duration-200"
       onClick={handleSelectMember}
     >
       <div className="relative size-14 aspect-square ">

@@ -42,13 +42,13 @@ export default function CustomerTable({
       cell: ({ getValue }) => <b>{getValue<[]>().length}</b>,
     },
     {
-      accessorKey: "_id",
+      accessorKey: "id",
       header: "",
       size: 50,
       cell: ({ row, getValue }) => (
         <Link
           className="bg-secondary text-center text-primary hover:bg-sky-100 transition-all duration-150  flex  justify-center p-1 rounded-md  text-xs font-semibold "
-          href={`/dashboard/customers/${row.original._id}`}
+          href={`/dashboard/customers/${row.original.id}`}
         >
           detalles
         </Link>

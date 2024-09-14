@@ -17,7 +17,7 @@ export default async function SercvicesList({
     <div className="space-y-4 w-full">
       {services.map((service) => (
         <div
-          key={service._id}
+          key={service.id}
           className="flex items-center justify-between border border-border rounded-lg p-4 cursor-pointer "
         >
           <div className="space-y-2">

@@ -14,7 +14,6 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
           <div className="flex justify-between w-full">
             <SheetSideMenu />
             <BreadcrumbLinks />
-
             <UserMenu />
           </div>
         </header>

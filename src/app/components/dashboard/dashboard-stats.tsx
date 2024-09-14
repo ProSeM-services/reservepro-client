@@ -1,4 +1,4 @@
-import { companiesCount, membersCount } from "@/lib/actions";
+import { getComapnies, getMembers } from "@/lib/actions";
 import React from "react";
 import AddButton from "./add-button";
 
@@ -8,11 +8,12 @@ export default async function DashboardStats({
   type: "member" | "company";
 }) {
   const fetchFunction = {
-    member: membersCount,
-    company: companiesCount,
+    member: getMembers,
+    company: getComapnies,
   };
-  const count = await fetchFunction[type]();
+  const res = await fetchFunction[type]();
 
+  const count = res.length;
   return (
     <div className="flex flex-col gap-4 justify-center items-center    p-4 w-full  relative ">
       {count > 0 ? (
