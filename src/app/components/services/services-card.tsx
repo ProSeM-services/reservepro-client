@@ -3,9 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ICompany, IService } from "@/interfaces";
 import { removeServiceFromComapny } from "@/lib/actions";
-import { ClockIcon, TrashIcon, UserIcon } from "lucide-react";
-import React, { Suspense, useState } from "react";
-import ServicesMemberList from "./services-members-list";
+import { ClockIcon, TrashIcon } from "lucide-react";
+import React, { useState } from "react";
 interface ServiceCardProps {
   service: IService;
   readonly?: boolean;
@@ -14,7 +13,6 @@ interface ServiceCardProps {
 export default function ServiceCard({
   service,
   selectedCompany,
-  readonly = false,
 }: ServiceCardProps) {
   const [deleting, setDeleting] = useState(false);
   const { toast } = useToast();
@@ -78,8 +76,6 @@ export default function ServiceCard({
       <div className="flex items-center justify-between">
         <p className="font-semibold">${service.price}</p>
       </div>
-
-      {!readonly && <ServicesMemberList service={service} />}
     </div>
   );
 }

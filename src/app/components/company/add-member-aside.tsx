@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { addMemberToCompany, getFreeMembers } from "@/lib/actions";
+import { getFreeMembers } from "@/lib/actions";
+import { addMembertoCompany } from "@/lib/user.actions";
 import { CheckCircleIcon, UserCircle } from "lucide-react";
 import { IMember } from "@/interfaces/member.iterface";
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,7 @@ export default function AddMemberAside({ company }: { company: ICompany }) {
     setIsAdding(true);
     try {
       const allMembersToAdd = selecetedMembers.map((memberId) =>
-        addMemberToCompany({ companyId: company.id!, memberId })
+        addMembertoCompany({ companyId: company.id!, memberId })
       );
       await Promise.all(allMembersToAdd);
       toast({

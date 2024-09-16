@@ -1,4 +1,5 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
+import { IAddMember } from "@/interfaces";
 import { ICreateMember, IMember } from "@/interfaces/member.iterface";
 
 export class MemberServices {
@@ -25,6 +26,14 @@ export class MemberServices {
 
   static async createMember(data: ICreateMember) {
     const res = await axiosInstance.post(`${BASE_URL}/user`, data);
+
+    return res.data;
+  }
+  static async addToCompany(data: IAddMember) {
+    const res = await axiosInstance.post(
+      `${BASE_URL}/user/add-to-company`,
+      data
+    );
 
     return res.data;
   }

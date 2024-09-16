@@ -6,8 +6,8 @@ import AddButton from "../components/dashboard/add-button";
 export default async function page() {
   return (
     <div className=" h-full flex flex-col  gap-4 ">
-      <section className="flex flex-col   flex-grow">
-        <div className="flex py-4 gap-4  max-lg:flex-col  ">
+      <section className="flex flex-col  gap-4 flex-grow">
+        <div className="flex  gap-4  max-lg:flex-col  ">
           <DashboardCard type="company" />
           <DashboardCard type="member" />
         </div>
