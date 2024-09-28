@@ -13,13 +13,13 @@ export default async function layout({ children, params }: LayoutProps) {
   const company = await getClientCompanyData(params.id);
 
   return (
-    <div className="   p-8 ">
+    <div>
       <div className="container py-4">
         <BreadcrumbLinks />
       </div>
-      <section className=" container flex justify-between h-screen gap-4">
-        <div className=" max-h-[90vh] flex-grow">{children}</div>
-        <aside className="w-1/3 p-4 border rounded-lg shadow-md h-[80vh] space-y-4">
+      <section className=" container flex justify-between h-[90vh] gap-4 ">
+        <div className=" max-h-[90vh]  flex-grow">{children}</div>
+        <aside className="w-1/3 p-4 border rounded-lg shadow-md h-full space-y-4">
           <section className="flex gap-4">
             <div className="w-20 aspect-square bg-muted rounded-lg"></div>
             <div>

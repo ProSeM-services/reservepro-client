@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function HomeHeader({ children }: PropsWithChildren) {
   return (
     <header
-      className="sticky top-0 transition-colors duration-300  shadow-sm z-10 font"
+      className="sticky top-0 transition-colors duration-300  shadow-sm z-10 font bg-muted"
       id="header"
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">

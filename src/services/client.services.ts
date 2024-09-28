@@ -14,12 +14,14 @@ export class ClientServices {
     city: string;
   }): Promise<ICompany[]> {
     const res = await axios.get(
-      `${BASE_URL}/client/companies?name=${query}&category=${category}&city=${city}`
+      `${BASE_URL}/company/clients?name=${query}&category=${category}&city=${city}`
     );
     return res.data;
   }
   static async getCompanyById(id: string): Promise<ICompany> {
-    const res = await axios.get(`${BASE_URL}/client/companies/${id}`);
+    const res = await axios.get(
+      `${BASE_URL}/company/clients/company-detail/${id}`
+    );
     return res.data;
   }
   static async getServicesById(id: string): Promise<IService> {
@@ -32,7 +34,7 @@ export class ClientServices {
   }
   static async getCompanyServices(companyId: string): Promise<IService[]> {
     const res = await axios.get(
-      `${BASE_URL}/client/companies/${companyId}/services`
+      `${BASE_URL}/company/clients/company-detail/${companyId}/services`
     );
     return res.data;
   }

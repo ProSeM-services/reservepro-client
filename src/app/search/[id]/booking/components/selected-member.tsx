@@ -21,9 +21,14 @@ export default function SelectedMember() {
 
   if (!member)
     return (
-      <p className="text-sm font-semibold text-gray-500 p-2">
-        No hay profesional seleccionado
-      </p>
+      <div className="  p-2  flex items-center gap-2 border rounded-xl select-none ">
+        <div className="shadow-md rounded-full size-14 object-cover border border-border cursor-pointer transition-all duration-150 hover:scale-105" />
+
+        <div className="flex gap-1 font-medium">
+          <p>Nombre</p>
+          <p>Apellido</p>
+        </div>
+      </div>
     );
   return (
     <div

@@ -44,7 +44,6 @@ export default function CreateServicesForm() {
       toast({
         title: "Servicio Creado!",
         description: `El servicio ${values.title} fue agregado a tu lista de servicios.`,
-        variant: "success",
       });
     } catch (error) {
       console.error("Error creating services ---- > ", error);

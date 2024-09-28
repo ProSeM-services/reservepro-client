@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function LandingPage() {
   return (
-    <section className="h-screen flex flex-col items-start justify-center pb-8 gradient-bg ">
+    <section className="h-screen flex flex-col items-start justify-center pb-8  ">
       <div className="container">
         <h1 className={`text-4xl md:text-6xl font-bold mb-6 text-gray-800 `}>
           Descubre y reserva los mejores servicios locales con facilidad

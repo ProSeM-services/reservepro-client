@@ -4,10 +4,8 @@ import React from "react";
 export default function BookingPage({ params }: { params: { id: string } }) {
   const companyId = params.id;
   return (
-    <div>
-      <section className=" w-full  flex">
-        <SercvicesList companyId={companyId} readonly={false} />
-      </section>
-    </div>
+    <section className=" w-full h-full  ">
+      <SercvicesList companyId={companyId} readonly={false} />
+    </section>
   );
 }

@@ -20,19 +20,19 @@ export default function CompaniesHomeSection({ searchParams }: PageProps) {
       <div className="container space-y-[2rem]">
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
           <h3 className="font-bold text-2xl text-soft-black">Recomendado</h3>
-          {/* <Suspense fallback={"Loading"}>
+          <Suspense fallback={"Loading"}>
             <SearchTable
               city={city}
               query={query}
               currentPage={currentPage}
               category={category}
             />
-          </Suspense> */}
+          </Suspense>
         </section>
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
-          <h3 className="font-bold text-2xl text-soft-black">
+          {/* <h3 className="font-bold text-2xl text-soft-black">
             Nuevo en Reserve Pro
-          </h3>
+          </h3> */}
           {/**
       
             <Suspense fallback={"Loading"}>
@@ -47,7 +47,7 @@ export default function CompaniesHomeSection({ searchParams }: PageProps) {
              */}
         </section>
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
-          <h3 className="font-bold text-2xl text-soft-black">Tendencia</h3>
+          {/* <h3 className="font-bold text-2xl text-soft-black">Tendencia</h3> */}
           {/*
       
           <Suspense fallback={"Loading"}>

@@ -1,4 +1,3 @@
-import { montserrat } from "@/lib/fonts";
 import LandingPage from "./components/home/landig-page";
 import CompaniesHomeSection from "./components/home/companies-home";
 import ClientsFeedback from "./components/home/clients-feedback";

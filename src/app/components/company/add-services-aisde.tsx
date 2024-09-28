@@ -16,10 +16,19 @@ import ServiceCard from "../services/services-card";
 export default function AddServicesAside({ company }: { company: ICompany }) {
   const [services, setServices] = useState<IService[]>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false); // Added state for loading
+
   useEffect(() => {
     const fetchServices = async () => {
-      const response = await getServices();
-      setServices(response);
+      setLoading(true); // Set loading to true when fetching services
+      try {
+        const response = await getServices();
+        setServices(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false); // Set loading to false after fetching services
+      }
     };
 
     fetchServices();
@@ -37,6 +46,7 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
   };
 
   const handleAddServices = async () => {
+    setLoading(true); // Set loading to true when adding services
     try {
       const allServicesToAdd = selectedServices.map((serviceId) =>
         addServiceToComapny({ companyId: company.id!, serviceId })
@@ -45,7 +55,6 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
       toast({
         title: "Servicios cargados!",
         description: `Los servicios fueron agregados exitosamente a ${company.name}!`,
-        variant: "success",
       });
     } catch (error) {
       console.log(error);
@@ -54,20 +63,27 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
         description: `Hubo un error al agregar los miembors en ${company.name}!`,
         variant: "destructive",
       });
+    } finally {
+      setLoading(false); // Set loading to false after adding services
     }
   };
   if (!company.id) return null;
 
+  const servicesToShow = services.filter((s) =>
+    company.Services?.find((value) => value.id === s.id) ? false : true
+  );
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
-      {services && !services.length ? (
-        <p>no hay miembros</p>
+      {loading ? (
+        <div>Loading...</div>
+      ) : servicesToShow.length === 0 ? (
+        <p>No hay servicios para mostrar!</p>
       ) : (
-        services?.map((service) => (
+        servicesToShow?.map((service) => (
           <div
             className={`flex relative items-center gap-2 border rounded-md border-accent  cursor-pointer hover:bg-secondary transition-all duration-150 ${
               selectedServices.includes(service.id!)
-                ? "border border-sky-300 "
+                ? "border border-primary "
                 : ""
             }`}
             key={service.id}
@@ -76,7 +92,7 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
             <ServiceCard service={service} />
 
             {selectedServices.includes(service.id!) && (
-              <CheckCircleIcon className="text-sky-300 absolute right-2 bottom-2  size-6" />
+              <CheckCircleIcon className="text-primary absolute right-2 bottom-2  size-6" />
             )}
           </div>
         ))
@@ -85,7 +101,7 @@ export default function AddServicesAside({ company }: { company: ICompany }) {
       <div className="absolute bottom-1 right-1  ">
         <Button
           onClick={handleAddServices}
-          disabled={selectedServices.length === 0}
+          disabled={selectedServices.length === 0 || loading} // Disable button if loading
         >
           Agregar
         </Button>

@@ -27,9 +27,13 @@ export default function SelectedServiceDetails() {
 
   if (!service)
     return (
-      <p className="text-sm font-semibold text-gray-500 p-2">
-        No hay servicios seleccionado
-      </p>
+      <div className="space-y-1 p-2 text-gray-600 text-sm">
+        <div className=" flex justify-between font-semibold">
+          <p> -</p>
+          <p>$ -</p>
+        </div>
+        <p className="text-gray-400">{formatDuration(0)}</p>
+      </div>
     );
   return (
     <div className="space-y-1 p-2 text-gray-600 text-sm">

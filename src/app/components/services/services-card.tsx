@@ -38,32 +38,34 @@ export default function ServiceCard({
   };
 
   return (
-    <div className="flex flex-col justify-between gap-1 h-44 p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full relative pb- ">
+    <div className="flex flex-col justify-between gap-1  p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full relative pb- ">
       <div className="flex justify-between items-center">
         <div className="flex justify-between w-full">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between  w-full">
             <p className="font-semibold">{service.title}</p>
 
-            <p className="text-xs bg-soft-d rounded-md px-2 py-[1px] felx items-center text-white font-medium ">
-              {service.provision}
-            </p>
+            <div className="flex gap-2">
+              <div className="text-xs text-soft-d rounded-md px-2 py-[1px]  items-center border font-medium flex gap-1">
+                <ClockIcon className="size-4" />
+                <p> {service.duration}min</p>
+              </div>
+              <p className="text-xs text-soft-d rounded-md px-2 py-[1px] flex items-center border font-medium ">
+                {service.provision}
+              </p>
+              {selectedCompany ? (
+                <Button
+                  variant={"destructive"}
+                  size={"sm"}
+                  className="size-6 p-0"
+                  onClick={handleDeleteService}
+                  isLoading={deleting}
+                >
+                  <TrashIcon className="size-4" />
+                </Button>
+              ) : null}
+            </div>
           </div>
-          {selectedCompany ? (
-            <Button
-              variant={"destructive"}
-              size={"sm"}
-              className="p-0 size-6"
-              onClick={handleDeleteService}
-              isLoading={deleting}
-            >
-              <TrashIcon className="size-4" />
-            </Button>
-          ) : null}
         </div>
-      </div>
-      <div className="flex items-center gap-1 text-soft-c font-light text-sm">
-        <ClockIcon className="size-4" />
-        <p> {service.duration}min</p>
       </div>
 
       <p className="text-gray-500 font-light">
