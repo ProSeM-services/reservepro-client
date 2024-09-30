@@ -25,11 +25,11 @@ export class ClientServices {
     return res.data;
   }
   static async getServicesById(id: string): Promise<IService> {
-    const res = await axios.get(`${BASE_URL}/client/services/${id}`);
+    const res = await axios.get(`${BASE_URL}/services/clients/${id}`);
     return res.data;
   }
   static async getMemberById(id: string): Promise<IMember> {
-    const res = await axios.get(`${BASE_URL}/client/members/${id}`);
+    const res = await axios.get(`${BASE_URL}/user/clients/${id}`);
     return res.data;
   }
   static async getCompanyServices(companyId: string): Promise<IService[]> {

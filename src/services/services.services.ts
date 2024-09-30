@@ -14,7 +14,7 @@ export class ServicesServices {
     return res.data;
   }
   static async getById(id: string): Promise<IService> {
-    const res = await axiosInstance.get(`${BASE_URL}/services/details/${id}`);
+    const res = await axiosInstance.get(`${BASE_URL}/services/${id}`);
 
     return res.data;
   }

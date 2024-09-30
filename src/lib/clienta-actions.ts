@@ -1,7 +1,7 @@
 "use server";
+import { IMember } from "@/interfaces/member.iterface";
 import { ClientServices } from "@/services/client.services";
 import { revalidatePath } from "next/cache";
-import { setAuthtoken } from "./actions";
 
 export async function getClientComapnies({
   query,
@@ -47,8 +47,8 @@ export async function getCompanyMembers(id: string) {
   return members;
 }
 
-export async function getServicesMembers(id: string) {
-  const members = await ClientServices.getServiceMembers(id);
+export async function getServicesMembers(id: string): Promise<IMember[]> {
+  const service = await ClientServices.getServicesById(id);
   revalidatePath("/search");
-  return members;
+  return service.Users;
 }

@@ -101,7 +101,7 @@ export default function AddMembertoServiceAside({
         ))
       )}
 
-      <div className="absolute bottom-1 right-1  ">
+      <div className=" ">
         <Button
           onClick={handleAddSelectedMembers}
           disabled={selecetedMembers.length === 0}

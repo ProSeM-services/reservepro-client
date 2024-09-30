@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { MemberZodSchema } from "./member.iterface";
+import { UserZodSchema } from "./user.interface";
 
 export const PROVISION_VALUES = [
   "Presencial",
@@ -15,18 +16,18 @@ export const ServiceZodSchema = z.object({
   price: z.number(),
   duration: z.number(),
   provision: z.enum(PROVISION_VALUES),
-  members: z.array(MemberZodSchema),
+  Users: z.array(MemberZodSchema),
   companyId: z.string().optional(),
 });
 
 export const CreateServiceZodSchema = ServiceZodSchema.omit({
   id: true,
-  members: true,
+  Users: true,
   companyId: true,
 });
 export const UpdateServiceZodSchema = ServiceZodSchema.omit({
   id: true,
-  members: true,
+  Users: true,
 }).partial();
 
 export type IService = z.infer<typeof ServiceZodSchema>;
@@ -43,7 +44,7 @@ export const AddServiceSchema = z.object({
 });
 export const AddMemberToService = z.object({
   serviceId: z.string(),
-  memberId: z.string(),
+  userId: z.string(),
 });
 export type IAddMemberToService = z.infer<typeof AddMemberToService>;
 export type IAddService = z.infer<typeof AddServiceSchema>;

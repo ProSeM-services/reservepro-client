@@ -1,19 +1,59 @@
-import { getServicesMembers } from "@/lib/clienta-actions";
-import React from "react";
-import SelectMemberCard from "./components/select-member-card";
+"use client";
 
-export default async function page({
-  searchParams,
-}: {
-  searchParams: { service: string };
-}) {
-  const { service } = searchParams;
-  const members = await getServicesMembers(service);
+import React, { useEffect, useState } from "react";
+import SelectMemberCard from "./components/select-member-card";
+import { usePathname, useSearchParams, redirect } from "next/navigation";
+import { getServicesMembers } from "@/lib/clienta-actions";
+import { IMember } from "@/interfaces/member.iterface";
+import { LoaderSpinner } from "@/app/components/common/loader-spinner";
+
+export default function Page() {
+  const [users, setUsers] = useState<IMember[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const serviceId = searchParams.get("service");
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      if (serviceId) {
+        try {
+          setIsLoading(true);
+          const members = await getServicesMembers(serviceId);
+          setUsers(members);
+        } catch (error) {
+          console.error("Error fetching service members:", error);
+        } finally {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    fetchMembers();
+  }, [serviceId]);
+
+  if (!serviceId) {
+    const redirectionURL = pathname
+      .split("/")
+      .splice(0, pathname.split("/").length - 1)
+      .join("/");
+    return redirect(redirectionURL);
+  }
+
   return (
     <div className="space-y-4 ">
-      {members.map((member) => (
-        <SelectMemberCard member={member} key={member.id} />
-      ))}
+      {isLoading ? (
+        <p className="flex items-center gap-2">
+          Cargando
+          <LoaderSpinner />
+        </p>
+      ) : users.length === 0 ? (
+        "No hay profesionales disponibles"
+      ) : (
+        users.map((member) => (
+          <SelectMemberCard member={member} key={member.id} />
+        ))
+      )}
     </div>
   );
 }
