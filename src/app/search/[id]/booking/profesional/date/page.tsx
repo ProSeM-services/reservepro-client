@@ -3,10 +3,12 @@ import { CalendarSelect } from "./components/calendar-select";
 
 export default function SelectDatePage() {
   return (
-    <div className="flex">
-      <section className="space-y-2">
-        <p className="text-gray-400 font-semibold">Seleccionar una fecha</p>
-        <CalendarSelect />
+    <div className="flex  w-full h-full">
+      <section className="space-y-2 w-full h-full flex flex-col">
+        <p className="text-gray-500 font-semibold">Seleccionar una fecha</p>
+        <div className="flex-grow">
+          <CalendarSelect />
+        </div>
       </section>
     </div>
   );

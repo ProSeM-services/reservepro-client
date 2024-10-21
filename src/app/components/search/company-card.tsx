@@ -8,11 +8,9 @@ import { Badge } from "@/components/ui/badge";
 
 export default function CompanyCard({
   company,
-  size = "md",
   index = 0,
 }: {
   company: ICompany;
-  size?: "sm" | "md";
   index?: number;
 }) {
   const router = useRouter();
@@ -22,7 +20,7 @@ export default function CompanyCard({
 
   return (
     <div
-      className={`flex flex-col   justify-start items-center rounded-xl border-2 shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-background max-lg:w-full `}
+      className={`flex flex-col   justify-start items-center rounded-xl  shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-background max-lg:w-full `}
       key={company.id}
       onClick={() => selectCompany(company.id)}
     >

@@ -32,6 +32,7 @@ export async function getComapnies() {
   revalidatePath("/dashboard");
   return companies;
 }
+
 export async function getCustomers() {
   await setAuthtoken();
   const customers = await CustomerServices.getAll();
