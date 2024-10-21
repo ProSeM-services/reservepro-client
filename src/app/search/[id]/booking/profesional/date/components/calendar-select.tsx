@@ -70,6 +70,7 @@ export function CalendarSelect() {
             <div
               className="border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300"
               onClick={() => handleSelectTime(value.hs)}
+              key={value.hs}
             >
               <p>{value.hs}</p>
             </div>

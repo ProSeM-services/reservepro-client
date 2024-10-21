@@ -20,7 +20,7 @@ export default async function CompnayList({
   return (
     <div className="space-y-4 max-h-full overflow-y-auto">
       {allComapnies.map((comp) => (
-        <CompanyCard company={comp} key={comp.id} size="sm" />
+        <CompanyCard company={comp} key={comp.id} />
       ))}
     </div>
   );

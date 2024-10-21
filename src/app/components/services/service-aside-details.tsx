@@ -41,7 +41,9 @@ export default function ServiceAsideDetails({
 
       <div className="space-y-2">
         {service.Users.length
-          ? service.Users.map((user) => <MemberCard member={user} />)
+          ? service.Users.map((user) => (
+              <MemberCard member={user} key={user.id} />
+            ))
           : null}
         <div className="">
           Agregar:
