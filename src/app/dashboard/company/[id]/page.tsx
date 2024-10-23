@@ -1,14 +1,15 @@
 import React from "react";
 import { getCompanyData } from "@/lib/actions";
 import { Clock2Icon, HomeIcon, MailCheck, MapPinnedIcon } from "lucide-react";
-import { CategoryCard } from "@/pages/dashboard/components";
 import WorkhourList from "@/app/components/common/work-hour-list";
-import AddToCompany from "@/app/components/company/add-member";
 import { MapComponent } from "@/app/components/common/map";
-import DeleteCompany from "@/app/components/company/delete-compnay";
-import CompnayMemberList from "@/app/components/company/compnay-member-list";
-import CompnayServicesList from "@/app/components/company/company-services-list";
-
+import {
+  AddToCompany,
+  CompnayMemberList,
+  CompnayServicesList,
+  DeleteCompany,
+} from "@/pages/company/components";
+import { CategoryCard } from "@/pages/dashboard/components";
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const company = await getCompanyData(id);
