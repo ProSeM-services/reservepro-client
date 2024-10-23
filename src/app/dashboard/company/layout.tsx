@@ -1,6 +1,6 @@
 import { getComapnies } from "@/lib/actions";
-import CompanyLinks from "@/pages/company/components/company-links";
-import AddButton from "@/pages/dashboard/components/add-button";
+import { CompanyLinks } from "@/pages/company/components/company-links";
+import { AddButton } from "@/pages/dashboard/components";
 import React, { PropsWithChildren } from "react";
 
 export default async function Page({ children }: PropsWithChildren) {

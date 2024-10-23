@@ -8,7 +8,7 @@ import { TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 
 /* Component to handle the action to remove one member from company */
-export default function RemoveMember({
+export function RemoveMember({
   member,
   company,
 }: {

@@ -3,13 +3,9 @@ import { getServicesFromCompany } from "@/lib/actions";
 import React from "react";
 
 import { AxeIcon } from "lucide-react";
-import ServiceCard from "../services/services-card";
+import ServiceCard from "@/pages/services/components/services-card";
 
-export default async function CompnayServicesList({
-  company,
-}: {
-  company: ICompany;
-}) {
+export async function CompnayServicesList({ company }: { company: ICompany }) {
   const services = company.Services;
   return (
     <div>

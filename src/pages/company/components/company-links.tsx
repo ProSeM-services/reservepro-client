@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-export default function CompanyLinks({ companies }: { companies: ICompany[] }) {
+export function CompanyLinks({ companies }: { companies: ICompany[] }) {
   const pathname = usePathname();
   return (
     <div className="flex md:flex-col gap-4 max-md:flex-wrap ">

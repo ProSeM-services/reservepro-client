@@ -7,9 +7,9 @@ import { IMember } from "@/interfaces/member.iterface";
 import { Button } from "@/components/ui/button";
 import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
-import { BarLoader } from "../common/bar-loader";
+import { BarLoader } from "@/components/common/bar-loader";
 
-export default function AddMemberAside({ company }: { company: ICompany }) {
+export function AddMemberAside({ company }: { company: ICompany }) {
   const [loading, setLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);

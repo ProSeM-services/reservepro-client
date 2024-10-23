@@ -11,9 +11,9 @@ import { IMember } from "@/interfaces/member.iterface";
 import { Button } from "@/components/ui/button";
 import { ICompany, IService } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
-import ServiceCard from "../services/services-card";
+import ServiceCard from "@/app/components/services/services-card";
 
-export default function AddServicesAside({ company }: { company: ICompany }) {
+export function AddServicesAside({ company }: { company: ICompany }) {
   const [services, setServices] = useState<IService[]>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false); // Added state for loading

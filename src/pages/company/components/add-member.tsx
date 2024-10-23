@@ -5,10 +5,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import AddMemberAside from "./add-member-aside";
+import { AddMemberAside } from "./add-member-aside";
 import { PlusIcon } from "lucide-react";
 import { ICompany } from "@/interfaces";
-import AddServicesAside from "./add-services-aisde";
+import { AddServicesAside } from "./add-services-aisde";
 interface AddToCompanyProps {
   company: ICompany;
   type: "member" | "service";
@@ -21,7 +21,7 @@ type IConfig = {
   Component: () => ReactNode;
 };
 
-export default function AddToCompany({ company, type }: AddToCompanyProps) {
+export function AddToCompany({ company, type }: AddToCompanyProps) {
   const Confg: Record<"member" | "service", IConfig> = {
     member: {
       title: "   Agregar Miembros",

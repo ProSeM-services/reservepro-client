@@ -1,15 +1,10 @@
 import { ICompany } from "@/interfaces";
-import { getCompanyData, getMembersFromCompany } from "@/lib/actions";
 import React from "react";
-import RemoveMember from "./remove-member";
-import { MemberCard } from "../dashboard/card";
+import { RemoveMember } from "./remove-member";
 import { Users2Icon } from "lucide-react";
+import { MemberCard } from "@/pages/dashboard/components";
 
-export default async function CompnayMemberList({
-  company,
-}: {
-  company: ICompany;
-}) {
+export async function CompnayMemberList({ company }: { company: ICompany }) {
   const members = company.Users;
   return (
     <div>

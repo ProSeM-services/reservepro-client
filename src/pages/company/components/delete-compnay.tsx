@@ -14,7 +14,7 @@ import { ICompany } from "@/interfaces";
 import { deleteCompany } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-export default function DeleteCompany({ company }: { company: ICompany }) {
+export function DeleteCompany({ company }: { company: ICompany }) {
   const [deleting, setDeleting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
