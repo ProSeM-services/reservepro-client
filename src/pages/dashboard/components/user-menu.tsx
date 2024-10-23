@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
 import { LogOut, Settings, User } from "lucide-react";
-export default function UserMenu() {
+export function UserMenu() {
   const session = useSession();
   const handleLogOut = () => {
     signOut({ callbackUrl: "http://localhost:3000/login", redirect: true });

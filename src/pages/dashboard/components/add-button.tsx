@@ -8,8 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { PlusIcon } from "lucide-react";
 import { CreateServicesForm } from "@/pages/services/components/create-services";
-import CompanyForm from "./create-company-form";
-import MemberForm from "./crate-member-form";
+import { CompanyForm, MemberForm } from "./";
 
 export type ICreateType = "member" | "company" | "services";
 interface AddButtonProps {
@@ -35,7 +34,7 @@ const config: Record<
     Content: CreateServicesForm,
   },
 };
-export default function AddButton({ type }: AddButtonProps) {
+export function AddButton({ type }: AddButtonProps) {
   const { title, Content, btnText } = config[type];
   return (
     <Sheet>

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { GeocodeServices } from "@/services/geocode.services";
 import { MapComponent } from "@/components/common/map";
 
-export default function DynamicMap({ address }: { address: string }) {
+export function DynamicMap({ address }: { address: string }) {
   const [location, setLocation] = useState<{ lat: number; lng: number }>();
   useEffect(() => {
     const getLoaction = async () => {

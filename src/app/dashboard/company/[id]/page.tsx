@@ -1,7 +1,7 @@
 import React from "react";
-import CategoryCard from "@/app/components/dashboard/category-card";
 import { getCompanyData } from "@/lib/actions";
 import { Clock2Icon, HomeIcon, MailCheck, MapPinnedIcon } from "lucide-react";
+import CategoryCard from "@/pages/dashboard/components/category-card";
 import WorkhourList from "@/app/components/common/work-hour-list";
 import AddToCompany from "@/app/components/company/add-member";
 import { MapComponent } from "@/app/components/common/map";

@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
-import DashboardStats from "./dashboard-stats";
-import List from "./dashboard-list";
+import { DashboardStats, List } from "./";
 const DashboardStatsSkeleton = () => (
   <div className="animate-pulse  flex justify-center items-center relative">
     <div className="h-8 w-1/5 rounded-sm bg-gray-200  absolute top-1 right-1 "></div>
@@ -33,11 +32,7 @@ const ListSkeleton = () => (
     </div>
   </div>
 );
-export default function DashboardCard({
-  type,
-}: {
-  type: "member" | "company";
-}) {
+export function DashboardCard({ type }: { type: "member" | "company" }) {
   return (
     <div
       className="flex flex-col gap-3

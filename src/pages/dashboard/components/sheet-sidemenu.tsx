@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { PanelLeft } from "lucide-react";
 import React from "react";
-import NavLinks from "./nav-links";
+import { NavLinks } from "./nav-links";
 
-export default function SheetSideMenu() {
+export function SheetSideMenu() {
   return (
     <div className="sm:hidden">
       <Sheet>

@@ -29,7 +29,7 @@ const links = [
   { name: "Services", href: "/dashboard/services", icon: BellElectric },
 ];
 
-export default function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
+export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
   const pathname = usePathname();
   return (
     <TooltipProvider>

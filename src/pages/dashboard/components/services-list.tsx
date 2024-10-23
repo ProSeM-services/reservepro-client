@@ -3,7 +3,7 @@ import React from "react";
 import { EmptyList } from "./dashboard-list";
 import ServiceCard from "@/pages/services/components/services-card";
 
-export default async function ServicesList() {
+export async function ServicesList() {
   const services = await getServices();
 
   return (

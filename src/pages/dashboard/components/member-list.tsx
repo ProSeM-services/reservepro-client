@@ -3,7 +3,7 @@ import { MemberCard } from "./card";
 import { getMembers } from "@/lib/actions";
 import { Users2Icon } from "lucide-react";
 
-export default async function MemberList() {
+export async function MemberList() {
   const members = await getMembers();
 
   return (

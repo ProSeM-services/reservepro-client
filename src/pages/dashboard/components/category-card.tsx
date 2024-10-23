@@ -72,10 +72,7 @@ const IconConfig: Record<
     icon: HandMetalIcon,
   },
 };
-export default function CategoryCard({
-  category,
-  selected,
-}: CategoryCardProps) {
+export function CategoryCard({ category, selected }: CategoryCardProps) {
   const { icon: Icon } = IconConfig[category];
   return (
     <div className="relative">

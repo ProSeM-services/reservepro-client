@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-export default function BreadcrumbLinks() {
+export function BreadcrumbLinks() {
   const [pathSegments, setPathSegments] = React.useState<string[]>([]);
   const path = usePathname();
 

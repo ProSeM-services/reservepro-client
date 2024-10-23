@@ -1,12 +1,8 @@
 import { getComapnies, getMembers } from "@/lib/actions";
 import React from "react";
-import AddButton from "./add-button";
+import { AddButton } from "./add-button";
 
-export default async function DashboardStats({
-  type,
-}: {
-  type: "member" | "company";
-}) {
+export async function DashboardStats({ type }: { type: "member" | "company" }) {
   const fetchFunction = {
     member: getMembers,
     company: getComapnies,

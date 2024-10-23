@@ -42,7 +42,7 @@ const INITIAL_MEMBER_DATA: ICreateMember = {
   phone: "",
   workhours: [],
 };
-export default function MemberForm() {
+export function MemberForm() {
   const { toast } = useToast();
   const form = useForm<ICreateMember>({
     resolver: zodResolver(CreateMemberZodSchema),

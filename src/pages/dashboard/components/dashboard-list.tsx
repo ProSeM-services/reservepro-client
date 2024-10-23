@@ -45,7 +45,7 @@ export function EmptyList({
   );
 }
 
-export default async function CompanyList({
+export async function List({
   type,
 }: {
   type: "member" | "company" | "service";

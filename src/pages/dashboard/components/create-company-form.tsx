@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Category, CATEGORY_VALUES } from "@/interfaces/categeory.interface";
-import CategoryCard from "./category-card";
+import { CategoryCard } from "./category-card";
 import { useToast } from "@/components/ui/use-toast";
 import { createCompany } from "@/lib/actions";
 import { AddressInput } from "@/components/common/address-input";
@@ -27,7 +27,7 @@ const INITIAL_COMPANY_DATA: ICreateCompany = {
   email: "",
   image: "",
 };
-export default function CompanyForm() {
+export function CompanyForm() {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
   const { toast } = useToast();
   const form = useForm<ICreateCompany>({
