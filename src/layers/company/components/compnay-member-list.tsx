@@ -2,7 +2,7 @@ import { ICompany } from "@/interfaces";
 import React from "react";
 import { RemoveMember } from "./remove-member";
 import { Users2Icon } from "lucide-react";
-import { MemberCard } from "@/pages/dashboard/components";
+import { MemberCard } from "@/layers/dashboard/components";
 
 export async function CompnayMemberList({ company }: { company: ICompany }) {
   const members = company.Users;

@@ -5,7 +5,7 @@ import AddMembertoServiceAside from "./add-member-aside";
 import { ServiceDetailCard } from "./services-card";
 import { getServicesById } from "@/lib/actions";
 import { LoaderSpinner } from "@/components/common/loader-spinner";
-import { MemberCard } from "@/pages/dashboard/components/card";
+import { MemberCard } from "@/layers/dashboard/components/card";
 
 export default function ServiceAsideDetails({
   serviceId,

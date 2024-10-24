@@ -1,7 +1,7 @@
 import { getServices } from "@/lib/actions";
 import React from "react";
 import { EmptyList } from "./dashboard-list";
-import ServiceCard from "@/pages/services/components/services-card";
+import ServiceCard from "@/layers/services/components/services-card";
 
 export async function ServicesList() {
   const services = await getServices();

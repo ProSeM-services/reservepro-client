@@ -7,8 +7,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { PlusIcon } from "lucide-react";
-import { CreateServicesForm } from "@/pages/services/components/create-services";
-import { CompanyForm, MemberForm } from "./";
+import { CreateServicesForm } from "@/layers/services/components/create-services";
+import { MemberForm } from "./crate-member-form";
+import { CompanyForm } from "./create-company-form";
 
 export type ICreateType = "member" | "company" | "services";
 interface AddButtonProps {

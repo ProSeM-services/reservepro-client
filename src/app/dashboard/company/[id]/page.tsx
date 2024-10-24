@@ -8,8 +8,9 @@ import {
   CompnayMemberList,
   CompnayServicesList,
   DeleteCompany,
-} from "@/pages/company/components";
-import { CategoryCard } from "@/pages/dashboard/components";
+} from "@/layers/company/components";
+import { CategoryCard } from "@/layers/dashboard/components";
+
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   const company = await getCompanyData(id);
