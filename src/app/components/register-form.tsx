@@ -11,8 +11,6 @@ import { useRouter } from "next/navigation";
 import {
   CreateTenantZodSchema,
   ICreateTentant,
-  ITentant,
-  ZodTenantSchema,
 } from "@/interfaces/member.iterface";
 import { AuthServices } from "@/services/auth.services";
 import { useToast } from "@/components/ui/use-toast";
