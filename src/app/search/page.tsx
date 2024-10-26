@@ -1,9 +1,10 @@
+import HomeHeader from "@/layers/home/components/home-header";
+import CategoryFilter from "@/layers/search/components/category-filter";
+import LocationFilter from "@/layers/search/components/location-filter";
+import Search from "@/layers/search/components/search";
+import SearchTable from "@/layers/search/components/table";
 import React, { Suspense } from "react";
-import Search from "../components/search/search";
-import SearchTable from "../components/search/table";
-import CategoryFilter from "../components/search/category-filter";
-import LocationFilter from "../components/search/location-filter";
-import HomeHeader from "../components/home/home-header";
+
 interface PageProps {
   searchParams?: {
     query?: string;

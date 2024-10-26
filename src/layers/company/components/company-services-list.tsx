@@ -1,11 +1,10 @@
 import { ICompany } from "@/interfaces";
-import { getServicesFromCompany } from "@/lib/actions";
 import React from "react";
 
 import { AxeIcon } from "lucide-react";
-import ServiceCard from "@/pages/services/components/services-card";
+import ServiceCard from "@/layers/services/components/services-card";
 
-export async function CompnayServicesList({ company }: { company: ICompany }) {
+export function CompnayServicesList({ company }: { company: ICompany }) {
   const services = company.Services;
   return (
     <div>

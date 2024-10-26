@@ -11,7 +11,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { LoaderSpinner } from "./common/loader-spinner";
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();

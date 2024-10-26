@@ -1,5 +1,5 @@
+import SearchTable from "@/layers/search/components/table";
 import React, { Suspense } from "react";
-import SearchTable from "../search/table";
 interface PageProps {
   searchParams?: {
     query?: string;
@@ -9,7 +9,7 @@ interface PageProps {
   };
 }
 
-export default function CompaniesHomeSection({ searchParams }: PageProps) {
+export function CompaniesHomeSection({ searchParams }: PageProps) {
   const query = searchParams?.query || "";
   const category = searchParams?.category || "";
   const city = searchParams?.city || "";

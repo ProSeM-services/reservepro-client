@@ -1,4 +1,4 @@
-import SercvicesList from "@/app/components/search/services-list";
+import SercvicesList from "@/layers/search/components/services-list";
 import React from "react";
 
 export default function BookingPage({ params }: { params: { id: string } }) {

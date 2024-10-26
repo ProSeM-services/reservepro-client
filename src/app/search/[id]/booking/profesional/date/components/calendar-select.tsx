@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import axios from "axios";
 import { BASE_URL } from "@/config/axios.config";
-import { BarLoader } from "@/app/components/common/bar-loader";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { BarLoader } from "@/components/common/bar-loader";
 type IAvailableList = {
   hs: string;
   available: boolean;

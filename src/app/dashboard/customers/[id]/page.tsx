@@ -1,4 +1,4 @@
-import AppointmentList from "@/app/components/customer/appointment-list";
+import AppointmentList from "@/layers/customers/components/appointment-list";
 import { getAppointmentsByEmail } from "@/lib/appointments.actions";
 import { getCustomerById } from "@/lib/customer.actions";
 import { MailIcon, Phone, UserCircle2 } from "lucide-react";

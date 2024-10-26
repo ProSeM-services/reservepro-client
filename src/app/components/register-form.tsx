@@ -16,7 +16,6 @@ import {
 } from "@/interfaces/member.iterface";
 import { AuthServices } from "@/services/auth.services";
 import { useToast } from "@/components/ui/use-toast";
-import { LoaderSpinner } from "./common/loader-spinner";
 
 const EMPTY_TENANT_DATA: ICreateTentant = {
   email: "",

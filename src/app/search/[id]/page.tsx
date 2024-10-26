@@ -1,7 +1,6 @@
-import HomeHeader from "@/app/components/home/home-header";
-import MemberList from "@/app/components/search/member-list";
-import SercvicesList from "@/app/components/search/services-list";
-import { Button } from "@/components/ui/button";
+import HomeHeader from "@/layers/home/components/home-header";
+import MemberList from "@/layers/search/components/member-list";
+import SercvicesList from "@/layers/search/components/services-list";
 import { getClientCompanyData } from "@/lib/clienta-actions";
 import { ClockIcon, MapIcon } from "lucide-react";
 import Image from "next/image";

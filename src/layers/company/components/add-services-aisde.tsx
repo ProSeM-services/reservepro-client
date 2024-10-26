@@ -1,17 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  addMemberToCompany,
-  addServiceToComapny,
-  getFreeMembers,
-  getServices,
-} from "@/lib/actions";
-import { CheckCircleIcon, UserCircle } from "lucide-react";
-import { IMember } from "@/interfaces/member.iterface";
+import { addServiceToComapny, getServices } from "@/lib/actions";
+import { CheckCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ICompany, IService } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
-import ServiceCard from "@/app/components/services/services-card";
+import ServiceCard from "@/layers/services/components/services-card";
 
 export function AddServicesAside({ company }: { company: ICompany }) {
   const [services, setServices] = useState<IService[]>([]);

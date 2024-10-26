@@ -1,7 +1,6 @@
-import { libreBaskerville } from "@/lib/fonts";
 import React from "react";
-import LocationFilter from "../search/location-filter";
 import Link from "next/link";
+import LocationFilter from "@/layers/search/components/location-filter";
 
 export default function LandingPage() {
   return (

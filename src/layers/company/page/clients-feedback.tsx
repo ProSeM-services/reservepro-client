@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function ClientsFeedback() {
+export function ClientsFeedback() {
   return (
     <section className="h-screen ">
       <div className="container mx-auto">

@@ -1,5 +1,5 @@
-import React, { PropsWithChildren, ReactNode } from "react";
-import CompnayList from "@/app/components/search/company-aside-list";
+import CompnayList from "@/layers/search/components/company-aside-list";
+import React, { ReactNode } from "react";
 interface PageProps {
   children: ReactNode;
 }

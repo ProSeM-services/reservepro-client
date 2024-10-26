@@ -1,10 +1,10 @@
 import { getClientCompanyData } from "@/lib/clienta-actions";
 import React, { ReactNode } from "react";
 import SelectedServiceDetails from "./components/selected-service";
-import BreadcrumbLinks from "@/app/components/dashboard/breadcrumb-links";
 import SelectedMember from "./components/selected-member";
 import { SelectedHour } from "./components/selected-hour";
 import { SetAppointment } from "./components/set-appointment";
+import { BreadcrumbLinks } from "@/layers/dashboard/components";
 
 interface LayoutProps {
   params: { id: string };

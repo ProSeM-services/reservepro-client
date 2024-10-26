@@ -1,7 +1,6 @@
-import LandingPage from "./components/home/landig-page";
-import CompaniesHomeSection from "./components/home/companies-home";
-import ClientsFeedback from "./components/home/clients-feedback";
-import HomeHeader from "./components/home/home-header";
+import HomeHeader from "@/layers/home/components/home-header";
+import { ClientsFeedback, CompaniesHomeSection } from "@/layers/company/page";
+import LandingPage from "@/layers/company/page/landig-page";
 interface PageProps {
   searchParams?: {
     query?: string;

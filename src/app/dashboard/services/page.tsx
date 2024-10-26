@@ -1,5 +1,5 @@
-import AddButton from "@/app/components/dashboard/add-button";
-import ServiceCard from "@/app/components/services/services-card";
+import { AddButton } from "@/layers/dashboard/components";
+import ServiceCard from "@/layers/services/components/services-card";
 import { getServices } from "@/lib/actions";
 import React from "react";
 

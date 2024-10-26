@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import SessionLink from "../common/session-link";
 import Link from "next/link";
+import SessionLink from "@/components/common/session-link";
 
 export default function HomeHeader({ children }: PropsWithChildren) {
   return (

@@ -1,5 +1,4 @@
-import CustomerCard from "@/app/components/customer/customer-card";
-import CustomerTable from "@/app/components/customer/customers-table";
+import CustomerTable from "@/layers/customers/components/customers-table";
 import { getCustomers } from "@/lib/actions";
 import React from "react";
 

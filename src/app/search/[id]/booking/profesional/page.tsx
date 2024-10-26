@@ -5,7 +5,7 @@ import SelectMemberCard from "./components/select-member-card";
 import { usePathname, useSearchParams, redirect } from "next/navigation";
 import { getServicesMembers } from "@/lib/clienta-actions";
 import { IMember } from "@/interfaces/member.iterface";
-import { LoaderSpinner } from "@/app/components/common/loader-spinner";
+import { LoaderSpinner } from "@/components/common/loader-spinner";
 
 export default function Page() {
   const [users, setUsers] = useState<IMember[]>([]);
