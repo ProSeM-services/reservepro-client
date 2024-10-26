@@ -1,11 +1,6 @@
-import SercvicesList from "@/layers/search/components/services-list";
+import { BookingPage } from "@/layers/search/page/compnay-id/page";
 import React from "react";
 
-export default function BookingPage({ params }: { params: { id: string } }) {
-  const companyId = params.id;
-  return (
-    <section className=" w-full h-full  ">
-      <SercvicesList companyId={companyId} readonly={false} />
-    </section>
-  );
+export default function page({ params }: { params: { id: string } }) {
+  return <BookingPage params={params} />;
 }

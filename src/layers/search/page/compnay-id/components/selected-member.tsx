@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function SelectedMember() {
+export function SelectedMember() {
   const params = useSearchParams();
 
   const [member, setMember] = useState<IMember | null>();

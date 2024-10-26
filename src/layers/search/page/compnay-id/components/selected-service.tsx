@@ -9,7 +9,7 @@ import { formatDuration } from "@/lib/formatDuration";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-export default function SelectedServiceDetails() {
+export function SelectedServiceDetails() {
   const params = useSearchParams();
 
   const [service, setService] = useState<IService | null>();

@@ -4,7 +4,7 @@ import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-export default function SelectMemberCard({ member }: { member: IMember }) {
+export function SelectMemberCard({ member }: { member: IMember }) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const pathname = usePathname();
