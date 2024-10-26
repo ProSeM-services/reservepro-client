@@ -1,5 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from "react";
-import CompnayList from "@/app/components/search/company-aside-list";
+import React, { ReactNode } from "react";
 interface PageProps {
   children: ReactNode;
 }
@@ -20,7 +19,7 @@ export default function Page({ children }: PageProps) {
       </header>
       <div className="flex h-full p-1">
         <div className="w-1/6 overflow-auto  max-h-full space-y-5">
-          <CompnayList category="" city="" currentPage={1} query="" />
+          ACA TIENE QUE IR EL LISTADO DE COMPANIES
         </div>
         <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full   bg-background rounded-md p-6 border border-border">
           {children}

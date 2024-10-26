@@ -1,9 +1,11 @@
+import {
+  BreadcrumbLinks,
+  SheetSideMenu,
+  SideNav,
+  UserMenu,
+} from "@/layers/dashboard/components";
 import React, { PropsWithChildren } from "react";
-import SideNav from "../components/dashboard/sidenav";
 
-import UserMenu from "../components/dashboard/user-menu";
-import BreadcrumbLinks from "../components/dashboard/breadcrumb-links";
-import SheetSideMenu from "../components/dashboard/sheet-sidemenu";
 export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <div className="flex min-h-screen w-full flex-col ">

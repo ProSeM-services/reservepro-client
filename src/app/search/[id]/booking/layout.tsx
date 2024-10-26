@@ -1,10 +1,13 @@
 import { getClientCompanyData } from "@/lib/clienta-actions";
 import React, { ReactNode } from "react";
-import SelectedServiceDetails from "./components/selected-service";
-import BreadcrumbLinks from "@/app/components/dashboard/breadcrumb-links";
-import SelectedMember from "./components/selected-member";
-import { SelectedHour } from "./components/selected-hour";
-import { SetAppointment } from "./components/set-appointment";
+
+import { BreadcrumbLinks } from "@/layers/dashboard/components";
+import {
+  SelectedServiceDetails,
+  SelectedHour,
+  SelectedMember,
+  SetAppointment,
+} from "@/layers/search/page/compnay-id/components";
 
 interface LayoutProps {
   params: { id: string };
@@ -32,13 +35,11 @@ export default async function layout({ children, params }: LayoutProps) {
                 <p className="text-gray-500 text-sm">{company.address.value}</p>
               </div>
             </section>
-
             <hr />
             <SelectedServiceDetails />
             <SelectedMember />
             <SelectedHour />
           </div>
-
           <SetAppointment />
         </aside>
       </section>

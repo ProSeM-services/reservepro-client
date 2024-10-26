@@ -1,22 +1,10 @@
-import AddButton from "@/app/components/dashboard/add-button";
-import ServiceCard from "@/app/components/services/services-card";
-import { getServices } from "@/lib/actions";
-import React from "react";
+import { ServicesPage } from "@/layers/services/page";
+import React, { Suspense } from "react";
 
-export default async function Page() {
-  const services = await getServices();
+export default function Page() {
   return (
-    <div>
-      <div className="flex justify-between items-center p-2">
-        <h2>Servicios</h2>
-        <AddButton type="services" />
-      </div>
-      <hr />
-      <div className="grid grid-cols-3 max-lg:grid-cols-2 max-sm:grid-cols-1 gap-2 flex-wrap max-w-full w-full p-4">
-        {services.map((service) => (
-          <ServiceCard service={service} key={service.id} />
-        ))}
-      </div>
-    </div>
+    <Suspense fallback="Loading..">
+      <ServicesPage />
+    </Suspense>
   );
 }
