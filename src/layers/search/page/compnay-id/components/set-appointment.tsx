@@ -7,10 +7,7 @@ export function SetAppointment() {
   const params = useSearchParams();
   const [loading, setLoading] = useState(false);
   const ableToSet =
-    params.get("member") !== "" &&
-    params.get("time") !== "" &&
-    params.get("service") !== "";
-
+    params.get("member") && params.get("time") && params.get("service");
   const handleSetTurno = async () => {};
   return (
     <div className="">

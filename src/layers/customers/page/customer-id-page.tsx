@@ -6,7 +6,7 @@ import { MailIcon, Phone, UserCircle2 } from "lucide-react";
 export async function CustomerIdPage({ params }: { params: { id: string } }) {
   const id = params.id;
   const customer = await getCustomerById(id);
-  const appointments = await getAppointmentsByEmail(customer.email);
+  const appointments = await getAppointmentsByEmail(id);
   return (
     <div className="space-y-3 bg-background rounded-md  p-2 h-full">
       <header className=" text-[14px]">
