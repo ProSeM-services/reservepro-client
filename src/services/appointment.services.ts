@@ -29,9 +29,9 @@ export class AppointmentServices {
     const res = await axiosInstance.post(`${BASE_URL}/appointments`);
     return res.data;
   }
-  static async getByEmail(email: string): Promise<IAppointment[]> {
+  static async getByEmail(id: string): Promise<IAppointment[]> {
     const res = await axiosInstance.get(
-      `${BASE_URL}/appointments/email/${email}`
+      `${BASE_URL}/appointments/customer/${id}`
     );
     return res.data;
   }

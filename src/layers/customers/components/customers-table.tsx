@@ -37,7 +37,7 @@ export default function CustomerTable({
       cell: ({ getValue }) => <p>{getValue<string>()}</p>,
     },
     {
-      accessorKey: "apointments",
+      accessorKey: "Appointments",
       header: "Turnos Agendados",
       size: 50,
       cell: ({ getValue }) => <b>{getValue<[]>().length}</b>,

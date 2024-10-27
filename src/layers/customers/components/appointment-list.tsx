@@ -28,7 +28,7 @@ export default function AppointmentList({
             key={app.id}
           >
             <div className="flex items-center justify-between ">
-              <MemberInfo memberId={app.memberId} />
+              <MemberInfo memberId={app.UserId} />
               <p
                 className={`${
                   app.canceled ? "bg-destructive" : "bg-green-500 "
@@ -39,7 +39,7 @@ export default function AppointmentList({
             </div>
             <div className="">
               <div className="flex items-center gap-2">
-                <ServiceDetail servieId={app.serviceId} />
+                <ServiceDetail servieId={app.ServiceId} />
               </div>
               <div className="flex items-center gap-2">
                 <ClockIcon className="size-4" />
