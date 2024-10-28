@@ -9,3 +9,10 @@ export async function getAppointmentsByEmail(email: string) {
   revalidatePath("/dashboard");
   return appointments;
 }
+
+export async function getAllAppointments() {
+  await setAuthtoken();
+  const appointments = await AppointmentServices.getAll();
+  revalidatePath("/dashboard");
+  return appointments;
+}
