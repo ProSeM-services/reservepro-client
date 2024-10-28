@@ -7,6 +7,7 @@ import {
   BellElectric,
   FactoryIcon,
   Settings,
+  CalendarCheck,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,6 +26,8 @@ const links = [
     icon: DockIcon,
   },
   { name: "Customers", href: "/dashboard/customers", icon: GroupIcon },
+  { name: "Appointmnets", href: "/dashboard/appointment", icon: CalendarCheck },
+
   { name: "Company", href: "/dashboard/company", icon: FactoryIcon },
   { name: "Services", href: "/dashboard/services", icon: BellElectric },
 ];
