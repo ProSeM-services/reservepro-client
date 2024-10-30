@@ -10,24 +10,78 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   AppointmentZodSchema,
+  ClientDataSchema,
   IAppointment,
+  IClientData,
+  ICreateAppointment,
 } from "@/interfaces/appointments.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { BookIcon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { AppointmentServices } from "@/services/appointment.services";
 
 export function ConfirmAppointmentPage() {
-  const form = useForm<IAppointment>({
-    resolver: zodResolver(AppointmentZodSchema),
-    defaultValues: {},
+  const params = useSearchParams();
+  const [appointmentData, setAppointmentData] = useState({
+    date: params.get("date"),
+    ServiceId: params.get("service"),
+    UserId: params.get("member"),
+    time: params.get("time"),
+  });
+  const form = useForm<IClientData>({
+    resolver: zodResolver(ClientDataSchema),
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      lastName: "",
+      phone: "",
+    },
   });
 
-  function onSubmit(values: IAppointment) {
-    console.log("SE EJECUTA EL ONSUBTIM", { values });
-  }
+  useEffect(() => {
+    params.keys().forEach((e) => {
+      if (e === "service")
+        return setAppointmentData((s) => ({
+          ...s,
+          ServiceId: params.get(e),
+        }));
+      if (e === "member")
+        return setAppointmentData((s) => ({ ...s, UserId: params.get(e) }));
+      setAppointmentData((s) => ({ ...s, [e]: params.get(e) }));
+    });
+  }, []);
+  const onSubmit = async (clientData: IClientData) => {
+    if (
+      !appointmentData.date ||
+      !appointmentData.ServiceId ||
+      !appointmentData.UserId ||
+      !appointmentData.time
+    )
+      return;
+    const data: ICreateAppointment = {
+      name: clientData.name,
+      lastName: clientData.lastName,
+      email: clientData.email,
+      phone: clientData.phone,
+      date: appointmentData.date,
+      ServiceId: appointmentData.ServiceId,
+      UserId: appointmentData.UserId,
+      time: appointmentData.time,
+    };
+    try {
+      const res = await AppointmentServices.createAppointment(data);
+      if (res.data.status === 401) throw new Error(res.data.message);
+      console.log("Appointment created!", res);
+      alert("Appointment created!");
+    } catch (error) {
+      console.error("Error creating appointment: ", error);
+    }
+  };
   return (
     <div className="h-full p-10">
       <Form {...form}>
@@ -69,7 +123,7 @@ export function ConfirmAppointmentPage() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nombre</FormLabel>
+                  <FormLabel>Celular</FormLabel>
                   <FormControl>
                     <Input placeholder="Celular" {...field} />
                   </FormControl>

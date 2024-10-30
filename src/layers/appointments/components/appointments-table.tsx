@@ -29,6 +29,12 @@ const customerColumns: ColumnDef<IClientAppointment>[] = [
     ),
   },
   {
+    accessorKey: "time",
+    header: "Fecha",
+    // size: 200,
+    cell: ({ getValue }) => <p>{getValue<string>()} hs</p>,
+  },
+  {
     accessorKey: "canceled",
     header: "Estado",
     size: 10,
