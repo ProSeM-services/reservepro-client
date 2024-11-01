@@ -1,5 +1,8 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
-import { IAppointment } from "@/interfaces/appointments.interface";
+import {
+  IAppointment,
+  ICreateAppointment,
+} from "@/interfaces/appointments.interface";
 
 export class AppointmentServices {
   static async getAll(): Promise<IAppointment[]> {
@@ -25,9 +28,13 @@ export class AppointmentServices {
     );
     return res.data;
   }
-  static async createAppointment(): Promise<IAppointment[]> {
-    const res = await axiosInstance.post(`${BASE_URL}/appointments`);
-    return res.data;
+  static async createAppointment(data: ICreateAppointment) {
+    return await axiosInstance.post(`${BASE_URL}/appointments`, data);
+  }
+  static async cancelAppointment(appointmemntId: string) {
+    return await axiosInstance.post(`${BASE_URL}/appointments/cancel`, {
+      appointmemntId,
+    });
   }
   static async getByEmail(id: string): Promise<IAppointment[]> {
     const res = await axiosInstance.get(

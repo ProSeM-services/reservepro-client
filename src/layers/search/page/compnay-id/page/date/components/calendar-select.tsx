@@ -13,7 +13,7 @@ type IAvailableList = {
 };
 export function CalendarSelect() {
   const [date, setDate] = useState<Date>(new Date());
-  const { push } = useRouter();
+  const { push, back } = useRouter();
   const [availableList, setAvailableList] = useState<IAvailableList[]>([]);
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -40,7 +40,10 @@ export function CalendarSelect() {
   }, [date]);
 
   const handleDate = (value: Date) => {
+    params.set("date", value.toISOString());
+    params.delete("time");
     setDate(value);
+    push(`${pathname}/?${params.toString()}`);
   };
 
   const handleSelectTime = (time: string) => {

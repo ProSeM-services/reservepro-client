@@ -42,4 +42,28 @@ export const CancelAppointmentZodSchema = z.object({
   appointmemntId: z.string().min(1),
 });
 
+export const ClientDataSchema = z.object({
+  name: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().min(1),
+});
+export const CreateAppointmentZodSchema = z.object({
+  name: z.string().min(1),
+  lastName: z.string().min(1),
+  email: z.string().email(),
+  phone: z.string().min(1),
+  time: z.string().min(1),
+  date: z
+    .string()
+    .trim()
+    .refine((value) => isoStringRegex.test(value), {
+      message:
+        "Date must be a valid ISO 8601 string including time and timezone",
+    }),
+  UserId: z.string().min(1),
+  ServiceId: z.string().min(1),
+});
+export type IClientData = z.infer<typeof ClientDataSchema>;
+export type ICreateAppointment = z.infer<typeof CreateAppointmentZodSchema>;
 export type IAppointment = z.infer<typeof AppointmentZodSchema>;

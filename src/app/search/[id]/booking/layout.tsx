@@ -7,6 +7,7 @@ import {
   SelectedHour,
   SelectedMember,
   SetAppointment,
+  SelectedDate,
 } from "@/layers/search/page/compnay-id/components";
 
 interface LayoutProps {
@@ -38,6 +39,7 @@ export default async function layout({ children, params }: LayoutProps) {
             <hr />
             <SelectedServiceDetails />
             <SelectedMember />
+            <SelectedDate />
             <SelectedHour />
           </div>
           <SetAppointment />
