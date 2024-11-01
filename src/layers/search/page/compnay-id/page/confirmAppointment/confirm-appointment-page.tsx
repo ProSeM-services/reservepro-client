@@ -44,17 +44,19 @@ export function ConfirmAppointmentPage() {
   });
 
   useEffect(() => {
-    params.keys().forEach((e) => {
-      if (e === "service")
-        return setAppointmentData((s) => ({
+    Array.from(params.keys()).forEach((e) => {
+      if (e === "service") {
+        setAppointmentData((s) => ({
           ...s,
           ServiceId: params.get(e),
         }));
-      if (e === "member")
-        return setAppointmentData((s) => ({ ...s, UserId: params.get(e) }));
-      setAppointmentData((s) => ({ ...s, [e]: params.get(e) }));
+      } else if (e === "member") {
+        setAppointmentData((s) => ({ ...s, UserId: params.get(e) }));
+      } else {
+        setAppointmentData((s) => ({ ...s, [e]: params.get(e) }));
+      }
     });
-  }, []);
+  }, [params]);
   const onSubmit = async (clientData: IClientData) => {
     if (
       !appointmentData.date ||
