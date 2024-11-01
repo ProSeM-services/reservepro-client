@@ -31,6 +31,11 @@ export class AppointmentServices {
   static async createAppointment(data: ICreateAppointment) {
     return await axiosInstance.post(`${BASE_URL}/appointments`, data);
   }
+  static async cancelAppointment(appointmemntId: string) {
+    return await axiosInstance.post(`${BASE_URL}/appointments/cancel`, {
+      appointmemntId,
+    });
+  }
   static async getByEmail(id: string): Promise<IAppointment[]> {
     const res = await axiosInstance.get(
       `${BASE_URL}/appointments/customer/${id}`

@@ -16,3 +16,10 @@ export async function getAllAppointments() {
   revalidatePath("/dashboard");
   return appointments;
 }
+
+export async function cancelAppointment(id: string) {
+  await setAuthtoken();
+  const appointments = await AppointmentServices.cancelAppointment(id);
+  revalidatePath("/dashboard");
+  return appointments;
+}
