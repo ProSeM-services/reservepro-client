@@ -54,6 +54,5 @@ export function AppointmentsTable({
 }: {
   appointmnets: IClientAppointment[];
 }) {
-  console.log(appointmnets);
   return <RootTable columns={customerColumns} data={appointmnets} />;
 }
