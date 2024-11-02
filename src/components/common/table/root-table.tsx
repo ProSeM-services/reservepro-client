@@ -20,17 +20,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
+import { Fragment, ReactNode, useState } from "react";
+import { TableFilter } from ".";
+import { TableType, TableColumnFilterType } from "@/interfaces";
 declare module "@tanstack/react-table" {
   interface ColumnMeta<TData extends RowData, TValue> {
     filterVariant?: "text" | "range" | "select";
+    filterType?: TableColumnFilterType;
     filterPositon?: "inline" | "bottom";
   }
 }
-import { Fragment, ReactNode, useState } from "react";
-import { TableFilter } from "./table";
-import { TableType } from "@/interfaces";
-
+import "./table.css";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];

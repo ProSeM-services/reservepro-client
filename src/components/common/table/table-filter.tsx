@@ -19,7 +19,7 @@ export function TableFilter<TData>({
   tableType,
 }: TableFilterProps<TData>) {
   const columnFilterValue = column.getFilterValue();
-  const { filterVariant } = column.columnDef.meta ?? {};
+  const { filterVariant, filterType } = column.columnDef.meta ?? {};
   const handleFilter = (value: string) => {
     if (value === "all") return table.resetColumnFilters();
     column.setFilterValue(value);
@@ -33,6 +33,7 @@ export function TableFilter<TData>({
     <SelectFilter
       onValueChange={handleFilter}
       tableType={tableType}
+      filterType={filterType}
       value={columnFilterValue?.toString()}
     />
   ) : (

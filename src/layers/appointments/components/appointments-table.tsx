@@ -1,6 +1,6 @@
 "use client";
 
-import { RootTable } from "@/components/common/root-table";
+import { RootTable } from "@/components/common/table/root-table";
 import { ColumnDef } from "@tanstack/react-table";
 import { IClientAppointment } from "../interfaces";
 import { CancelAppointment } from "./cancel-appointment";
@@ -14,50 +14,56 @@ const columns: ColumnDef<IClientAppointment>[] = [
   {
     accessorKey: "fullName",
     header: "Nombre",
-    // size: 10,
+    size: 200,
     cell: ({ getValue }) => <p>{getValue<string>()}</p>,
   },
   {
     accessorKey: "email",
     header: "Email",
-    // size: 10,
+    enableColumnFilter: false,
+    meta: {
+      filterVariant: "select",
+      filterType: "customers",
+    },
+    size: 200,
     cell: ({ getValue }) => <p>{getValue<string>()}</p>,
   },
   {
     accessorKey: "phone",
     header: "Celular",
-    // size: 10,
+    size: 200,
     cell: ({ getValue }) => <p>{getValue<string>()}</p>,
+  },
+
+  {
+    accessorKey: "UserId",
+    header: "Profesional",
+    enableColumnFilter: false,
+    meta: {
+      filterVariant: "select",
+      filterType: "members",
+    },
+    size: 200,
+    cell: ({ row }) => <ProfesionalCell user={row.original.User} />,
   },
   {
     accessorKey: "date",
-    header: "Fecha",
-    // size: 200,
+    header: "Dia",
+    size: 80,
     cell: ({ getValue }) => (
       <p>{new Date(getValue<string>()).toLocaleDateString()}</p>
     ),
   },
   {
-    accessorKey: "UserId",
-    header: "Profesional",
-    enableColumnFilter: false,
-
-    meta: {
-      filterVariant: "select",
-    },
-    // size: 200,
-    cell: ({ row }) => <ProfesionalCell user={row.original.User} />,
-  },
-  {
     accessorKey: "time",
     header: "Fecha",
-    // size: 200,
+    size: 80,
     cell: ({ getValue }) => <p>{getValue<string>()} hs</p>,
   },
   {
     accessorKey: "canceled",
     header: "Estado",
-    size: 10,
+    size: 100,
     cell: ({ getValue }) => (
       <p
         className={`${

@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
 
 import Link from "next/link";
-import { RootTable } from "@/components/common/root-table";
+import { RootTable } from "@/components/common/table/root-table";
 import { getCustomers } from "@/lib/actions";
 import { useQuery } from "@tanstack/react-query";
 import { BarLoader } from "@/components/common/bar-loader";
