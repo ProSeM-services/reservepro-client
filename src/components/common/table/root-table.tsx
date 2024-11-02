@@ -89,9 +89,15 @@ export function RootTable<TData, TValue>({
                   <TableHead
                     key={header.id}
                     style={{ width: `${header.getSize()}px` }}
-                    className={` py-3 px-4  border-l  border-border text-start   font-semibold   `}
+                    className={` py-3 px-4  border-l  border-border text-center   font-semibold   `}
                   >
-                    <div className="flex w-full justify-between items-center">
+                    <div
+                      className={`flex w-full  ${
+                        !header.column.getCanFilter()
+                          ? "justify-between"
+                          : "justify-center"
+                      } items-center  text-center `}
+                    >
                       <div>
                         {header.isPlaceholder
                           ? null

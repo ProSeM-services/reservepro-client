@@ -25,6 +25,11 @@ const customerColumns: ColumnDef<ICustomer>[] = [
   {
     accessorKey: "email",
     header: "Email",
+    meta: {
+      filterVariant: "select",
+      filterType: "customers",
+    },
+    enableColumnFilter: false,
     size: 120,
     cell: ({ getValue }) => <p>{getValue<string>()}</p>,
   },
@@ -37,8 +42,12 @@ const customerColumns: ColumnDef<ICustomer>[] = [
   {
     accessorKey: "Appointments",
     header: "Turnos Agendados",
-    size: 50,
-    cell: ({ getValue }) => <b>{getValue<[]>().length}</b>,
+    size: 100,
+    cell: ({ getValue }) => (
+      <div className="size-10 border flex items-center justify-center rounded-full bg-muted mx-auto p-0">
+        <p className="mx-auto text-center">{getValue<[]>().length}</p>
+      </div>
+    ),
   },
   {
     accessorKey: "id",
@@ -70,5 +79,8 @@ export default function CustomerTable() {
       </div>
     );
 
-  if (data) return <RootTable columns={customerColumns} data={data} />;
+  if (data)
+    return (
+      <RootTable columns={customerColumns} data={data} tableType="customers" />
+    );
 }
