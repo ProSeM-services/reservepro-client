@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MemberZodSchema } from "./member.iterface";
 const isoStringRegex =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|([+-]\d{2}:\d{2}))$/;
 
@@ -24,6 +25,7 @@ export const AppointmentZodSchema = z.object({
   companyId: z.string().optional(),
   canceled: z.boolean().optional(),
   createdAt: z.string(),
+  User: MemberZodSchema,
 });
 
 export const SlotsZodSchmea = z.object({
