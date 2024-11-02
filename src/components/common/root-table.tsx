@@ -5,6 +5,11 @@ import {
   getCoreRowModel,
   useReactTable,
   RowData,
+  ColumnFiltersState,
+  getFilteredRowModel,
+  PaginationState,
+  getExpandedRowModel,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -23,10 +28,13 @@ declare module "@tanstack/react-table" {
   }
 }
 import { Fragment, ReactNode, useState } from "react";
+import { TableFilter } from "./table";
+import { TableType } from "@/interfaces";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  tableType?: TableType;
   getRowCanExpand?: () => boolean;
   renderSubComponent?: (row: TData) => ReactNode;
   pageSize?: number;
@@ -36,10 +44,20 @@ interface DataTableProps<TData, TValue> {
 export function RootTable<TData, TValue>({
   columns,
   data,
+  tableType,
 }: DataTableProps<TData, TValue>) {
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnFilters,
+      pagination,
+    },
     defaultColumn: {
       size: 200,
       minSize: 50,
@@ -47,7 +65,12 @@ export function RootTable<TData, TValue>({
     },
     autoResetPageIndex: true,
     debugTable: true,
+    onPaginationChange: setPagination,
+    getExpandedRowModel: getExpandedRowModel(),
     getCoreRowModel: getCoreRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -80,9 +103,17 @@ export function RootTable<TData, TValue>({
 
                       <div
                         className={`${
-                          header.column.getCanFilter() ? "" : "hidden"
+                          !header.column.getCanFilter() ? "" : "hidden"
                         }`}
-                      ></div>
+                      >
+                        {!header.column.getCanFilter() ? (
+                          <TableFilter
+                            column={header.column}
+                            table={table}
+                            tableType={tableType}
+                          />
+                        ) : null}
+                      </div>
                     </div>
                   </TableHead>
                 ))}
