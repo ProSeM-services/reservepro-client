@@ -32,6 +32,7 @@ export function ConfirmAppointmentPage() {
     UserId: params.get("member"),
     time: params.get("time"),
   });
+  const [loading, setLoading] = useState(false);
   const form = useForm<IClientData>({
     resolver: zodResolver(ClientDataSchema),
     mode: "onChange",
@@ -58,6 +59,7 @@ export function ConfirmAppointmentPage() {
     });
   }, [params]);
   const onSubmit = async (clientData: IClientData) => {
+    console.log("--------- 1", { appointmentData });
     if (
       !appointmentData.date ||
       !appointmentData.ServiceId ||
@@ -65,6 +67,9 @@ export function ConfirmAppointmentPage() {
       !appointmentData.time
     )
       return;
+
+    console.log("--------- 2");
+
     const data: ICreateAppointment = {
       name: clientData.name,
       lastName: clientData.lastName,
@@ -76,12 +81,15 @@ export function ConfirmAppointmentPage() {
       time: appointmentData.time,
     };
     try {
+      setLoading(true);
       const res = await AppointmentServices.createAppointment(data);
       if (res.data.status === 401) throw new Error(res.data.message);
       console.log("Appointment created!", res);
       alert("Appointment created!");
     } catch (error) {
       console.error("Error creating appointment: ", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -152,7 +160,12 @@ export function ConfirmAppointmentPage() {
             />
           </section>
 
-          <Button type="submit" className="flex items-center gap-2">
+          <Button
+            type="submit"
+            className="flex items-center gap-2"
+            isLoading={loading}
+            disabled={loading}
+          >
             <BookIcon className="size-4" />
             Agendar turno
           </Button>

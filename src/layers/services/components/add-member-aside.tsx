@@ -10,29 +10,25 @@ import { BarLoader } from "@/components/common/bar-loader";
 
 export default function AddMembertoServiceAside({
   service,
-  handleAddMembers,
 }: {
   service: IService;
-  handleAddMembers: (list: string[]) => Promise<any>;
 }) {
   const [loading, setLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const [selecetedMembers, setSelectedMembers] = useState<string[]>([]);
-
+  const fetchMembers = async () => {
+    setLoading(true);
+    try {
+      const response = await getMembers();
+      setMembers(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchMembers = async () => {
-      setLoading(true);
-      try {
-        const response = await getMembers();
-        setMembers(response);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     if (!isAdding) fetchMembers();
   }, [isAdding]);
   const { toast } = useToast();
@@ -46,7 +42,17 @@ export default function AddMembertoServiceAside({
 
     setSelectedMembers(res);
   };
-
+  const handleAddMembers = async (selecetedMembers: string[]) => {
+    try {
+      const allMembersToAdd = selecetedMembers.map((userId) =>
+        addMemberToService({ serviceId: service.id!, userId })
+      );
+      await Promise.all(allMembersToAdd);
+      await fetchMembers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleAddSelectedMembers = async () => {
     setIsAdding(true);
     try {
