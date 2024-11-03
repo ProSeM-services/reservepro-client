@@ -47,10 +47,7 @@ export default function ServiceAsideDetails({
           : null}
         <div className="">
           Agregar:
-          <AddMembertoServiceAside
-            service={service}
-            handleAddMembers={async () => {}}
-          />
+          <AddMembertoServiceAside service={service} />
         </div>
       </div>
     </div>

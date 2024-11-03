@@ -12,7 +12,10 @@ export function SetAppointment() {
   const { push } = useRouter();
 
   const ableToSet =
-    params.get("member") && params.get("time") && params.get("service");
+    params.get("member") &&
+    params.get("time") &&
+    params.get("service") &&
+    params.get("date");
   const handleSetTurno = () => {
     if (!ableToSet) return;
     push(`${pathname}/confirm?${params.toString()}`);

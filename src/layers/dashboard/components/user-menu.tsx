@@ -10,9 +10,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
 import { LogOut, Settings, User } from "lucide-react";
+import { QueryClient } from "@tanstack/react-query";
 export function UserMenu() {
   const session = useSession();
+  const queryClient = new QueryClient();
   const handleLogOut = () => {
+    queryClient.clear();
     signOut({ callbackUrl: "http://localhost:3000/login", redirect: true });
   };
 

@@ -29,6 +29,8 @@ const INITIAL_COMPANY_DATA: ICreateCompany = {
 };
 export function CompanyForm() {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const { toast } = useToast();
   const form = useForm<ICreateCompany>({
     resolver: zodResolver(CreateCompanyZodSchema),
@@ -37,13 +39,24 @@ export function CompanyForm() {
   });
 
   const onSubmit = async (values: ICreateCompany) => {
-    await createCompany(values);
+    try {
+      setLoading(true);
+      await createCompany(values);
 
-    toast({
-      title: "Sucursal creada exitosamente!",
-      description: `Se agregó ${values.name} a tu lista de sucursales`,
-      variant: "default",
-    });
+      toast({
+        title: "Sucursal creada exitosamente!",
+        description: `Se agregó ${values.name} a tu lista de sucursales`,
+        variant: "default",
+      });
+    } catch (error) {
+      console.log("Hubo un error al crear la sucursal", error);
+      toast({
+        title: "Hubo un error al crear la sucursal!",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleCategories = (newCategory: Category) => {
@@ -155,7 +168,12 @@ export function CompanyForm() {
 
         <section className="absolute bottom-0 right-0 p-2 w-full">
           <div className="flex gap-2 w-1/3 ml-auto ">
-            <Button type="submit" className="flex-grow text-white">
+            <Button
+              type="submit"
+              className="flex-grow text-white"
+              isLoading={loading}
+              disabled={loading}
+            >
               Crear
             </Button>
           </div>

@@ -13,6 +13,7 @@ export default function SelectService({ service }: { service: IService }) {
   const handleSelecServices = () => {
     if (service) {
       params.set("service", service.id);
+      params.set("duration", service.duration.toString());
     } else {
       params.delete("service");
     }

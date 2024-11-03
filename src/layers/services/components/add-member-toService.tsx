@@ -33,10 +33,7 @@ export default function AddMemberToService({
             adelante con los clientes.
           </p>
           <hr />
-          <AddMembertoServiceAside
-            service={service}
-            handleAddMembers={handleAddMembers}
-          />
+          <AddMembertoServiceAside service={service} />
         </div>
       </SheetContent>
     </Sheet>
