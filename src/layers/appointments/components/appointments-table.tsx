@@ -10,6 +10,7 @@ import { getAllAppointments } from "@/lib/appointments.actions";
 import { BarLoader } from "@/components/common/bar-loader";
 import { ProfesionalCell } from "./profesional-cell";
 import { IMember } from "@/interfaces/member.iterface";
+import { useAppSelector } from "@/store/hooks";
 const columns: ColumnDef<IClientAppointment>[] = [
   {
     accessorKey: "fullName",
@@ -85,18 +86,15 @@ const columns: ColumnDef<IClientAppointment>[] = [
   },
 ];
 export function AppointmentsTable() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["appointments"],
-    queryFn: getAllAppointments,
-  });
+  const { appointments, loading } = useAppSelector((s) => s.appointments);
 
-  if (isLoading) return <BarLoader />;
-  if (data)
-    return (
-      <RootTable
-        columns={columns}
-        data={AppoitnemntModelAdapter(data)}
-        tableType="appoitnemnts"
-      />
-    );
+  if (loading) return <BarLoader />;
+
+  return (
+    <RootTable
+      columns={columns}
+      data={AppoitnemntModelAdapter(appointments)}
+      tableType="appoitnemnts"
+    />
+  );
 }

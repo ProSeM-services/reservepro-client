@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import { getComapnies, getMembers } from "@/lib/actions";
 import { CompanyCard, MemberCard } from "./card";
 import { HousePlugIcon, LucideProps, Users2Icon } from "lucide-react";
+import { useAppSelector } from "@/store/hooks";
 
 export function EmptyList({
   type,
@@ -45,27 +47,18 @@ export function EmptyList({
   );
 }
 
-export async function List({
-  type,
-}: {
-  type: "member" | "company" | "service";
-}) {
-  const fetchFunction = {
-    member: getMembers,
-    company: getComapnies,
-    service: getComapnies,
-  };
-  const list = await fetchFunction[type]();
-  const copmpanies = await getComapnies();
-  const members = await getMembers();
+export function List({ type }: { type: "member" | "company" | "service" }) {
+  const { companies } = useAppSelector((s) => s.company);
+  const { members } = useAppSelector((s) => s.member);
   return (
     <div className=" max-h-full h-full   overflow-y-auto ">
-      {list.length === 0 ? (
+      {(type === "company" && companies.length === 0) ||
+      (type === "member" && members.length === 0) ? (
         <EmptyList type={type} />
       ) : (
         <div className="space-y-2">
           {type === "company" &&
-            copmpanies?.map((company) => (
+            companies?.map((company) => (
               <CompanyCard company={company} key={company.id} />
             ))}
           {type === "member" &&

@@ -36,7 +36,7 @@ export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
   const pathname = usePathname();
   return (
     <TooltipProvider>
-      <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+      <nav className="flex md:flex-col items-center gap-4 px-2 sm:py-5">
         {links.map((link) => {
           const LinkIcon = link.icon;
           const selected = pathname === link.href;
