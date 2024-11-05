@@ -11,6 +11,7 @@ import { BarLoader } from "@/components/common/bar-loader";
 import { ProfesionalCell } from "./profesional-cell";
 import { IMember } from "@/interfaces/member.iterface";
 import { useAppSelector } from "@/store/hooks";
+import { CalendarRangeIcon } from "lucide-react";
 const columns: ColumnDef<IClientAppointment>[] = [
   {
     accessorKey: "fullName",
@@ -86,9 +87,20 @@ const columns: ColumnDef<IClientAppointment>[] = [
   },
 ];
 export function AppointmentsTable() {
-  const { appointments, loading } = useAppSelector((s) => s.appointments);
+  const { appointments, loading, fetched } = useAppSelector(
+    (s) => s.appointments
+  );
 
-  if (loading) return <BarLoader />;
+  if (loading && !fetched)
+    return (
+      <div className="relative h-full">
+        <BarLoader />
+        <div className=" p-10 h-full w-full flex flex-col gap-4 justify-center items-center">
+          <CalendarRangeIcon className="size-10" />
+          Cargando turnos...
+        </div>
+      </div>
+    );
 
   return (
     <RootTable

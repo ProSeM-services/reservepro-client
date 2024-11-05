@@ -14,6 +14,7 @@ const initialState: CustomerState = {
   customers: [],
   inmutableCustomers: [],
   loading: true,
+  fetched: false,
 };
 
 export const customerSlice = createSlice({
@@ -24,6 +25,7 @@ export const customerSlice = createSlice({
       state.loading = action.payload;
     },
     setCustomers: (state, action: PayloadAction<ICustomer[]>) => {
+      state.fetched = true;
       state.customers = action.payload;
       state.inmutableCustomers = action.payload;
     },

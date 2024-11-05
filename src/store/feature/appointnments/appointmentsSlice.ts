@@ -15,6 +15,7 @@ const initialState: AppointmentState = {
   appointments: [],
   inmutablesAppointments: [],
   loading: true,
+  fetched: false,
 };
 
 export const appointmentSlice = createSlice({
@@ -25,6 +26,7 @@ export const appointmentSlice = createSlice({
       state.loading = action.payload;
     },
     setAppointments: (state, action: PayloadAction<IAppointment[]>) => {
+      state.fetched = true;
       state.appointments = action.payload;
       state.inmutablesAppointments = action.payload;
     },
