@@ -9,6 +9,7 @@ import { getCustomers } from "@/lib/actions";
 import { useQuery } from "@tanstack/react-query";
 import { BarLoader } from "@/components/common/bar-loader";
 import { UserSearchIcon } from "lucide-react";
+import { useAppSelector } from "@/store/hooks";
 const customerColumns: ColumnDef<ICustomer>[] = [
   {
     accessorKey: "firstName",
@@ -64,11 +65,8 @@ const customerColumns: ColumnDef<ICustomer>[] = [
   },
 ];
 export default function CustomerTable() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["customers"],
-    queryFn: getCustomers,
-  });
-  if (isLoading)
+  const { loading, customers, fetched } = useAppSelector((s) => s.customers);
+  if (loading && !fetched)
     return (
       <div className="relative h-full">
         <BarLoader />
@@ -79,8 +77,11 @@ export default function CustomerTable() {
       </div>
     );
 
-  if (data)
-    return (
-      <RootTable columns={customerColumns} data={data} tableType="customers" />
-    );
+  return (
+    <RootTable
+      columns={customerColumns}
+      data={customers}
+      tableType="customers"
+    />
+  );
 }

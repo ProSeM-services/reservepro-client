@@ -18,7 +18,7 @@ import {
   ROLES_VALUES,
 } from "@/interfaces/member.iterface";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Select,
@@ -28,8 +28,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { BaselineIcon, ShieldCheck } from "lucide-react";
-import { createMember } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
+import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 const INITIAL_MEMBER_DATA: ICreateMember = {
   email: "",
   lastName: "",
@@ -44,21 +44,28 @@ const INITIAL_MEMBER_DATA: ICreateMember = {
 };
 export function MemberForm() {
   const { toast } = useToast();
+  const { createMember } = useCreatingFetch();
+  const [loading, setLoading] = useState(false);
   const form = useForm<ICreateMember>({
     resolver: zodResolver(CreateMemberZodSchema),
     mode: "onChange",
     defaultValues: INITIAL_MEMBER_DATA,
   });
   const onSubmit = async (values: ICreateMember) => {
-    const res = await createMember(values);
-    if (res.status === 400) {
-      alert(res.response.message);
+    try {
+      setLoading(true);
+      await createMember(values);
+      toast({
+        title: "Miembro agregado exitosamente!",
+        description: `Se agregó ${values.name} a tu lista de miembros`,
+        variant: "default",
+      });
+      form.reset();
+    } catch (error) {
+      console.log("Error creating Member, ", error);
+    } finally {
+      setLoading(false);
     }
-    toast({
-      title: "Miembro agregado exitosamente!",
-      description: `Se agregó ${values.name} a tu lista de miembros`,
-      variant: "default",
-    });
   };
   return (
     <Form {...form}>
@@ -211,7 +218,12 @@ export function MemberForm() {
             <Button type="button" variant={"outline"} className="w-1/4">
               Cancelar
             </Button>
-            <Button type="submit" className="flex-grow text-white">
+            <Button
+              type="submit"
+              className="flex-grow text-white"
+              isLoading={loading}
+              disabled={loading}
+            >
               Crear
             </Button>
           </div>

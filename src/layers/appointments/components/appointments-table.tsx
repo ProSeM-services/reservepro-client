@@ -10,6 +10,8 @@ import { getAllAppointments } from "@/lib/appointments.actions";
 import { BarLoader } from "@/components/common/bar-loader";
 import { ProfesionalCell } from "./profesional-cell";
 import { IMember } from "@/interfaces/member.iterface";
+import { useAppSelector } from "@/store/hooks";
+import { CalendarRangeIcon } from "lucide-react";
 const columns: ColumnDef<IClientAppointment>[] = [
   {
     accessorKey: "fullName",
@@ -85,18 +87,26 @@ const columns: ColumnDef<IClientAppointment>[] = [
   },
 ];
 export function AppointmentsTable() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["appointments"],
-    queryFn: getAllAppointments,
-  });
+  const { appointments, loading, fetched } = useAppSelector(
+    (s) => s.appointments
+  );
 
-  if (isLoading) return <BarLoader />;
-  if (data)
+  if (loading && !fetched)
     return (
-      <RootTable
-        columns={columns}
-        data={AppoitnemntModelAdapter(data)}
-        tableType="appoitnemnts"
-      />
+      <div className="relative h-full">
+        <BarLoader />
+        <div className=" p-10 h-full w-full flex flex-col gap-4 justify-center items-center">
+          <CalendarRangeIcon className="size-10" />
+          Cargando turnos...
+        </div>
+      </div>
     );
+
+  return (
+    <RootTable
+      columns={columns}
+      data={AppoitnemntModelAdapter(appointments)}
+      tableType="appoitnemnts"
+    />
+  );
 }

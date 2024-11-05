@@ -1,11 +1,13 @@
-import { getServices } from "@/lib/actions";
+"use client";
 import React from "react";
 import { EmptyList } from "./dashboard-list";
 import ServiceCard from "@/layers/services/components/services-card";
+import { useAppSelector } from "@/store/hooks";
 
-export async function ServicesList() {
-  const services = await getServices();
+export function ServicesList() {
+  const { services, loading } = useAppSelector((s) => s.service);
 
+  if (loading) return <div>Loading ...</div>;
   return (
     <div className="  h-full  ">
       {services.length === 0 ? (

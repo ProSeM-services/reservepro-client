@@ -1,7 +1,7 @@
 import { NavLinks } from "./nav-links";
 export function SideNav() {
   return (
-    <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 pt-10 flex-col border-r bg-background sm:flex">
+    <aside className="fixed hidden sm:flex inset-y-0 left-0  z-10  w-14  md:pt-10  flex-col md:border-r  bg-background ">
       <NavLinks />
     </aside>
   );

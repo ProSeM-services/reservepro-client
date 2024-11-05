@@ -1,22 +1,15 @@
-import { getAllAppointments } from "@/lib/appointments.actions";
 import { AppointmentProvider, AppointmentsTable } from "../components";
 
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
 export async function AppointmentPage() {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["appointments"],
-    queryFn: getAllAppointments,
-  });
   return (
-    <AppointmentProvider>
-      <HydrationBoundary state={dehydrate(queryClient)}>
+    <div>
+      <div className="flex justify-between items-center p-2">
+        <h2 className="font-bold">Clientes</h2>
+      </div>
+      <hr />
+      <div className="flex flex-col gap-0 p-4 max-md:p-1">
         <AppointmentsTable />
-      </HydrationBoundary>
-    </AppointmentProvider>
+      </div>
+    </div>
   );
 }

@@ -20,8 +20,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { createService } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
+import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 const INITIAL_SERVICE_DATA: ICreateService = {
   duration: 0,
   price: 0,
@@ -31,6 +31,8 @@ const INITIAL_SERVICE_DATA: ICreateService = {
 };
 export function CreateServicesForm() {
   const { toast } = useToast();
+  const { createService } = useCreatingFetch();
+  const [loading, setLoading] = useState(false);
   const [selectedProvision, setSelectedProvision] =
     useState<Provision>("Presencial");
   const form = useForm<ICreateService>({
@@ -40,11 +42,13 @@ export function CreateServicesForm() {
   });
   const onSubmit = async (values: ICreateService) => {
     try {
+      setLoading(true);
       await createService(values);
       toast({
         title: "Servicio Creado!",
         description: `El servicio ${values.title} fue agregado a tu lista de servicios.`,
       });
+      form.reset();
     } catch (error) {
       console.error("Error creating services ---- > ", error);
       toast({
@@ -52,6 +56,8 @@ export function CreateServicesForm() {
         description: "Vuelve a intentar en unos minutos.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,6 +112,7 @@ export function CreateServicesForm() {
                   <Input
                     placeholder="Duracion del servicio"
                     type="number"
+                    value={field.value}
                     onChange={(e) => handleDuration(parseInt(e.target.value))}
                     // {...field}
                   />
@@ -125,6 +132,7 @@ export function CreateServicesForm() {
                   <Input
                     placeholder="Precio del servicio"
                     type="number"
+                    value={field.value}
                     onChange={(e) => handlePrice(parseInt(e.target.value))}
                   />
                 </FormControl>
@@ -184,7 +192,12 @@ export function CreateServicesForm() {
 
         <section className="absolute bottom-0 right-0 p-2 w-full">
           <div className="flex gap-2 w-1/3 ml-auto ">
-            <Button type="submit" className="flex-grow text-white">
+            <Button
+              type="submit"
+              className="flex-grow text-white"
+              isLoading={loading}
+              disabled={loading}
+            >
               Crear
             </Button>
           </div>

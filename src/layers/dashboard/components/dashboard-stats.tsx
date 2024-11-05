@@ -1,15 +1,13 @@
-import { getComapnies, getMembers } from "@/lib/actions";
+"use client";
 import React from "react";
 import { AddButton } from "./add-button";
+import { useAppSelector } from "@/store/hooks";
 
-export async function DashboardStats({ type }: { type: "member" | "company" }) {
-  const fetchFunction = {
-    member: getMembers,
-    company: getComapnies,
-  };
-  const res = await fetchFunction[type]();
+export function DashboardStats({ type }: { type: "member" | "company" }) {
+  const { companies } = useAppSelector((s) => s.company);
+  const { members } = useAppSelector((s) => s.member);
 
-  const count = res.length;
+  const count = type === "company" ? companies.length : members.length;
   return (
     <div className="flex flex-col gap-4 justify-center items-center    p-4 w-full  relative ">
       {count > 0 ? (

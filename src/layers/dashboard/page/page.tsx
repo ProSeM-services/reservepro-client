@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { AddButton, DashboardCard, ServicesList } from "../components";
 
 export async function DashboardPage() {
@@ -17,9 +17,7 @@ export async function DashboardPage() {
           </div>
           <hr />
 
-          <Suspense fallback={"Loading ..."}>
-            <ServicesList />
-          </Suspense>
+          <ServicesList />
         </div>
       </section>
     </div>

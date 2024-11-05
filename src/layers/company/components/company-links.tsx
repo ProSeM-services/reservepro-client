@@ -1,12 +1,13 @@
 "use client";
-import { ICompany } from "@/interfaces";
+import { useAppSelector } from "@/store/hooks";
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-export function CompanyLinks({ companies }: { companies: ICompany[] }) {
+export function CompanyLinks() {
   const pathname = usePathname();
+  const { companies } = useAppSelector((s) => s.company);
   return (
     <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
       {companies.map((company) => (

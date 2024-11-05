@@ -5,6 +5,7 @@ export * from "./card";
 export * from "./category-card";
 export * from "./crate-member-form";
 export * from "./create-company-form";
+export * from "./dashboard-skeletons";
 export * from "./dashboard-list";
 export * from "./dashboard-stats";
 export * from "./dynamic-map";

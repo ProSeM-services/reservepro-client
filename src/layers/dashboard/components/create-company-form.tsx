@@ -17,8 +17,8 @@ import { Button } from "@/components/ui/button";
 import { Category, CATEGORY_VALUES } from "@/interfaces/categeory.interface";
 import { CategoryCard } from "./category-card";
 import { useToast } from "@/components/ui/use-toast";
-import { createCompany } from "@/lib/actions";
 import { AddressInput } from "@/components/common/address-input";
+import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 
 const INITIAL_COMPANY_DATA: ICreateCompany = {
   address: "",
@@ -30,7 +30,7 @@ const INITIAL_COMPANY_DATA: ICreateCompany = {
 export function CompanyForm() {
   const [categoryList, setCategoryList] = useState<Category[]>([]);
   const [loading, setLoading] = useState(false);
-
+  const { createCompany } = useCreatingFetch();
   const { toast } = useToast();
   const form = useForm<ICreateCompany>({
     resolver: zodResolver(CreateCompanyZodSchema),
@@ -42,12 +42,12 @@ export function CompanyForm() {
     try {
       setLoading(true);
       await createCompany(values);
-
       toast({
         title: "Sucursal creada exitosamente!",
         description: `Se agregó ${values.name} a tu lista de sucursales`,
         variant: "default",
       });
+      form.reset();
     } catch (error) {
       console.log("Hubo un error al crear la sucursal", error);
       toast({
