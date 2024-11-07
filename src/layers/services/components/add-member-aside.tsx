@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { IService } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
 import { BarLoader } from "@/components/common/bar-loader";
+import { useAppSelector } from "@/store/hooks";
 
 export default function AddMembertoServiceAside({
   service,
@@ -15,22 +16,10 @@ export default function AddMembertoServiceAside({
 }) {
   const [loading, setLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
-  const [members, setMembers] = useState<IMember[]>([]);
+  // const [members, setMembers] = useState<IMember[]>([]);
   const [selecetedMembers, setSelectedMembers] = useState<string[]>([]);
-  const fetchMembers = async () => {
-    setLoading(true);
-    try {
-      const response = await getMembers();
-      setMembers(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    if (!isAdding) fetchMembers();
-  }, [isAdding]);
+  const { members } = useAppSelector((s) => s.member);
+
   const { toast } = useToast();
   const handleSelectMember = (memberId: string) => {
     let res = [];
@@ -48,7 +37,6 @@ export default function AddMembertoServiceAside({
         addMemberToService({ serviceId: service.id!, userId })
       );
       await Promise.all(allMembersToAdd);
-      await fetchMembers();
     } catch (error) {
       console.log(error);
     }
@@ -74,13 +62,17 @@ export default function AddMembertoServiceAside({
   };
   if (!service.id) return null;
 
+  const membersOutOfServices = members.filter(
+    (member) => !service.Users.some((e) => e.id === member.id)
+  );
+
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
       {loading ? <BarLoader /> : null}
       {!loading && members && !members.length ? (
         <p>no hay miembros</p>
       ) : (
-        members?.map((member) => (
+        membersOutOfServices?.map((member) => (
           <div
             className={`flex relative items-center gap-2 border rounded-md border-accent p-2 cursor-pointer hover:bg-secondary transition-all duration-150 ${
               selecetedMembers.includes(member.id!)
