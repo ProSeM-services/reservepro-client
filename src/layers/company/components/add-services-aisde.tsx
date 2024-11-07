@@ -1,32 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { addServiceToComapny, getServices } from "@/lib/actions";
+import React, { useState } from "react";
+import { addServiceToComapny } from "@/lib/actions";
 import { CheckCircleIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ICompany, IService } from "@/interfaces";
+import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
-import ServiceCard from "@/layers/services/components/services-card";
+import ServiceCard, {
+  ServiceDetailCard,
+} from "@/layers/services/components/services-card";
+import { useAppSelector } from "@/store/hooks";
 
 export function AddServicesAside({ company }: { company: ICompany }) {
-  const [services, setServices] = useState<IService[]>([]);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false); // Added state for loading
+  const { services } = useAppSelector((s) => s.service);
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      setLoading(true); // Set loading to true when fetching services
-      try {
-        const response = await getServices();
-        setServices(response);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching services
-      }
-    };
-
-    fetchServices();
-  }, [company.members]);
   const { toast } = useToast();
   const handleSelectService = (memberId: string) => {
     let res = [];
@@ -83,7 +71,9 @@ export function AddServicesAside({ company }: { company: ICompany }) {
             key={service.id}
             onClick={() => handleSelectService(service.id!)}
           >
-            <ServiceCard service={service} />
+            <div className="w-full">
+              <ServiceDetailCard service={service} />
+            </div>
 
             {selectedServices.includes(service.id!) && (
               <CheckCircleIcon className="text-primary absolute right-2 bottom-2  size-6" />
