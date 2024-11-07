@@ -6,6 +6,8 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface CompanyState extends IStoreState {
   value: number;
   companies: ICompany[];
+  selectedCompany?: ICompany;
+
   inmutablesCompanies: ICompany[];
 }
 
@@ -13,6 +15,7 @@ const initialState: CompanyState = {
   value: 0,
   companies: [],
   inmutablesCompanies: [],
+  selectedCompany: undefined,
   loading: true,
 };
 
@@ -31,11 +34,18 @@ export const companySlice = createSlice({
       state.companies.push(action.payload);
       state.inmutablesCompanies.push(action.payload);
     },
+    setSelectedCompany: (state, action: PayloadAction<ICompany>) => {
+      state.selectedCompany = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setCompanies, addCompany, toggleCompanyLoading } =
-  companySlice.actions;
+export const {
+  setCompanies,
+  addCompany,
+  toggleCompanyLoading,
+  setSelectedCompany,
+} = companySlice.actions;
 
 export default companySlice.reducer;

@@ -37,4 +37,12 @@ export class MemberServices {
 
     return res.data;
   }
+  static async removeFromCompany(data: IAddMember) {
+    const res = await axiosInstance.post(
+      `${BASE_URL}/user/remove-from-company`,
+      data
+    );
+
+    return res.data;
+  }
 }

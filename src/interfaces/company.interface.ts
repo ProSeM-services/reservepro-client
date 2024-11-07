@@ -41,6 +41,6 @@ export type ICreateCompany = z.infer<typeof CreateCompanyZodSchema>;
 
 export const AddMemberSchema = z.object({
   companyId: z.string(),
-  memberId: z.string(),
+  userId: z.string(),
 });
 export type IAddMember = z.infer<typeof AddMemberSchema>;

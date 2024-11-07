@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { ICompany } from "@/interfaces";
 import { IMember } from "@/interfaces/member.iterface";
-import { removeMemberFromCompany } from "@/lib/actions";
+import { removeMemberFromCompany } from "@/lib/user.actions";
 import { TrashIcon } from "lucide-react";
 import React, { useState } from "react";
 
@@ -22,7 +22,7 @@ export function RemoveMember({
     try {
       await removeMemberFromCompany({
         companyId: company.id,
-        memberId: member.id,
+        userId: member.id,
       });
       toast({
         title: `${member.name}, ${member.lastName} elminado de ${company.name}`,

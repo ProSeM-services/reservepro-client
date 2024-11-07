@@ -1,11 +1,11 @@
 import { ICompany } from "@/interfaces";
-import React from "react";
 
 import { AxeIcon } from "lucide-react";
 import ServiceCard from "@/layers/services/components/services-card";
 
 export function CompnayServicesList({ company }: { company: ICompany }) {
   const services = company.Services;
+
   return (
     <div>
       {services?.length ? (

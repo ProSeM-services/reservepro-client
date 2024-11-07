@@ -89,17 +89,28 @@ export default function ServiceCard({
   };
 
   return (
-    <Sheet>
-      <SheetTrigger>
-        <ServiceDetailCard service={service} selectable />
-      </SheetTrigger>
-      <SheetContent>
-        <SheetTitle>Detalles del servicio</SheetTitle>
-        <hr />
-        <div className="flex-grow h-[85%] space-y-3">
-          <ServiceAsideDetails serviceId={service.id} />
-        </div>
-      </SheetContent>
-    </Sheet>
+    <div className="w-full relative">
+      <Sheet>
+        <SheetTrigger className="w-full">
+          <ServiceDetailCard service={service} selectable />
+        </SheetTrigger>
+        <SheetContent>
+          <SheetTitle>Detalles del servicio</SheetTitle>
+          <hr />
+          <div className="flex-grow h-[85%] space-y-3">
+            <ServiceAsideDetails serviceId={service.id} />
+          </div>
+        </SheetContent>
+      </Sheet>
+      <Button
+        className="absolute right-1 bottom-1 size-8"
+        variant="destructive"
+        isLoading={deleting}
+        size={"icon"}
+        onClick={handleDeleteService}
+      >
+        <TrashIcon className="size-4" />
+      </Button>
+    </div>
   );
 }
