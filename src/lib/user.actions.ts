@@ -13,6 +13,12 @@ export async function getFreeMembers() {
 export async function addMembertoCompany(data: IAddMember) {
   await setAuthtoken();
   const res = await MemberServices.addToCompany(data);
-  revalidatePath("/dashboard");
+  revalidatePath("/dashboard/company");
+  return res;
+}
+export async function removeMemberFromCompany(data: IAddMember) {
+  await setAuthtoken();
+  const res = await MemberServices.removeFromCompany(data);
+  revalidatePath("/dashboard/company");
   return res;
 }

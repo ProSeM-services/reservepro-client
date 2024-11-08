@@ -9,10 +9,12 @@ import ServiceCard, {
   ServiceDetailCard,
 } from "@/layers/services/components/services-card";
 import { useAppSelector } from "@/store/hooks";
+import { BarLoader } from "@/components/common/bar-loader";
 
 export function AddServicesAside({ company }: { company: ICompany }) {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(false); // Added state for loading
+  const [loading, setLoading] = useState(false); // Added state for loading
+
   const { services } = useAppSelector((s) => s.service);
 
   const { toast } = useToast();
@@ -56,30 +58,31 @@ export function AddServicesAside({ company }: { company: ICompany }) {
   );
   return (
     <div className="space-y-2 h-full max-h-full overflow-auto  ">
-      {loading ? (
-        <div>Loading...</div>
-      ) : servicesToShow.length === 0 ? (
+      {servicesToShow.length === 0 ? (
         <p>No hay servicios para mostrar!</p>
       ) : (
-        servicesToShow?.map((service) => (
-          <div
-            className={`flex relative items-center gap-2 border rounded-md border-accent  cursor-pointer hover:bg-secondary transition-all duration-150 ${
-              selectedServices.includes(service.id!)
-                ? "border border-primary "
-                : ""
-            }`}
-            key={service.id}
-            onClick={() => handleSelectService(service.id!)}
-          >
-            <div className="w-full">
-              <ServiceDetailCard service={service} />
-            </div>
+        <div>
+          {loading && <BarLoader />}
+          {servicesToShow?.map((service) => (
+            <div
+              className={`flex relative items-center gap-2 border rounded-md border-accent  cursor-pointer hover:bg-secondary transition-all duration-150 ${
+                selectedServices.includes(service.id!)
+                  ? "border border-primary "
+                  : ""
+              }`}
+              key={service.id}
+              onClick={() => handleSelectService(service.id!)}
+            >
+              <div className="w-full">
+                <ServiceDetailCard service={service} />
+              </div>
 
-            {selectedServices.includes(service.id!) && (
-              <CheckCircleIcon className="text-primary absolute right-2 bottom-2  size-6" />
-            )}
-          </div>
-        ))
+              {selectedServices.includes(service.id!) && (
+                <CheckCircleIcon className="text-primary absolute right-2 bottom-2  size-6" />
+              )}
+            </div>
+          ))}
+        </div>
       )}
 
       <div className="absolute bottom-1 right-1  ">

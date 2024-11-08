@@ -7,6 +7,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 export interface AppointmentState extends IStoreState {
   value: number;
   appointments: IAppointment[];
+  selectedAppointment?: IAppointment;
   inmutablesAppointments: IAppointment[];
 }
 
@@ -14,6 +15,7 @@ const initialState: AppointmentState = {
   value: 0,
   appointments: [],
   inmutablesAppointments: [],
+  selectedAppointment: undefined,
   loading: true,
   fetched: false,
 };
@@ -34,11 +36,18 @@ export const appointmentSlice = createSlice({
       state.appointments.push(action.payload);
       state.inmutablesAppointments.push(action.payload);
     },
+    setSelectedAppointment: (state, action: PayloadAction<IAppointment>) => {
+      state.selectedAppointment = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addAppointment, setAppointments, toggleAppointmentsLoading } =
-  appointmentSlice.actions;
+export const {
+  addAppointment,
+  setAppointments,
+  toggleAppointmentsLoading,
+  setSelectedAppointment,
+} = appointmentSlice.actions;
 
 export default appointmentSlice.reducer;

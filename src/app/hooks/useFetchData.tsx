@@ -10,6 +10,7 @@ import {
 } from "@/store/feature/appointnments/appointmentsSlice";
 import {
   setCompanies,
+  setSelectedCompany,
   toggleCompanyLoading,
 } from "@/store/feature/company/companySlice";
 import {
@@ -83,11 +84,23 @@ export default function useFetchData() {
       dispatch(toggleAppointmentsLoading(false));
     }
   };
+  const fetchCompanyData = async (id: string) => {
+    try {
+      dispatch(toggleAppointmentsLoading(true));
+      const appointment = await CompanyServices.getCopanyById(id);
+      dispatch(setSelectedCompany(appointment));
+    } catch (error) {
+      console.log("Error fetching Companies", error);
+    } finally {
+      dispatch(toggleAppointmentsLoading(false));
+    }
+  };
   return {
     fetchCompanies,
     fetchMembers,
     fetchCustomers,
     fetchServices,
     fetchAppointments,
+    fetchCompanyData,
   };
 }

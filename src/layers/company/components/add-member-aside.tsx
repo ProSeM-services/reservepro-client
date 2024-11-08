@@ -8,12 +8,15 @@ import { Button } from "@/components/ui/button";
 import { ICompany } from "@/interfaces";
 import { useToast } from "@/components/ui/use-toast";
 import { BarLoader } from "@/components/common/bar-loader";
+import useFetchData from "@/app/hooks/useFetchData";
+import { MemberServices } from "@/services/member.services";
 
 export function AddMemberAside({ company }: { company: ICompany }) {
   const [loading, setLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
   const [members, setMembers] = useState<IMember[]>([]);
   const [selecetedMembers, setSelectedMembers] = useState<string[]>([]);
+  const { fetchMembers, fetchCompanies } = useFetchData();
   useEffect(() => {
     const fetchMembers = async () => {
       setLoading(true);
@@ -44,10 +47,11 @@ export function AddMemberAside({ company }: { company: ICompany }) {
   const handleAddMembers = async () => {
     setIsAdding(true);
     try {
-      const allMembersToAdd = selecetedMembers.map((memberId) =>
-        addMembertoCompany({ companyId: company.id!, memberId })
+      const allMembersToAdd = selecetedMembers.map((userId) =>
+        addMembertoCompany({ companyId: company.id!, userId })
       );
       await Promise.all(allMembersToAdd);
+
       toast({
         title: "Miembros cargados!",
         description: `Los miembros fueron agregados exitosamente a ${company.name}!`,
