@@ -2,12 +2,12 @@
 
 import {
   HomeIcon,
-  GroupIcon,
   DockIcon,
-  BellElectric,
-  FactoryIcon,
   Settings,
   CalendarCheck,
+  HotelIcon,
+  PackageCheck,
+  Contact,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,11 +25,11 @@ const links = [
     href: "/dashboard/activity",
     icon: DockIcon,
   },
-  { name: "Customers", href: "/dashboard/customers", icon: GroupIcon },
+  { name: "Customers", href: "/dashboard/customers", icon: Contact },
   { name: "Appointmnets", href: "/dashboard/appointment", icon: CalendarCheck },
 
-  { name: "Company", href: "/dashboard/company", icon: FactoryIcon },
-  { name: "Services", href: "/dashboard/services", icon: BellElectric },
+  { name: "Company", href: "/dashboard/company", icon: HotelIcon },
+  { name: "Services", href: "/dashboard/services", icon: PackageCheck },
 ];
 
 export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {

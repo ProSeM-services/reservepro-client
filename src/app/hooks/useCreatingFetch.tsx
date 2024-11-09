@@ -44,6 +44,7 @@ export default function useCreatingFetch() {
       dispatch(addMember(newMember));
     } catch (error) {
       console.log("Error creating Member", error);
+      throw error;
     } finally {
       //   dispatch(toggleMembersLoading(false));
     }

@@ -15,6 +15,7 @@ export default function DataProvider({ children }: PropsWithChildren) {
   } = useFetchData();
   useEffect(() => {
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
+    // console.log(`  --------------- \n DataProvider () \n ---------------  `);
     const fetchData = async () => {
       try {
         await setAuthInterceptor(session.data?.backendTokens.accessToken);

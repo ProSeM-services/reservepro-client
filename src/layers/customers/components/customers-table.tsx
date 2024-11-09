@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { BarLoader } from "@/components/common/bar-loader";
 import { UserSearchIcon } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
+import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
 const customerColumns: ColumnDef<ICustomer>[] = [
   {
     accessorKey: "firstName",
@@ -66,22 +67,14 @@ const customerColumns: ColumnDef<ICustomer>[] = [
 ];
 export default function CustomerTable() {
   const { loading, customers, fetched } = useAppSelector((s) => s.customers);
-  if (loading && !fetched)
-    return (
-      <div className="relative h-full">
-        <BarLoader />
-        <div className=" p-10 h-full w-full flex flex-col gap-4 justify-center items-center">
-          <UserSearchIcon className="size-10" />
-          Cargando clientes...
-        </div>
-      </div>
-    );
 
   return (
-    <RootTable
-      columns={customerColumns}
-      data={customers}
-      tableType="customers"
-    />
+    <LoaderWrapper loading={loading && !fetched} type="customers">
+      <RootTable
+        columns={customerColumns}
+        data={customers}
+        tableType="customers"
+      />
+    </LoaderWrapper>
   );
 }
