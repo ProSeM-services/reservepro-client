@@ -16,7 +16,7 @@ export function ServicesList() {
             <EmptyList type="service" />
           </div>
         ) : (
-          <div className="  grid grid-cols-3 gap-2 max-lg:grid-cols-2  max-md:grid-cols-1  ">
+          <div className="  grid grid-cols-2 gap-2 max-lg:grid-cols-2  max-md:grid-cols-1  ">
             {services.map((service) => (
               <ServiceCard service={service} key={service.id} />
             ))}
