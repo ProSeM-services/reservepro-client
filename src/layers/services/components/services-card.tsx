@@ -65,6 +65,8 @@ export default function ServiceCard({
   service,
   selectedCompany,
 }: ServiceCardProps) {
+  // selectedCompany prop is used for company detail page to delete this service from this selected Company.
+
   const [deleting, setDeleting] = useState(false);
   const { toast } = useToast();
   const handleDeleteService = async () => {
@@ -102,15 +104,17 @@ export default function ServiceCard({
           </div>
         </SheetContent>
       </Sheet>
-      <Button
-        className="absolute right-1 bottom-1 size-8"
-        variant="destructive"
-        isLoading={deleting}
-        size={"icon"}
-        onClick={handleDeleteService}
-      >
-        <TrashIcon className="size-4" />
-      </Button>
+      {selectedCompany && (
+        <Button
+          className="absolute right-1 bottom-1 size-8"
+          variant="destructive"
+          isLoading={deleting}
+          size={"icon"}
+          onClick={handleDeleteService}
+        >
+          <TrashIcon className="size-4" />
+        </Button>
+      )}
     </div>
   );
 }

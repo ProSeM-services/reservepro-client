@@ -14,9 +14,7 @@ export class CompanyServices {
     return res.data;
   }
   static async delete(id: string) {
-    const res = await axiosInstance.delete(`${BASE_URL}/company/${id}`);
-
-    return res.data;
+    return await axiosInstance.delete(`${BASE_URL}/company/${id}`);
   }
 
   static async getCopanyById(id: string): Promise<ICompany> {
