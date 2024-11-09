@@ -28,7 +28,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PieExampleGraph } from "./graph";
 
 const chartConfig = {
   january: {
@@ -106,7 +105,10 @@ export function CustomerStats() {
     };
     fetchData();
   }, [session.data]);
-  const months = useMemo(() => customersStats.map((item) => item.month), []);
+  const months = useMemo(
+    () => customersStats.map((item) => item.month),
+    [customersStats]
+  );
   const activeIndex = useMemo(
     () => customersStats.findIndex((item) => item.month === activeMonth),
     [activeMonth]
