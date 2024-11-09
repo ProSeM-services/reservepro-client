@@ -1,6 +1,8 @@
 export * from "./DashboardCard";
 export * from "./add-button";
 export * from "./breadcrumb-links";
+export * from "./customers-stats";
+
 export * from "./card";
 export * from "./category-card";
 export * from "./crate-member-form";

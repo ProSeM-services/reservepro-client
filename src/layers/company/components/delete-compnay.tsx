@@ -11,28 +11,34 @@ import {
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "lucide-react";
 import { ICompany } from "@/interfaces";
-import { deleteCompany } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import useCreatingFetch from "@/app/hooks/useCreatingFetch";
+import { AxiosResponse } from "axios";
 export function DeleteCompany({ company }: { company: ICompany }) {
   const [deleting, setDeleting] = useState(false);
   const { toast } = useToast();
   const router = useRouter();
+  const { deleteCompany } = useCreatingFetch();
   const handleDelete = async () => {
     setDeleting(true);
     try {
-      await deleteCompany(company.id);
-
+      const res = await deleteCompany(company.id);
+      console.log("RES", res);
       toast({
         title: "Sucursal elimnada!",
       });
       router.push("/dashboard/company");
     } catch (error) {
+      console.log("errrer", error);
       toast({
         title: `Error al elimnar surcursal ${company.name}`,
+        // @ts-ignore
+        description: error.response.data.message,
+        variant: "destructive",
       });
     } finally {
-      setDeleting(true);
+      setDeleting(false);
     }
   };
   return (

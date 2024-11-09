@@ -1,10 +1,13 @@
 "use client";
-import { ICompany, ICreateCompany, ICreateService } from "@/interfaces";
+import { ICreateCompany, ICreateService } from "@/interfaces";
 import { ICreateMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
 import { ServicesServices } from "@/services/services.services";
-import { addCompany } from "@/store/feature/company/companySlice";
+import {
+  addCompany,
+  removeCompany,
+} from "@/store/feature/company/companySlice";
 import { addMember } from "@/store/feature/members/membersSlice";
 import { addService } from "@/store/feature/services/servicesSlice";
 import { useAppDispatch } from "@/store/hooks";
@@ -22,6 +25,18 @@ export default function useCreatingFetch() {
       //   dispatch(toggleCompanyLoading(false));
     }
   };
+  const deleteCompany = async (id: string) => {
+    try {
+      //   dispatch(toggleCompanyLoading(true));
+      await CompanyServices.delete(id);
+      dispatch(removeCompany(id));
+    } catch (error) {
+      console.log("Error creating Companies", error);
+      throw error;
+    } finally {
+      //   dispatch(toggleCompanyLoading(false));
+    }
+  };
   const createMember = async (data: ICreateMember) => {
     try {
       //   dispatch(toggleMembersLoading(true));
@@ -29,6 +44,7 @@ export default function useCreatingFetch() {
       dispatch(addMember(newMember));
     } catch (error) {
       console.log("Error creating Member", error);
+      throw error;
     } finally {
       //   dispatch(toggleMembersLoading(false));
     }
@@ -44,5 +60,5 @@ export default function useCreatingFetch() {
       //   dispatch(toggleMembersLoading(false));
     }
   };
-  return { createCompany, createMember, createService };
+  return { createCompany, createMember, createService, deleteCompany };
 }

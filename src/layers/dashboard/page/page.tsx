@@ -1,24 +1,35 @@
 import React from "react";
-import { AddButton, DashboardCard, ServicesList } from "../components";
+import {
+  AddButton,
+  CustomerStats,
+  DashboardCard,
+  ServicesList,
+} from "../components";
 
-export async function DashboardPage() {
+export function DashboardPage() {
   return (
-    <div className=" h-full flex flex-col  gap-4 ">
-      <section className="flex flex-col  gap-4 flex-grow">
-        <div className="flex  gap-4  max-lg:flex-col  ">
+    <div className=" h-[100%] flex flex-col  gap-4  ">
+      <section className="flex flex-col  gap-4  h-full">
+        <div className="flex  gap-4  max-lg:flex-col  md:h-1/2  ">
           <DashboardCard type="company" />
           <DashboardCard type="member" />
         </div>
 
-        <div className=" h-1/3  space-y-2    ">
-          <div className="flex items-center justify-between">
-            <h2 className="font-semibold">Servicios</h2>
-            <AddButton type="services" />
+        <section className="flex max-md:flex-col gap-4 ,md:h-1/2 ">
+          <div className=" h-1/3  space-y-2 md:w-1/2   ">
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold">Servicios</h2>
+              <AddButton type="services" />
+            </div>
+            <hr />
+            <div className="max-md:max-h-full max-md:overflow-auto">
+              <ServicesList />
+            </div>
           </div>
-          <hr />
-
-          <ServicesList />
-        </div>
+          <div className=" h-full md:w-1/2 grid place-items-center">
+            <CustomerStats />
+          </div>
+        </section>
       </section>
     </div>
   );

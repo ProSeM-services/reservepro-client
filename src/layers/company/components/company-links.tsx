@@ -1,4 +1,5 @@
 "use client";
+import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
 import { useAppSelector } from "@/store/hooks";
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
@@ -7,23 +8,26 @@ import React from "react";
 
 export function CompanyLinks() {
   const pathname = usePathname();
-  const { companies } = useAppSelector((s) => s.company);
+  const { companies, loading } = useAppSelector((s) => s.company);
+
   return (
-    <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
-      {companies.map((company) => (
-        <Link
-          href={`/dashboard/company/${company.id}`}
-          key={company.id}
-          className={` ${
-            pathname === `/dashboard/company/${company.id}`
-              ? " text-primary  bg-sky-100 "
-              : " border-border  text-secondary-foreground "
-          }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}
-        >
-          <HomeIcon />
-          {company.name}
-        </Link>
-      ))}
-    </div>
+    <LoaderWrapper loading={loading} type="company">
+      <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
+        {companies.map((company) => (
+          <Link
+            href={`/dashboard/company/${company.id}`}
+            key={company.id}
+            className={` ${
+              pathname === `/dashboard/company/${company.id}`
+                ? " text-primary  bg-sky-100 "
+                : " border-border  text-secondary-foreground "
+            }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}
+          >
+            <HomeIcon />
+            {company.name}
+          </Link>
+        ))}
+      </div>
+    </LoaderWrapper>
   );
 }

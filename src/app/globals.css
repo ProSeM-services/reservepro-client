@@ -25,11 +25,19 @@
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 120 76% 46%;    /* Verde oscuro */
+    --chart-2: 134 58% 44%;    /* Verde bosque */
+    --chart-3: 144 42% 39%;    /* Verde oliva */
+    --chart-4: 151 55% 52%;    /* Verde jungla */
+    --chart-5: 163 66% 58%;    /* Verde césped */
+    --chart-6: 152 82% 36%;    /* Verde limón */
+    --chart-7: 158 72% 42%;    /* Verde manzana */
+    --chart-8: 166 72% 54%;    /* Verde medio */
+    --chart-9: 172 59% 60%;    /* Verde claro */
+    --chart-10: 176 50% 64%;   /* Verde pastel */
+    --chart-11: 185 47% 70%;   /* Verde menta */
+    --chart-12: 190 35% 75%;   /* Verde agua */
+    
   }
 
   .dark {
@@ -52,11 +60,18 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --chart-1: 120 76% 46%;    /* Verde oscuro */
+  --chart-2: 134 58% 44%;    /* Verde bosque */
+  --chart-3: 144 42% 39%;    /* Verde oliva */
+  --chart-4: 151 55% 52%;    /* Verde jungla */
+  --chart-5: 163 66% 58%;    /* Verde césped */
+  --chart-6: 152 82% 36%;    /* Verde limón */
+  --chart-7: 158 72% 42%;    /* Verde manzana */
+  --chart-8: 166 72% 54%;    /* Verde medio */
+  --chart-9: 172 59% 60%;    /* Verde claro */
+  --chart-10: 176 50% 64%;   /* Verde pastel */
+  --chart-11: 185 47% 70%;   /* Verde menta */
+  --chart-12: 190 35% 75%;   /* Verde agua */
   }
 }
 

@@ -34,6 +34,12 @@ export const companySlice = createSlice({
       state.companies.push(action.payload);
       state.inmutablesCompanies.push(action.payload);
     },
+    removeCompany: (state, action: PayloadAction<string>) => {
+      state.companies = state.companies.filter((c) => c.id !== action.payload);
+      state.inmutablesCompanies = state.inmutablesCompanies.filter(
+        (c) => c.id !== action.payload
+      );
+    },
     setSelectedCompany: (state, action: PayloadAction<ICompany>) => {
       state.selectedCompany = action.payload;
     },
@@ -46,6 +52,7 @@ export const {
   addCompany,
   toggleCompanyLoading,
   setSelectedCompany,
+  removeCompany,
 } = companySlice.actions;
 
 export default companySlice.reducer;

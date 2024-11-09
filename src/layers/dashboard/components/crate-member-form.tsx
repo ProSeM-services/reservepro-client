@@ -62,6 +62,12 @@ export function MemberForm() {
       });
       form.reset();
     } catch (error) {
+      toast({
+        title: "Error al crear un miembro!",
+        // @ts-ignore
+        description: error.response.data.message,
+        variant: "destructive",
+      });
       console.log("Error creating Member, ", error);
     } finally {
       setLoading(false);
@@ -117,7 +123,11 @@ export function MemberForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Nombre" {...field} />
+                  <Input
+                    type="email"
+                    placeholder="example@mail.com"
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
