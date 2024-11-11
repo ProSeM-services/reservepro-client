@@ -18,6 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { ModeToggle } from "@/app/components/theme-toggler";
+import { UserMenu } from "./user-menu";
 const links = [
   { name: "Home", href: "/dashboard", icon: HomeIcon },
   {
@@ -75,6 +76,7 @@ export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
         </div>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+        <UserMenu />
         <Tooltip>
           <TooltipTrigger asChild>
             <Link

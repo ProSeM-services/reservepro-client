@@ -28,6 +28,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { BarLoader } from "@/components/common/bar-loader";
 
 const chartConfig = {
   january: {
@@ -84,7 +85,6 @@ export function CustomerStats() {
   const session = useSession();
   const [customersStats, setCustomersStats] = useState<ICustomerStat[]>([]);
   const [activeMonth, setActiveMonth] = useState("");
-
   const [loading, setLoading] = useState(false);
   const id = "pie-interactive";
   useEffect(() => {
@@ -115,8 +115,8 @@ export function CustomerStats() {
   );
   if (loading || !customersStats.length || !months.length) {
     return (
-      <div>
-        <LoaderSpinner />
+      <div className="bg-white size-80 relative grid place-items-center">
+        <BarLoader />
         Loading ...
       </div>
     );
