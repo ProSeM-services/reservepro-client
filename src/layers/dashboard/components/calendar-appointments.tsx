@@ -41,7 +41,7 @@ export function CalnedarAppointments() {
   }, [session.data, date]);
 
   return (
-    <div className=" h-full flex flex-col items-center gap-2   bg-background px-8 py-4 rounded-md ">
+    <div className=" h-full w-1/3 flex flex-col items-center gap-2   bg-background px-8 py-4 rounded-md ">
       <Calendar
         mode="single"
         selected={date ? date : new Date()}

@@ -71,13 +71,16 @@ export function AppointmentStats() {
     fetch();
   }, [session.data, dateLimits]);
 
+  if (!session.data) {
+    return null; // Evitar renderizado hasta que la sesión esté disponible
+  }
   if (fetched && data.length === 0) {
     return <div>No data</div>;
   }
 
   const { end, start, year } = dateLimits;
   return (
-    <Card className="w-2/5 flex flex-col justify-between ">
+    <Card className="flex-grow max-w-1/3 flex flex-col justify-between ">
       <CardHeader>
         <CardTitle>Turnos Agendados</CardTitle>
         <CardDescription>
@@ -142,7 +145,7 @@ export function AppointmentStats() {
       </CardHeader>
       <CardContent>
         {loading ? (
-          <div className=" w-full h-60 bg-accent relative rounded-xl">
+          <div className=" w-full h-full bg-accent relative rounded-xl">
             <BarLoader />
           </div>
         ) : (
