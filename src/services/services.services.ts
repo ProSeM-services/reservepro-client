@@ -18,6 +18,11 @@ export class ServicesServices {
 
     return res.data;
   }
+  static async getByMemberId(id: string): Promise<IService[]> {
+    const res = await axiosInstance.get(`${BASE_URL}/services/by-user/${id}`);
+
+    return res.data;
+  }
   static async getMembers(id: string): Promise<IMember[]> {
     const res = await axiosInstance.get(`${BASE_URL}/services/members/${id}`);
 

@@ -70,17 +70,31 @@ const config = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
         loader: {
-          "0%": { width: "0%" },
-          "50%": { width: "50%" },
-          "100%": { width: "100%" },
+          "0%": {
+            width: "0%",
+          },
+          "50%": {
+            width: "50%",
+          },
+          "100%": {
+            width: "100%",
+          },
         },
       },
       animation: {

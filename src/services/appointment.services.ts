@@ -42,4 +42,10 @@ export class AppointmentServices {
     );
     return res.data;
   }
+  static async getByUser(id: string, date?: string): Promise<IAppointment[]> {
+    const res = await axiosInstance.get(
+      `${BASE_URL}/appointments/user/${id}?date=${date}`
+    );
+    return res.data;
+  }
 }
