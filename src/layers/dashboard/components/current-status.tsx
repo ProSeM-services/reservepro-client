@@ -31,11 +31,14 @@ export function CurrentStatus({ time }: { time: string }) {
   const todayNumber = today.getDay();
   const todaySegmnets = workhours.filter((wh) => wh.day === todayNumber)[0]
     ?.segments;
+  if (!todaySegmnets) return null;
   const lastSegment = todaySegmnets[todaySegmnets.length - 1];
+
+  if (!lastSegment) return null;
   return (
     <div
       className={` px-4  rounded-md text-white ${
-        lastSegment.endTime > time ? "bg-green-500" : "bg-slate-500"
+        lastSegment?.endTime > time ? "bg-green-500" : "bg-slate-500"
       }`}
     >
       {lastSegment.endTime > time ? "Active" : "Off"}
