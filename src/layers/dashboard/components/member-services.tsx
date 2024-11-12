@@ -3,7 +3,6 @@ import { setAuthInterceptor } from "@/config/axios.config";
 import { IService } from "@/interfaces";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-
 import { ServicesServices } from "@/services/services.services";
 export function MemberServices() {
   const session = useSession();
@@ -33,7 +32,7 @@ export function MemberServices() {
       {services.map((service) => (
         <div
           key={service.id}
-          className="px-4  rounded-lg bg-accent-foreground/85 text-sm text-white"
+          className="px-4  rounded-lg bg-primary text-sm text-white"
         >
           {service.title}
         </div>
