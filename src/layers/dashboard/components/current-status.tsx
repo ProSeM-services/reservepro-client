@@ -28,19 +28,9 @@ export function CurrentStatus({ time }: { time: string }) {
   }, [session.data]);
 
   const today = new Date();
-  const DAYS = [
-    { short: "dom", long: "domingo" },
-    { short: "lun", long: "lunes" },
-    { short: "mar", long: "martes" },
-    { short: "mie", long: "miércoles" },
-    { short: "jue", long: "jueves" },
-    { short: "vie", long: "viernes" },
-    { short: "sab", long: "sábado" },
-  ];
-
   const todayNumber = today.getDay();
   const todaySegmnets = workhours.filter((wh) => wh.day === todayNumber)[0]
-    .segments;
+    ?.segments;
   const lastSegment = todaySegmnets[todaySegmnets.length - 1];
   return (
     <div
