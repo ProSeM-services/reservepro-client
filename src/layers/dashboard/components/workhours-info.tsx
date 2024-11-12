@@ -2,15 +2,10 @@
 import { setAuthInterceptor } from "@/config/axios.config";
 import { IWorkhour } from "@/interfaces";
 import { MemberServices } from "@/services/member.services";
-import { ArrowRight, Clock1Icon, PenIcon } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 export default function WorkhourInfo() {
   const session = useSession();
   const [workhours, setWorkhours] = useState<IWorkhour[]>([]);
@@ -44,35 +39,39 @@ export default function WorkhourInfo() {
   ];
   return (
     <div
-      className={`w-1/4   bg-background p-4 rounded-lg    text-gray-700 flex flex-col gap-4`}
+      className={`h-full   bg-background p-4 rounded-lg    text-gray-700 flex flex-col items-center gap-4`}
     >
-      <h2 className="text-lg text-center">Horarios de trabajo</h2>
-      <Accordion type="single" collapsible className="">
-        {workhours.map(({ day, segments }, index) => (
-          <AccordionItem
-            value={`day-${day}`}
-            key={index}
-            className="flex flex-col  flex-grow  items-start    w-full      "
-          >
-            <AccordionTrigger>
-              <p>{DAYS[day].long}</p>
-            </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-2 justify-between flex-grow  w-full">
-              {segments.map((seg) => (
-                <div className="flex  gap-4  items-center " key={seg.duration}>
-                  <div className="   bg-soft-d p-2 px-4  rounded text-white">
-                    {seg.startime} hs
-                  </div>
-                  <ArrowRight />
-                  <div className="   bg-soft-g p-2  px-4 rounded text-white">
-                    {seg.endTime} hs
-                  </div>
+      <div className="flex items-center gap-1">
+        <h2 className="text-lg text-center font-bold">Mis Horarios</h2>
+        <Clock />
+      </div>
+
+      {workhours.map(({ day, segments }, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-1  flex-grow  items-start    w-full      "
+        >
+          <div className="border-b w-full">
+            <p>{DAYS[day].long}</p>
+          </div>
+          <div className="flex flex-col items-center gap-2 justify-between flex-grow  w-full">
+            {segments.map((seg) => (
+              <div
+                className="flex  gap-4  items-center text-xs "
+                key={seg.duration}
+              >
+                <div className="   bg-soft-d p-2 px-4  rounded text-white">
+                  {seg.startime} hs
                 </div>
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+                <ArrowRight />
+                <div className="   bg-soft-g p-2  px-4 rounded text-white">
+                  {seg.endTime} hs
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

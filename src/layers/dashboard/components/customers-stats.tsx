@@ -113,18 +113,13 @@ export function CustomerStats() {
     () => customersStats.findIndex((item) => item.month === activeMonth),
     [activeMonth]
   );
-  if (loading || !customersStats.length || !months.length) {
-    return (
-      <div className="bg-white size-80 relative grid place-items-center">
-        <BarLoader />
-        Loading ...
-      </div>
-    );
-  }
 
   return (
     <div>
-      <Card data-chart={id} className="flex flex-col border-0 h-full w-full">
+      <Card
+        data-chart={id}
+        className="flex flex-col border-0 h-full  flex-grow max-w-1/3"
+      >
         <ChartStyle id={id} config={chartConfig} />
         <CardHeader className="flex-row items-start space-y-0 pb-0">
           <div className="grid gap-1">
@@ -167,69 +162,78 @@ export function CustomerStats() {
           </Select>
         </CardHeader>
         <CardContent className="flex flex-1 justify-center pb-0">
-          <ChartContainer
-            id={id}
-            config={chartConfig}
-            className="mx-auto aspect-square w-full max-w-[300px]"
-          >
-            <PieChart>
-              <ChartTooltip
-                cursor={false}
-                content={<ChartTooltipContent hideLabel />}
-              />
-              <Pie
-                data={customersStats}
-                dataKey="count"
-                nameKey="month"
-                innerRadius={60}
-                strokeWidth={5}
-                activeIndex={activeIndex}
-                activeShape={({
-                  outerRadius = 0,
-                  ...props
-                }: PieSectorDataItem) => (
-                  <g className="bg-green-400">
-                    <Sector {...props} outerRadius={outerRadius + 10} />
-                    <Sector
-                      {...props}
-                      outerRadius={outerRadius + 25}
-                      innerRadius={outerRadius + 12}
-                    />
-                  </g>
-                )}
-              >
-                <Label
-                  content={({ viewBox }) => {
-                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                      return (
-                        <text
-                          x={viewBox.cx}
-                          y={viewBox.cy}
-                          textAnchor="middle"
-                          dominantBaseline="middle"
-                        >
-                          <tspan
+          {loading || !customersStats.length || !months.length ? (
+            <div className="bg-white h-full w-full relative grid place-items-center">
+              <BarLoader />
+              Loading ...
+            </div>
+          ) : (
+            <ChartContainer
+              id={id}
+              config={chartConfig}
+              className="mx-auto aspect-square w-full "
+            >
+              <PieChart>
+                <ChartTooltip
+                  cursor={false}
+                  content={<ChartTooltipContent hideLabel />}
+                />
+                <Pie
+                  data={customersStats}
+                  dataKey="count"
+                  nameKey="month"
+                  innerRadius={60}
+                  strokeWidth={5}
+                  activeIndex={activeIndex}
+                  activeShape={({
+                    outerRadius = 0,
+                    ...props
+                  }: PieSectorDataItem) => (
+                    <g className="bg-green-400">
+                      <Sector {...props} outerRadius={outerRadius + 10} />
+                      <Sector
+                        {...props}
+                        outerRadius={outerRadius + 25}
+                        innerRadius={outerRadius + 12}
+                      />
+                    </g>
+                  )}
+                >
+                  <Label
+                    content={({ viewBox }) => {
+                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                        return (
+                          <text
                             x={viewBox.cx}
                             y={viewBox.cy}
-                            className="fill-foreground text-3xl font-bold"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
                           >
-                            {customersStats[activeIndex].count.toLocaleString()}
-                          </tspan>
-                          <tspan
-                            x={viewBox.cx}
-                            y={(viewBox.cy || 0) + 24}
-                            className="fill-muted-foreground"
-                          >
-                            New Clients
-                          </tspan>
-                        </text>
-                      );
-                    }
-                  }}
-                />
-              </Pie>
-            </PieChart>
-          </ChartContainer>
+                            <tspan
+                              x={viewBox.cx}
+                              y={viewBox.cy}
+                              className="fill-foreground text-3xl font-bold"
+                            >
+                              {customersStats[
+                                activeIndex
+                              ].count.toLocaleString()}
+                            </tspan>
+                            <tspan
+                              x={viewBox.cx}
+                              y={(viewBox.cy || 0) + 24}
+                              className="fill-muted-foreground"
+                            >
+                              New Clients
+                            </tspan>
+                          </text>
+                        );
+                      }
+                    }}
+                  />
+                </Pie>
+              </PieChart>
+            </ChartContainer>
+          )}
         </CardContent>
       </Card>
     </div>
