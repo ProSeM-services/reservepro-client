@@ -1,25 +1,19 @@
+"use client";
 import React from "react";
 import { MemberCard } from "./card";
-import { getMembers } from "@/lib/actions";
-import { Users2Icon } from "lucide-react";
+import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { useAppSelector } from "@/store/hooks";
 
-export async function MemberList() {
-  const members = await getMembers();
+export function MemberList() {
+  const { members, loading } = useAppSelector((s) => s.member);
 
   return (
-    <div className=" max-h-full   overflow-y-auto ">
-      {members?.length === 0 ? (
-        <div className="bg-accent     p-4 py-8 w-full rounded-md flex flex-col items-center justify-center text-center text-sm  ">
-          <Users2Icon className="size-8" />
-          No tenes miembros cargados en tu equipo
-        </div>
-      ) : (
-        <div className="space-y-2">
-          {members?.map((member) => (
-            <MemberCard member={member} key={member.id} />
-          ))}
-        </div>
-      )}
-    </div>
+    <LoaderWrapper loading={loading} type="members">
+      <div className="space-y-2">
+        {members?.map((member) => (
+          <MemberCard member={member} key={member.id} />
+        ))}
+      </div>
+    </LoaderWrapper>
   );
 }

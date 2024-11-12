@@ -143,7 +143,7 @@ export function AppointmentStats() {
           </div>
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className=" w-5/6 mx-auto">
         {loading ? (
           <div className=" w-full h-full bg-accent relative rounded-xl">
             <BarLoader />
