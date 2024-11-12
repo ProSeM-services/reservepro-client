@@ -1,5 +1,11 @@
 import dynamic from "next/dynamic";
-import { CustomerStats, MemberList, List, DashboardHero } from "../components";
+import {
+  CustomerStats,
+  MemberList,
+  List,
+  DashboardHero,
+  AddButton,
+} from "../components";
 import { CalnedarAppointments } from "../components/calendar-appointments";
 import WorkhourInfo from "../components/workhours-info";
 import { BellDot, BellMinus, Building, Users } from "lucide-react";
@@ -45,7 +51,10 @@ export function DashboardPage() {
                 {" "}
                 <div className="flex items-center justify-between font-bold">
                   <h2>Miembros</h2>
-                  <Users />
+                  <div className="flex items-center gap-2">
+                    <Users />
+                    <AddButton type="member" />
+                  </div>
                 </div>
                 <div className=" h-[90%] max-h-[90%] overflow-y-auto">
                   <MemberList />
@@ -55,7 +64,10 @@ export function DashboardPage() {
                 {" "}
                 <div className="flex items-center justify-between font-bold">
                   <h2>Sucursales</h2>
-                  <Building />
+                  <div className="flex items-center gap-2">
+                    <Building />
+                    <AddButton type="member" />
+                  </div>
                 </div>
                 <div className=" h-[90%] max-h-[90%] overflow-y-auto">
                   <CompanyList />

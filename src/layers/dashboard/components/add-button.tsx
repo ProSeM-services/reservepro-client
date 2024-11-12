@@ -10,6 +10,7 @@ import { PlusIcon } from "lucide-react";
 import { CreateServicesForm } from "@/layers/services/components/create-services";
 import { MemberForm } from "./crate-member-form";
 import { CompanyForm } from "./create-company-form";
+import { Button } from "@/components/ui/button";
 
 export type ICreateType = "member" | "company" | "services";
 interface AddButtonProps {
@@ -40,10 +41,13 @@ export function AddButton({ type }: AddButtonProps) {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="bg-secondary text-primary hover:bg-sky-100 transition-all duration-150 p-1 px-4 rounded-md flex items-center text-xs font-semibold gap-2 ">
-          {btnText}
+        <Button
+          size={"icon"}
+          variant={"secondary"}
+          className=" rounded-full size-8 "
+        >
           <PlusIcon className="size-4 " />
-        </div>
+        </Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
