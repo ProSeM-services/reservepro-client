@@ -32,16 +32,24 @@ export function CurrentStatus({ time }: { time: string }) {
   const todaySegmnets = workhours.filter((wh) => wh.day === todayNumber)[0]
     ?.segments;
   if (!todaySegmnets) return null;
+  const firstSegment = todaySegmnets[0];
   const lastSegment = todaySegmnets[todaySegmnets.length - 1];
 
   if (!lastSegment) return null;
+  if (!firstSegment) return null;
+
+  const status =
+    lastSegment?.endTime < time &&
+    lastSegment?.startime > time &&
+    firstSegment?.endTime < time &&
+    firstSegment?.startime > time;
   return (
     <div
       className={` px-4  rounded-md text-white ${
-        lastSegment?.endTime > time ? "bg-green-500" : "bg-slate-500"
+        status ? "bg-green-500" : "bg-destructive"
       }`}
     >
-      {lastSegment.endTime > time ? "Active" : "Off"}
+      {status ? "Active" : "Off"}
     </div>
   );
 }

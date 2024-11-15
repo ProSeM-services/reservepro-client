@@ -26,17 +26,15 @@ export default async function RootLayout({
     <html lang="en">
       <body className={roboto.className}>
         <SessionProvider session={session}>
-          <ReactQueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="ligth"
-              enableSystem
-              disableTransitionOnChange
-            >
-              <main>{children}</main>
-              <Toaster />
-            </ThemeProvider>
-          </ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="ligth"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <main>{children}</main>
+            <Toaster />
+          </ThemeProvider>
         </SessionProvider>
       </body>
     </html>

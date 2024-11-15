@@ -10,7 +10,7 @@ export const DateTime: React.FC = () => {
       setCurrentDateTime(new Date());
     }, 1000);
 
-    return () => clearInterval(intervalId); // Limpia el intervalo al desmontar
+    return () => clearInterval(intervalId);
   }, []);
 
   const formatDate = (date: Date): string => {
@@ -23,15 +23,14 @@ export const DateTime: React.FC = () => {
   };
 
   const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString(); // Formato: HH:MM:SS
+    return date.toLocaleTimeString();
   };
 
   return (
     <div className="flex flex-col items-end">
-      <p className="font-bold text-xl text-soft-black">
+      <p className="font-medium text-xl text-foreground">
         {formatDate(currentDateTime)}
       </p>
-      <p className="text-gray-500">{formatTime(currentDateTime)}</p>
       <CurrentStatus time={formatTime(currentDateTime)} />
     </div>
   );

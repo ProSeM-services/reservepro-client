@@ -2,13 +2,8 @@
 import { ICustomer } from "@/interfaces/customer.interface";
 import { ColumnDef } from "@tanstack/react-table";
 import React from "react";
-
 import Link from "next/link";
 import { RootTable } from "@/components/common/table/root-table";
-import { getCustomers } from "@/lib/actions";
-import { useQuery } from "@tanstack/react-query";
-import { BarLoader } from "@/components/common/bar-loader";
-import { UserSearchIcon } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
 const customerColumns: ColumnDef<ICustomer>[] = [
