@@ -27,6 +27,7 @@ export const MemberZodSchema = ZodTenantSchema.omit({
 }).extend({
   phone: z.string().optional(),
   workhours: z.array(WorkhourZodSchema).optional(),
+  CompanyId: z.string().optional(),
 });
 export const CreateMemberZodSchema = ZodTenantSchema.omit({
   tenantName: true,

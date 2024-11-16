@@ -133,7 +133,7 @@ export async function SearchCompanyDetail({
             <p className="text-gray-600 ">{company.address.value}</p>
 
             <Link
-              href={`/search/${company.id}/booking`}
+              href={`/search/${company.id}/booking?company=${company.id}`}
               className="bg-primary text-white text-center p-2 rounded-md font-semibold"
             >
               Reservar ahora

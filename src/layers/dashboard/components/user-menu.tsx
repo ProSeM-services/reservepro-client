@@ -10,12 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut, useSession } from "next-auth/react";
 import { LogOut, Settings, User } from "lucide-react";
-import { QueryClient } from "@tanstack/react-query";
 export function UserMenu() {
   const session = useSession();
-  const queryClient = new QueryClient();
   const handleLogOut = () => {
-    queryClient.clear();
     signOut({ callbackUrl: "http://localhost:3000/login", redirect: true });
   };
 
@@ -29,7 +26,7 @@ export function UserMenu() {
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="bg-primary text-white size-10 flex justify-center items-center rounded-full cursor-pointer">
+          <div className="bg-accent text-accent-foreground size-10 flex justify-center items-center rounded-full cursor-pointer">
             <span>
               {session?.data?.user.name ? session?.data?.user.name[0] : null}
             </span>
