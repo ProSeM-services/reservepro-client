@@ -80,7 +80,7 @@ export function AppointmentStats() {
 
   const { end, start, year } = dateLimits;
   return (
-    <Card className="flex-grow max-w-1/3 flex flex-col justify-between ">
+    <Card className="flex-grow max-w-1/3 flex flex-col justify-between border-none ">
       <CardHeader>
         <CardTitle>Turnos Agendados</CardTitle>
         <CardDescription>

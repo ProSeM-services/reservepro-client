@@ -35,7 +35,7 @@ export function DashboardPage() {
             </div>
           </section>
           <section className=" rounded-lg w-full flex gap-4 flex-grow ">
-            <div className="border rounded h-full w-1/4 bg-background p-4 flex flex-col ">
+            <div className="bg-card rounded h-full w-1/4  p-4 flex flex-col ">
               <div className="flex items-center justify-between font-bold">
                 <h2>Notificaciones</h2>
                 <BellDot />
@@ -46,7 +46,7 @@ export function DashboardPage() {
                 <p className="">No hay notifiaciones por leer</p>
               </div>
             </div>
-            <div className="w-3/4 max-w-3/4 bg-background rounded flex p-2 gap-4">
+            <div className="w-3/4 max-w-3/4 bg-card rounded flex p-2 gap-4">
               <div className=" w-1/2 rounded-md p-2  space-y-2">
                 {" "}
                 <div className="flex items-center justify-between font-bold">
@@ -66,7 +66,7 @@ export function DashboardPage() {
                   <h2>Sucursales</h2>
                   <div className="flex items-center gap-2">
                     <Building />
-                    <AddButton type="member" />
+                    <AddButton type="company" />
                   </div>
                 </div>
                 <div className=" h-[90%] max-h-[90%] overflow-y-auto">

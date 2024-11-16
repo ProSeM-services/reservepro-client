@@ -9,9 +9,8 @@ import {
   SelectLabel,
 } from "@/components/ui/select";
 import { TableColumnFilterType, TableType } from "@/interfaces";
-import { getCustomers, getMembers } from "@/lib/actions";
-import { useQuery } from "@tanstack/react-query";
 import { LoaderSpinner } from "../../loader-spinner";
+import { useAppSelector } from "@/store/hooks";
 interface ISelectFilter {
   tableType?: TableType;
   onValueChange: (value: string) => void;
@@ -19,12 +18,9 @@ interface ISelectFilter {
   filterType?: TableColumnFilterType;
 }
 const SelctMembers = ({ filterType, onValueChange }: ISelectFilter) => {
-  const { data, isLoading } = useQuery({
-    queryKey: [filterType],
-    queryFn: getMembers,
-  });
+  const { members: data, loading } = useAppSelector((s) => s.member);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div>
         <LoaderSpinner />
@@ -57,12 +53,9 @@ const SelctMembers = ({ filterType, onValueChange }: ISelectFilter) => {
 };
 
 const SelectCustomer = ({ filterType, onValueChange }: ISelectFilter) => {
-  const { data, isLoading } = useQuery({
-    queryKey: [filterType],
-    queryFn: getCustomers,
-  });
+  const { customers: data, loading } = useAppSelector((s) => s.customers);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div>
         <LoaderSpinner />

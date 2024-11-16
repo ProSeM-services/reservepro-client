@@ -8,11 +8,12 @@ import { useSession } from "next-auth/react";
 export function DashboardHero() {
   const { data: session } = useSession();
 
+  if (!session?.user) return null;
   return (
     <header className="flex justify-between ">
       <div className="space-y-2 py-2">
-        <h2 className="font-bold text-3xl text-soft-black">
-          Hello, {session?.user?.name || "Guest"}!
+        <h2 className="font-bold text-3xl text-foreground">
+          Hello, {session?.user?.name}!
         </h2>
         <MemberServices />
       </div>
