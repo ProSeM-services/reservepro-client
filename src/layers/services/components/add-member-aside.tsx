@@ -11,8 +11,10 @@ import { useAppSelector } from "@/store/hooks";
 
 export default function AddMembertoServiceAside({
   service,
+  fetchServiceData,
 }: {
   service: IService;
+  fetchServiceData?: () => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
@@ -49,6 +51,9 @@ export default function AddMembertoServiceAside({
         title: "Miembros cargados!",
         description: `Los miembros fueron agregados exitosamente a ${service.title}!`,
       });
+      if (fetchServiceData) {
+        fetchServiceData();
+      }
     } catch (error) {
       console.log(error);
       toast({

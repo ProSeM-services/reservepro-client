@@ -13,14 +13,14 @@ export function ProfesionalPage() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const serviceId = searchParams.get("service");
-
+  const companyId = searchParams.get("company");
   useEffect(() => {
     const fetchMembers = async () => {
       if (serviceId) {
         try {
           setIsLoading(true);
           const members = await getServicesMembers(serviceId);
-          setUsers(members);
+          setUsers(members.filter((m) => m.CompanyId === companyId));
         } catch (error) {
           console.error("Error fetching service members:", error);
         } finally {

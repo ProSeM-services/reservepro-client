@@ -61,6 +61,11 @@ export function CalendarSelect() {
         selected={date ? date : new Date()}
         onSelect={(value) => value && handleDate(value)}
         className="rounded-md  "
+        disabled={(date) => {
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+          return date < today;
+        }}
       />
 
       {loading ? (

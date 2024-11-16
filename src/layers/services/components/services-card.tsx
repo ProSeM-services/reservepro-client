@@ -106,8 +106,8 @@ export default function ServiceCard({
       </Sheet>
       {selectedCompany && (
         <Button
-          className="absolute right-1 bottom-1 size-8"
-          variant="destructive"
+          className="absolute right-2 bottom-2 size-8"
+          variant="secondary"
           isLoading={deleting}
           size={"icon"}
           onClick={handleDeleteService}
