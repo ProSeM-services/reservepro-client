@@ -37,7 +37,7 @@ export function UserMenu() {
             </span>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
+        <DropdownMenuContent align="end" className="border-none">
           <DropdownMenuLabel>
             {name}, {lastName}
           </DropdownMenuLabel>

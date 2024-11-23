@@ -8,6 +8,14 @@ import { useRouter } from "next/navigation";
 interface CompanyCardProps {
   company: ICompany;
 }
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { MemberAsideDetails } from "./member-aside-details";
 export function CompanyCard({ company }: CompanyCardProps) {
   const router = useRouter();
   return (
@@ -57,13 +65,16 @@ export function MemberCard({ member }: MemberCardProps) {
         </p>
       </div>
       <div>
-        <Button
-          variant={"ghost"}
-          onClick={() => router.push(`/dashboard/company/${member.id}`)}
-          disabled
-        >
-          <Edit className="size-4" />
-        </Button>
+        <Sheet>
+          <SheetTrigger>
+            <Button variant={"ghost"}>
+              <Edit className="size-4" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent className="overflow-auto">
+            <MemberAsideDetails member={member} />
+          </SheetContent>
+        </Sheet>
       </div>
     </div>
   );
