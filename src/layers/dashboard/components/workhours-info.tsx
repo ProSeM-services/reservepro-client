@@ -39,7 +39,7 @@ export default function WorkhourInfo() {
   ];
   return (
     <div
-      className={`h-full   bg-background p-4 rounded-lg    text-gray-700 flex flex-col items-center gap-4`}
+      className={`h-full   bg-card p-4 rounded-lg    text-card-foreground flex flex-col items-center gap-4`}
     >
       <div className="flex items-center gap-1">
         <h2 className="text-lg text-center font-bold">Mis Horarios</h2>

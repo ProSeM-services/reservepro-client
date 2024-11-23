@@ -163,7 +163,7 @@ export function CustomerStats() {
         </CardHeader>
         <CardContent className="flex flex-1 justify-center pb-0">
           {loading || !customersStats.length || !months.length ? (
-            <div className="bg-white h-full w-full relative grid place-items-center">
+            <div className=" h-full w-full relative grid place-items-center">
               <BarLoader />
               Loading ...
             </div>

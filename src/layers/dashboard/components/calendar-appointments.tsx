@@ -78,9 +78,6 @@ export function CalnedarAppointments() {
             onSelect={(value) => value && setDate(new Date(value))}
             className="rounded-md mx-auto "
             initialFocus
-            disabled={(date) =>
-              date > new Date() || date < new Date("1900-01-01")
-            }
           />
         </PopoverContent>
       </Popover>
@@ -96,14 +93,14 @@ export function CalnedarAppointments() {
             </span>
           </div>
         ) : (
-          <div className="flex flex-col gap-4 p-2 w-5/6">
-            <p className="font-medium text-gray-800">
+          <div className="flex flex-col gap-4 p-2 w-full">
+            <p className="font-medium text-card-foreground">
               {date.toLocaleDateString()}
             </p>
             {appointments.map((appointment) => (
               <div
                 key={appointment.id}
-                className="px-2 border-l-2 border-purple-500  text-gray-700"
+                className="p-2 border-l-4 border-primary  bg-accent rounded-md text-card-foreground"
               >
                 <p className="font-medium ">
                   {appointment.name}, {appointment.lastName}

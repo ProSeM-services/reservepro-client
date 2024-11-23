@@ -45,4 +45,9 @@ export class MemberServices {
 
     return res.data;
   }
+  static async update(id: string, data: Partial<IMember>) {
+    const res = await axiosInstance.patch(`${BASE_URL}/user/${id}`, data);
+
+    return res.data;
+  }
 }
