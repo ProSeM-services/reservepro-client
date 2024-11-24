@@ -13,7 +13,7 @@ export function DashboardHero() {
     <header className="flex justify-between ">
       <div className="space-y-2 py-2">
         <h2 className="font-bold text-3xl text-foreground">
-          Hello, {session?.user?.name}!
+          Hola, {session?.user?.name}!
         </h2>
         <MemberServices />
       </div>

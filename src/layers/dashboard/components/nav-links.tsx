@@ -8,6 +8,7 @@ import {
   HotelIcon,
   PackageCheck,
   Contact,
+  UserSquare2Icon,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,15 +23,43 @@ import { UserMenu } from "./user-menu";
 const links = [
   { name: "Home", href: "/dashboard", icon: HomeIcon },
   {
-    name: "Activity",
+    name: "Actividad",
     href: "/dashboard/activity",
+    ref: "activity",
     icon: DockIcon,
   },
-  { name: "Customers", href: "/dashboard/customers", icon: Contact },
-  { name: "Appointmnets", href: "/dashboard/appointment", icon: CalendarCheck },
+  {
+    name: "Clientes",
+    href: "/dashboard/customers",
+    ref: "customers",
+    icon: Contact,
+  },
+  {
+    name: "Turnos",
+    href: "/dashboard/appointment",
+    ref: "appointment",
+    icon: CalendarCheck,
+  },
 
-  { name: "Company", href: "/dashboard/company", icon: HotelIcon },
-  { name: "Services", href: "/dashboard/services", icon: PackageCheck },
+  {
+    name: "Sucursales",
+    href: "/dashboard/company",
+    ref: "company",
+    icon: HotelIcon,
+  },
+  {
+    name: "Miembros",
+    href: "/dashboard/members",
+    ref: "members",
+    icon: UserSquare2Icon,
+  },
+
+  {
+    name: "Servicios",
+    href: "/dashboard/services",
+    ref: "services",
+    icon: PackageCheck,
+  },
 ];
 
 export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
@@ -40,7 +69,10 @@ export function NavLinks({ size = "sm" }: { size?: "sm" | "bg" }) {
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         {links.map((link) => {
           const LinkIcon = link.icon;
-          const selected = pathname === link.href;
+
+          const selected = link.ref
+            ? pathname.split("/").includes(link.ref)
+            : pathname === link.href;
           return size === "sm" ? (
             <Tooltip key={link.name}>
               <TooltipTrigger asChild>
