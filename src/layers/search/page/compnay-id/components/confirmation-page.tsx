@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, HomeIcon } from "lucide-react";
 import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -42,10 +42,10 @@ export default function ConfirmationPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-1 font-light text-sm"
+          className="mt-4 font-light text-sm underline   "
           onClick={() => push("/")}
         >
-          volver
+          <span>volver</span>
         </motion.button>
       </motion.div>
     </div>
