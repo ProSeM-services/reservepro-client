@@ -1,28 +1,20 @@
-"use client";
-import { IWorkhour, Segment } from "@/interfaces";
-import { IMember } from "@/interfaces/member.iterface";
-import React, { useState } from "react";
-import { WorkhourList } from "./workhours/workhour-list";
-import Link from "next/link";
-import { PenIcon } from "lucide-react";
+import { WorkhoursEditor } from "@/layers/dashboard/components/workhours/wh-editor";
+import { getMemberById } from "@/lib/actions";
 
-interface MemberAsideDetailsProps {
-  member: IMember;
-}
-
-export function MemberAsideDetails({ member }: MemberAsideDetailsProps) {
+export async function MemberDetailsPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const member = await getMemberById(params.id);
+  if (!member) return null;
   return (
     <div className="p-4 overflow-auto ">
-      <header className="mb-6 flex justify-between">
-        <div>
-          <h2 className="text-xl font-medium">
-            {member.name} {member.lastName}
-          </h2>
-          <p className="text-gray-600">{member.email}</p>
-        </div>
-        <Link href={`/dashboard/members/${member.id}`}>
-          <PenIcon className="size-4" />
-        </Link>
+      <header className="mb-6">
+        <h2 className="text-xl font-medium">
+          {member.name} {member.lastName}
+        </h2>
+        <p className="text-gray-600">{member.email}</p>
       </header>
 
       <div className="flex-grow space-y-4">
@@ -57,12 +49,7 @@ export function MemberAsideDetails({ member }: MemberAsideDetailsProps) {
             />
           </div>
         )}
-        {member.workhours && (
-          <div>
-            <h3 className="font-medium mb-2">Horarios de trabajo</h3>
-            <WorkhourList workhours={member.workhours} />
-          </div>
-        )}
+        <WorkhoursEditor member={member} />
       </div>
     </div>
   );

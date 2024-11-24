@@ -7,14 +7,8 @@ interface SegmentDayProps {
   segment: Segment;
   day: number;
   position: number;
-  handleUpdate: (day: number, position: number, value: any) => void;
 }
-export function SegmentDay({
-  segment,
-  day,
-  handleUpdate,
-  position,
-}: SegmentDayProps) {
+export function SegmentDay({ segment, day, position }: SegmentDayProps) {
   const [values, setValues] = useState<Segment>(segment);
   const handleEditWorkhours = (
     day: number,
@@ -22,19 +16,12 @@ export function SegmentDay({
     value: string
   ) => {
     setValues((prev) => ({ ...prev, [key]: value }));
-    handleUpdate(day, position, { [key]: value });
   };
 
   return (
     <div className="flex  flex-col items-center" key={segment.duration}>
-      <Input
-        value={values.startime}
-        onChange={(e) => handleEditWorkhours(day, "startime", e.target.value)}
-      />
-      <Input
-        value={values.endTime}
-        onChange={(e) => handleEditWorkhours(day, "endTime", e.target.value)}
-      />
+      <p>{values.startime}</p>
+      <p>{values.endTime}</p>
     </div>
   );
 }

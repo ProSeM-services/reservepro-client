@@ -25,16 +25,16 @@ export function DashboardPage() {
     <div className="h-full  flex flex-col gap-4">
       <DashboardHero />
 
-      <div className=" h-full flex justify-between  gap-4   ">
-        <div className="h-full flex flex-col gap-4 flex-grow">
-          <section className=" w-full h-[60%]   gap-4 ">
+      <div className=" h-[88%] flex justify-between  gap-4    ">
+        <div className="h-full flex flex-col gap-4 flex-grow ">
+          <section className=" w-full h-[60%]  max-h-[60%]   ">
             <div className="w-full h-full flex   gap-4 ">
               <CalnedarAppointments />
               <AppointmentStats />
               <CustomerStats />
             </div>
           </section>
-          <section className=" rounded-lg w-full flex gap-4 flex-grow ">
+          <section className=" rounded-lg w-full flex gap-4 h-[37%] max-h-[37%]  ">
             <div className="bg-card rounded h-full w-1/4  p-4 flex flex-col ">
               <div className="flex items-center justify-between font-bold">
                 <h2>Notificaciones</h2>
@@ -56,7 +56,7 @@ export function DashboardPage() {
                     <AddButton type="member" />
                   </div>
                 </div>
-                <div className=" h-[90%] max-h-[90%] overflow-y-auto">
+                <div className=" h-[90%] max-h-[90%] overflow-y-auto ">
                   <MemberList />
                 </div>
               </div>

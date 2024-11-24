@@ -12,20 +12,21 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useState } from "react";
 import {
-  AppointmentZodSchema,
   ClientDataSchema,
-  IAppointment,
   IClientData,
   ICreateAppointment,
 } from "@/interfaces/appointments.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { BookIcon } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AppointmentServices } from "@/services/appointment.services";
 
-export function ConfirmAppointmentPage() {
+export function ClientFormAppointmentPage() {
   const params = useSearchParams();
+  const pathname = usePathname();
+  const { push } = useRouter();
+
   const [appointmentData, setAppointmentData] = useState({
     date: params.get("date"),
     ServiceId: params.get("service"),
@@ -59,7 +60,6 @@ export function ConfirmAppointmentPage() {
     });
   }, [params]);
   const onSubmit = async (clientData: IClientData) => {
-    console.log("--------- 1", { appointmentData });
     if (
       !appointmentData.date ||
       !appointmentData.ServiceId ||
@@ -67,8 +67,6 @@ export function ConfirmAppointmentPage() {
       !appointmentData.time
     )
       return;
-
-    console.log("--------- 2");
 
     const data: ICreateAppointment = {
       name: clientData.name,
@@ -80,12 +78,12 @@ export function ConfirmAppointmentPage() {
       UserId: appointmentData.UserId,
       time: appointmentData.time,
     };
+
     try {
       setLoading(true);
       const res = await AppointmentServices.createAppointment(data);
       if (res.data.status === 401) throw new Error(res.data.message);
-      console.log("Appointment created!", res);
-      alert("Appointment created!");
+      push(`${pathname}/confirmation?${params.toString()}`);
     } catch (error) {
       console.error("Error creating appointment: ", error);
     } finally {

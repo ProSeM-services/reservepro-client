@@ -12,13 +12,10 @@ export default function LandingPage() {
         <p className="text-xl md:text-xl  mb-8 max-w-2xl text-left">
           Encuentra servicios cerca de ti
         </p>
-        <div className="flex gap-4 w-1/2">
-          <div className="flex-grow">
-            <LocationFilter />
-          </div>
+        <div className="flex gap-4 ">
           <Link
             href="/search"
-            className="bg-primary text-white font-semibold flex items-center px-4 rounded-sm"
+            className="bg-primary text-white font-semibold flex items-center px-4 p-2 rounded-sm"
           >
             Buscar
           </Link>
