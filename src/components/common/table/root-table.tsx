@@ -31,6 +31,7 @@ declare module "@tanstack/react-table" {
   }
 }
 import "./table.css";
+import { inter } from "@/lib/fonts";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -74,7 +75,9 @@ export function RootTable<TData, TValue>({
   });
 
   return (
-    <div className="h-full flex-grow  flex flex-col  gap-1 relative bg-background  ">
+    <div
+      className={` ${inter.className}  h-full flex-grow  flex flex-col  gap-1 relative bg-card  text-card-foreground `}
+    >
       <div
         className={`rounded-md  border border-border    w-full  max-h-[85%] mx-auto   overflow-y-auto scrollbar-custom `}
       >
@@ -89,7 +92,7 @@ export function RootTable<TData, TValue>({
                   <TableHead
                     key={header.id}
                     style={{ width: `${header.getSize()}px` }}
-                    className={` py-3 px-4  border-l  border-border text-center   font-semibold   `}
+                    className={` py-3 px-4  border-l  border-border text-center text-card-foreground    font-semibold   `}
                   >
                     <div
                       className={`flex w-full  ${

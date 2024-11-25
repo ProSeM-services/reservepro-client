@@ -31,10 +31,10 @@ const SelctMembers = ({ filterType, onValueChange }: ISelectFilter) => {
   if (data) {
     return (
       <Select onValueChange={(value) => onValueChange(value)}>
-        <SelectTrigger className=" bg-white  text-xs ">
+        <SelectTrigger className=" bg-card text-card-foreground   text-xs ">
           <SelectValue placeholder="Filter by Profesional" />
         </SelectTrigger>
-        <SelectContent className="bg-white text-xs">
+        <SelectContent className="bg-card text-card-foreground  border-none text-xs">
           <SelectGroup>
             <SelectLabel className="px-2 py-1 font-semibold">
               Profesionales
@@ -66,10 +66,10 @@ const SelectCustomer = ({ filterType, onValueChange }: ISelectFilter) => {
   if (data) {
     return (
       <Select onValueChange={(value) => onValueChange(value)}>
-        <SelectTrigger className=" bg-white  text-xs ">
+        <SelectTrigger className=" bg-card text-card-foreground  text-xs ">
           <SelectValue placeholder="Filtrar por email" />
         </SelectTrigger>
-        <SelectContent className="bg-white text-xs">
+        <SelectContent className="bg-card text-card-foreground border-none text-xs">
           <SelectGroup>
             <SelectLabel className="px-2 py-1 font-semibold">
               Clientes

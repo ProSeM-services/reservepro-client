@@ -12,7 +12,7 @@ export default function Page({ children }: PropsWithChildren) {
         </div>
         <CompanyLinks />
       </div>
-      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full lg:max-w-[75%]  bg-background rounded-md p-6 border border-border">
+      <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full lg:max-w-[75%]  bg-card text-card-foreground rounded-md p-6 ">
         {children}
       </div>
     </section>
