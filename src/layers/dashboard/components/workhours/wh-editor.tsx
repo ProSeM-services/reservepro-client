@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { PlusIcon, TrashIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { updateMember } from "@/lib/user.actions";
+import { useToast } from "@/components/ui/use-toast";
 
 const DAYS = [
   { short: "dom", long: "domingo" },
@@ -20,7 +21,8 @@ const DAYS = [
 ];
 
 export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
-  // Estado local para los `workhours`
+  const { toast } = useToast();
+
   const [workhours, setWorkhours] = useState<IWorkhour[]>(
     member.workhours || []
   );
@@ -37,7 +39,6 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
 
   const [updating, setUpdating] = useState(false);
 
-  // Función para manejar cambios en un segmento específico
   const handleSegmentChange = (
     day: number,
     segmentIndex: number,
@@ -62,7 +63,6 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
     );
   };
 
-  // Función para agregar un nuevo segmento
   const handleAddSegment = (day: number) => {
     setWeek((prev) =>
       prev.map((entry) =>
@@ -82,7 +82,6 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
     );
   };
 
-  // Función para eliminar un segmento
   const handleRemoveSegment = (day: number, segmentIndex: number) => {
     setWeek((prev) =>
       prev.map((entry) =>
@@ -101,14 +100,15 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
     );
   };
 
-  // Función para guardar los cambios
   const handleSave = async () => {
     try {
       setUpdating(true);
       const updatedWorkhours = week.map((entry) => entry.workhour);
       await updateMember(member.id, { workhours: updatedWorkhours });
-      console.log("Workhours actualizados correctamente");
-      alert("Workhours actualizados correctamente");
+      toast({
+        title: "Horarios actualizados",
+        variant: "success",
+      });
     } catch (error) {
       console.error("Error actualizando workhours:", error);
       alert("Hubo un error al actualizar los workhours.");
@@ -123,7 +123,7 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
         {week.map((entry) => (
           <Card
             key={entry.short}
-            className="flex flex-col items-start gap-2 rounded-none w-full   p-2"
+            className="flex flex-col border-none items-start gap-2 rounded-none w-full   p-2"
           >
             <p className="font-bold uppercase">{entry.long}</p>
             <div className="flex flex-col items-start gap-4 w-full">
