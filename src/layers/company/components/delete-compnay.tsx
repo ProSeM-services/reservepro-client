@@ -43,9 +43,11 @@ export function DeleteCompany({ company }: { company: ICompany }) {
   };
   return (
     <Dialog>
-      <DialogTrigger className="text-white bg-red-500  p-1 px-2 text-sm rounded-md flex items-center gap-2 font-light">
-        Eliminar
-        <TrashIcon className="size-4" />
+      <DialogTrigger>
+        <Button variant={"destructive"} className="flex items-center gap-2">
+          <span>Eliminar</span>
+          <TrashIcon className="size-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

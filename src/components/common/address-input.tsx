@@ -19,16 +19,18 @@ interface AddressInputProps {
   handleSelect: (address: string) => void;
   onlyInput?: boolean;
   placeholder?: string;
+  value?: string;
 }
 export function AddressInput({
   handleSelect,
   onlyInput = false,
   placeholder = "Ingresa la dirección",
+  value = "",
 }: AddressInputProps) {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   const [query, setQuery] = useState(params.get("city") || "");
-  const [mapValue, setMapValue] = useState("");
+  const [mapValue, setMapValue] = useState(value || "");
   const [predictions, setPredictions] = useState<Prediction[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const autocompleteService =
@@ -47,6 +49,10 @@ export function AddressInput({
           new google.maps.places.AutocompleteService();
       };
     };
+
+    if (value) {
+      setQuery(value);
+    }
 
     loadScript();
   }, []);
@@ -125,6 +131,10 @@ export function AddressInput({
   }, []);
 
   useEffect(() => {
+    if (value) {
+      setQuery(value);
+      return;
+    }
     setQuery(params.get("city") || "");
   }, [params.get("city")]);
 

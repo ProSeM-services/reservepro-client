@@ -33,6 +33,14 @@ export class ServicesServices {
 
     return res.data;
   }
+  static async updateService(
+    id: string,
+    data: Partial<IService>
+  ): Promise<IService> {
+    const res = await axiosInstance.patch(`${BASE_URL}/services`, data);
+
+    return res.data;
+  }
   static async addToCompany(data: IAddService): Promise<IService> {
     const res = await axiosInstance.post(
       `${BASE_URL}/services/add-to-company`,

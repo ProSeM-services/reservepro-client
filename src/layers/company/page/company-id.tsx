@@ -11,6 +11,8 @@ import {
 import { CategoryCard } from "@/layers/dashboard/components";
 import { MapComponent } from "@/components/common/map";
 import WorkhourList from "@/components/common/work-hour-list";
+import { EditCompany } from "../components/edit-company";
+import { NeedReladcompanyPage } from "../components/need-reload-company";
 
 export async function CompanyDetailPage({
   params,
@@ -27,9 +29,13 @@ export async function CompanyDetailPage({
         <div className="flex items-center gap-2">
           <HomeIcon className="size-5" />
           <p className="text-lg font-semibold ">{company?.name}</p>
+          <NeedReladcompanyPage />
         </div>
 
-        <DeleteCompany company={company} />
+        <div className="flex items-center gap-2">
+          <EditCompany company={company} />
+          <DeleteCompany company={company} />
+        </div>
       </div>
       <hr />
 
