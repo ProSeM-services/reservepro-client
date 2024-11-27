@@ -37,6 +37,14 @@ export class CompanyServices {
 
     return res.data;
   }
+  static async updateCompany(
+    id: string,
+    data: Partial<ICompany>
+  ): Promise<ICompany> {
+    const res = await axiosInstance.patch(`${BASE_URL}/company/${id}`, data);
+
+    return res.data;
+  }
   static async addMember(data: IAddMember): Promise<ICompany | undefined> {
     const res = await axiosInstance.post(
       `${BASE_URL}/company/add-member`,

@@ -7,7 +7,7 @@ export interface CompanyState extends IStoreState {
   value: number;
   companies: ICompany[];
   selectedCompany?: ICompany;
-
+  companyUpdated?: boolean;
   inmutablesCompanies: ICompany[];
 }
 
@@ -17,6 +17,7 @@ const initialState: CompanyState = {
   inmutablesCompanies: [],
   selectedCompany: undefined,
   loading: true,
+  companyUpdated: false,
 };
 
 export const companySlice = createSlice({
@@ -43,6 +44,9 @@ export const companySlice = createSlice({
     setSelectedCompany: (state, action: PayloadAction<ICompany>) => {
       state.selectedCompany = action.payload;
     },
+    setCompanyIsUpdated: (state, action: PayloadAction<boolean>) => {
+      state.companyUpdated = action.payload;
+    },
   },
 });
 
@@ -53,6 +57,7 @@ export const {
   toggleCompanyLoading,
   setSelectedCompany,
   removeCompany,
+  setCompanyIsUpdated,
 } = companySlice.actions;
 
 export default companySlice.reducer;
