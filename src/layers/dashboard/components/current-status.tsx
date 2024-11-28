@@ -1,33 +1,20 @@
 "use client";
-import { setAuthInterceptor } from "@/config/axios.config";
 import { IWorkhour } from "@/interfaces";
-import { MemberServices } from "@/services/member.services";
-import { ArrowRight, Clock } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { useAppSelector } from "@/store/hooks";
+import { Clock } from "lucide-react";
 import React, { useEffect, useState } from "react";
-export function CurrentStatus({ time }: { time: string }) {
-  const session = useSession();
+export function CurrentStatus() {
   const [workhours, setWorkhours] = useState<IWorkhour[]>([]);
-  const [loading, setLoading] = useState(false);
+  const { memberLogged, loading } = useAppSelector((s) => s.member);
   useEffect(() => {
-    if (!session.data || !session.data?.backendTokens?.accessToken) return;
-    const fetch = async () => {
-      try {
-        setLoading(true);
-        await setAuthInterceptor(session.data?.backendTokens.accessToken);
-        const res = await MemberServices.getById(session.data.user.id);
-        setWorkhours(res.workhours || []);
-      } catch (error) {
-        console.log("Error fetching today appointments : ", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetch();
-  }, [session.data]);
+    if (loading) return;
+    if (memberLogged) {
+      setWorkhours(memberLogged.workhours || []);
+    }
+  }, [memberLogged]);
 
   const today = new Date();
+  const time = today.toLocaleTimeString();
   const todayNumber = today.getDay();
   const todaySegmnets = workhours.filter((wh) => wh.day === todayNumber)[0]
     ?.segments;
@@ -38,18 +25,19 @@ export function CurrentStatus({ time }: { time: string }) {
   if (!lastSegment) return null;
   if (!firstSegment) return null;
 
-  const status =
-    lastSegment?.endTime < time &&
-    lastSegment?.startime > time &&
-    firstSegment?.endTime < time &&
-    firstSegment?.startime > time;
+  const arrayOfBooleans = todaySegmnets.map((segment) => {
+    return segment.endTime > time && time > segment.startime;
+  });
+
+  const status = arrayOfBooleans.filter((e) => e).length > 0;
   return (
     <div
-      className={` px-4  rounded-md text-white ${
-        status ? "bg-green-500" : "bg-destructive"
+      className={` py-1 px-4 rounded-full flex items-center gap-2 font-medium text-white ${
+        status ? "bg-green-500" : "bg-gray-500"
       }`}
     >
-      {status ? "Active" : "Off"}
+      <Clock />
+      {today.toLocaleTimeString()}
     </div>
   );
 }

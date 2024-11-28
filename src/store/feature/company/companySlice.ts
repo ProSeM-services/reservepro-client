@@ -17,6 +17,7 @@ const initialState: CompanyState = {
   inmutablesCompanies: [],
   selectedCompany: undefined,
   loading: true,
+  fetched: false,
   companyUpdated: false,
 };
 
@@ -28,6 +29,7 @@ export const companySlice = createSlice({
       state.loading = action.payload;
     },
     setCompanies: (state, action: PayloadAction<ICompany[]>) => {
+      state.fetched = true;
       state.companies = action.payload;
       state.inmutablesCompanies = action.payload;
     },

@@ -4,7 +4,6 @@ import { StatsServices } from "@/services/stats.services";
 import { useSession } from "next-auth/react";
 import React, { useEffect, useMemo, useState } from "react";
 import { ICustomerStat } from "../models/customer-stats.interface";
-import { LoaderSpinner } from "@/components/common/loader-spinner";
 import { Label, Pie, PieChart, Sector } from "recharts";
 import { PieSectorDataItem } from "recharts/types/polar/Pie";
 import {
@@ -29,6 +28,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { BarLoader } from "@/components/common/bar-loader";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setCustomerStats } from "@/store/feature/stats/statsSlices";
 
 const chartConfig = {
   january: {
@@ -83,11 +84,14 @@ const chartConfig = {
 
 export function CustomerStats() {
   const session = useSession();
-  const [customersStats, setCustomersStats] = useState<ICustomerStat[]>([]);
   const [activeMonth, setActiveMonth] = useState("");
   const [loading, setLoading] = useState(false);
   const id = "pie-interactive";
+  const dispatch = useAppDispatch();
+  const { customersStats } = useAppSelector((s) => s.stats);
+
   useEffect(() => {
+    if (customersStats.length > 0) return;
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetchData = async () => {
       try {
@@ -95,7 +99,7 @@ export function CustomerStats() {
         await setAuthInterceptor(session.data?.backendTokens.accessToken);
         const data = await StatsServices.getCustomerStats();
 
-        setCustomersStats(data);
+        dispatch(setCustomerStats(data));
         setActiveMonth(data.filter((e) => e.count > 0)[0].month);
       } catch (error) {
         console.log("error fetchin customers stats data: ", error);
@@ -103,6 +107,7 @@ export function CustomerStats() {
         setLoading(false);
       }
     };
+
     fetchData();
   }, [session.data]);
   const months = useMemo(
