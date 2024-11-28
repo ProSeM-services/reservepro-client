@@ -53,7 +53,7 @@ export function AppointmentStats() {
   useEffect(() => {
     if (appointmentStats.length > 0) {
       setData(appointmentStats);
-
+      setChartConfig(createChartConfig(appointmentStats));
       return;
     }
     if (!session.data || !session.data?.backendTokens?.accessToken) return;

@@ -91,7 +91,10 @@ export function CustomerStats() {
   const { customersStats } = useAppSelector((s) => s.stats);
 
   useEffect(() => {
-    if (customersStats.length > 0) return;
+    if (customersStats.length > 0) {
+      setActiveMonth(customersStats.filter((e) => e.count > 0)[0].month);
+      return;
+    }
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetchData = async () => {
       try {
@@ -221,7 +224,7 @@ export function CustomerStats() {
                             >
                               {customersStats[
                                 activeIndex
-                              ].count.toLocaleString()}
+                              ]?.count.toLocaleString()}
                             </tspan>
                             <tspan
                               x={viewBox.cx}
