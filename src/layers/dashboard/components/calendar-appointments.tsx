@@ -20,6 +20,8 @@ import { AppointmentServices } from "@/services/appointment.services";
 import { useSession } from "next-auth/react";
 import { setAuthInterceptor } from "@/config/axios.config";
 import { CalendarOffIcon, Clock } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setCalendarAppointments } from "@/store/feature/stats/statsSlices";
 
 export function CalnedarAppointments() {
   const session = useSession();
@@ -28,7 +30,6 @@ export function CalnedarAppointments() {
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
   const [date, setDate] = useState(new Date());
-
   useEffect(() => {
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetch = async () => {

@@ -14,6 +14,7 @@ const initialState: ServiceState = {
   services: [],
   inmutableServices: [],
   loading: true,
+  fetched: false,
 };
 
 export const serviceSlice = createSlice({
@@ -24,6 +25,7 @@ export const serviceSlice = createSlice({
       state.loading = action.payload;
     },
     setServices: (state, action: PayloadAction<IService[]>) => {
+      state.fetched = true;
       state.services = action.payload;
       state.inmutableServices = action.payload;
     },

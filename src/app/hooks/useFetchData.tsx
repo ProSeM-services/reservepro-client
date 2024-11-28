@@ -18,6 +18,7 @@ import {
   toggleCustomersLoading,
 } from "@/store/feature/customers/customerSlice";
 import {
+  setMemberLogged,
   setMembers,
   toggleMembersLoading,
 } from "@/store/feature/members/membersSlice";
@@ -95,6 +96,17 @@ export default function useFetchData() {
       dispatch(toggleAppointmentsLoading(false));
     }
   };
+  const fetchMemberLogged = async (id: string) => {
+    try {
+      dispatch(toggleMembersLoading(true));
+      const member = await MemberServices.getById(id);
+      dispatch(setMemberLogged(member));
+    } catch (error) {
+      console.log("Error fetching Member logged", error);
+    } finally {
+      dispatch(toggleMembersLoading(false));
+    }
+  };
   return {
     fetchCompanies,
     fetchMembers,
@@ -102,5 +114,6 @@ export default function useFetchData() {
     fetchServices,
     fetchAppointments,
     fetchCompanyData,
+    fetchMemberLogged,
   };
 }

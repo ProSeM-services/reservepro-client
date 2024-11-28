@@ -35,6 +35,8 @@ import {
 } from "@/components/ui/select";
 import { MONTHS } from "../constants";
 import { Input } from "@/components/ui/input";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setAppointmentsStats } from "@/store/feature/stats/statsSlices";
 export function AppointmentStats() {
   const session = useSession();
   const [data, setData] = useState<MonthlyData[]>([]);
@@ -46,7 +48,14 @@ export function AppointmentStats() {
     end: 11,
     year: 2024,
   });
+  const dispatch = useAppDispatch();
+  const { appointmentStats } = useAppSelector((s) => s.stats);
   useEffect(() => {
+    if (appointmentStats.length > 0) {
+      setData(appointmentStats);
+
+      return;
+    }
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetch = async () => {
       try {
@@ -60,6 +69,7 @@ export function AppointmentStats() {
         );
         setChartConfig(createChartConfig(res));
         setData(res);
+        dispatch(setAppointmentsStats(res));
       } catch (error) {
         console.log("Error fetching today appointments : ", error);
       } finally {

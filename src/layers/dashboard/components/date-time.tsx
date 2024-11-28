@@ -22,16 +22,12 @@ export const DateTime: React.FC = () => {
     });
   };
 
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString();
-  };
-
   return (
-    <div className="flex flex-col items-end">
-      <p className="font-medium text-xl text-foreground">
+    <div className="flex flex-col text-[14px] items-end">
+      <p className="font-medium  text-foreground">
         {formatDate(currentDateTime)}
       </p>
-      <CurrentStatus time={formatTime(currentDateTime)} />
+      <CurrentStatus />
     </div>
   );
 };
