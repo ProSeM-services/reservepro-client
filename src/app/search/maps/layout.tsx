@@ -1,4 +1,5 @@
 import HomeHeader from "@/layers/home/components/home-header";
+import { ClusterMap } from "@/layers/search/page/maps/components/cluster-map";
 import React, { ReactNode } from "react";
 interface PageProps {
   children: ReactNode;
@@ -14,7 +15,7 @@ export default function Page({ children }: PageProps) {
           {children}
         </div>
         <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full   bg-background rounded-md p-6 border border-border">
-          Mapa
+          <ClusterMap />
         </div>
       </div>
     </section>
