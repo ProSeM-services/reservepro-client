@@ -22,7 +22,7 @@ const AppointmentStats = dynamic(
 );
 export function DashboardPage() {
   return (
-    <div className="h-full  flex flex-col  ">
+    <div className="h-full  flex flex-col    ">
       <DashboardHero />
 
       <div className=" h-[95%] flex justify-between  gap-4     ">
@@ -35,7 +35,7 @@ export function DashboardPage() {
             </div>
           </section>
           <section className=" rounded-lg w-full flex gap-4 h-[40%] max-h-[40%]   ">
-            <div className="bg-card rounded h-full w-1/4  p-4 flex flex-col ">
+            <div className="bg-card rounded h-full w-1/4  p-4 flex flex-col border border-border ">
               <div className="flex items-center justify-between font-bold">
                 <h2>Notificaciones</h2>
                 <BellDot />
@@ -46,7 +46,7 @@ export function DashboardPage() {
                 <p className="">No hay notifiaciones por leer</p>
               </div>
             </div>
-            <div className="w-3/4 max-w-3/4 bg-card rounded flex p-2 gap-4">
+            <div className="w-3/4 max-w-3/4 bg-card rounded flex p-2 gap-4 border border-border">
               <div className=" w-1/2 rounded-md p-2  space-y-2">
                 {" "}
                 <div className="flex items-center justify-between font-bold">
