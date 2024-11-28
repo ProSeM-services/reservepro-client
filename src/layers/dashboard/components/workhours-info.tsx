@@ -29,49 +29,52 @@ export default function WorkhourInfo() {
   }, [session.data]);
 
   const DAYS = [
-    { short: "dom", long: "domingo" },
-    { short: "lun", long: "lunes" },
-    { short: "mar", long: "martes" },
-    { short: "mie", long: "miércoles" },
-    { short: "jue", long: "jueves" },
-    { short: "vie", long: "viernes" },
-    { short: "sab", long: "sábado" },
+    { short: "dom", long: "Domingo" },
+    { short: "lun", long: "Lunes" },
+    { short: "mar", long: "Martes" },
+    { short: "mie", long: "Miércoles" },
+    { short: "jue", long: "Jueves" },
+    { short: "vie", long: "Viernes" },
+    { short: "sab", long: "Sábado" },
   ];
   return (
     <div
-      className={`h-full   bg-card p-4 rounded-lg    text-card-foreground flex flex-col items-center gap-4`}
+      className={`h-full   bg-card  p-2 rounded-lg    text-card-foreground flex flex-col items-center gap-4`}
     >
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 ">
         <h2 className="text-lg text-center font-bold">Mis Horarios</h2>
         <Clock />
       </div>
-
-      {workhours.map(({ day, segments }, index) => (
-        <div
-          key={index}
-          className="flex flex-col gap-1  flex-grow  items-start    w-full      "
-        >
-          <div className="border-b w-full">
-            <p>{DAYS[day].long}</p>
-          </div>
-          <div className="flex flex-col items-center gap-2 justify-between flex-grow  w-full">
-            {segments.map((seg) => (
-              <div
-                className="flex  gap-4  items-center text-xs "
-                key={seg.duration}
-              >
-                <div className="   bg-soft-d p-2 px-4  rounded text-white">
-                  {seg.startime} hs
-                </div>
-                <ArrowRight />
-                <div className="   bg-soft-g p-2  px-4 rounded text-white">
-                  {seg.endTime} hs
-                </div>
+      <section className=" w-full flex flex-col gap-2 max-h-[92%] overflow-auto">
+        {workhours
+          .filter((e) => e.segments.length)
+          .map(({ day, segments }, index) => (
+            <div
+              key={index}
+              className="flex flex-col gap-2  flex-grow  items-start    w-full      "
+            >
+              <div className="border-b w-full px-2">
+                <p>{DAYS[day].long}</p>
               </div>
-            ))}
-          </div>
-        </div>
-      ))}
+              <div className="flex flex-col items-center gap-2 justify-between flex-grow  w-full">
+                {segments.map((seg) => (
+                  <div
+                    className="flex  gap-4  font-semibold items-center text-xs px-2 w-full justify-center "
+                    key={seg.duration}
+                  >
+                    <div className="   bg-primary p-2 px-4 w-2/3 text-center  rounded text-white">
+                      {seg.startime} hs
+                    </div>
+                    <ArrowRight />
+                    <div className="   bg-gray-500  p-2  px-4 w-2/3 text-center rounded text-white">
+                      {seg.endTime} hs
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+      </section>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import React, { PropsWithChildren } from "react";
 export default function Page({ children }: PropsWithChildren) {
   return (
     <section className="flex max-lg:flex-col gap-2  h-full">
-      <div className=" space-y-2  w-1/4 max-lg:w-full ">
+      <div className=" space-y-2  w-1/4 max-lg:w-full  h-full">
         <div className="flex items-center justify-between">
           <p className="font-semibold text-lg">Miembros</p>
           <AddButton type="member" />

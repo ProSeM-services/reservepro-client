@@ -37,7 +37,7 @@ export class ServicesServices {
     id: string,
     data: Partial<IService>
   ): Promise<IService> {
-    const res = await axiosInstance.patch(`${BASE_URL}/services`, data);
+    const res = await axiosInstance.patch(`${BASE_URL}/services/${id}`, data);
 
     return res.data;
   }

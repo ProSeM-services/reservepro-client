@@ -10,7 +10,7 @@ export function MembersLinks() {
   const { members, loading } = useAppSelector((s) => s.member);
   return (
     <LoaderWrapper loading={loading} type="members">
-      <div className="flex md:flex-col max-md:flex-wrap bg-card  h-full gap-4 p-2">
+      <div className="flex md:flex-col gap-4 max-md:flex-wrap ">
         {members.map((member) => (
           <Link
             key={member.id}
