@@ -1,9 +1,11 @@
+import { Building } from "lucide-react";
 import React from "react";
 
 export default function Page() {
   return (
-    <section className="flex gap-2 bg-accent/50 h-full flex-grow rounded-xl justify-center items-center text-center">
-      <p>Seleccionar una sucursal para ver sus detalles.</p>
-    </section>
+    <div className="size-full  flex flex-col justify-center items-center text-card-foreground">
+      <Building className="size-20" />
+      <p>Selecciona una sucursal para ver sus detalles</p>
+    </div>
   );
 }

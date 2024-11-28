@@ -126,7 +126,7 @@ export function CustomerStats() {
     <div>
       <Card
         data-chart={id}
-        className="flex flex-col border-0 h-full  flex-grow max-w-1/3"
+        className="flex flex-col border border-border h-full  flex-grow max-w-1/3"
       >
         <ChartStyle id={id} config={chartConfig} />
         <CardHeader className="flex-row items-start space-y-0 pb-0">

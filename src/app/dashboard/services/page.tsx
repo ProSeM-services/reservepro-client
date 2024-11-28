@@ -1,6 +1,10 @@
-import { ServicesPage } from "@/layers/services/page";
-import React, { Suspense } from "react";
+import { PackageCheck } from "lucide-react";
 
 export default function Page() {
-  return <ServicesPage />;
+  return (
+    <div className="size-full  flex flex-col justify-center items-center text-card-foreground">
+      <PackageCheck className="size-20" />
+      <p>Selecciona un servicio para ver sus detalles</p>
+    </div>
+  );
 }

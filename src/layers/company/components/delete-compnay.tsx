@@ -23,6 +23,13 @@ export function DeleteCompany({ company }: { company: ICompany }) {
   const handleDelete = async () => {
     setDeleting(true);
     try {
+      if (company.Users && company.Users?.length > 0) {
+        return toast({
+          title: `Error al elimnar surcursal ${company.name}`,
+          description: "Por favor, eliminar los miembros de esta sucursal,",
+          variant: "destructive",
+        });
+      }
       const res = await deleteCompany(company.id);
       console.log("RES", res);
       toast({
@@ -33,8 +40,7 @@ export function DeleteCompany({ company }: { company: ICompany }) {
       console.log("errrer", error);
       toast({
         title: `Error al elimnar surcursal ${company.name}`,
-        // @ts-ignore
-        description: error.response.data.message,
+        description: "Intentar mas tarde",
         variant: "destructive",
       });
     } finally {

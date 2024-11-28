@@ -1,5 +1,10 @@
 "use client";
-import { ICompany, ICreateCompany, ICreateService } from "@/interfaces";
+import {
+  ICompany,
+  ICreateCompany,
+  ICreateService,
+  IService,
+} from "@/interfaces";
 import { ICreateMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
@@ -81,11 +86,24 @@ export default function useCreatingFetch() {
       //   dispatch(toggleMembersLoading(false));
     }
   };
+
+  const updateService = async (id: string, data: Partial<IService>) => {
+    try {
+      //   dispatch(toggleMembersLoading(true));
+      const newService = await ServicesServices.updateService(id, data);
+      // dispatch(addService(newService));
+    } catch (error) {
+      console.log("Error creating Service", error);
+    } finally {
+      //   dispatch(toggleMembersLoading(false));
+    }
+  };
   return {
     createCompany,
     createMember,
     createService,
     deleteCompany,
     updateCompany,
+    updateService,
   };
 }

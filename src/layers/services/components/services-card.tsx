@@ -26,7 +26,7 @@ export const ServiceDetailCard = ({
   return (
     <div
       className={`flex flex-col items-start justify-between w-full  gap-1  p-4 rounded-sm border border-accent shadow-sm lg:flex-grow    bg-background max-lg:w-full transition-all duration-200 ${
-        selectable ? "hover:border-black " : ""
+        selectable ? "hover:border-card-foreground " : ""
       }`}
     >
       <div className="flex justify-between items-center w-full">
@@ -34,12 +34,12 @@ export const ServiceDetailCard = ({
           <div className="flex items-center justify-between  w-full">
             <p className="font-semibold">{service.title}</p>
 
-            <div className="flex gap-2">
-              <div className="text-xs text-soft-d rounded-md px-2 py-[1px]  items-center border font-medium flex gap-1">
+            <div className="flex gap-2  text-xs">
+              <div className="  rounded-md px-2 py-[1px]  items-center  font-medium flex gap-1">
                 <ClockIcon className="size-4" />
                 <p> {service.duration}min</p>
               </div>
-              <p className="text-xs text-soft-d rounded-md px-2 py-[1px] flex items-center border font-medium ">
+              <p className=" rounded-md px-2 py-[1px] flex items-center  font-medium ">
                 {service.provision}
               </p>
             </div>
