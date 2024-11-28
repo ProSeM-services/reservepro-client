@@ -1,5 +1,6 @@
 "use client";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { MemberCard } from "@/layers/dashboard/components";
 import { useAppSelector } from "@/store/hooks";
 import { UserCircle } from "lucide-react";
 import Link from "next/link";
@@ -17,15 +18,11 @@ export function MembersLinks() {
             href={`/dashboard/members/${member.id}`}
             className={` ${
               pathname === `/dashboard/members/${member.id}`
-                ? " text-primary  bg-sky-100 "
+                ? " text-primary   "
                 : " border-border  text-secondary-foreground "
-            }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}
+            }   transition-all duration-300 border rounded-md  flex items-center gap-2 bg-background `}
           >
-            <UserCircle />
-            <p>
-              {" "}
-              {member.name} {member.lastName}
-            </p>
+            <MemberCard member={member} readonly />
           </Link>
         ))}
       </div>

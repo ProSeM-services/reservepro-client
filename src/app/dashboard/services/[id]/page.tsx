@@ -7,11 +7,7 @@ import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
 export default async function Page({ params }: { params: { id: string } }) {
   return (
     <Suspense
-      fallback={
-        <LoaderWrapper loading type="services">
-          data
-        </LoaderWrapper>
-      }
+      fallback={<LoaderWrapper loading type="services"></LoaderWrapper>}
     >
       <ServiceDetailsPage serviceId={params.id} />
     </Suspense>

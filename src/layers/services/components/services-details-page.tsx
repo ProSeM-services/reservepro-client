@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { BarLoader } from "@/components/common/bar-loader";
 import { EditService } from "./edit-service";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { NeedReladServicePage } from "./need-reload";
 
 export function ServiceDetailsPage({ serviceId }: { serviceId: string }) {
   const [service, setService] = useState<IService>();
@@ -46,14 +47,19 @@ export function ServiceDetailsPage({ serviceId }: { serviceId: string }) {
   return (
     <LoaderWrapper loading={loading} type="services">
       <header className="flex justify-between p-2">
-        <h2 className="font-semibold">Detalles del servicio</h2>
+        <div className="flex gap-2 items-start w-5/6">
+          <div className="w-5/6">
+            {service && <ServiceDetailCard service={service} />}
+          </div>
+
+          <NeedReladServicePage />
+        </div>
+
         <div>{service && <EditService serivce={service} />}</div>
       </header>
 
       <hr />
       <div className="p-4 space-y-4">
-        {service && <ServiceDetailCard service={service} />}
-
         <div className="space-y-2 relative">
           {deleting && <BarLoader />}
           {service && service.Users.length
