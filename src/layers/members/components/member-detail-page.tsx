@@ -1,5 +1,7 @@
 import { WorkhoursEditor } from "@/layers/dashboard/components/workhours/wh-editor";
 import { getMemberById } from "@/lib/actions";
+import { EditMember } from "./edit-member";
+import { NeedReladMemberPage } from "./need-reload";
 
 export async function MemberDetailsPage({
   params,
@@ -9,14 +11,24 @@ export async function MemberDetailsPage({
   const member = await getMemberById(params.id);
   if (!member) return null;
   return (
-    <div className="p-4 overflow-auto ">
-      <header className="mb-6">
-        <h2 className="text-xl font-medium">
-          {member.name} {member.lastName}
-        </h2>
-        <p className="text-gray-400">{member.email}</p>
-      </header>
+    <div className="p-4 overflow-auto space-y-4 ">
+      <header className=" flex justify-between">
+        <div>
+          <div className="flex gap-2">
+            <h2 className="text-xl font-medium">
+              {member.name} {member.lastName}
+            </h2>
+            <NeedReladMemberPage />
+          </div>
 
+          <p className="text-gray-400">{member.email}</p>
+        </div>
+
+        <div>
+          <EditMember member={member} />
+        </div>
+      </header>
+      <hr />
       <div className="flex-grow space-y-4">
         <div>
           <h3 className="font-medium mb-2">Company Information</h3>

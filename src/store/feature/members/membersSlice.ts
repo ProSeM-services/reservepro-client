@@ -17,6 +17,7 @@ const initialState: MemberState = {
   loading: true,
   memberLogged: undefined,
   fetched: false,
+  updated: false,
 };
 
 export const memberSlice = createSlice({
@@ -38,11 +39,19 @@ export const memberSlice = createSlice({
       state.members.push(action.payload);
       state.inmutableMembers.push(action.payload);
     },
+    setMemberUpdated: (state, action: PayloadAction<boolean>) => {
+      state.updated = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addMember, setMembers, toggleMembersLoading, setMemberLogged } =
-  memberSlice.actions;
+export const {
+  addMember,
+  setMembers,
+  toggleMembersLoading,
+  setMemberLogged,
+  setMemberUpdated,
+} = memberSlice.actions;
 
 export default memberSlice.reducer;

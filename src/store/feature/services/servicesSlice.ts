@@ -15,6 +15,7 @@ const initialState: ServiceState = {
   inmutableServices: [],
   loading: true,
   fetched: false,
+  updated: false,
 };
 
 export const serviceSlice = createSlice({
@@ -23,6 +24,9 @@ export const serviceSlice = createSlice({
   reducers: {
     toggleServiceLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+    setSerivicesUpdated: (state, action: PayloadAction<boolean>) => {
+      state.updated = action.payload;
     },
     setServices: (state, action: PayloadAction<IService[]>) => {
       state.fetched = true;
@@ -37,7 +41,11 @@ export const serviceSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addService, setServices, toggleServiceLoading } =
-  serviceSlice.actions;
+export const {
+  addService,
+  setServices,
+  toggleServiceLoading,
+  setSerivicesUpdated,
+} = serviceSlice.actions;
 
 export default serviceSlice.reducer;

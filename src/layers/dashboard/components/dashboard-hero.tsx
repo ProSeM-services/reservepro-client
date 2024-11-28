@@ -9,7 +9,7 @@ export function DashboardHero() {
 
   if (!session?.user) return null;
   return (
-    <header className="flex justify-between h-[10%]  ">
+    <header className="flex justify-between h-10  items-center ">
       <h2 className="font-semibold text-xl ">Hola, {session?.user?.name}!</h2>
 
       <DateTime />

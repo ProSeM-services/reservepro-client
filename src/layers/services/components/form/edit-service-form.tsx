@@ -196,7 +196,7 @@ export function EditServiceForm({ service }: { service: IService }) {
               isLoading={loading}
               disabled={loading}
             >
-              Crear
+              Actualizar
             </Button>
           </div>
         </section>

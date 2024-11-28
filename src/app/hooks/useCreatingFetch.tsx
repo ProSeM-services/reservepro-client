@@ -5,7 +5,7 @@ import {
   ICreateService,
   IService,
 } from "@/interfaces";
-import { ICreateMember } from "@/interfaces/member.iterface";
+import { ICreateMember, IMember } from "@/interfaces/member.iterface";
 import { CompanyServices } from "@/services/company.services";
 import { MemberServices } from "@/services/member.services";
 import { ServicesServices } from "@/services/services.services";
@@ -14,8 +14,14 @@ import {
   removeCompany,
   setCompanyIsUpdated,
 } from "@/store/feature/company/companySlice";
-import { addMember } from "@/store/feature/members/membersSlice";
-import { addService } from "@/store/feature/services/servicesSlice";
+import {
+  addMember,
+  setMemberUpdated,
+} from "@/store/feature/members/membersSlice";
+import {
+  addService,
+  setSerivicesUpdated,
+} from "@/store/feature/services/servicesSlice";
 import { useAppDispatch } from "@/store/hooks";
 
 export default function useCreatingFetch() {
@@ -75,6 +81,19 @@ export default function useCreatingFetch() {
       //   dispatch(toggleMembersLoading(false));
     }
   };
+
+  const editMember = async (id: string, data: Partial<IMember>) => {
+    try {
+      //   dispatch(toggleMembersLoading(true));
+      await MemberServices.update(id, data);
+      dispatch(setMemberUpdated(true));
+    } catch (error) {
+      console.log("Error creating Member", error);
+      throw error;
+    } finally {
+      //   dispatch(toggleMembersLoading(false));
+    }
+  };
   const createService = async (data: ICreateService) => {
     try {
       //   dispatch(toggleMembersLoading(true));
@@ -90,8 +109,8 @@ export default function useCreatingFetch() {
   const updateService = async (id: string, data: Partial<IService>) => {
     try {
       //   dispatch(toggleMembersLoading(true));
-      const newService = await ServicesServices.updateService(id, data);
-      // dispatch(addService(newService));
+      await ServicesServices.updateService(id, data);
+      dispatch(setSerivicesUpdated(true));
     } catch (error) {
       console.log("Error creating Service", error);
     } finally {
@@ -105,5 +124,6 @@ export default function useCreatingFetch() {
     deleteCompany,
     updateCompany,
     updateService,
+    editMember,
   };
 }

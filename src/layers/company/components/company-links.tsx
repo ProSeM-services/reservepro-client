@@ -1,5 +1,6 @@
 "use client";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { CompanyCard } from "@/layers/dashboard/components";
 import { useAppSelector } from "@/store/hooks";
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
@@ -19,12 +20,11 @@ export function CompanyLinks() {
             key={company.id}
             className={` ${
               pathname === `/dashboard/company/${company.id}`
-                ? " text-primary  bg-sky-100 "
+                ? " text-primary "
                 : " border-border  text-secondary-foreground "
-            }   transition-all duration-300 border rounded-md p-2 flex items-center gap-2 bg-background `}
+            }   transition-all duration-300 border rounded-md  flex items-center gap-2 bg-background `}
           >
-            <HomeIcon />
-            {company.name}
+            <CompanyCard company={company} readonly />
           </Link>
         ))}
       </div>
