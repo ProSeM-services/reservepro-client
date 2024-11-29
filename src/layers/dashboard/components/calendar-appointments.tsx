@@ -2,7 +2,7 @@
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 
-import { CalendarIcon } from "lucide-react";
+import { CalendarCheck, CalendarIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -20,16 +20,17 @@ import { AppointmentServices } from "@/services/appointment.services";
 import { useSession } from "next-auth/react";
 import { setAuthInterceptor } from "@/config/axios.config";
 import { CalendarOffIcon, Clock } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setCalendarAppointments } from "@/store/feature/stats/statsSlices";
+import { Card, CardTitle } from "@/components/ui/card";
+import { useAppSelector } from "@/store/hooks";
 
 export function CalnedarAppointments() {
   const session = useSession();
-
   const [appointments, setAppointments] = useState<IAppointment[]>([]);
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
   const [date, setDate] = useState(new Date());
+  const { appointments: allAppointments, loading: storeLoading } =
+    useAppSelector((s) => s.appointments);
   useEffect(() => {
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetch = async () => {
@@ -53,14 +54,31 @@ export function CalnedarAppointments() {
     fetch();
   }, [session.data, date]);
 
+  if (allAppointments.length === 0)
+    return (
+      <Card className="flex flex-col border border-border h-ful w-full p-1 ">
+        <div className="bg-card rounded h-full w-full flex flex-col p-4 ">
+          <div className="flex items-center justify-between font-bold">
+            <CardTitle>Calenadrio</CardTitle>
+          </div>
+
+          <div className="flex-grow flex flex-col justify-center items-center text-gray-400">
+            <CalendarCheck className="size-28" />
+            <p className="text-wrap w-1/2 text-center">
+              No hay turnos agendados.
+            </p>
+          </div>
+        </div>
+      </Card>
+    );
   return (
-    <div className=" h-full w-1/3 flex flex-col items-center gap-2 bg-card  border border-border px-8 py-4 rounded-md ">
+    <div className=" h-full w-full flex flex-col items-center gap-2 bg-card  border border-border px-8 py-4 rounded-md ">
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant={"outline"}
             className={cn(
-              "w-[240px] pl-3 text-left font-normal",
+              "w-full text-left font-normal",
               !date && "text-muted-foreground"
             )}
           >
@@ -72,7 +90,10 @@ export function CalnedarAppointments() {
             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent
+          className="w-auto mx-auto p-0 border-border"
+          align="start"
+        >
           <Calendar
             mode="single"
             selected={date ? date : new Date()}

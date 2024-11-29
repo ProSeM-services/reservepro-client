@@ -10,16 +10,8 @@ import { CalnedarAppointments } from "../components/calendar-appointments";
 import WorkhourInfo from "../components/workhours-info";
 import { BellDot, BellMinus, Building, Users } from "lucide-react";
 import { CompanyList } from "../components/company-list";
-// Usamos dynamic para cargar AppointmentStats solo en el cliente
-const AppointmentStats = dynamic(
-  () =>
-    import("../components/appointment-stats").then(
-      (mod) => mod.AppointmentStats
-    ),
-  {
-    ssr: false, // Desactivar SSR para este componente
-  }
-);
+import { AppointmentStats } from "../components/appointment-stats";
+
 export function DashboardPage() {
   return (
     <div className="h-full  flex flex-col    ">
@@ -28,7 +20,7 @@ export function DashboardPage() {
       <div className=" h-[95%] flex justify-between  gap-4     ">
         <div className="h-full flex flex-col gap-4 flex-grow  ">
           <section className=" w-full h-[60%]  max-h-[60%]   ">
-            <div className="w-full h-full flex   gap-4 ">
+            <div className="w-full h-full grid grid-cols-3   gap-4 ">
               <CalnedarAppointments />
               <AppointmentStats />
               <CustomerStats />

@@ -30,6 +30,7 @@ import {
 import { BarLoader } from "@/components/common/bar-loader";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setCustomerStats } from "@/store/feature/stats/statsSlices";
+import { BellDot, BellMinus, Contact, UserSquare2Icon } from "lucide-react";
 
 const chartConfig = {
   january: {
@@ -89,10 +90,12 @@ export function CustomerStats() {
   const id = "pie-interactive";
   const dispatch = useAppDispatch();
   const { customersStats } = useAppSelector((s) => s.stats);
+  const { customers, fetched } = useAppSelector((s) => s.customers);
 
   useEffect(() => {
+    if (!customers.length) return;
     if (customersStats.length > 0) {
-      setActiveMonth(customersStats.filter((e) => e.count > 0)[0].month);
+      setActiveMonth(customersStats.filter((e) => e.count > 0)[0]?.month);
       return;
     }
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
@@ -122,11 +125,31 @@ export function CustomerStats() {
     [activeMonth]
   );
 
+  if (customers.length === 0 && fetched)
+    return (
+      <Card
+        data-chart={id}
+        className="flex flex-col border border-border h-full   w-full p-1"
+      >
+        <div className="bg-card rounded h-full w-full  p-4 flex flex-col  ">
+          <div className="flex items-center justify-between font-bold">
+            <CardTitle>Clientes </CardTitle>
+          </div>
+
+          <div className="flex-grow flex flex-col justify-center items-center text-gray-400">
+            <Contact className="size-28" />
+            <p className="text-wrap w-1/2 text-center">
+              No hay informacion de clientes para cargar
+            </p>
+          </div>
+        </div>
+      </Card>
+    );
   return (
     <div>
       <Card
         data-chart={id}
-        className="flex flex-col border border-border h-full  flex-grow max-w-1/3"
+        className="flex flex-col border border-border h-full  flex-grow w-full"
       >
         <ChartStyle id={id} config={chartConfig} />
         <CardHeader className="flex-row items-start space-y-0 pb-0">
