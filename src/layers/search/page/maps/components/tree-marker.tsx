@@ -1,11 +1,12 @@
-import { Tree } from "../utils/trees";
+import { ICompanyMap } from "../utils/trees";
 import type { Marker } from "@googlemaps/markerclusterer";
 import React, { useCallback } from "react";
 import { AdvancedMarker } from "@vis.gl/react-google-maps";
+import { HouseIcon } from "lucide-react";
 
 export type TreeMarkerProps = {
-  tree: Tree;
-  onClick: (tree: Tree) => void;
+  tree: ICompanyMap;
+  onClick: (tree: ICompanyMap) => void;
   setMarkerRef: (marker: Marker | null, key: string) => void;
 };
 
@@ -24,7 +25,7 @@ export const TreeMarker = (props: TreeMarkerProps) => {
 
   return (
     <AdvancedMarker position={tree.position} ref={ref} onClick={handleClick}>
-      <span className="marker-clustering-tree">🌳</span>
+      <HouseIcon className="bg-primary rounded-full text-white p-1" />
     </AdvancedMarker>
   );
 };

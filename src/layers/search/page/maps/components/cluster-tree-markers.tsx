@@ -1,27 +1,29 @@
 import { InfoWindow, useMap } from "@vis.gl/react-google-maps";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { type Marker, MarkerClusterer } from "@googlemaps/markerclusterer";
-import { Tree } from "../utils";
+import { ICompanyMap } from "../utils";
 import { TreeMarker } from "./tree-marker";
 
 export type ClusteredTreeMarkersProps = {
-  trees: Tree[];
+  companies: ICompanyMap[];
 };
 
 /**
  * The ClusteredTreeMarkers component is responsible for integrating the
  * markers with the markerclusterer.
  */
-export const ClusteredTreeMarkers = ({ trees }: ClusteredTreeMarkersProps) => {
+export const ClusteredCompaniesMarkers = ({
+  companies,
+}: ClusteredTreeMarkersProps) => {
   const [markers, setMarkers] = useState<{ [key: string]: Marker }>({});
   const [selectedTreeKey, setSelectedTreeKey] = useState<string | null>(null);
 
   const selectedTree = useMemo(
     () =>
-      trees && selectedTreeKey
-        ? trees.find((t) => t.key === selectedTreeKey)!
+      companies && selectedTreeKey
+        ? companies.find((t) => t.key === selectedTreeKey)!
         : null,
-    [trees, selectedTreeKey]
+    [companies, selectedTreeKey]
   );
 
   // create the markerClusterer once the map is available and update it when
@@ -61,13 +63,13 @@ export const ClusteredTreeMarkers = ({ trees }: ClusteredTreeMarkersProps) => {
     setSelectedTreeKey(null);
   }, []);
 
-  const handleMarkerClick = useCallback((tree: Tree) => {
+  const handleMarkerClick = useCallback((tree: ICompanyMap) => {
     setSelectedTreeKey(tree.key);
   }, []);
 
   return (
     <>
-      {trees.map((tree) => (
+      {companies.map((tree) => (
         <TreeMarker
           key={tree.key}
           tree={tree}
