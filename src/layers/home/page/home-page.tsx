@@ -12,10 +12,10 @@ interface PageProps {
 
 export function HomePage({ searchParams }: PageProps) {
   return (
-    <div className={`flex flex-col  bg-muted/50   `}>
+    <div className={`flex flex-col     `}>
       <HomeHeader />
 
-      <main className=" min-h-screen ">
+      <main className=" min-h-screen  bg-muted">
         <LandingPage />
 
         <CompaniesHomeSection searchParams={searchParams} />
@@ -23,7 +23,7 @@ export function HomePage({ searchParams }: PageProps) {
         <ClientsFeedback />
       </main>
 
-      <footer className="bg-muted/50 text-foreground py-8">
+      <footer className="bg-muted  py-8">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-4 gap-8">
             <div>

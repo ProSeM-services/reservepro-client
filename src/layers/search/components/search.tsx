@@ -1,6 +1,7 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { MagnetIcon } from "lucide-react";
+import { MagnetIcon, SearchIcon } from "lucide-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -20,7 +21,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
   return (
-    <div className=" flex items-center  relative">
+    <div className=" flex items-center gap-2  relative">
       <Input
         className="peer  w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
@@ -30,6 +31,9 @@ export default function Search({ placeholder }: { placeholder: string }) {
         defaultValue={searchParams.get("query")?.toString()}
       />
       <MagnetIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+      <Button variant={"outline"} onClick={handleSearch}>
+        <SearchIcon className="size-4" />
+      </Button>
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const LocationZodSchema = z.object({
   value: z.string(),
-  lat: z.number().optional(),
-  lng: z.number().optional(),
+  lat: z.number(),
+  lng: z.number(),
 });
 export type Location = z.infer<typeof LocationZodSchema>;

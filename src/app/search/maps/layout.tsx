@@ -1,28 +1,39 @@
+import HomeHeader from "@/layers/home/components/home-header";
+import CompanyCard from "@/layers/search/components/company-card";
+import { ClusterMap } from "@/layers/search/page/maps/components/cluster-map";
+import { getClientComapnies } from "@/lib/clienta-actions";
+import { Filter } from "lucide-react";
 import React, { ReactNode } from "react";
 interface PageProps {
   children: ReactNode;
 }
-export default function Page({ children }: PageProps) {
+export default async function Page({ children }: PageProps) {
+  const companies = await getClientComapnies({
+    query: "",
+    category: "",
+    city: "",
+  });
   return (
     <section className="flex flex-col max-lg:flex-col gap-2  h-screen  ">
-      <header className=" mx-auto flex items-center justify-between w-full">
-        <div className="flex items-center space-x-4">
-          <div className="text-2xl font-bold text-primary">
-            <span className="text-gray-800">Reserve</span> Pro
+      <HomeHeader>
+        <div></div>
+      </HomeHeader>
+      <div className="flex gap-4 h-[90%] p-1 outlin">
+        <section className="w-1/4 p-1">
+          <div className="flex justify-between items-center">
+            <h2>Sucursales </h2>
+            <Filter />
           </div>
-        </div>
-        <div>
-          <h1 className="text-lg font-light ">
-            Encuentra servicios cerca de ti
-          </h1>
-        </div>
-      </header>
-      <div className="flex h-full p-1">
-        <div className="w-1/6 overflow-auto  max-h-full space-y-5">
-          ACA TIENE QUE IR EL LISTADO DE COMPANIES
-        </div>
-        <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full   bg-background rounded-md p-6 border border-border">
-          {children}
+
+          <div className="w-full overflow-auto  p-2 max-h-full space-y-5">
+            {companies.map((company) => (
+              <CompanyCard company={company} key={company.id} />
+            ))}
+          </div>
+        </section>
+
+        <div className="flex flex-col gap-3 flex-grow overflow-auto  max-h-full   bg-background rounded-md border border-border">
+          <ClusterMap />
         </div>
       </div>
     </section>
