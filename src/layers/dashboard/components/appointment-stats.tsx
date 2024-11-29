@@ -1,6 +1,6 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
+import { Calendar, TrendingUp } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
@@ -50,6 +50,10 @@ export function AppointmentStats() {
   });
   const dispatch = useAppDispatch();
   const { appointmentStats } = useAppSelector((s) => s.stats);
+  const { appointments, fetched: allAppointmentFetched } = useAppSelector(
+    (s) => s.appointments
+  );
+
   useEffect(() => {
     if (appointmentStats.length > 0) {
       setData(appointmentStats);
@@ -89,8 +93,26 @@ export function AppointmentStats() {
   }
 
   const { end, start, year } = dateLimits;
+
+  if (appointments.length === 0 && allAppointmentFetched)
+    return (
+      <Card className="flex flex-col border border-border h-full   w-full p-1">
+        <div className="bg-card rounded h-full w-full  p-4 flex flex-col  ">
+          <div className="flex items-center justify-between font-bold">
+            <CardTitle>Turnos Agendados</CardTitle>
+          </div>
+
+          <div className="flex-grow flex flex-col justify-center items-center text-gray-400">
+            <Calendar className="size-28" />
+            <p className="text-wrap w-1/2 text-center">
+              No hay informacion de turnos agendados para cargar
+            </p>
+          </div>
+        </div>
+      </Card>
+    );
   return (
-    <Card className="flex-grow max-w-1/3 flex flex-col justify-between  border-border ">
+    <Card className=" w-full flex flex-col justify-between  border-border ">
       <CardHeader>
         <CardTitle>Turnos Agendados</CardTitle>
         <CardDescription>

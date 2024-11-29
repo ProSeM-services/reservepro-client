@@ -5,6 +5,7 @@ import servicesReducer from "./feature/services/servicesSlice";
 import customerReducer from "./feature/customers/customerSlice";
 import appointmentReducer from "./feature/appointnments/appointmentsSlice";
 import statsReducer from "./feature/stats/statsSlices";
+import mainReducer from "./feature/main/mainSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -15,6 +16,7 @@ export const makeStore = () => {
       customers: customerReducer,
       appointments: appointmentReducer,
       stats: statsReducer,
+      main: mainReducer,
     },
   });
 };

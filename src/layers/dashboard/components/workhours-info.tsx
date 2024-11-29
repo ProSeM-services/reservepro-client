@@ -1,4 +1,5 @@
 "use client";
+import { Card, CardTitle } from "@/components/ui/card";
 import { setAuthInterceptor } from "@/config/axios.config";
 import { IWorkhour } from "@/interfaces";
 import { MemberServices } from "@/services/member.services";
@@ -37,6 +38,24 @@ export default function WorkhourInfo() {
     { short: "vie", long: "Viernes" },
     { short: "sab", long: "Sábado" },
   ];
+
+  if (workhours.length === 0)
+    return (
+      <Card className="h-full   bg-card  rounded-lg    text-card-foreground flex flex-col items-center gap-4 p-1 border-border">
+        <div className="bg-card rounded h-full w-full  p-4 flex flex-col  ">
+          <div className="flex items-center justify-between font-bold">
+            <CardTitle>Horarios de trabajo</CardTitle>
+          </div>
+
+          <div className="flex-grow flex flex-col justify-center items-center text-gray-400">
+            <Clock className="size-28" />
+            <p className="text-wrap w-2/3 text-center">
+              No hay horarios de trabajo definidos
+            </p>
+          </div>
+        </div>
+      </Card>
+    );
   return (
     <div
       className={`h-full   bg-card  p-2 rounded-lg    text-card-foreground flex flex-col items-center gap-4`}

@@ -26,10 +26,14 @@ import {
   setServices,
   toggleServiceLoading,
 } from "@/store/feature/services/servicesSlice";
+import { setMainFetched } from "@/store/feature/main/mainSlice";
 import { useAppDispatch } from "@/store/hooks";
 
 export default function useFetchData() {
   const dispatch = useAppDispatch();
+  const setMainLoaderStatus = (status: boolean) => {
+    dispatch(setMainFetched(status));
+  };
   const fetchCompanies = async () => {
     try {
       dispatch(toggleCompanyLoading(true));
@@ -111,6 +115,7 @@ export default function useFetchData() {
     fetchCompanies,
     fetchMembers,
     fetchCustomers,
+    setMainLoaderStatus,
     fetchServices,
     fetchAppointments,
     fetchCompanyData,
