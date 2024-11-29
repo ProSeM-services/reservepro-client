@@ -1,5 +1,6 @@
 import HomeHeader from "@/layers/home/components/home-header";
 import CompanyCard from "@/layers/search/components/company-card";
+import { MapSearch } from "@/layers/search/page/maps/components";
 import { ClusterMap } from "@/layers/search/page/maps/components/cluster-map";
 import { getClientComapnies } from "@/lib/clienta-actions";
 import { Filter } from "lucide-react";
@@ -16,10 +17,10 @@ export default async function Page({ children }: PageProps) {
   return (
     <section className="flex flex-col max-lg:flex-col gap-2  h-screen  ">
       <HomeHeader>
-        <div></div>
+        <MapSearch />
       </HomeHeader>
       <div className="flex gap-4 h-[90%] p-1 outlin">
-        <section className="w-1/4 p-1">
+        <section className="w-1/4 p-4 space-y-4">
           <div className="flex justify-between items-center">
             <h2>Sucursales </h2>
             <Filter />
@@ -27,7 +28,7 @@ export default async function Page({ children }: PageProps) {
 
           <div className="w-full overflow-auto  p-2 max-h-full space-y-5">
             {companies.map((company) => (
-              <CompanyCard company={company} key={company.id} />
+              <CompanyCard company={company} key={company.id} isOnMapPage />
             ))}
           </div>
         </section>
