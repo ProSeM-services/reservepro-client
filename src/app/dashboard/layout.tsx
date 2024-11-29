@@ -13,18 +13,19 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
         enableSystem
         disableTransitionOnChange
       >
-        <DataProvider>
-          <div className="flex min-h-screen w-full flex-col ">
-            <SideNav />
-            <div className="flex flex-col sm:gap-4 sm:py-2 sm:pl-14  h-screen bg-background overflow-hidden ">
-              <main className="  p-1 px-6 h-full  max-md:p-1 ">
+        <div className="flex min-h-screen w-full flex-col ">
+          <SideNav />
+
+          <div className="flex flex-col sm:gap-4 sm:py-2 sm:pl-14  h-screen bg-background overflow-hidden ">
+            <main className="  p-1 px-6 h-full  max-md:p-1 ">
+              <DataProvider>
                 <div className=" h-full max-h-full max-md:max-h-[92%]    overflow-auto rounded-md p-4">
                   {children}
                 </div>
-              </main>
-            </div>
+              </DataProvider>
+            </main>
           </div>
-        </DataProvider>
+        </div>
       </ThemeProvider>
     </StoreProvider>
   );
