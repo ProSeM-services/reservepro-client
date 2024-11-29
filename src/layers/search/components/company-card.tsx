@@ -2,27 +2,37 @@
 import { ICompany } from "@/interfaces";
 import { HomeIcon, MailIcon, MapPinned } from "lucide-react";
 import React from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 
 export default function CompanyCard({
   company,
-  index = 0,
+  isOnMapPage = false,
 }: {
   company: ICompany;
   index?: number;
+  isOnMapPage?: boolean;
 }) {
   const router = useRouter();
-  const selectCompany = (id: string) => {
-    router.push(`/search/${id}`);
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const selectCompany = () => {
+    if (isOnMapPage) {
+      params.set("lat", String(company.address.lat));
+      params.set("lng", String(company.address.lng));
+      router.replace(`${pathname}?${params.toString()}`);
+      return;
+    }
+    router.push(`/search/${company.id}`);
   };
 
   return (
     <div
       className={`flex flex-col   justify-start items-center rounded-xl  shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-muted  max-lg:w-full `}
       key={company.id}
-      onClick={() => selectCompany(company.id)}
+      onClick={selectCompany}
     >
       <div className="w-full h-52  overflow-hidden rounded-sm">
         <Image
