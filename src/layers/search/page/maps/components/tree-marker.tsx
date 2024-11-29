@@ -25,7 +25,7 @@ export const TreeMarker = (props: TreeMarkerProps) => {
 
   return (
     <AdvancedMarker position={tree.position} ref={ref} onClick={handleClick}>
-      <HouseIcon className="bg-primary rounded-full text-white p-1" />
+      <HouseIcon className="bg-purple-700 rounded-lg  text-white p-1" />
     </AdvancedMarker>
   );
 };

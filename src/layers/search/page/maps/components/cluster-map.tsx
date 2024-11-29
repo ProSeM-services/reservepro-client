@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 export function ClusterMap() {
   const [companies, setCompanies] = useState<ICompany[]>([]);
-  const [isSelectedCompany, setIsSelectedCompany] = useState(false);
+  const [zoom, setZoom] = useState(10);
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -18,9 +18,8 @@ export function ClusterMap() {
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
   useEffect(() => {
-    console.log("GETTTING LOCATION!");
     if (params.get("lat") && params.get("lng")) {
-      setIsSelectedCompany(true);
+      setZoom(16);
       setUserLocation({
         lat: Number(params.get("lat") || ""),
         lng: Number(params.get("lng") || ""),
@@ -30,7 +29,7 @@ export function ClusterMap() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setIsSelectedCompany(false);
+          setZoom(10);
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -80,10 +79,13 @@ export function ClusterMap() {
       <Map
         mapId={"bf51a910020fa25a"}
         defaultCenter={userLocation || { lat: -38.7556381, lng: -62.2744032 }}
-        defaultZoom={isSelectedCompany ? 16 : 10}
+        defaultZoom={zoom}
+        zoom={zoom}
+        onZoomChanged={(e) => setZoom(e.detail.zoom)}
         gestureHandling={"greedy"}
         disableDefaultUI
         center={userLocation}
+        onCenterChanged={(e) => setUserLocation(e.detail.center)}
       >
         {formatedCompanies && (
           <ClusteredCompaniesMarkers companies={formatedCompanies} />
