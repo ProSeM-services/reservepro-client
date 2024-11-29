@@ -27,7 +27,7 @@ export default async function Page({ children }: PageProps) {
 
           <div className="w-full overflow-auto  p-2 max-h-full space-y-5">
             {companies.map((company) => (
-              <CompanyCard company={company} />
+              <CompanyCard company={company} key={company.id} />
             ))}
           </div>
         </section>
