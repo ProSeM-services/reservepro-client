@@ -28,7 +28,6 @@ export default function DataProvider({ children }: PropsWithChildren) {
     (s) => s.appointments
   );
 
-  console.log(mainFetched);
   useEffect(() => {
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetchData = async () => {
