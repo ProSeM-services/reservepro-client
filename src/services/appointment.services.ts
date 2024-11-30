@@ -1,11 +1,12 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
 import {
   IAppointment,
+  IAppointmentApiResponse,
   ICreateAppointment,
 } from "@/interfaces/appointments.interface";
 
 export class AppointmentServices {
-  static async getAll(): Promise<IAppointment[]> {
+  static async getAll(): Promise<IAppointmentApiResponse> {
     const res = await axiosInstance.get(`${BASE_URL}/appointments`);
     return res.data;
   }

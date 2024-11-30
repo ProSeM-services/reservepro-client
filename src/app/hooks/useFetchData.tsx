@@ -6,6 +6,7 @@ import { MemberServices } from "@/services/member.services";
 import { ServicesServices } from "@/services/services.services";
 import {
   setAppointments,
+  setAppointmentsTableData,
   toggleAppointmentsLoading,
 } from "@/store/feature/appointnments/appointmentsSlice";
 import {
@@ -81,8 +82,10 @@ export default function useFetchData() {
   const fetchAppointments = async () => {
     try {
       dispatch(toggleAppointmentsLoading(true));
-      const appointments = await AppointmentServices.getAll();
+      const { appointments, limit, offset, page, total } =
+        await AppointmentServices.getAll();
       dispatch(setAppointments(appointments));
+      dispatch(setAppointmentsTableData({ limit, offset, page, total }));
     } catch (error) {
       console.log("Error fetching Companies", error);
     } finally {
