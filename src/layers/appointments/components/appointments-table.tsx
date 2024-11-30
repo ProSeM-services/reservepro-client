@@ -82,12 +82,17 @@ const columns: ColumnDef<IClientAppointment>[] = [
   },
 ];
 export function AppointmentsTable() {
-  const { appointments, loading, fetched } = useAppSelector(
-    (s) => s.appointments
-  );
+  const { appointments, loading, fetched, limit, offset, page, total } =
+    useAppSelector((s) => s.appointments);
 
   return (
     <LoaderWrapper loading={loading && !fetched} type="appointments">
+      <div className="flex w-full justify-around">
+        <p>limit:{limit}</p>
+        <p>offset:{offset}</p>
+        <p>page:{page}</p>
+        <p>total:{total}</p>
+      </div>
       <RootTable
         columns={columns}
         data={AppoitnemntModelAdapter(appointments)}

@@ -69,3 +69,11 @@ export const CreateAppointmentZodSchema = z.object({
 export type IClientData = z.infer<typeof ClientDataSchema>;
 export type ICreateAppointment = z.infer<typeof CreateAppointmentZodSchema>;
 export type IAppointment = z.infer<typeof AppointmentZodSchema>;
+
+export type IAppointmentApiResponse = {
+  appointments: IAppointment[];
+  total: number;
+  limit: number;
+  offset: number;
+  page: number;
+};

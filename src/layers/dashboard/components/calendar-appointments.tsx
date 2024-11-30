@@ -72,7 +72,7 @@ export function CalnedarAppointments() {
       </Card>
     );
   return (
-    <div className=" h-full w-full flex flex-col items-center gap-2 bg-card  border border-border px-8 py-4 rounded-md ">
+    <Card className=" w-full h-full  flex flex-col justify-between  border-border p-4 ">
       <Popover>
         <PopoverTrigger asChild>
           <Button
@@ -136,6 +136,6 @@ export function CalnedarAppointments() {
           </div>
         )}
       </LoaderWrapper>
-    </div>
+    </Card>
   );
 }

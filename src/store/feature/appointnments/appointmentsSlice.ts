@@ -5,14 +5,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface AppointmentState extends IStoreState {
-  value: number;
+  total: number;
+  limit: number;
+  offset: number;
+  page: number;
   appointments: IAppointment[];
   selectedAppointment?: IAppointment;
   inmutablesAppointments: IAppointment[];
 }
 
 const initialState: AppointmentState = {
-  value: 0,
+  total: 0,
+  limit: 0,
+  offset: 0,
+  page: 0,
   appointments: [],
   inmutablesAppointments: [],
   selectedAppointment: undefined,
@@ -32,6 +38,20 @@ export const appointmentSlice = createSlice({
       state.appointments = action.payload;
       state.inmutablesAppointments = action.payload;
     },
+    setAppointmentsTableData: (
+      state,
+      action: PayloadAction<{
+        total: number;
+        limit: number;
+        offset: number;
+        page: number;
+      }>
+    ) => {
+      state.total = action.payload.total;
+      state.limit = action.payload.limit;
+      state.offset = action.payload.offset;
+      state.page = action.payload.page;
+    },
     addAppointment: (state, action: PayloadAction<IAppointment>) => {
       state.appointments.push(action.payload);
       state.inmutablesAppointments.push(action.payload);
@@ -47,6 +67,7 @@ export const {
   addAppointment,
   setAppointments,
   toggleAppointmentsLoading,
+  setAppointmentsTableData,
   setSelectedAppointment,
 } = appointmentSlice.actions;
 

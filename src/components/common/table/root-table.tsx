@@ -46,11 +46,12 @@ export function RootTable<TData, TValue>({
   columns,
   data,
   tableType,
+  pageSize = 10,
 }: DataTableProps<TData, TValue>) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 10,
+    pageSize,
   });
   const table = useReactTable({
     data,

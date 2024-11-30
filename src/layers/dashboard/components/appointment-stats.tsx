@@ -112,7 +112,7 @@ export function AppointmentStats() {
       </Card>
     );
   return (
-    <Card className=" w-full flex flex-col justify-between  border-border ">
+    <Card className=" w-full h-full flex flex-col justify-between  border-border ">
       <CardHeader>
         <CardTitle>Turnos Agendados</CardTitle>
         <CardDescription>

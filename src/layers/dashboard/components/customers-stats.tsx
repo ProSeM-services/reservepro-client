@@ -149,7 +149,7 @@ export function CustomerStats() {
     <div>
       <Card
         data-chart={id}
-        className="flex flex-col border border-border h-full  flex-grow w-full"
+        className="flex flex-col border border-border h-full  w-full"
       >
         <ChartStyle id={id} config={chartConfig} />
         <CardHeader className="flex-row items-start space-y-0 pb-0">
@@ -192,7 +192,7 @@ export function CustomerStats() {
             </SelectContent>
           </Select>
         </CardHeader>
-        <CardContent className="flex flex-1 justify-center pb-0">
+        <CardContent className="flex justify-center items-center  h-full w-full ">
           {loading || !customersStats.length || !months.length ? (
             <div className=" h-full w-full relative grid place-items-center">
               <BarLoader />
@@ -202,7 +202,7 @@ export function CustomerStats() {
             <ChartContainer
               id={id}
               config={chartConfig}
-              className="mx-auto aspect-square w-full "
+              className="w-[80%]  aspect-square"
             >
               <PieChart>
                 <ChartTooltip
