@@ -59,6 +59,24 @@ export const appointmentSlice = createSlice({
     setSelectedAppointment: (state, action: PayloadAction<IAppointment>) => {
       state.selectedAppointment = action.payload;
     },
+    cancleAppointment: (state, action: PayloadAction<string>) => {
+      const id = action.payload;
+      if (!state.appointments.find((e) => e.id === id)) return;
+      const appointmnetCanceled = state.appointments.filter(
+        (e) => e.id === id
+      )[0];
+
+      const newlist = [
+        ...state.appointments.filter((e) => e.id !== id),
+        { ...appointmnetCanceled, canceled: true },
+      ].sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB.getTime() - dateA.getTime();
+      });
+
+      state.appointments = newlist;
+    },
   },
 });
 
@@ -69,6 +87,7 @@ export const {
   toggleAppointmentsLoading,
   setAppointmentsTableData,
   setSelectedAppointment,
+  cancleAppointment,
 } = appointmentSlice.actions;
 
 export default appointmentSlice.reducer;
