@@ -59,7 +59,7 @@ export function CalendarAppointments() {
                 defaultMonth={date?.from}
                 selected={date}
                 onSelect={(e) => e && setDate(e)}
-                numberOfMonths={2}
+                // numberOfMonths={2}
               />
             </PopoverContent>
           </Popover>

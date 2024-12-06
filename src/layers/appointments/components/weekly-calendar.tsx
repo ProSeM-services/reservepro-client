@@ -1,5 +1,5 @@
 import React from "react";
-import { format, addDays, parseISO, isWithinInterval } from "date-fns";
+import { format, addDays, parseISO, isWithinInterval, set } from "date-fns";
 import { es } from "date-fns/locale";
 import { IAppointment } from "@/interfaces/appointments.interface";
 import { DateRange } from "react-day-picker";
@@ -31,8 +31,17 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
     currentDate = addDays(currentDate, 1);
   }
 
-  // Horarios (por ejemplo, de 6:00 a 21:00)
-  const hours = Array.from({ length: 16 }, (_, i) => i + 6);
+  // Generar intervalos de 15 minutos entre 6:00 y 21:00
+  const intervals = Array.from({ length: (21 - 6) * 4 }, (_, i) => {
+    const hour = 6 + Math.floor(i / 4);
+    const minutes = (i % 4) * 15;
+    return set(new Date(), {
+      hours: hour,
+      minutes,
+      seconds: 0,
+      milliseconds: 0,
+    });
+  });
 
   // Filtrar y organizar turnos dentro del rango de fechas
   const appointmentsByDay: Record<string, IAppointment[]> = appointments.reduce(
@@ -64,7 +73,7 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
       }}
     >
       {/* Encabezados de días */}
-      <div className="bg-gray-100 text-sm text-gray-600 font-semibold"></div>
+      <div className="bg-gray-100 text-sm text-gray-600 font-semibold "></div>
       {daysInRange.map((day) => (
         <div
           key={day.toISOString()}
@@ -76,29 +85,51 @@ const WeeklyCalendar: React.FC<WeeklyCalendarProps> = ({
       ))}
 
       {/* Filas de horarios */}
-      {hours.map((hour) => (
-        <React.Fragment key={hour}>
-          {/* Columna de horas */}
+      {intervals.map((interval) => (
+        <React.Fragment key={interval.toISOString()}>
+          {/* Columna de horarios */}
           <div className="p-2 text-right text-xs text-gray-500 bg-gray-50 border-t border-gray-300">
-            {`${hour}:00`}
+            {format(interval, "HH:mm")}
           </div>
           {/* Celdas de turnos */}
           {daysInRange.map((day) => {
             const dayKey = format(day, "yyyy-MM-dd");
             const dayAppointments = appointmentsByDay[dayKey] || [];
-            const hourAppointments = dayAppointments.filter(
-              (appointment) =>
-                parseISO(
+            if (dayAppointments.length > 0) {
+              console.log(
+                dayAppointments.filter((appointment) => {
+                  const appointmentTime = parseISO(
+                    `${appointment.date}T${appointment.time}`
+                  );
+                  console.log({
+                    appointmentTime: `${appointment.date}T${appointment.time}`,
+                    intervalTime: interval.getTime(),
+                  });
+                  return (
+                    appointmentTime.getHours() === interval.getHours() &&
+                    appointmentTime.getMinutes() === interval.getMinutes()
+                  );
+                })
+              );
+            }
+            const intervalAppointments = dayAppointments.filter(
+              (appointment) => {
+                const appointmentTime = parseISO(
                   `${appointment.date}T${appointment.time}`
-                ).getHours() === hour
+                );
+                return (
+                  appointmentTime.getHours() === interval.getHours() &&
+                  appointmentTime.getMinutes() === interval.getMinutes()
+                );
+              }
             );
 
             return (
               <div
-                key={day.toISOString() + hour}
+                key={day.toISOString() + interval.toISOString()}
                 className="p-1 relative border-t border-l border-gray-200 hover:bg-gray-50"
               >
-                {hourAppointments.map((appointment) => (
+                {intervalAppointments.map((appointment) => (
                   <div
                     key={appointment.id}
                     className="absolute top-1 left-1 right-1 bg-blue-400 text-white text-xs rounded p-1 shadow hover:bg-blue-500 transition-all cursor-pointer"
