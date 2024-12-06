@@ -24,6 +24,8 @@ import { Category, CATEGORY_VALUES } from "@/interfaces/categeory.interface";
 import { useToast } from "@/components/ui/use-toast";
 import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 import { CategoryCard } from "@/layers/dashboard/components";
+import { EditAddressInput } from "./edit-address-input";
+import { Location } from "@/interfaces/location.interface";
 interface UpdateCompanyFormProps {
   company: ICompany;
 }
@@ -42,6 +44,7 @@ export function UpdateCompanyForm({ company }: UpdateCompanyFormProps) {
   });
 
   const onSubmit = async (values: Partial<ICompany>) => {
+    console.log("VALUES TO UPDATE: ", values);
     try {
       setLoading(true);
       await updateCompany(company.id, values);
@@ -81,6 +84,9 @@ export function UpdateCompanyForm({ company }: UpdateCompanyFormProps) {
     setCategoryList(res);
   };
 
+  const handleAddressChange = (newLocation: Location) => {
+    form.setValue("address", newLocation);
+  };
   return (
     <Form {...form}>
       <form
@@ -122,6 +128,28 @@ export function UpdateCompanyForm({ company }: UpdateCompanyFormProps) {
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>Email</FormLabel>
+                {field.value && (
+                  <>
+                    <FormControl>
+                      <EditAddressInput
+                        location={field.value.value}
+                        placeholder="exapmple@email.com"
+                        handleAddressChange={handleAddressChange}
+                      />
+                    </FormControl>
+
+                    <FormMessage />
+                  </>
+                )}
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}

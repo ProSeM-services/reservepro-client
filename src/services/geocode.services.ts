@@ -16,7 +16,6 @@ export class GeocodeServices {
       if (response.data.status !== "OK") {
         throw new Error(`Geocodificación fallida: ${response.data.status}`);
       }
-
       const result = response.data.results[0];
       const location = result.geometry.location;
 
