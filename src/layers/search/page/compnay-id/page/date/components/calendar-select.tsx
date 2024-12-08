@@ -80,7 +80,9 @@ export function CalendarSelect() {
         <div className=" flex flex-wrap items-start justify-start gap-2   w-full">
           {availableList.map((value) => (
             <div
-              className="border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300"
+              className={`border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
+                params.get("time") === value.hs ? "bg-primary text-white" : ""
+              }`}
               onClick={() => handleSelectTime(value.hs)}
               key={value.hs}
             >

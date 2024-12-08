@@ -36,30 +36,40 @@ import {
 import { MONTHS } from "../constants";
 import { Input } from "@/components/ui/input";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { setAppointmentsStats } from "@/store/feature/stats/statsSlices";
+import {
+  setAppointmentsStats,
+  setAppointmentsStatsDateLimits,
+  setINITIAL_DATE_LIMIT,
+} from "@/store/feature/stats/statsSlices";
+
 export function AppointmentStats() {
   const session = useSession();
   const [data, setData] = useState<MonthlyData[]>([]);
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
   const [chartConfig, setChartConfig] = useState<ChartConfig>({});
-  const [dateLimits, setDateLimits] = useState({
-    start: 9,
-    end: 11,
-    year: 2024,
-  });
+
   const dispatch = useAppDispatch();
-  const { appointmentStats } = useAppSelector((s) => s.stats);
+  const { appointmentStats, dateLimits, INITIAL_DATE_LIMIT } = useAppSelector(
+    (s) => s.stats
+  );
   const { appointments, fetched: allAppointmentFetched } = useAppSelector(
     (s) => s.appointments
   );
-
+  const { end, start, year } = dateLimits;
   useEffect(() => {
-    if (appointmentStats.length > 0) {
+    if (
+      appointmentStats.length > 0 &&
+      INITIAL_DATE_LIMIT.start === start &&
+      INITIAL_DATE_LIMIT.end === end &&
+      INITIAL_DATE_LIMIT.year === year
+    ) {
       setData(appointmentStats);
       setChartConfig(createChartConfig(appointmentStats));
+
       return;
     }
+
     if (!session.data || !session.data?.backendTokens?.accessToken) return;
     const fetch = async () => {
       try {
@@ -74,6 +84,7 @@ export function AppointmentStats() {
         setChartConfig(createChartConfig(res));
         setData(res);
         dispatch(setAppointmentsStats(res));
+        dispatch(setINITIAL_DATE_LIMIT(dateLimits));
       } catch (error) {
         console.log("Error fetching today appointments : ", error);
       } finally {
@@ -91,8 +102,6 @@ export function AppointmentStats() {
   if (fetched && data.length === 0) {
     return <div>No data</div>;
   }
-
-  const { end, start, year } = dateLimits;
 
   if (appointments.length === 0 && allAppointmentFetched)
     return (
@@ -121,16 +130,23 @@ export function AppointmentStats() {
               type="number"
               value={year}
               onChange={(e) =>
-                setDateLimits((s) => ({
-                  ...s,
-                  year: parseInt(e.target.value),
-                }))
+                dispatch(
+                  setAppointmentsStatsDateLimits({
+                    key: "year",
+                    value: parseInt(e.target.value),
+                  })
+                )
               }
             />
             <Select
               value={`${start}`}
               onValueChange={(value) =>
-                setDateLimits((s) => ({ ...s, start: parseInt(value) }))
+                dispatch(
+                  setAppointmentsStatsDateLimits({
+                    key: "start",
+                    value: parseInt(value),
+                  })
+                )
               }
             >
               <SelectTrigger>
@@ -151,7 +167,12 @@ export function AppointmentStats() {
             <Select
               value={`${end}`}
               onValueChange={(value) =>
-                setDateLimits((s) => ({ ...s, end: parseInt(value) }))
+                dispatch(
+                  setAppointmentsStatsDateLimits({
+                    key: "end",
+                    value: parseInt(value),
+                  })
+                )
               }
             >
               <SelectTrigger>

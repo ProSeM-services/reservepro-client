@@ -7,7 +7,7 @@ import {
 
 export class AppointmentServices {
   static async getAll(): Promise<IAppointmentApiResponse> {
-    const res = await axiosInstance.get(`${BASE_URL}/appointments`);
+    const res = await axiosInstance.get(`${BASE_URL}/appointments?limit=30`);
     return res.data;
   }
   static async getAvialablesTimes({

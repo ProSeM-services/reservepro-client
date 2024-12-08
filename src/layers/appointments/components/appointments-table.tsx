@@ -97,6 +97,7 @@ export function AppointmentsTable() {
         columns={columns}
         data={AppoitnemntModelAdapter(appointments)}
         tableType="appoitnemnts"
+        pageSize={limit}
       />
     </LoaderWrapper>
   );
