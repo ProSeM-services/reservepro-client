@@ -11,25 +11,24 @@ import WorkhourInfo from "../components/workhours-info";
 import { BellDot, BellMinus, Building, Users } from "lucide-react";
 import { CompanyList } from "../components/company-list";
 import { AppointmentStats } from "../components/appointment-stats";
+import { Card, CardTitle } from "@/components/ui/card";
 
 export function DashboardPage() {
   return (
-    <div className="h-full  flex flex-col    ">
+    <div className="h-full w-full  flex flex-col    text-xs ">
       <DashboardHero />
 
-      <div className=" h-[95%] flex justify-between  gap-4     ">
-        <div className="h-full flex flex-col gap-4  flex-grow   ">
-          <section className=" w-full h-[60%]  max-h-[60%]   ">
-            <div className="w-full h-full grid grid-cols-3    justify-start  gap-4 ">
-              <CalnedarAppointments />
-              <AppointmentStats />
-              <CustomerStats />
-            </div>
+      <div className="  max-w-[92vw]   w-[92vw]  overflow-x-hidden   ">
+        <div className="h-full flex flex-col gap-2    ">
+          <section className=" max-w-full    grid grid-cols-3    justify-start  gap-2    ">
+            <CalnedarAppointments />
+            <AppointmentStats />
+            <CustomerStats />
           </section>
-          <section className="  w-full flex gap-4 h-[40%] max-h-[40%]    ">
-            <div className="bg-card rounded h-full w-1/4  p-4 flex flex-col border border-border ">
+          <section className=" h-80  w-full max-w-full flex gap-4      ">
+            <Card className="bg-card rounded h-full w-1/4  p-4 flex flex-col border border-border ">
               <div className="flex items-center justify-between font-bold">
-                <h2>Notificaciones</h2>
+                <CardTitle>Notificaciones</CardTitle>
                 <BellDot />
               </div>
 
@@ -37,12 +36,12 @@ export function DashboardPage() {
                 <BellMinus className="size-32" />
                 <p className="">No hay notifiaciones por leer</p>
               </div>
-            </div>
-            <div className="w-3/4 max-w-3/4 bg-card rounded flex p-2 gap-4 border border-border">
-              <div className=" w-1/2 rounded-md p-2  space-y-2">
+            </Card>
+            <div className="w-3/4 max-w-3/4  flex  gap-4 ">
+              <Card className=" w-1/2 rounded-md p-2  space-y-2">
                 {" "}
                 <div className="flex items-center justify-between font-bold">
-                  <h2>Miembros</h2>
+                  <CardTitle>Miembros</CardTitle>
                   <div className="flex items-center gap-2">
                     <Users />
                     <AddButton type="member" />
@@ -51,11 +50,11 @@ export function DashboardPage() {
                 <div className=" h-[90%] max-h-[90%] overflow-y-auto ">
                   <MemberList />
                 </div>
-              </div>
-              <div className=" w-1/2 rounded-md p-2 space-y-2">
+              </Card>
+              <Card className=" w-1/2 rounded-md p-2 space-y-2">
                 {" "}
                 <div className="flex items-center justify-between font-bold">
-                  <h2>Sucursales</h2>
+                  <CardTitle>Sucursales</CardTitle>
                   <div className="flex items-center gap-2">
                     <Building />
                     <AddButton type="company" />
@@ -64,12 +63,9 @@ export function DashboardPage() {
                 <div className=" h-[90%] max-h-[90%] overflow-y-auto">
                   <CompanyList />
                 </div>
-              </div>
+              </Card>
             </div>
           </section>
-        </div>
-        <div className=" h-full  w-1/6  ">
-          <WorkhourInfo />
         </div>
       </div>
     </div>

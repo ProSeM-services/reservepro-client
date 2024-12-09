@@ -1,5 +1,5 @@
 import { AddButton } from "@/layers/dashboard/components";
-import { ServicesList } from "../components";
+import { ServicesLinks, ServicesList } from "../components";
 
 export function ServicesPage() {
   return (
@@ -9,7 +9,7 @@ export function ServicesPage() {
         <AddButton type="services" />
       </div>
       <hr />
-      <ServicesList />
+      <ServicesLinks />
     </div>
   );
 }

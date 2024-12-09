@@ -105,9 +105,9 @@ export function AppointmentStats() {
 
   if (appointments.length === 0 && allAppointmentFetched)
     return (
-      <Card className="flex flex-col border border-border h-full   w-full p-1">
+      <Card className="flex flex-col  h-full   w-full p-1">
         <div className="bg-card rounded h-full w-full  p-4 flex flex-col  ">
-          <div className="flex items-center justify-between font-bold">
+          <div className="flex items-center justify-between font-bold text-lg">
             <CardTitle>Turnos Agendados</CardTitle>
           </div>
 

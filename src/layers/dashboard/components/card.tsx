@@ -20,7 +20,11 @@ import { MemberAsideDetails } from "./member-aside-details";
 export function CompanyCard({ company, readonly = false }: CompanyCardProps) {
   const router = useRouter();
   return (
-    <div className=" flex justify-between items-center p-2 rounded-sm border border-accent shadow-sm w-full  text-sm">
+    <div
+      className={` flex justify-between items-center   ${
+        readonly ? "p-2" : "px-2"
+      } rounded-sm border border-accent shadow-sm w-full  text-[12px]`}
+    >
       <div className="flex items-center gap-4  max-md:flex-grow   w-3/4 justify-between">
         <div className="flex items-center gap-2">
           <HomeIcon className="h-5 w-5 text-primary" />
@@ -51,10 +55,14 @@ interface MemberCardProps {
 }
 export function MemberCard({ member, readonly = false }: MemberCardProps) {
   return (
-    <div className=" flex justify-between items-center p-2 rounded-sm border border-accent shadow-sm w-full  text-sm">
+    <div
+      className={` flex justify-between items-center ${
+        readonly ? "p-2" : "px-2"
+      } rounded-sm border border-accent shadow-sm w-full  text-[12px]`}
+    >
       <div className="flex items-center gap-4  max-md:flex-grow  w-3/4  max-md:justify-between ">
         <div className="flex items-center gap-2">
-          <UserCircle2 className="h-5 w-5 text-primary" />
+          <UserCircle2 className="size-4 text-primary" />
           <span className="  font-medium text-nowrap">
             {member.name}, {member.lastName}
           </span>
