@@ -72,7 +72,7 @@ export function CalnedarAppointments() {
       </Card>
     );
   return (
-    <Card className=" w-full h-full  flex flex-col justify-between  border-border p-4 ">
+    <Card className=" w-full h-full  flex flex-col  gap-2  border-border p-4 ">
       <Popover>
         <PopoverTrigger asChild>
           <Button
