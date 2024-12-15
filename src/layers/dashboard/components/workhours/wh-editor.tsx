@@ -9,6 +9,8 @@ import { PlusIcon, TrashIcon } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { updateMember } from "@/lib/user.actions";
 import { useToast } from "@/components/ui/use-toast";
+import useFetchData from "@/app/hooks/useFetchData";
+import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 
 const DAYS = [
   { short: "dom", long: "domingo" },
@@ -100,17 +102,18 @@ export const WorkhoursEditor: React.FC<{ member: IMember }> = ({ member }) => {
     );
   };
 
+  const { editMember } = useCreatingFetch();
   const handleSave = async () => {
     try {
       setUpdating(true);
       const updatedWorkhours = week.map((entry) => entry.workhour);
-      await updateMember(member.id, { workhours: updatedWorkhours });
+      await editMember(member.id, { ...member, workhours: updatedWorkhours });
       toast({
         title: "Horarios actualizados",
         variant: "success",
       });
     } catch (error) {
-      console.error("Error actualizando workhours:", error);
+      console.log("Error actualizando workhours:", error);
       alert("Hubo un error al actualizar los workhours.");
     } finally {
       setUpdating(false);

@@ -1,22 +1,16 @@
 "use client";
 import { IMember } from "@/interfaces/member.iterface";
+import { setBookinData, setStep } from "@/store/feature/booking/bookingSlice";
+import { useAppDispatch } from "@/store/hooks";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
 export function SelectMemberCard({ member }: { member: IMember }) {
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const pathname = usePathname();
-  const { push } = useRouter();
+  const dispatch = useAppDispatch();
 
   const handleSelectMember = () => {
-    if (member) {
-      params.set("member", member.id);
-    } else {
-      params.delete("member");
-    }
-    push(`${pathname}/date?${params.toString()}`);
+    dispatch(setBookinData({ key: "member", value: member }));
+    dispatch(setStep("forward"));
   };
   return (
     <div

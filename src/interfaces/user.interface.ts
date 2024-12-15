@@ -1,5 +1,5 @@
 import { z } from "zod";
-export const ROLES_VALUES = ["BASIC", "ADMIN"] as const;
+export const ROLES_VALUES = ["BASIC", "ADMIN", "OWNER"] as const;
 export const UserZodSchema = z.object({
   id: z.string(),
   name: z.string(),

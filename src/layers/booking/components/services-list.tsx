@@ -1,11 +1,13 @@
 "use client";
 import { getCompnayServices } from "@/lib/clienta-actions";
 import React, { useEffect, useState } from "react";
-import SelectService from "./select-services";
 import { formatDuration } from "@/lib/formatDuration";
 import { useSearchParams } from "next/navigation";
 import { IService } from "@/interfaces";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { SelectService } from "./select-services";
+import { useAppDispatch } from "@/store/hooks";
+import { setBookinData } from "@/store/feature/booking/bookingSlice";
 
 export default function SercvicesList({
   readonly = true,
@@ -15,12 +17,12 @@ export default function SercvicesList({
   const [services, setServices] = useState<IService[]>([]);
   const searchParams = useSearchParams();
   const companyId = searchParams.get("company");
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
     if (!companyId) return;
     const fetch = async () => {
       const res = await getCompnayServices(companyId);
-      console.log("COOMPANY SERIVCES", res);
+      dispatch(setBookinData({ key: "companyId", value: companyId }));
       setServices(res);
     };
     fetch();

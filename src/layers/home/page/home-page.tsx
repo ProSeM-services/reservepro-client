@@ -15,7 +15,7 @@ export function HomePage({ searchParams }: PageProps) {
     <div className={`flex flex-col   bg-muted  `}>
       <HomeHeader />
 
-      <main className=" min-h-screen px-24  outline ">
+      <main className=" min-h-screen px-24   ">
         <LandingPage />
         <CompaniesHomeSection searchParams={searchParams} />
         <ClientsFeedback />

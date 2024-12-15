@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   ClientDataSchema,
   IClientData,
@@ -19,20 +19,14 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { BookIcon } from "lucide-react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { AppointmentServices } from "@/services/appointment.services";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setStep } from "@/store/feature/booking/bookingSlice";
 
-export function ClientFormAppointmentPage() {
-  const params = useSearchParams();
-  const pathname = usePathname();
-  const { push } = useRouter();
+export function ClientFormSection() {
+  const { bookingData } = useAppSelector((s) => s.booking);
+  const dispatch = useAppDispatch();
 
-  const [appointmentData, setAppointmentData] = useState({
-    date: params.get("date"),
-    ServiceId: params.get("service"),
-    UserId: params.get("member"),
-    time: params.get("time"),
-  });
   const [loading, setLoading] = useState(false);
   const form = useForm<IClientData>({
     resolver: zodResolver(ClientDataSchema),
@@ -45,26 +39,12 @@ export function ClientFormAppointmentPage() {
     },
   });
 
-  useEffect(() => {
-    Array.from(params.keys()).forEach((e) => {
-      if (e === "service") {
-        setAppointmentData((s) => ({
-          ...s,
-          ServiceId: params.get(e),
-        }));
-      } else if (e === "member") {
-        setAppointmentData((s) => ({ ...s, UserId: params.get(e) }));
-      } else {
-        setAppointmentData((s) => ({ ...s, [e]: params.get(e) }));
-      }
-    });
-  }, [params]);
   const onSubmit = async (clientData: IClientData) => {
     if (
-      !appointmentData.date ||
-      !appointmentData.ServiceId ||
-      !appointmentData.UserId ||
-      !appointmentData.time
+      !bookingData.date ||
+      !bookingData.service ||
+      !bookingData.member ||
+      !bookingData.time
     )
       return;
 
@@ -73,17 +53,17 @@ export function ClientFormAppointmentPage() {
       lastName: clientData.lastName,
       email: clientData.email,
       phone: clientData.phone,
-      date: appointmentData.date,
-      ServiceId: appointmentData.ServiceId,
-      UserId: appointmentData.UserId,
-      time: appointmentData.time,
+      date: bookingData.date,
+      ServiceId: bookingData.service.id,
+      UserId: bookingData.member.id,
+      time: bookingData.time,
     };
 
     try {
       setLoading(true);
       const res = await AppointmentServices.createAppointment(data);
       if (res.data.status === 401) throw new Error(res.data.message);
-      push(`${pathname}/confirmation?${params.toString()}`);
+      dispatch(setStep("forward"));
     } catch (error) {
       console.error("Error creating appointment: ", error);
     } finally {

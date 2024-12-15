@@ -8,28 +8,27 @@ import { BASE_URL } from "@/config/axios.config";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { BarLoader } from "@/components/common/bar-loader";
 import { CalendarIcon } from "lucide-react";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setBookinData } from "@/store/feature/booking/bookingSlice";
 type IAvailableList = {
   hs: string;
   available: boolean;
 };
 export function CalendarSelect() {
-  const [date, setDate] = useState<Date | null>(null);
-  const { push, back } = useRouter();
   const [availableList, setAvailableList] = useState<IAvailableList[]>([]);
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const pathname = usePathname();
-
+  const { bookingData } = useAppSelector((s) => s.booking);
+  const dispatch = useAppDispatch();
+  const { member, duration, date, time } = bookingData;
   useEffect(() => {
     if (!date) return;
     const fetchData = async () => {
       setLoading(true);
       try {
         const res = await axios.post(`${BASE_URL}/appointments/member-slots`, {
-          UserId: params.get("member"),
+          UserId: member?.id,
           date: new Date(date).toISOString(),
-          duration: parseInt(params.get("duration") || ""),
+          duration: duration,
         });
 
         setAvailableList(res.data.availableTimes);
@@ -43,22 +42,19 @@ export function CalendarSelect() {
   }, [date]);
 
   const handleDate = (value: Date) => {
-    params.set("date", value.toISOString());
-    params.delete("time");
-    setDate(value);
-    push(`${pathname}/?${params.toString()}`);
+    dispatch(setBookinData({ key: "date", value: value.toISOString() }));
+    dispatch(setBookinData({ key: "time", value: "" }));
   };
 
-  const handleSelectTime = (time: string) => {
-    params.set("time", time);
-    push(`${pathname}/?${params.toString()}`);
+  const handleSelectTime = (value: string) => {
+    dispatch(setBookinData({ key: "time", value }));
   };
 
   return (
     <div className=" w-full   h-full items-start flex gap-4 ">
       <Calendar
         mode="single"
-        selected={date ? date : new Date()}
+        selected={date ? new Date(date) : new Date()}
         onSelect={(value) => value && handleDate(value)}
         className="rounded-md  "
         disabled={(date) => {
@@ -81,7 +77,7 @@ export function CalendarSelect() {
           {availableList.map((value) => (
             <div
               className={`border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
-                params.get("time") === value.hs ? "bg-primary text-white" : ""
+                time === value.hs ? "bg-primary text-white" : ""
               }`}
               onClick={() => handleSelectTime(value.hs)}
               key={value.hs}

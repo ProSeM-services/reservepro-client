@@ -114,7 +114,7 @@ export async function SearchCompanyDetail({
               <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Servicios</h2>
                 <Suspense fallback="Loading....">
-                  <SercvicesList companyId={company.id} />
+                  <SercvicesList />
                 </Suspense>
               </div>
             )}
@@ -133,7 +133,8 @@ export async function SearchCompanyDetail({
             <p className="text-gray-600 ">{company.address.value}</p>
 
             <Link
-              href={`/search/${company.id}/booking?company=${company.id}`}
+              // href={`/search/${company.id}/booking?company=${company.id}`}
+              href={`/booking?company=${company.id}`}
               className="bg-primary text-white text-center p-2 rounded-md font-semibold"
             >
               Reservar ahora

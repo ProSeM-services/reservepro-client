@@ -17,7 +17,7 @@ export default function SelectService({ service }: { service: IService }) {
     } else {
       params.delete("service");
     }
-    push(`${pathname}/profesional?${params.toString()}`);
+    push(`${pathname}?${params.toString()}`);
   };
 
   return (

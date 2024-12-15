@@ -1,7 +1,7 @@
 import React from "react";
-import { CalendarSelect } from "../components";
+import { CalendarSelect } from "./calendar-select";
 
-export function SelectDatePage() {
+export function SelectDate() {
   return (
     <div className="flex  w-full h-full">
       <section className="space-y-2 w-full h-full flex flex-col">

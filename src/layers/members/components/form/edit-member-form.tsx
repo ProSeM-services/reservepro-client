@@ -16,9 +16,10 @@ import {
   IMember,
   MemberZodSchema,
   ROLES_VALUES,
+  UpdateMemberZodSchema,
 } from "@/interfaces/member.iterface";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Select,
@@ -27,26 +28,60 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { BaselineIcon, ShieldCheck } from "lucide-react";
+import {
+  BaselineIcon,
+  Paperclip,
+  ShieldCheck,
+  UserIcon,
+  XIcon,
+} from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import useCreatingFetch from "@/app/hooks/useCreatingFetch";
 import useFetchData from "@/app/hooks/useFetchData";
+import Image from "next/image";
+import { FilesServices } from "@/services/files.services";
 
 export function EditMemberForm({ member }: { member: IMember }) {
   const { toast } = useToast();
   const { editMember } = useCreatingFetch();
   const { fetchMembers } = useFetchData();
-
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(
+    member.image ? member.image : null
+  );
   const [loading, setLoading] = useState(false);
   const form = useForm<ICreateMember>({
-    resolver: zodResolver(CreateMemberZodSchema),
-    mode: "onChange",
+    resolver: zodResolver(UpdateMemberZodSchema),
+    // mode: "onChange",
     defaultValues: member,
   });
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0] || null;
+
+    setFile(selectedFile);
+    if (selectedFile) {
+      const fileReader = new FileReader();
+      fileReader.onload = () => setPreview(fileReader.result as string);
+      fileReader.readAsDataURL(selectedFile); // Convierte la imagen a Base64 para previsualización
+    } else {
+      setPreview(null);
+    }
+  };
+  const handleResetImageFile = () => {
+    setPreview(member.image ? member.image : null);
+    setFile(null);
+  };
   const onSubmit = async (values: ICreateMember) => {
+    // const values = form.getValues();
     try {
       setLoading(true);
-      await editMember(member.id, values);
+      let data = values;
+      if (file) {
+        const imageData = await FilesServices.upload(file);
+        data = { ...values, image: imageData.url };
+      }
+      await editMember(member.id, data);
       await fetchMembers();
       toast({
         title: "Miembro actualizado!",
@@ -57,8 +92,6 @@ export function EditMemberForm({ member }: { member: IMember }) {
     } catch (error) {
       toast({
         title: "Error al editar un miembro!",
-        // @ts-ignore
-        description: error.response.data.message,
         variant: "destructive",
       });
       console.log("Error creating Member, ", error);
@@ -66,6 +99,12 @@ export function EditMemberForm({ member }: { member: IMember }) {
       setLoading(false);
     }
   };
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   return (
     <Form {...form}>
       <form
@@ -81,6 +120,53 @@ export function EditMemberForm({ member }: { member: IMember }) {
               {form.getValues("lastName")}
             </span>
           </div>
+
+          <section>
+            <div className="w-full  flex justify-center">
+              {preview ? (
+                <>
+                  <Image
+                    src={preview}
+                    alt="Vista previa"
+                    width={250}
+                    height={250}
+                    className="rounded-full aspect-square object-cover"
+                  />
+                  {preview !== member.image && (
+                    <Button
+                      type="button"
+                      variant={"secondary"}
+                      size={"sm"}
+                      onClick={handleResetImageFile}
+                    >
+                      <XIcon className="size-4" />
+                    </Button>
+                  )}
+                </>
+              ) : (
+                <UserIcon className="size-[250px] aspect-square " />
+              )}
+            </div>
+
+            <FormLabel>Seleccionar una imagen</FormLabel>
+            <>
+              <Button
+                onClick={handleButtonClick}
+                variant={"ghost"}
+                type="button"
+              >
+                <Paperclip className="size-4 text-primary" />
+              </Button>
+              <Input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+            </>
+
+            <FormMessage />
+          </section>
           <FormField
             control={form.control}
             name="name"
