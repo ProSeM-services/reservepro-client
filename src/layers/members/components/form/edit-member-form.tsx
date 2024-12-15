@@ -132,14 +132,16 @@ export function EditMemberForm({ member }: { member: IMember }) {
                     height={250}
                     className="rounded-full aspect-square object-cover"
                   />
-                  <Button
-                    type="button"
-                    variant={"secondary"}
-                    size={"sm"}
-                    onClick={handleResetImageFile}
-                  >
-                    <XIcon className="size-4" />
-                  </Button>
+                  {preview !== member.image && (
+                    <Button
+                      type="button"
+                      variant={"secondary"}
+                      size={"sm"}
+                      onClick={handleResetImageFile}
+                    >
+                      <XIcon className="size-4" />
+                    </Button>
+                  )}
                 </>
               ) : (
                 <UserIcon className="size-[250px] aspect-square " />
