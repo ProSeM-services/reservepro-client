@@ -19,7 +19,7 @@ export function SelectedMember() {
       >
         <div className="relative size-14 aspect-square ">
           <Image
-            src={"/avatars/avatar.webp"}
+            src={member.image ? member.image : "/avatars/avatar.webp"}
             fill
             alt={member.name}
             className="shadow-md rounded-full object-cover border border-border cursor-pointer transition-all duration-150 hover:scale-105"

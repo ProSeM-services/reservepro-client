@@ -10,6 +10,10 @@ export function SelectService({ service }: { service: IService }) {
   const handleSelecServices = () => {
     dispatch(setBookinData({ key: "service", value: service }));
     dispatch(setBookinData({ key: "duration", value: service.duration }));
+    dispatch(setBookinData({ key: "member", value: "" }));
+    dispatch(setBookinData({ key: "time", value: "" }));
+    dispatch(setBookinData({ key: "date", value: "" }));
+
     dispatch(setStep("forward"));
   };
 

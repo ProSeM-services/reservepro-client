@@ -2,12 +2,15 @@
 
 import { useAppSelector } from "@/store/hooks";
 import { motion } from "framer-motion";
+import { parseDateToString } from "../utils/parseDateToString";
+
 export function SelectedDate() {
   const {
     bookingData: { date },
   } = useAppSelector((s) => s.booking);
 
   if (!date) return null;
+
   return (
     <motion.div
       key={date}
@@ -17,7 +20,7 @@ export function SelectedDate() {
       className="flex w-full p-2 text-gray-600 justify-between items-center"
     >
       <p>Dia</p>
-      <p>{new Date(date).toLocaleDateString()} hs</p>
+      <p>{parseDateToString(date)}</p>
     </motion.div>
   );
 }
