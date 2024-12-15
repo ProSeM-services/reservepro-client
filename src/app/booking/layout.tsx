@@ -9,7 +9,6 @@ import {
 } from "@/layers/booking/components";
 import HomeHeader from "@/layers/home/components/home-header";
 import Link from "next/link";
-import { GoBackButton } from "@/components";
 import { SelectedCompanyDetail } from "@/layers/search/page/compnay-id/components/selected-company";
 import StoreProvider from "../components/store-provider";
 import { PreviousStep } from "@/layers/booking/components/previous-step";
@@ -17,7 +16,6 @@ import { PreviousStep } from "@/layers/booking/components/previous-step";
 interface LayoutProps {
   params: { id: string };
   children: ReactNode;
-  searchParams: { service: string };
 }
 export default function layout({ children }: LayoutProps) {
   return (
