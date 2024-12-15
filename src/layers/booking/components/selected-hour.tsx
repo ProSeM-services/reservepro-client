@@ -1,16 +1,23 @@
 "use client";
-import { useSearchParams } from "next/navigation";
+import { useAppSelector } from "@/store/hooks";
+import { motion } from "framer-motion";
 
 export function SelectedHour() {
-  const params = useSearchParams();
+  const {
+    bookingData: { time },
+  } = useAppSelector((s) => s.booking);
 
-  const hour = params.get("time");
-
-  if (!hour) return null;
+  if (!time) return null;
   return (
-    <div className="flex w-full p-2 text-gray-600 justify-between items-center">
+    <motion.div
+      key={time}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="flex w-full p-2 text-gray-600 justify-between items-center"
+    >
       <p>Horario</p>
-      <p>{hour} hs</p>
-    </div>
+      <p>{time} hs</p>
+    </motion.div>
   );
 }

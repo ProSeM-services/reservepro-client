@@ -1,11 +1,13 @@
+import { ICompany, IService } from "@/interfaces";
+import { IMember } from "@/interfaces/member.iterface";
 import { IStoreState } from "@/store/interface/state.interface";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 interface IBookinData {
   companyId: string;
-  serviceId: string;
+  service?: IService;
   duration: string;
-  member: string;
+  member?: IMember;
   time: string;
   date: string;
 }
@@ -20,9 +22,9 @@ const initialState: BookingState = {
   fetched: false,
   bookingData: {
     companyId: "",
-    serviceId: "",
+    service: undefined,
     duration: "",
-    member: "",
+    member: undefined,
     date: "",
     time: "",
   },
@@ -38,7 +40,10 @@ export const bookingSlice = createSlice({
     },
     setBookinData: (
       state,
-      action: PayloadAction<{ key: keyof IBookinData; value: string | number }>
+      action: PayloadAction<{
+        key: keyof IBookinData;
+        value: string | number | ICompany | IService | IMember;
+      }>
     ) => {
       const { key, value } = action.payload;
       state.bookingData = { ...state.bookingData, [key]: value };

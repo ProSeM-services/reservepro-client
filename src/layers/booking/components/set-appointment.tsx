@@ -1,37 +1,24 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { setStep } from "@/store/feature/booking/bookingSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 export function SetAppointment() {
-  const searchParams = useSearchParams();
-  const [loading, setLoading] = useState(false);
+  const {
+    bookingData: { companyId, date, duration, member, service, time },
+    step,
+  } = useAppSelector((s) => s.booking);
+  const dispatch = useAppDispatch();
 
-  const params = new URLSearchParams(searchParams);
-  const pathname = usePathname();
-  const { push } = useRouter();
-
-  const ableToSet =
-    params.get("member") &&
-    params.get("time") &&
-    params.get("service") &&
-    params.get("date");
+  const ableToSet = member && time && service && date && companyId;
   const handleSetTurno = () => {
     if (!ableToSet) return;
-    push(`${pathname}/form?${params.toString()}`);
+    dispatch(setStep("forward"));
   };
 
-  if (pathname.split("/").includes("form")) return null;
-  if (pathname.split("/").includes("confirmation")) return null;
-
   return (
-    <div className="">
-      <Button
-        className="w-full"
-        disabled={!ableToSet}
-        onClick={handleSetTurno}
-        isLoading={loading}
-      >
+    <div className={`${step > 2 ? "hidden" : ""}`}>
+      <Button className="w-full" disabled={!ableToSet} onClick={handleSetTurno}>
         Agendar turno
       </Button>
     </div>

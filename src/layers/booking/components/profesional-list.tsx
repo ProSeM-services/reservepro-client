@@ -7,6 +7,7 @@ import { IMember } from "@/interfaces/member.iterface";
 import { LoaderSpinner } from "@/components/common/loader-spinner";
 import { SelectMemberCard } from "../components/select-member-card";
 import { useAppSelector } from "@/store/hooks";
+import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
 
 export function ProfesionalList() {
   const [users, setUsers] = useState<IMember[]>([]);
@@ -14,13 +15,13 @@ export function ProfesionalList() {
 
   const { bookingData } = useAppSelector((s) => s.booking);
   useEffect(() => {
-    const { companyId, serviceId } = bookingData;
-    if (!serviceId) return;
+    const { companyId, service } = bookingData;
+    if (!service) return;
     const fetchMembers = async () => {
-      if (serviceId) {
+      if (service) {
         try {
           setIsLoading(true);
-          const members = await getServicesMembers(serviceId);
+          const members = await getServicesMembers(service.id);
           setUsers(members.filter((m) => m.CompanyId === companyId));
         } catch (error) {
           console.error("Error fetching service members:", error);
@@ -31,22 +32,24 @@ export function ProfesionalList() {
     };
 
     fetchMembers();
-  }, [bookingData.serviceId]);
+  }, [bookingData.service]);
 
   return (
-    <div className="space-y-4 ">
-      {isLoading ? (
-        <p className="flex items-center gap-2">
-          Cargando
-          <LoaderSpinner />
-        </p>
-      ) : users.length === 0 ? (
-        "No hay profesionales disponibles"
-      ) : (
-        users.map((member) => (
-          <SelectMemberCard member={member} key={member.id} />
-        ))
-      )}
-    </div>
+    <LoaderWrapper type="members" loading={isLoading}>
+      <div className="space-y-4 ">
+        {isLoading ? (
+          <p className="flex items-center gap-2">
+            Cargando
+            <LoaderSpinner />
+          </p>
+        ) : users.length === 0 ? (
+          "No hay profesionales disponibles"
+        ) : (
+          users.map((member) => (
+            <SelectMemberCard member={member} key={member.id} />
+          ))
+        )}
+      </div>
+    </LoaderWrapper>
   );
 }

@@ -6,7 +6,7 @@ import {
   SelectedMember,
   SetAppointment,
   SelectedDate,
-} from "@/layers/search/page/compnay-id/components";
+} from "@/layers/booking/components";
 import HomeHeader from "@/layers/home/components/home-header";
 import Link from "next/link";
 import { GoBackButton } from "@/components";

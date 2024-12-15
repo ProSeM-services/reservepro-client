@@ -15,23 +15,18 @@ type IAvailableList = {
   available: boolean;
 };
 export function CalendarSelect() {
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const { push, back } = useRouter();
   const [availableList, setAvailableList] = useState<IAvailableList[]>([]);
   const [loading, setLoading] = useState(false);
-  const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams);
-  const pathname = usePathname();
   const { bookingData } = useAppSelector((s) => s.booking);
   const dispatch = useAppDispatch();
-  const { companyId, member, duration, date, time } = bookingData;
+  const { member, duration, date, time } = bookingData;
   useEffect(() => {
-    if (!selectedDate) return;
+    if (!date) return;
     const fetchData = async () => {
       setLoading(true);
       try {
         const res = await axios.post(`${BASE_URL}/appointments/member-slots`, {
-          UserId: member,
+          UserId: member?.id,
           date: new Date(date).toISOString(),
           duration: duration,
         });
@@ -49,7 +44,6 @@ export function CalendarSelect() {
   const handleDate = (value: Date) => {
     dispatch(setBookinData({ key: "date", value: value.toISOString() }));
     dispatch(setBookinData({ key: "time", value: "" }));
-    setSelectedDate(value);
   };
 
   const handleSelectTime = (value: string) => {
@@ -60,7 +54,7 @@ export function CalendarSelect() {
     <div className=" w-full   h-full items-start flex gap-4 ">
       <Calendar
         mode="single"
-        selected={selectedDate ? selectedDate : new Date()}
+        selected={date ? new Date(date) : new Date()}
         onSelect={(value) => value && handleDate(value)}
         className="rounded-md  "
         disabled={(date) => {
@@ -74,11 +68,11 @@ export function CalendarSelect() {
         <div className="flex flex-col relative  w-full h-full items-center justify-center">
           <BarLoader />
         </div>
-      ) : availableList.length === 0 && selectedDate ? (
+      ) : availableList.length === 0 && date ? (
         <div className="bg-muted rounded-md w-full text-center p-4">
           <p>No hay horarios disponibles</p>
         </div>
-      ) : selectedDate ? (
+      ) : date ? (
         <div className=" flex flex-wrap items-start justify-start gap-2   w-full">
           {availableList.map((value) => (
             <div

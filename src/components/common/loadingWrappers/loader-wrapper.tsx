@@ -8,6 +8,7 @@ import {
   HotelIcon,
   PackageCheck,
   Contact,
+  UserSearch,
 } from "lucide-react";
 import { BarLoader } from "../bar-loader";
 export type ILoadingWrapper =
@@ -38,7 +39,7 @@ const Config: Record<ILoadingWrapper, IConfig> = {
     text: "clientes",
   },
   members: {
-    icon: CalendarCheck,
+    icon: UserSearch,
     text: "miembros",
   },
   services: {

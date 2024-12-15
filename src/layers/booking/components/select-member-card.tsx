@@ -9,7 +9,7 @@ export function SelectMemberCard({ member }: { member: IMember }) {
   const dispatch = useAppDispatch();
 
   const handleSelectMember = () => {
-    dispatch(setBookinData({ key: "member", value: member.id }));
+    dispatch(setBookinData({ key: "member", value: member }));
     dispatch(setStep("forward"));
   };
   return (
