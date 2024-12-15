@@ -2,6 +2,8 @@ import { WorkhoursEditor } from "@/layers/dashboard/components/workhours/wh-edit
 import { getMemberById } from "@/lib/actions";
 import { EditMember } from "./edit-member";
 import { NeedReladMemberPage } from "./need-reload";
+import Image from "next/image";
+import { UserIcon } from "lucide-react";
 
 export async function MemberDetailsPage({
   params,
@@ -13,15 +15,30 @@ export async function MemberDetailsPage({
   return (
     <div className="p-4 overflow-auto space-y-4 ">
       <header className=" flex justify-between">
-        <div>
-          <div className="flex gap-2">
-            <h2 className="text-xl font-medium">
-              {member.name} {member.lastName}
-            </h2>
-            <NeedReladMemberPage />
-          </div>
+        <div className="flex gap-4">
+          {member.image ? (
+            <div>
+              <Image
+                src={member.image}
+                alt={`${member.name}'s profile`}
+                className="aspect-square  rounded-full object-cover"
+                width={`${100}`}
+                height={100}
+              />
+            </div>
+          ) : (
+            <UserIcon className="size-[100px] aspect-square " />
+          )}
+          <div>
+            <div className="flex gap-2">
+              <h2 className="text-xl font-medium">
+                {member.name} {member.lastName}
+              </h2>
+              <NeedReladMemberPage />
+            </div>
 
-          <p className="text-gray-400">{member.email}</p>
+            <p className="text-gray-400">{member.email}</p>
+          </div>
         </div>
 
         <div>
@@ -51,16 +68,6 @@ export async function MemberDetailsPage({
           <p className="text-gray-400">Role: {member.role}</p>
         </div>
 
-        {member.image && (
-          <div>
-            <h3 className="font-medium mb-2">Profile Image</h3>
-            <img
-              src={member.image}
-              alt={`${member.name}'s profile`}
-              className="w-32 h-32 rounded-full object-cover"
-            />
-          </div>
-        )}
         <WorkhoursEditor member={member} />
       </div>
     </div>
