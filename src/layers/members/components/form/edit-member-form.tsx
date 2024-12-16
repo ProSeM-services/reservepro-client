@@ -14,6 +14,7 @@ import {
   CreateMemberZodSchema,
   ICreateMember,
   IMember,
+  IUpdateMember,
   MemberZodSchema,
   ROLES_VALUES,
   UpdateMemberZodSchema,
@@ -51,7 +52,7 @@ export function EditMemberForm({ member }: { member: IMember }) {
     member.image ? member.image : null
   );
   const [loading, setLoading] = useState(false);
-  const form = useForm<ICreateMember>({
+  const form = useForm<IUpdateMember>({
     resolver: zodResolver(UpdateMemberZodSchema),
     // mode: "onChange",
     defaultValues: member,
@@ -72,7 +73,7 @@ export function EditMemberForm({ member }: { member: IMember }) {
     setPreview(member.image ? member.image : null);
     setFile(null);
   };
-  const onSubmit = async (values: ICreateMember) => {
+  const onSubmit = async (values: IUpdateMember) => {
     // const values = form.getValues();
     try {
       setLoading(true);
