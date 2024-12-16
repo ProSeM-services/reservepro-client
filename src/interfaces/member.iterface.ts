@@ -38,6 +38,7 @@ export const CreateMemberZodSchema = ZodTenantSchema.omit({
 });
 export const UpdateMemberZodSchema = ZodTenantSchema.omit({
   tenantName: true,
+  password: true,
 })
   .partial()
   .extend({
@@ -47,3 +48,4 @@ export const UpdateMemberZodSchema = ZodTenantSchema.omit({
 
 export type IMember = z.infer<typeof MemberZodSchema>;
 export type ICreateMember = z.infer<typeof CreateMemberZodSchema>;
+export type IUpdateMember = z.infer<typeof UpdateMemberZodSchema>;
