@@ -12,7 +12,7 @@ import { Users } from "lucide-react";
 export default function Page() {
   return (
     <div>
-      <div className="flex flex-1 flex-col gap-4 ">
+      <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
         <div className="grid auto-rows-min gap-4 md:grid-cols-3">
           <Card className=" w-full rounded-md p-2  space-y-2">
             {" "}

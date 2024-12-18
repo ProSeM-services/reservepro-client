@@ -146,127 +146,125 @@ export function CustomerStats() {
       </Card>
     );
   return (
-    <div>
-      <Card
-        data-chart={id}
-        className="flex flex-col border border-border h-full  w-full"
-      >
-        <ChartStyle id={id} config={chartConfig} />
-        <CardHeader className="flex-row items-start space-y-0 pb-0">
-          <div className="grid gap-1">
-            <CardTitle>Clientes </CardTitle>
-            <CardDescription>
-              {months[0]} - {months[months.length - 1]} 2024
-            </CardDescription>
-          </div>
-          <Select value={activeMonth} onValueChange={setActiveMonth}>
-            <SelectTrigger
-              className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
-              aria-label="Select a value"
-            >
-              <SelectValue placeholder="Select month" />
-            </SelectTrigger>
-            <SelectContent align="end" className="rounded-xl">
-              {months.map((key) => {
-                const config =
-                  chartConfig[key.toLowerCase() as keyof typeof chartConfig];
+    <Card
+      data-chart={id}
+      className="flex flex-col border border-border h-full  w-full"
+    >
+      <ChartStyle id={id} config={chartConfig} />
+      <CardHeader className="flex-row items-start space-y-0 pb-0">
+        <div className="grid gap-1">
+          <CardTitle>Clientes </CardTitle>
+          <CardDescription>
+            {months[0]} - {months[months.length - 1]} 2024
+          </CardDescription>
+        </div>
+        <Select value={activeMonth} onValueChange={setActiveMonth}>
+          <SelectTrigger
+            className="ml-auto h-7 w-[130px] rounded-lg pl-2.5"
+            aria-label="Select a value"
+          >
+            <SelectValue placeholder="Select month" />
+          </SelectTrigger>
+          <SelectContent align="end" className="rounded-xl">
+            {months.map((key) => {
+              const config =
+                chartConfig[key.toLowerCase() as keyof typeof chartConfig];
 
-                return (
-                  <SelectItem
-                    key={key}
-                    value={key}
-                    className="rounded-lg [&_span]:flex"
-                  >
-                    <div className="flex items-center gap-2 text-xs">
-                      <span
-                        className="flex h-3 w-3 shrink-0 rounded-sm"
-                        style={{
-                          backgroundColor: ` ${config.color}`,
-                        }}
-                      />
-                      {config?.label}
-                    </div>
-                  </SelectItem>
-                );
-              })}
-            </SelectContent>
-          </Select>
-        </CardHeader>
-        <CardContent className="flex justify-center items-center  h-full w-full ">
-          {loading || !customersStats.length || !months.length ? (
-            <div className=" h-full w-full relative grid place-items-center">
-              <BarLoader />
-              Loading ...
-            </div>
-          ) : (
-            <ChartContainer
-              id={id}
-              config={chartConfig}
-              className="w-[80%]  aspect-square"
-            >
-              <PieChart>
-                <ChartTooltip
-                  cursor={false}
-                  content={<ChartTooltipContent hideLabel />}
-                />
-                <Pie
-                  data={customersStats}
-                  dataKey="count"
-                  nameKey="month"
-                  innerRadius={60}
-                  strokeWidth={5}
-                  activeIndex={activeIndex}
-                  activeShape={({
-                    outerRadius = 0,
-                    ...props
-                  }: PieSectorDataItem) => (
-                    <g className="bg-green-400">
-                      <Sector {...props} outerRadius={outerRadius + 10} />
-                      <Sector
-                        {...props}
-                        outerRadius={outerRadius + 25}
-                        innerRadius={outerRadius + 12}
-                      />
-                    </g>
-                  )}
+              return (
+                <SelectItem
+                  key={key}
+                  value={key}
+                  className="rounded-lg [&_span]:flex"
                 >
-                  <Label
-                    content={({ viewBox }) => {
-                      if (viewBox && "cx" in viewBox && "cy" in viewBox) {
-                        return (
-                          <text
+                  <div className="flex items-center gap-2 text-xs">
+                    <span
+                      className="flex h-3 w-3 shrink-0 rounded-sm"
+                      style={{
+                        backgroundColor: ` ${config.color}`,
+                      }}
+                    />
+                    {config?.label}
+                  </div>
+                </SelectItem>
+              );
+            })}
+          </SelectContent>
+        </Select>
+      </CardHeader>
+      <CardContent className="flex justify-center items-center  h-full w-full ">
+        {loading || !customersStats.length || !months.length ? (
+          <div className=" h-full w-full relative grid place-items-center">
+            <BarLoader />
+            Loading ...
+          </div>
+        ) : (
+          <ChartContainer
+            id={id}
+            config={chartConfig}
+            className="w-[50%]  aspect-square"
+          >
+            <PieChart>
+              <ChartTooltip
+                cursor={false}
+                content={<ChartTooltipContent hideLabel />}
+              />
+              <Pie
+                data={customersStats}
+                dataKey="count"
+                nameKey="month"
+                innerRadius={60}
+                strokeWidth={5}
+                activeIndex={activeIndex}
+                activeShape={({
+                  outerRadius = 0,
+                  ...props
+                }: PieSectorDataItem) => (
+                  <g className="bg-green-400">
+                    <Sector {...props} outerRadius={outerRadius + 10} />
+                    <Sector
+                      {...props}
+                      outerRadius={outerRadius + 25}
+                      innerRadius={outerRadius + 12}
+                    />
+                  </g>
+                )}
+              >
+                <Label
+                  content={({ viewBox }) => {
+                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                      return (
+                        <text
+                          x={viewBox.cx}
+                          y={viewBox.cy}
+                          textAnchor="middle"
+                          dominantBaseline="middle"
+                        >
+                          <tspan
                             x={viewBox.cx}
                             y={viewBox.cy}
-                            textAnchor="middle"
-                            dominantBaseline="middle"
+                            className="fill-foreground text-3xl font-bold"
                           >
-                            <tspan
-                              x={viewBox.cx}
-                              y={viewBox.cy}
-                              className="fill-foreground text-3xl font-bold"
-                            >
-                              {customersStats[
-                                activeIndex
-                              ]?.count.toLocaleString()}
-                            </tspan>
-                            <tspan
-                              x={viewBox.cx}
-                              y={(viewBox.cy || 0) + 24}
-                              className="fill-muted-foreground"
-                            >
-                              New Clients
-                            </tspan>
-                          </text>
-                        );
-                      }
-                    }}
-                  />
-                </Pie>
-              </PieChart>
-            </ChartContainer>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+                            {customersStats[
+                              activeIndex
+                            ]?.count.toLocaleString()}
+                          </tspan>
+                          <tspan
+                            x={viewBox.cx}
+                            y={(viewBox.cy || 0) + 24}
+                            className="fill-muted-foreground"
+                          >
+                            New Clients
+                          </tspan>
+                        </text>
+                      );
+                    }
+                  }}
+                />
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+        )}
+      </CardContent>
+    </Card>
   );
 }
