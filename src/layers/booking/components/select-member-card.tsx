@@ -10,6 +10,9 @@ export function SelectMemberCard({ member }: { member: IMember }) {
 
   const handleSelectMember = () => {
     dispatch(setBookinData({ key: "member", value: member }));
+    dispatch(setBookinData({ key: "date", value: "" }));
+    dispatch(setBookinData({ key: "time", value: "" }));
+
     dispatch(setStep("forward"));
   };
   return (
