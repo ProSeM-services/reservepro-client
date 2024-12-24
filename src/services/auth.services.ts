@@ -13,4 +13,9 @@ export class AuthServices {
 
     return response.data;
   }
+  static async confirmEmail(data: { token: string }): Promise<ITentant> {
+    const response = await axios.post(`${BASE_URL}/auth/confirmation`, data);
+
+    return response.data;
+  }
 }

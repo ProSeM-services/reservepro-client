@@ -14,7 +14,15 @@ import {
 } from "@/interfaces/member.iterface";
 import { AuthServices } from "@/services/auth.services";
 import { useToast } from "@/components/ui/use-toast";
-
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 const EMPTY_TENANT_DATA: ICreateTentant = {
   email: "",
   lastName: "",
@@ -25,21 +33,31 @@ const EMPTY_TENANT_DATA: ICreateTentant = {
   userName: "",
   image: "",
 };
+
 export function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const router = useRouter();
   const form = useForm<ICreateTentant>({
     resolver: zodResolver(CreateTenantZodSchema),
     defaultValues: EMPTY_TENANT_DATA,
   });
 
+  const handleCloseDialog = (value: boolean) => {
+    if (!value) {
+      setOpen(false);
+      router.push("/login");
+    }
+  };
   const { toast } = useToast();
 
   const onSubmit = async (values: ICreateTentant) => {
     setLoading(true);
     try {
       await AuthServices.register(values);
-      router.push("/login");
+
+      setOpen(true);
     } catch (error) {
       //@ts-ignore
       if (error.response.data.message) {
@@ -57,131 +75,147 @@ export function RegisterForm() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className=" flex flex-col gap-4 ">
-          <div className="w-full flex flex-col gap-4">
-            <div className="flex gap-4 ">
+    <>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className=" flex flex-col gap-4 ">
+            <div className="w-full flex flex-col gap-4">
+              <div className="flex gap-4 ">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <Label htmlFor="email">Name</Label>
+                      <div className="relative ">
+                        <Input
+                          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 "
+                          {...field}
+                          placeholder="Enter your first name"
+                        />
+                        <User2Icon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="lastName"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <Label htmlFor="email">Last Name</Label>
+                      <div className="relative">
+                        <Input
+                          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                          {...field}
+                          placeholder="Enter your last name"
+                        />
+                        <User2Icon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
               <FormField
                 control={form.control}
-                name="name"
+                name="email"
                 render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <Label htmlFor="email">Name</Label>
-                    <div className="relative ">
-                      <Input
-                        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 "
-                        {...field}
-                        placeholder="Enter your first name"
-                      />
-                      <User2Icon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                    </div>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <Label htmlFor="email">Last Name</Label>
+                  <FormItem>
+                    <Label htmlFor="email">Email</Label>
                     <div className="relative">
                       <Input
                         className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                         {...field}
-                        placeholder="Enter your last name"
+                        placeholder="example@email.com"
                       />
-                      <User2Icon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                      <Mail className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
                     </div>
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem>
+                    <Label htmlFor="email">Company Name</Label>
+                    <div className="relative">
+                      <Input
+                        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                        {...field}
+                        placeholder="Name of your company"
+                      />
+                      <HouseIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <div className="flex gap-4 w-full">
+                <FormField
+                  control={form.control}
+                  name="userName"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <Label htmlFor="password">User Name</Label>
+                      <div className="relative">
+                        <Input
+                          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                          {...field}
+                          placeholder="user name"
+                        />
+                        <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem className="w-1/2">
+                      <Label htmlFor="password">Password</Label>
+                      <div className="relative">
+                        <Input
+                          className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                          {...field}
+                          placeholder="******"
+                          type="password"
+                        />
+                        <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <Label htmlFor="email">Email</Label>
-                  <div className="relative">
-                    <Input
-                      className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                      {...field}
-                      placeholder="example@email.com"
-                    />
-                    <Mail className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                  </div>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="companyName"
-              render={({ field }) => (
-                <FormItem>
-                  <Label htmlFor="email">Company Name</Label>
-                  <div className="relative">
-                    <Input
-                      className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                      {...field}
-                      placeholder="Name of your company"
-                    />
-                    <HouseIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                  </div>
-                </FormItem>
-              )}
-            />
-            <div className="flex gap-4 w-full">
-              <FormField
-                control={form.control}
-                name="userName"
-                render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <Label htmlFor="password">User Name</Label>
-                    <div className="relative">
-                      <Input
-                        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                        {...field}
-                        placeholder="user name"
-                      />
-                      <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                    </div>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem className="w-1/2">
-                    <Label htmlFor="password">Password</Label>
-                    <div className="relative">
-                      <Input
-                        className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-                        {...field}
-                        placeholder="******"
-                        type="password"
-                      />
-                      <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-                    </div>
-                  </FormItem>
-                )}
-              />
-            </div>
+            <Button
+              type="submit"
+              className="w-full text-white"
+              disabled={loading}
+              isLoading={loading}
+            >
+              Create account
+            </Button>
+            <Button variant="outline" className="w-full" disabled>
+              Sign Up with Google
+            </Button>
           </div>
-          <Button
-            type="submit"
-            className="w-full text-white"
-            disabled={loading}
-            isLoading={loading}
-          >
-            Create account
-          </Button>
-          <Button variant="outline" className="w-full" disabled>
-            Sign Up with Google
-          </Button>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+      <Dialog open={open} onOpenChange={(e) => handleCloseDialog(!open)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmar tu mail</DialogTitle>
+            <DialogDescription>
+              Hemos enviado un correo electrónico a la dirección proporcionada.
+              Por favor, revisa tu bandeja de entrada y haz clic en el enlace de
+              confirmación para activar tu cuenta.
+            </DialogDescription>
+          </DialogHeader>
+          {/* Agrega un botón aquí para reenviar el correo si es necesario */}
+          <DialogClose onClick={() => setOpen(false)}></DialogClose>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
