@@ -27,6 +27,7 @@ export function LoginForm() {
       if (!res?.ok) {
         throw new Error("Invalid Credentials");
       }
+
       router.push("/dashboard");
     } catch (error) {
       return toast({
