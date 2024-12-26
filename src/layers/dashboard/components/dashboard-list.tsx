@@ -2,7 +2,7 @@
 import React from "react";
 import { getComapnies, getMembers } from "@/lib/actions";
 import { CompanyCard, MemberCard } from "./card";
-import { HousePlugIcon, LucideProps, Users2Icon } from "lucide-react";
+import { Building, HousePlugIcon, LucideProps, Users2Icon } from "lucide-react";
 import { useAppSelector } from "@/store/hooks";
 
 export function EmptyList({
@@ -23,7 +23,7 @@ export function EmptyList({
     company: {
       title: "Sin sucursales",
       description: "Aún no has creado ninguna sucursal",
-      Icon: HousePlugIcon,
+      Icon: Building,
     },
     service: {
       title: "Sin servicios",

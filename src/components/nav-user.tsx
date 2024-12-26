@@ -1,11 +1,9 @@
 "use client";
-
 import {
   BadgeCheck,
   Bell,
   ChevronsUpDown,
   CreditCard,
-  LogOut,
   Sparkles,
 } from "lucide-react";
 
@@ -25,7 +23,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { signOut, useSession } from "next-auth/react";
+import { LogOutButton } from "./log-out-button";
+import { useSession } from "next-auth/react";
 
 export function NavUser({
   user,
@@ -38,11 +37,11 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar();
   const session = useSession();
-  if (!session.data?.user) return;
-  const handleLogOut = () => {
-    signOut({ callbackUrl: "http://localhost:3000/login", redirect: true });
-  };
-  const { email, name, image, lastName } = session.data.user;
+
+  if (!session || !session.data) return;
+
+  const { email, lastName, name, image } = session.data.user;
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -57,8 +56,9 @@ export function NavUser({
                   src={image ? image : user.avatar}
                   alt={`image ${name}'s profile`}
                 />
-                <AvatarFallback className="rounded-lg">
-                  {name[0]} {lastName[0]}
+                <AvatarFallback className="rounded-lg uppercase">
+                  {name && name[0]}
+                  {lastName && lastName[0]}
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -81,8 +81,9 @@ export function NavUser({
                     src={image ? image : user.avatar}
                     alt={`image ${name}'s profile`}
                   />
-                  <AvatarFallback className="rounded-lg">
-                    {name[0]} {lastName[0]}
+                  <AvatarFallback className="rounded-lg uppercase">
+                    {name && name[0]}
+                    {lastName && lastName[0]}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -114,9 +115,8 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogOut}>
-              <LogOut />
-              Log out
+            <DropdownMenuItem>
+              <LogOutButton />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
