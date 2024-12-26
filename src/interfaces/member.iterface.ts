@@ -18,7 +18,17 @@ export const ZodTenantSchema = z.object({
 });
 export const CreateTenantZodSchema = ZodTenantSchema.omit({
   id: true,
-});
+})
+  .extend({
+    confirmPassword: z.string(),
+  })
+  .refine(
+    (data) => data.password === data.confirmPassword, // Comparación entre las contraseñas
+    {
+      path: ["confirmPassword"], // El campo al que se asignará el error si falla la validación
+      message: "Las contraseñas no coinciden", // Mensaje de error
+    }
+  );
 export type ITentant = z.infer<typeof ZodTenantSchema>;
 export type ICreateTentant = z.infer<typeof CreateTenantZodSchema>;
 

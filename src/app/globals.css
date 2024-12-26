@@ -36,7 +36,7 @@
     --chart-9: 172 59% 60%;    /* Verde claro */
     --chart-10: 176 50% 64%;   /* Verde pastel */
     --chart-11: 185 47% 70%;   /* Verde menta */
-    --chart-12: 190 35% 75%;   /* Verde agua */
+    --chart-12: 190 35% 75%;   /* Verde agua */   --sidebar-background: 0 0% 98%;   --sidebar-foreground: 240 5.3% 26.1%;   --sidebar-primary: 240 5.9% 10%;   --sidebar-primary-foreground: 0 0% 98%;   --sidebar-accent: 240 4.8% 95.9%;   --sidebar-accent-foreground: 240 5.9% 10%;   --sidebar-border: 220 13% 91%;   --sidebar-ring: 217.2 91.2% 59.8%;
     
   }
 
@@ -71,7 +71,7 @@
   --chart-9: 172 59% 60%;    /* Verde claro */
   --chart-10: 176 50% 64%;   /* Verde pastel */
   --chart-11: 185 47% 70%;   /* Verde menta */
-  --chart-12: 190 35% 75%;   /* Verde agua */
+  --chart-12: 190 35% 75%;   /* Verde agua */   --sidebar-background: 240 5.9% 10%;   --sidebar-foreground: 240 4.8% 95.9%;   --sidebar-primary: 224.3 76.3% 48%;   --sidebar-primary-foreground: 0 0% 100%;   --sidebar-accent: 240 3.7% 15.9%;   --sidebar-accent-foreground: 240 4.8% 95.9%;   --sidebar-border: 240 3.7% 15.9%;   --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -101,4 +101,13 @@ html{
 
 .bg-gradient-card {
   background: radial-gradient(circle, rgba(255, 209, 111, 0.35) 35%, rgb(247, 237, 223) 50%, rgb(255, 255, 255) 100%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

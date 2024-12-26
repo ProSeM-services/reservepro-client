@@ -34,7 +34,6 @@ export function CompanyForm() {
   const { toast } = useToast();
   const form = useForm<ICreateCompany>({
     resolver: zodResolver(CreateCompanyZodSchema),
-    mode: "onChange",
     defaultValues: INITIAL_COMPANY_DATA,
   });
 

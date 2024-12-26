@@ -13,7 +13,6 @@ import { LogOut, Settings, User } from "lucide-react";
 import Image from "next/image";
 export function UserMenu() {
   const session = useSession();
-  console.log({ session });
   const handleLogOut = () => {
     signOut({ callbackUrl: "http://localhost:3000/login", redirect: true });
   };

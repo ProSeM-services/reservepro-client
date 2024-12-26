@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { DateTime } from "./date-time";
 import { useSession } from "next-auth/react";
 
 export function DashboardHero() {
@@ -9,10 +8,8 @@ export function DashboardHero() {
 
   if (!session?.user) return null;
   return (
-    <header className="flex justify-between h-10  items-center ">
-      <h2 className="font-semibold text-xl ">Hola, {session?.user?.name}!</h2>
-
-      <DateTime />
+    <header className="flex justify-between h-full  items-center ">
+      <h2 className="font-medium text-xl ">Hola, {session?.user?.name}!</h2>
     </header>
   );
 }
