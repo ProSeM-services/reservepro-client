@@ -64,6 +64,7 @@ export function ClusterMap() {
       companies.map((company) => ({
         key: company.id,
         name: company.name,
+        company,
         position: {
           lat: company.address.lat,
           lng: company.address.lng,

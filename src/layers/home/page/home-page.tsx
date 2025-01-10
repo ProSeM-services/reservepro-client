@@ -15,9 +15,10 @@ export function HomePage({ searchParams }: PageProps) {
     <div className={`flex flex-col   bg-muted  `}>
       <HomeHeader />
 
-      <main className=" min-h-screen px-24   ">
+      <main className=" min-h-screen md:px-24 space-y-6 py-4   ">
         <LandingPage />
         <CompaniesHomeSection searchParams={searchParams} />
+        <hr />
         <ClientsFeedback />
       </main>
 

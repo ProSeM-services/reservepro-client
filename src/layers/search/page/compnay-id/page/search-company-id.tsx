@@ -62,8 +62,8 @@ export async function SearchCompanyDetail({
             </div>
           </div>
         </section>
-        <div className=" flex items-start justify-between gap-4">
-          <div className="flex-grow  space-y-4">
+        <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4">
+          <div className="flex-grow  max-md:w-full space-y-4">
             <h1 className="text-2xl font-bold ">Nosotros</h1>
             <div className="mb-4">
               {company.category.map((cat) => (
@@ -128,9 +128,11 @@ export async function SearchCompanyDetail({
             )}
           </div>
 
-          <div className="p-6 flex flex-col gap-4 w-1/3  border rounded-lg ">
-            <h3 className="text-5xl font-bold">{company.name}</h3>
-            <p className="text-gray-600 ">{company.address.value}</p>
+          <div className="p-6 flex flex-col gap-4 md:w-1/3  w-full border rounded-lg ">
+            <h3 className="text-5xl font-bold max-md:hidden">{company.name}</h3>
+            <p className="text-gray-600  max-md:hidden">
+              {company.address.value}
+            </p>
 
             <Link
               // href={`/search/${company.id}/booking?company=${company.id}`}

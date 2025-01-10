@@ -2,6 +2,7 @@ import HomeHeader from "@/layers/home/components/home-header";
 import CompanyCard from "@/layers/search/components/company-card";
 import { MapSearch } from "@/layers/search/page/maps/components";
 import { ClusterMap } from "@/layers/search/page/maps/components/cluster-map";
+import { CompaniesAside } from "@/layers/search/page/maps/components/companies-aside";
 import { getClientComapnies } from "@/lib/clienta-actions";
 import { Filter } from "lucide-react";
 import React, { ReactNode } from "react";
@@ -15,12 +16,17 @@ export default async function Page({ children }: PageProps) {
     city: "",
   });
   return (
-    <section className="flex flex-col max-lg:flex-col gap-2  h-screen  ">
+    <section className="flex flex-col max-lg:flex-col md:gap-2   h-screen  ">
       <HomeHeader>
-        <MapSearch />
+        <div className="flex gap-1">
+          <MapSearch />
+          <section>
+            <CompaniesAside companies={companies} />
+          </section>
+        </div>
       </HomeHeader>
-      <div className="flex gap-4 h-[90%] p-1 outlin">
-        <section className="w-1/4 p-4 space-y-4">
+      <div className="flex gap-4 h-[90%] md:p-1 ">
+        <section className="w-1/4 p-4 space-y-4 max-md:hidden">
           <div className="flex justify-between items-center">
             <h2>Sucursales </h2>
             <Filter />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
+import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 import axios from "axios";
 import { BASE_URL } from "@/config/axios.config";
@@ -14,10 +14,17 @@ type IAvailableList = {
   hs: string;
   available: boolean;
 };
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 export function CalendarSelect() {
   const [availableList, setAvailableList] = useState<IAvailableList[]>([]);
   const [loading, setLoading] = useState(false);
-  const { bookingData } = useAppSelector((s) => s.booking);
+  const { bookingData, step } = useAppSelector((s) => s.booking);
   const dispatch = useAppDispatch();
   const { member, duration, date, time } = bookingData;
   useEffect(() => {
@@ -51,12 +58,42 @@ export function CalendarSelect() {
   };
 
   return (
-    <div className=" w-full   h-full items-start flex gap-4 ">
+    <div className=" w-full   h-full items-start flex max-md:flex-col gap-4 ">
+      <section className="md:hidden flex items-center justify-between w-full">
+        <p className="text-gray-500 font-semibold ">Seleccionar una fecha</p>
+        <Popover>
+          <PopoverTrigger>
+            <Button
+              variant={"outline"}
+              className={cn(
+                "w-[240px] pl-3 text-left font-normal",
+                !date && "text-muted-foreground"
+              )}
+            >
+              {date ? format(date, "PPP") : <span>Pick a date</span>}
+              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <Calendar
+              mode="single"
+              selected={date ? new Date(date) : new Date()}
+              onSelect={(value) => value && handleDate(value)}
+              className="rounded-md  "
+              disabled={(date) => {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                return date < today;
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+      </section>
       <Calendar
         mode="single"
         selected={date ? new Date(date) : new Date()}
         onSelect={(value) => value && handleDate(value)}
-        className="rounded-md  "
+        className="rounded-md max-md:hidden "
         disabled={(date) => {
           const today = new Date();
           today.setHours(0, 0, 0, 0);
@@ -73,7 +110,7 @@ export function CalendarSelect() {
           <p>No hay horarios disponibles</p>
         </div>
       ) : date ? (
-        <div className=" flex flex-wrap items-start justify-start gap-2   w-full">
+        <div className=" flex  flex-wrap items-start justify-start gap-2   w-full">
           {availableList.map((value) => (
             <div
               className={`border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
