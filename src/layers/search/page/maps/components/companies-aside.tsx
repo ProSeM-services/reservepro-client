@@ -25,7 +25,7 @@ export function CompaniesAside({ companies }: { companies: ICompany[] }) {
           <section className=" ">
             <div className="w-full overflow-auto  p-2 max-h-full space-y-5">
               {companies.map((company) => (
-                <SheetTrigger className="w-full">
+                <SheetTrigger className="w-full" key={company.id}>
                   <CompanyCard company={company} key={company.id} isOnMapPage />
                 </SheetTrigger>
               ))}
