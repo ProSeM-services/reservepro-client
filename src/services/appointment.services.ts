@@ -1,4 +1,5 @@
 import { axiosInstance, BASE_URL } from "@/config/axios.config";
+import { IService } from "@/interfaces";
 import {
   IAppointment,
   IAppointmentApiResponse,
@@ -40,6 +41,14 @@ export class AppointmentServices {
   static async getByEmail(id: string): Promise<IAppointment[]> {
     const res = await axiosInstance.get(
       `${BASE_URL}/appointments/customer/${id}`
+    );
+    return res.data;
+  }
+  static async getBytoken(
+    token: string
+  ): Promise<IAppointment & { Service: IService }> {
+    const res = await axiosInstance.get(
+      `${BASE_URL}/appointments/cancelationToken/${token}`
     );
     return res.data;
   }
