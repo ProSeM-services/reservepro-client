@@ -22,6 +22,7 @@ import { BookIcon } from "lucide-react";
 import { AppointmentServices } from "@/services/appointment.services";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setStep } from "@/store/feature/booking/bookingSlice";
+import { Label } from "@/components/ui/label";
 
 export function ClientFormSection() {
   const { bookingData } = useAppSelector((s) => s.booking);
@@ -71,13 +72,17 @@ export function ClientFormSection() {
     }
   };
   return (
-    <div className="h-full p-10">
+    <div className="h-full md:p-10 max-md:space-y-2 space-y-4">
+      <Label className="text-[18px] mx-auto">
+        Completar con sus datos personales
+      </Label>
+      <hr />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-between h-full"
+          className="flex flex-col justify-between h-[90%]"
         >
-          <section className="space-y-8">
+          <section className="space-y-2 ">
             <FormField
               control={form.control}
               name="name"

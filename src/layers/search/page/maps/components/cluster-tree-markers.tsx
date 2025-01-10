@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { type Marker, MarkerClusterer } from "@googlemaps/markerclusterer";
 import { ICompanyMap } from "../utils";
 import { TreeMarker } from "./tree-marker";
+import CompanyCard from "@/layers/search/components/company-card";
 
 export type ClusteredTreeMarkersProps = {
   companies: ICompanyMap[];
@@ -83,7 +84,7 @@ export const ClusteredCompaniesMarkers = ({
           anchor={markers[selectedTreeKey]}
           onCloseClick={handleInfoWindowClose}
         >
-          {selectedTree?.name}
+          {selectedTree && <CompanyCard company={selectedTree?.company} />}
         </InfoWindow>
       )}
     </>

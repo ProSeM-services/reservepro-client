@@ -49,7 +49,7 @@ export default function AppointmentData({ token }: { token: string }) {
   if (!appointment) return;
   if (isCanceled) return <CancelConfirmation />;
   return (
-    <Card className="flex flex-col w-[30vw] rounded-none gap-4 p-4">
+    <Card className="flex flex-col md:w-[30vw] w-5/6 rounded-none gap-4 p-4">
       <header>
         <p className="font-bold text-xl text-gray-700">
           ¿Quieres cancelar el turno?

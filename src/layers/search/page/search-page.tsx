@@ -4,10 +4,11 @@ import CategoryFilter from "@/layers/search/components/category-filter";
 import LocationFilter from "@/layers/search/components/location-filter";
 import Search from "@/layers/search/components/search";
 import SearchTable from "@/layers/search/components/table";
-import { MapIcon } from "lucide-react";
+import { FilterIcon, MapIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Suspense } from "react";
+import AsideFilters from "../components/aside-filters";
 
 interface PageProps {
   searchParams?: {
@@ -41,16 +42,19 @@ export function SearchPage({ searchParams }: PageProps) {
                 <MapIcon className="size-4" />
               </Button>
             </Link>
+            <div className="md:hidden">
+              <AsideFilters />
+            </div>
           </div>
 
           <div className="flex space-x-8  max-h-[90%] h-[90%]  ">
-            <aside className="w-1/4 space-y-4">
+            <aside className="w-1/4 space-y-4 max-md:hidden">
               <h2 className="text-xl font-semibold mb-4">Filtros</h2>
               <LocationFilter />
               <CategoryFilter />
             </aside>
 
-            <div className="w-3/4  max-h-full h-full overflow-auto  ">
+            <div className="md:w-3/4  w-full max-h-full h-full overflow-auto  ">
               <Suspense fallback={<div>Cargando resultados...</div>}>
                 <SearchTable
                   view="grid"

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { SelectedCompanyDetail } from "@/layers/search/page/compnay-id/components/selected-company";
 import StoreProvider from "../components/store-provider";
 import { PreviousStep } from "@/layers/booking/components/previous-step";
+import { AppointmentDataAside } from "@/layers/booking/components/appointmnet-data-aside";
 
 interface LayoutProps {
   params: { id: string };
@@ -30,14 +31,17 @@ export default function layout({ children }: LayoutProps) {
           </Link>
         </HomeHeader>
 
-        <div className="container py-4">
+        <div className="container py-4 flex justify-between items-center">
           <PreviousStep />
+          <aside className="md:hidden">
+            <AppointmentDataAside />
+          </aside>
         </div>
         <section className=" container flex justify-between h-[80vh] gap-4 ">
           <div className=" max-h-full   max-w-2/3 w-2/3 flex-grow">
             {children}
           </div>
-          <aside className="w-1/3 p-4 border rounded-lg shadow-md h-full flex flex-col justify-between">
+          <aside className="w-1/3 p-4 max-md:hidden border rounded-lg shadow-md h-full flex flex-col justify-between">
             <div className=" space-y-4">
               <SelectedCompanyDetail />
               <hr />
