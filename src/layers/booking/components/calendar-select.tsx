@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { Label } from "@/components/ui/label";
 export function CalendarSelect() {
   const [availableList, setAvailableList] = useState<IAvailableList[]>([]);
   const [loading, setLoading] = useState(false);
@@ -59,14 +60,14 @@ export function CalendarSelect() {
 
   return (
     <div className=" w-full   h-full items-start flex max-md:flex-col gap-4 ">
-      <section className="md:hidden flex items-center justify-between w-full">
-        <p className="text-gray-500 font-semibold ">Seleccionar una fecha</p>
+      <section className="md:hidden flex flex-col   w-full">
+        <Label>Seleccionar una fecha</Label>
         <Popover>
           <PopoverTrigger>
             <Button
               variant={"outline"}
               className={cn(
-                "w-[240px] pl-3 text-left font-normal",
+                "w-[100%] pl-3 text-left font-normal",
                 !date && "text-muted-foreground"
               )}
             >

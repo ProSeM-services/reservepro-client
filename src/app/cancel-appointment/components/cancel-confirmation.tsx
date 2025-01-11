@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function CancelConfirmation() {
   const { push } = useRouter();
   return (
-    <div className="rounded-md h-full w-full flex justify-center items-center text-card-foreground">
+    <div className="rounded-md h-full w-full flex justify-center  items-center text-card-foreground">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -27,7 +27,7 @@ export default function CancelConfirmation() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-4 font-semibold uppercase"
+          className="mt-4 font-semibold uppercase text-center w-full  max-md:text-[19px]"
         >
           Turno Cancelado Correctamente
         </motion.p>

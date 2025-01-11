@@ -19,8 +19,10 @@ export default async function Page({ children }: PageProps) {
     <section className="flex flex-col max-lg:flex-col md:gap-2   h-screen  ">
       <HomeHeader>
         <div className="flex gap-1">
-          <MapSearch />
-          <section>
+          <section className="max-md:hidden">
+            <MapSearch />
+          </section>
+          <section className="md:hidden">
             <CompaniesAside companies={companies} />
           </section>
         </div>

@@ -49,7 +49,7 @@ export default function AsideFilters() {
           <FilterX className="size-4" /> Filtros
         </SheetTitle>
         <hr />
-        <div className="relative  h-full">
+        <div className="relative  h-[70vh] ">
           <aside className="w-full space-y-4">
             <Label className="text-lg text-gray-600">Categorias</Label>
             <div className="  grid grid-cols-3 gap-2">
@@ -72,7 +72,7 @@ export default function AsideFilters() {
               ))}
             </div>
           </aside>
-          <section className="absolute w-full flex justify-end bottom-0 pb-5">
+          <section className="absolute w-full flex justify-end bottom-0">
             <SheetTrigger>
               <Button>Aplicar</Button>
             </SheetTrigger>

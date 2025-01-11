@@ -10,7 +10,7 @@ interface PageProps {
 }
 export default function CancelAppoitnmentPage({ searchParams }: PageProps) {
   return (
-    <div className="bg-card h-screen max-h-screen flex flex-col">
+    <div className="bg-card h-screen max-h-screen max-md:h-[80vh] flex flex-col">
       <HomeHeader>
         <Link href={"/"} className="bg-primary text-white p-2 rounded-md px-4">
           Ir al inicio

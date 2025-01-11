@@ -21,7 +21,7 @@ interface LayoutProps {
 export default function layout({ children }: LayoutProps) {
   return (
     <StoreProvider>
-      <div>
+      <div className=" max-md:max-h-[90vh]">
         <HomeHeader>
           <Link
             href={"/"}
@@ -31,14 +31,14 @@ export default function layout({ children }: LayoutProps) {
           </Link>
         </HomeHeader>
 
-        <div className="container py-4 flex justify-between items-center">
+        <div className="container  max-md:h-[8vh] md:py-4 flex justify-between items-center ">
           <PreviousStep />
           <aside className="md:hidden">
             <AppointmentDataAside />
           </aside>
         </div>
-        <section className=" container flex justify-between h-[80vh] gap-4 ">
-          <div className=" max-h-full   max-w-2/3 w-2/3 flex-grow">
+        <section className=" container flex justify-between h-[82vh] max-md:max-h-[82vh]  gap-4   overflow-auto ">
+          <div className=" md:max-h-full   h-full  max-w-2/3 w-2/3 flex-grow">
             {children}
           </div>
           <aside className="w-1/3 p-4 max-md:hidden border rounded-lg shadow-md h-full flex flex-col justify-between">
