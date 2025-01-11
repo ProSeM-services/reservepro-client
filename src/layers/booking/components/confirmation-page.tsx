@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function ConfirmationPage() {
   const { push } = useRouter();
   return (
-    <div className="rounded-md h-full w-full flex justify-center items-center text-card-foreground">
+    <div className="rounded-md h-full max-md:h-[80%] w-full flex justify-center items-center text-card-foreground">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}

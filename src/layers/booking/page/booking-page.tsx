@@ -11,7 +11,7 @@ export function BookingPage() {
   const { step } = useAppSelector((s) => s.booking);
 
   return (
-    <section className=" w-full h-full  ">
+    <section className=" w-full h-full    ">
       {step === 0 && <SercvicesList readonly={false} />}
       {step === 1 && <ProfesionalList />}
       {step === 2 && <SelectDate />}

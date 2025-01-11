@@ -20,8 +20,8 @@ export function AppointmentDataAside() {
       </SheetTrigger>
       <SheetContent>
         <SheetTitle>Información del turno</SheetTitle>
-
-        <aside className=" p-4  border rounded-lg shadow-md h-full flex flex-col justify-between">
+        <br />
+        <aside className="  h-[92%] flex flex-col justify-between ">
           <div className=" space-y-4">
             <SelectedCompanyDetail />
             <hr />

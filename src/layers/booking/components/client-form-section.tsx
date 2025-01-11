@@ -80,7 +80,7 @@ export function ClientFormSection() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col justify-between h-[90%]"
+          className="flex flex-col justify-between h-[90%] max-md:h-auto max-md:gap-8 "
         >
           <section className="space-y-2 ">
             <FormField

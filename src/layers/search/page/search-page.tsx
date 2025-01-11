@@ -28,7 +28,9 @@ export function SearchPage({ searchParams }: PageProps) {
   return (
     <div className="flex flex-col h-screen   bg-muted">
       <HomeHeader>
-        <h1 className="text-lg font-light ">Encuentra servicios cerca de ti</h1>
+        <h1 className="text-lg font-light max-md:text-xs ">
+          Encuentra servicios cerca de ti
+        </h1>
       </HomeHeader>
 
       <main className=" h-[95%] bg-muted">
