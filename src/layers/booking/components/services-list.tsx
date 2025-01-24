@@ -38,14 +38,7 @@ export default function SercvicesList({
       <LoaderWrapper loading={loading} type="services">
         <div className="space-y-4 w-full h-full  ">
           {services.length
-            ? [
-                ...services,
-                ...services,
-                ...services,
-                ...services,
-                ...services,
-                ...services,
-              ].map((service) => (
+            ? services.map((service) => (
                 <div
                   key={service.id}
                   className="flex items-center justify-between border border-border rounded-lg p-4 cursor-pointer "
