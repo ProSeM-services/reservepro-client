@@ -6,6 +6,7 @@ import { ProfesionalList } from "../components/profesional-list";
 import { SelectDate } from "../components/select-date";
 import { ClientFormSection } from "../components/client-form-section";
 import ConfirmationPage from "../components/confirmation-page";
+import RejectionPage from "@/layers/search/page/compnay-id/components/rejection-page";
 
 export function BookingPage() {
   const { step } = useAppSelector((s) => s.booking);
@@ -17,6 +18,7 @@ export function BookingPage() {
       {step === 2 && <SelectDate />}
       {step === 3 && <ClientFormSection />}
       {step === 4 && <ConfirmationPage />}
+      {step === 5 && <RejectionPage />}
     </section>
   );
 }

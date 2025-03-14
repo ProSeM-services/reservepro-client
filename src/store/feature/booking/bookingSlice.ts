@@ -14,12 +14,14 @@ interface IBookinData {
 export interface BookingState extends IStoreState {
   step: number;
   bookingData: IBookinData;
+  error: boolean;
 }
 
 const initialState: BookingState = {
   step: 0,
   loading: true,
   fetched: false,
+  error: false,
   bookingData: {
     companyId: "",
     service: undefined,
@@ -34,7 +36,23 @@ export const bookingSlice = createSlice({
   name: "booking",
   initialState,
   reducers: {
-    setStep: (state, action: PayloadAction<"forward" | "back">) => {
+    setError: (state) => {
+      state.step = 5;
+    },
+    setStep: (state, action: PayloadAction<"forward" | "back" | "error">) => {
+      if (action.payload === "error") {
+        state.step = 5;
+        return;
+      }
+
+      if (action.payload === "back" && state.step === 0) {
+        return;
+      }
+      if (action.payload === "back" && state.step === 5) {
+        state.step = 2;
+        return;
+      }
+
       state.step =
         action.payload === "forward" ? state.step + 1 : state.step - 1;
     },
