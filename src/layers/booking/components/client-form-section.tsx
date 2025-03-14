@@ -66,6 +66,8 @@ export function ClientFormSection() {
       if (res.data.status === 401) throw new Error(res.data.message);
       dispatch(setStep("forward"));
     } catch (error) {
+      dispatch(setStep("error"));
+
       console.error("Error creating appointment: ", error);
     } finally {
       setLoading(false);
