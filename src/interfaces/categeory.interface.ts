@@ -11,7 +11,7 @@ export enum CategoryEnum {
   Peluqueria = "Peluquería",
   Barberia = "Barbería",
   PeluqueriaMascotas = "Peluquería Mascotas",
-  Asesorias = "",
+  Asesorias = "Asesorías",
   ClasesParticulares = "Clases particulares",
   Fotografia = "Fotografía",
   Otro = "Otro",
