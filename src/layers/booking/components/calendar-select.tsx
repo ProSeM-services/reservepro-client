@@ -29,6 +29,7 @@ export function CalendarSelect() {
   const dispatch = useAppDispatch();
   const { member, duration, date, time } = bookingData;
   useEffect(() => {
+    console.log("date", date);
     if (!date) return;
     const fetchData = async () => {
       setLoading(true);

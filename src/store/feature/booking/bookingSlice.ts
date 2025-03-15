@@ -27,7 +27,7 @@ const initialState: BookingState = {
     service: undefined,
     duration: "",
     member: undefined,
-    date: "",
+    date: new Date().toISOString(),
     time: "",
   },
 };

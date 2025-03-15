@@ -5,6 +5,7 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { getS3Url } from "@/lib/s3-image";
 
 export default function CompanyCard({
   company,
@@ -36,7 +37,11 @@ export default function CompanyCard({
     >
       <div className="w-full h-52  overflow-hidden rounded-sm">
         <Image
-          src={`/company/${Math.floor(Math.random() * 3) + 1}.jpeg`}
+          src={
+            company.image
+              ? getS3Url(company.image)
+              : `/company/${Math.floor(Math.random() * 3) + 1}.jpeg`
+          }
           width={400}
           height={400}
           alt={`Imagen de ${company.name}`}
