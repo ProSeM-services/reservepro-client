@@ -1,3 +1,4 @@
+import { CategoryEnum } from "@/interfaces/categeory.interface";
 import SearchTable from "@/layers/search/components/table";
 import React, { Suspense } from "react";
 interface PageProps {
@@ -30,20 +31,19 @@ export function CompaniesHomeSection({ searchParams }: PageProps) {
           </Suspense>
         </section>
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
-          <h3 className="font-bold text-2xl ">Nuevo en Reserve Pro</h3>
+          <h3 className="font-bold text-2xl ">Barberías</h3>
 
           <Suspense fallback={"Loading"}>
             <SearchTable
               city={city}
               query={query}
               currentPage={currentPage}
-              category={category}
+              category={CategoryEnum.Barberia}
             />
           </Suspense>
         </section>
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
-          <h3 className="font-bold text-2xl ">Tendencia</h3>
-
+          <h3 className="font-bold text-2xl ">Nuevos en Reserve Pro</h3>
           <Suspense fallback={"Loading"}>
             <SearchTable
               city={city}

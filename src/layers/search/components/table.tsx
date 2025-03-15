@@ -7,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Category } from "@/interfaces/categeory.interface";
 export default async function SearchTable({
   query,
   category,
@@ -14,7 +15,7 @@ export default async function SearchTable({
   view = "carousel",
 }: {
   query: string;
-  category: string;
+  category: Category | string;
   city: string;
   currentPage: number;
   view?: "grid" | "carousel";

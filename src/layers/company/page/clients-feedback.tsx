@@ -17,7 +17,7 @@ export function ClientsFeedback() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
       </div>
-      <Carousel className="w-[80%] max-w-[80%] mx-auto ">
+      <Carousel className="w-[80%] max-w-[80%] mx-auto  md:hidden">
         <CarouselContent className="">
           <CarouselItem className="bg-muted p-6 rounded-lg shadow-md">
             <div className="flex items-center mb-4">
@@ -119,9 +119,6 @@ export function ClientsFeedback() {
         </>
       </Carousel>
       <div className="container mx-auto max-md:hidden">
-        <h2 className="text-3xl font-bold text-center mb-12">
-          Lo que dicen nuestros clientes
-        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div className="bg-muted p-6 rounded-lg shadow-md">
             <div className="flex items-center mb-4">
