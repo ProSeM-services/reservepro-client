@@ -4,9 +4,16 @@ import SercvicesList from "@/layers/search/components/services-list";
 import { getClientCompanyData } from "@/lib/clienta-actions";
 import { getS3Url } from "@/lib/s3-image";
 import { ClockIcon, MapIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { MapComponent } from "@/components/common/map";
 
 export async function SearchCompanyDetail({
   params,
@@ -31,18 +38,27 @@ export async function SearchCompanyDetail({
           <h1 className="text-3xl font-bold ">{company.name}</h1>
           <p className="text-gray-600 ">{company.address.value}</p>
         </div>
+
         {company.images?.length && (
-          <section className=" w-full flex gap-4 justify-around ">
-            <div className="h-[500px]  w-full flex gap-2  items-center  ">
-              {company.images?.map((image) => (
-                <img
-                  alt={company.name}
-                  className="rounded-xl h-[80%] object-contain"
-                  src={getS3Url(image)}
-                />
+          <Carousel className="w-5/6 mx-auto ">
+            <CarouselContent className="">
+              {company.images.map((image, index) => (
+                <CarouselItem key={company.id} className=" basis-5/6 ">
+                  <img
+                    alt={company.name}
+                    className="rounded-xl h-[80%] object-contain"
+                    src={getS3Url(image)}
+                  />
+                </CarouselItem>
               ))}
-            </div>
-          </section>
+            </CarouselContent>
+            {company.images.length > 3 ? (
+              <>
+                <CarouselPrevious />
+                <CarouselNext />
+              </>
+            ) : null}
+          </Carousel>
         )}
         <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4">
           <div className="flex-grow  max-md:w-full space-y-4">
@@ -137,6 +153,9 @@ export async function SearchCompanyDetail({
             </div>
           </div>
         </div>
+        <section className="h-[50dvh]">
+          <MapComponent lat={company.address.lat} lng={company.address.lng} />
+        </section>
       </section>
     </div>
   );
