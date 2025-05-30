@@ -36,6 +36,7 @@ export async function SearchCompanyDetail({
             <div className="h-[500px]  w-full flex gap-2  items-center  ">
               {company.images?.map((image) => (
                 <img
+                  key={image}
                   alt={company.name}
                   className="rounded-xl h-[80%] object-contain"
                   src={getS3Url(image)}
