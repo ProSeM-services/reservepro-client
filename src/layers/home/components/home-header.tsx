@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from "react";
 import Link from "next/link";
-import SessionLink from "@/components/common/session-link";
 
 export default function HomeHeader({ children }: PropsWithChildren) {
   return (
@@ -17,7 +16,7 @@ export default function HomeHeader({ children }: PropsWithChildren) {
             </div>
           </Link>{" "}
         </div>
-        <div>{children ? children : <SessionLink />}</div>
+        <div>{children ? children : null}</div>
       </div>
     </header>
   );

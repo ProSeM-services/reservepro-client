@@ -2,6 +2,7 @@ import HomeHeader from "@/layers/home/components/home-header";
 import MemberList from "@/layers/search/components/member-list";
 import SercvicesList from "@/layers/search/components/services-list";
 import { getClientCompanyData } from "@/lib/clienta-actions";
+import { getS3Url } from "@/lib/s3-image";
 import { ClockIcon, MapIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -30,38 +31,20 @@ export async function SearchCompanyDetail({
           <h1 className="text-3xl font-bold ">{company.name}</h1>
           <p className="text-gray-600 ">{company.address.value}</p>
         </div>
-        <section className=" w-full flex gap-4 justify-around ">
-          <div className="h-[500px] flex-grow rounded-xl relative">
-            <Image
-              alt={company.name}
-              fill
-              objectFit="cover"
-              className="object-cover rounded-xl"
-              src={"/company/1.jpeg"}
-            />
-          </div>
-
-          <div className="flex gap-2 flex-col w-1/4">
-            <div className="h-[250px] w-full rounded-xl relative">
-              <Image
-                alt={company.name}
-                fill
-                objectFit="cover"
-                className="object-cover rounded-xl"
-                src={"/company/1.jpeg"}
-              />
+        {company.images?.length && (
+          <section className=" w-full flex gap-4 justify-around ">
+            <div className="h-[500px]  w-full flex gap-2  items-center  ">
+              {company.images?.map((image) => (
+                <img
+                  key={image}
+                  alt={company.name}
+                  className="rounded-xl h-[80%] object-contain"
+                  src={getS3Url(image)}
+                />
+              ))}
             </div>
-            <div className="h-[250px] w-full rounded-xl relative">
-              <Image
-                alt={company.name}
-                fill
-                objectFit="cover"
-                className="object-cover rounded-xl"
-                src={"/company/1.jpeg"}
-              />
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
         <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4">
           <div className="flex-grow  max-md:w-full space-y-4">
             <h1 className="text-2xl font-bold ">Nosotros</h1>
