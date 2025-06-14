@@ -137,7 +137,8 @@ export function ClientFormSection() {
                     <Input placeholder="example@mail.com" {...field} />
                   </FormControl>
                   <FormDescription>
-                    El valor de este mail es importat
+                    Con este email se lo registrará en el sistema como cliente
+                    de este negocio y se le enviará un recordatorio del turno.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
