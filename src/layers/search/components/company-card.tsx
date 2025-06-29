@@ -31,7 +31,7 @@ export default function CompanyCard({
 
   return (
     <div
-      className={`flex flex-col   justify-start items-center rounded-xl  shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-muted  max-lg:w-full `}
+      className={`flex flex-col   justify-start items-center rounded-xl  shadow-sm   lg:flex-grow cursor-pointer transition-all duration-200  bg-muted/50  max-lg:w-full `}
       key={company.id}
       onClick={selectCompany}
     >

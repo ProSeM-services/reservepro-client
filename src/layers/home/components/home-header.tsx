@@ -12,7 +12,7 @@ export default function HomeHeader({ children }: PropsWithChildren) {
           <Link href={"/"}>
             <div className="text-2xl font-bold text-primary">
               <span className="text-secondary-foreground">Reserve</span>
-              Pro
+              <span className="text-indigo-500">Pro</span>
             </div>
           </Link>{" "}
         </div>

@@ -2,6 +2,7 @@
 import { useAppSelector } from "@/store/hooks";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { getS3Url } from "@/lib/s3-image";
 export function SelectedMember() {
   const {
     bookingData: { member },
@@ -19,7 +20,7 @@ export function SelectedMember() {
       >
         <div className="relative size-14 aspect-square ">
           <Image
-            src={member.image ? member.image : "/avatars/avatar.webp"}
+            src={member.image ? getS3Url(member.image) : "/avatars/avatar.webp"}
             fill
             alt={member.name}
             className="shadow-md rounded-full object-cover border border-border cursor-pointer transition-all duration-150 hover:scale-105"

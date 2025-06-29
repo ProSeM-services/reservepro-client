@@ -2,11 +2,10 @@ import HomeHeader from "@/layers/home/components/home-header";
 import MemberList from "@/layers/search/components/member-list";
 import SercvicesList from "@/layers/search/components/services-list";
 import { getClientCompanyData } from "@/lib/clienta-actions";
-import { getS3Url } from "@/lib/s3-image";
 import { ClockIcon, MapIcon } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import React, { Suspense } from "react";
+import { CompanyImages } from "../components/company-images";
 
 export async function SearchCompanyDetail({
   params,
@@ -26,26 +25,14 @@ export async function SearchCompanyDetail({
         </Link>
       </HomeHeader>
 
-      <section className="container mx-auto px-4 py-8  space-y-5">
-        <div className="flex flex-col gap-0">
+      <section className="container mx-auto px-4 py-8  space-y-5 ">
+        <div className="flex flex-col gap-0 ">
           <h1 className="text-3xl font-bold ">{company.name}</h1>
           <p className="text-gray-600 ">{company.address.value}</p>
+          <p className="text-gray-600 ">{company.email}</p>
         </div>
-        {company.images?.length && (
-          <section className=" w-full flex gap-4 justify-around ">
-            <div className="h-[500px]  w-full flex gap-2  items-center  ">
-              {company.images?.map((image) => (
-                <img
-                  key={image}
-                  alt={company.name}
-                  className="rounded-xl h-[80%] object-contain"
-                  src={getS3Url(image)}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-        <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4">
+        {company.images?.length && <CompanyImages company={company} />}
+        <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4 ">
           <div className="flex-grow  max-md:w-full space-y-4">
             <h1 className="text-2xl font-bold ">Nosotros</h1>
             <div className="mb-4">
@@ -58,54 +45,52 @@ export async function SearchCompanyDetail({
                 </span>
               ))}
             </div>
-            {company.email && (
-              <p className="mb-4">
-                <strong>Email:</strong> {company.email}
-              </p>
-            )}
+
             {company.workhours && (
               <div className="mb-4">
                 <h2 className="text-xl font-semibold mb-2">
                   Horarios de atención
                 </h2>
                 <ul>
-                  {company.workhours.map((wh, index) => (
-                    <li key={index}>
-                      <div className="flex justify-between gap-2 items-center w-1/2">
-                        <p className="font-semibold">
-                          {
-                            ["dom", "lun", "mar", "mie", "jue", "vie", "sab"][
-                              wh.day
-                            ]
-                          }
-                        </p>
+                  {company.workhours
+                    .filter((item) => item.segments.length > 0)
+                    .map((wh, index) => (
+                      <li key={index}>
+                        <div className="flex  justify-between gap-2 items-center w-1/2 max-md:w-full">
+                          <p className="font-semibold">
+                            {
+                              ["dom", "lun", "mar", "mie", "jue", "vie", "sab"][
+                                wh.day
+                              ]
+                            }
+                          </p>
 
-                        <div className="flex gap-2">
-                          {wh.segments.map(({ endTime, startime }) => (
-                            <span className="" key={endTime}>
-                              {startime} - {endTime}
-                            </span>
-                          ))}
+                          <div className="flex gap-2">
+                            {wh.segments.map(({ endTime, startime }) => (
+                              <span className="" key={endTime}>
+                                {startime} - {endTime}
+                              </span>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    </li>
-                  ))}
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}
-            {company.services && (
+            {company.Services && (
               <div className="mt-8">
                 <h2 className="text-2xl font-semibold mb-4">Servicios</h2>
                 <Suspense fallback="Loading....">
-                  <SercvicesList />
+                  <SercvicesList companyId={company.id} />
                 </Suspense>
               </div>
             )}
-            {company.members && (
-              <div className="mt-8">
+            {company.Users && (
+              <div className="mt-8 ">
                 <h2 className="text-2xl font-semibold mb-4">Nuestro equipo</h2>
                 <Suspense fallback="Loading....">
-                  <MemberList companyId={company.id} />
+                  <MemberList company={company} />
                 </Suspense>
               </div>
             )}

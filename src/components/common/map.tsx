@@ -31,13 +31,21 @@ const PoiMarkers = ({ pois }: { pois: Poi }) => {
   );
 };
 // ------------------------------------------
-const MapComponent = ({ lat, lng }: { lat: number; lng: number }) => {
+const MapComponent = ({
+  lat,
+  lng,
+  defaultZoom = 14,
+}: {
+  lat: number;
+  lng: number;
+  defaultZoom?: number;
+}) => {
   const [center, setCenter] = useState({ lat, lng });
   return (
     <MapProvider>
       <div className="w-full border bg-gray-300 h-full">
         <Map
-          defaultZoom={14}
+          defaultZoom={defaultZoom}
           defaultCenter={center}
           center={center}
           onCenterChanged={(e) => setCenter(e.detail.center)}

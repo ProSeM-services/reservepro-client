@@ -6,28 +6,38 @@ import { formatDuration } from "@/lib/formatDuration";
 import { useSearchParams } from "next/navigation";
 import { IService } from "@/interfaces";
 import LoaderWrapper from "@/components/common/loadingWrappers/loader-wrapper";
+import { formatCurrency } from "@/lib/formatCurrency";
 
 export default function SercvicesList({
   readonly = true,
+  companyId = "",
 }: {
   readonly?: boolean;
+  companyId?: string;
 }) {
   const [services, setServices] = useState<IService[]>([]);
+  const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
-  const companyId = searchParams.get("company");
+  const company_id = searchParams.get("company") || companyId;
 
   useEffect(() => {
-    if (!companyId) return;
+    if (!company_id) return;
     const fetch = async () => {
-      const res = await getCompnayServices(companyId);
-      console.log("COOMPANY SERIVCES", res);
-      setServices(res);
+      try {
+        setLoading(true);
+        const res = await getCompnayServices(company_id);
+        setServices(res);
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetch();
-  }, [companyId]);
+  }, [company_id]);
 
   return (
-    <LoaderWrapper loading={services.length === 0} type="services">
+    <LoaderWrapper loading={loading} type="services">
       <div className="space-y-4 w-full h-full">
         {services.length ? (
           services.map((service) => (
@@ -35,12 +45,12 @@ export default function SercvicesList({
               key={service.id}
               className="flex items-center justify-between border border-border rounded-lg p-4 cursor-pointer "
             >
-              <div className="space-y-2">
+              <div>
                 <strong>{service.title}</strong>
                 <p className="text-gray-400">
                   {formatDuration(service.duration)}
                 </p>
-                <p>$ {service.price}</p>
+                <p className="text-gray-400">{formatCurrency(service.price)}</p>
               </div>
               {!readonly && <SelectService service={service} />}
             </div>

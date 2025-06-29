@@ -14,7 +14,7 @@ export default function LandingPage() {
         <div className="flex gap-4 ">
           <Link
             href="/search"
-            className="bg-primary text-white font-semibold flex items-center px-4 p-2 rounded-sm"
+            className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold flex items-center px-4 p-2 rounded-sm"
           >
             Buscar
           </Link>

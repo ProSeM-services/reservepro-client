@@ -40,8 +40,9 @@ export class ClientServices {
   }
   static async getCompanyMembers(companyId: string): Promise<IMember[]> {
     const res = await axios.get(
-      `${BASE_URL}/client/companies/${companyId}/members`
+      `${BASE_URL}/company/company-detail/${companyId}`
     );
+    console.log("member data", res.data);
     return res.data;
   }
   static async getServiceMembers(serviceId: string): Promise<IMember[]> {

@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Suspense } from "react";
 import AsideFilters from "../components/aside-filters";
+import { Badge } from "@/components/ui/badge";
 
 interface PageProps {
   searchParams?: {
@@ -26,21 +27,21 @@ export function SearchPage({ searchParams }: PageProps) {
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <div className="flex flex-col h-screen   bg-muted">
+    <div className="flex flex-col h-screen gap-1 ">
       <HomeHeader>
         <h1 className="text-lg font-light max-md:text-xs ">
           Encuentra servicios cerca de ti
         </h1>
       </HomeHeader>
 
-      <main className=" h-[95%] bg-muted">
-        <div className="container mx-auto px-4 py-8 h-full  ">
-          <div className="flex space-x-4 mb-8 h-10 ">
+      <main className=" h-[93%]">
+        <div className=" container mx-auto p-4 h-full  flex flex-col gap-4 ">
+          <div className="flex gap-4 items-center">
             <div className="flex-grow">
               <Search placeholder="Buscar servicios, negocios o tratamientos" />
             </div>
             <Link href={"/search/maps"}>
-              <Button variant={"outline"}>
+              <Button>
                 <MapIcon className="size-4" />
               </Button>
             </Link>
@@ -53,10 +54,15 @@ export function SearchPage({ searchParams }: PageProps) {
             <aside className="w-1/4 space-y-4 max-md:hidden">
               <h2 className="text-xl font-semibold mb-4">Filtros</h2>
               <LocationFilter />
-              <CategoryFilter />
+
+              <div>
+                <span className="text-sm text-gray-500">Cagtegorias</span>
+                <CategoryFilter />
+              </div>
             </aside>
 
             <div className="md:w-3/4  w-full max-h-full h-full overflow-auto  ">
+              {city && <Badge className="mb-4">{city}</Badge>}
               <Suspense fallback={<div>Cargando resultados...</div>}>
                 <SearchTable
                   view="grid"

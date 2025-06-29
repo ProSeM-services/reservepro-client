@@ -1,11 +1,12 @@
-import { getCompanyMembers } from "@/lib/clienta-actions";
+import { ICompany } from "@/interfaces";
+import { getS3Url } from "@/lib/s3-image";
 import Image from "next/image";
 import React from "react";
 
-export default async function MemberList({ companyId }: { companyId: string }) {
-  const members = await getCompanyMembers(companyId);
+export default function MemberList({ company }: { company: ICompany }) {
+  const members = company.Users || [];
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 flex-wrap ">
       {members.map((member) => (
         <div
           key={member.id}
@@ -13,10 +14,12 @@ export default async function MemberList({ companyId }: { companyId: string }) {
         >
           <div className="relative size-24 aspect-square ">
             <Image
-              src={"/avatars/avatar.webp"}
+              src={
+                member.image ? getS3Url(member.image) : "/avatars/avatar.webp"
+              }
               fill
               alt={member.name}
-              className="shadow-md rounded-full object-cover border border-border cursor-pointer transition-all duration-150 hover:scale-105"
+              className="shadow-md rounded-full object-cover border border-border  transition-all duration-150 hover:scale-105"
             />
           </div>
           <div className="flex gap-1 font-medium">

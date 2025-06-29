@@ -1,4 +1,3 @@
-import { getClientCompanyData } from "@/lib/clienta-actions";
 import React, { ReactNode } from "react";
 import {
   SelectedServiceDetails,
@@ -37,11 +36,11 @@ export default function layout({ children }: LayoutProps) {
             <AppointmentDataAside />
           </aside>
         </div>
-        <section className=" container flex justify-between h-[82vh] max-md:max-h-[82vh]  gap-4   overflow-auto ">
+        <section className=" container flex justify-between h-[82vh] max-md:max-h-[82vh]  gap-4   overflow-auto  ">
           <div className=" md:max-h-full   h-full  max-w-2/3 w-2/3 flex-grow">
             {children}
           </div>
-          <aside className="w-1/3 p-4 max-md:hidden border rounded-lg shadow-md h-full flex flex-col justify-between">
+          <aside className="w-1/3 p-4 max-md:hidden border rounded-lg shadow-md h-full flex flex-col justify-between ">
             <div className=" space-y-4">
               <SelectedCompanyDetail />
               <hr />

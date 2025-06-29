@@ -60,7 +60,7 @@ export function CalendarSelect() {
   };
 
   return (
-    <div className=" w-full   h-full items-start flex max-md:flex-col gap-4 ">
+    <div className=" w-full   h-[99%]  max-h-[99%] items-start flex max-md:flex-col gap-4    ">
       <section className="md:hidden flex flex-col   w-full">
         <Label>Seleccionar una fecha</Label>
         <Popover>
@@ -112,10 +112,10 @@ export function CalendarSelect() {
           <p>No hay horarios disponibles</p>
         </div>
       ) : date ? (
-        <div className=" flex  flex-wrap items-start justify-start gap-2   w-full">
+        <div className=" grid grid-cols-4  max-md:grid-cols-2 gap-2  h-full max-h-full w-full     overflow-y-auto">
           {availableList.map((value) => (
             <div
-              className={`border  size-36 flex-grow    grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
+              className={`border  h-full w-full rounded-lg flex-grow  py-10  grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
                 time === value.hs ? "bg-primary text-white" : ""
               }`}
               onClick={() => handleSelectTime(value.hs)}

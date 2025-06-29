@@ -22,7 +22,7 @@ export default function SelectService({ service }: { service: IService }) {
 
   return (
     <Button variant={"outline"} onClick={handleSelecServices}>
-      Reservar
+      Seleccionar
     </Button>
   );
 }
