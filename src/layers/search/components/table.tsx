@@ -76,10 +76,10 @@ export default async function SearchTable({
         ))}
       </CarouselContent>
       {companies.length > 3 ? (
-        <>
+        <div className="text-black">
           <CarouselPrevious />
           <CarouselNext />
-        </>
+        </div>
       ) : null}
     </Carousel>
   );

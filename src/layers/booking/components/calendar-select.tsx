@@ -29,7 +29,6 @@ export function CalendarSelect() {
   const dispatch = useAppDispatch();
   const { member, duration, date, time } = bookingData;
   useEffect(() => {
-    console.log("date", date);
     if (!date) return;
     const fetchData = async () => {
       setLoading(true);
@@ -112,7 +111,7 @@ export function CalendarSelect() {
           <p>No hay horarios disponibles</p>
         </div>
       ) : date ? (
-        <div className=" grid grid-cols-4  max-md:grid-cols-2 gap-2  h-full max-h-full w-full     overflow-y-auto">
+        <div className=" grid grid-cols-4  max-md:grid-cols-2 gap-2  h-full max-h-full max-md:h-[70vh] max-md:max-h-[70vh] w-full  overflow-y-auto">
           {availableList.map((value) => (
             <div
               className={`border  h-full w-full rounded-lg flex-grow  py-10  grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${

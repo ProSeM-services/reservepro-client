@@ -17,7 +17,7 @@ export function CompaniesHomeSection({ searchParams }: PageProps) {
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
-    <section className="minh-h-screen text-card-foreground py-6">
+    <section className="min-h-screen  py-6   z-10">
       <div className="container space-y-[2rem]">
         <section className="w-5/6 md:w-full  mx-auto space-y-4">
           <h3 className="font-bold text-2xl ">Recomendado</h3>
