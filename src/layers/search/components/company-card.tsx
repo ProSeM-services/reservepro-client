@@ -1,6 +1,6 @@
 "use client";
 import { ICompany } from "@/interfaces";
-import { HomeIcon, MailIcon, MapPinned } from "lucide-react";
+import { HomeIcon, MailIcon, MapPinned, ImageIcon } from "lucide-react";
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
@@ -35,18 +35,20 @@ export default function CompanyCard({
       key={company.id}
       onClick={selectCompany}
     >
-      <div className="w-full h-52  overflow-hidden rounded-sm">
-        <Image
-          src={
-            company.image
-              ? getS3Url(company.image)
-              : `/company/${Math.floor(Math.random() * 3) + 1}.jpeg`
-          }
-          width={400}
-          height={400}
-          alt={`Imagen de ${company.name}`}
-          className="w-full h-full object-cover"
-        />
+      <div className="w-full h-52  flex justify-center items-center overflow-hidden rounded-sm">
+        {company.image ? (
+          <Image
+            src={getS3Url(company.image)}
+            width={400}
+            height={400}
+            alt={`Imagen de ${company.name}`}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="size-full flex items-center justify-center">
+            <ImageIcon className="size-24 text-gray-500" />
+          </div>
+        )}
       </div>
 
       <section className="flex w-full flex-col  text-[16px]  p-4 gap-2 ">

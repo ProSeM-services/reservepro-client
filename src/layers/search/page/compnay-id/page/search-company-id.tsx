@@ -31,7 +31,7 @@ export async function SearchCompanyDetail({
           <p className="text-gray-600 ">{company.address.value}</p>
           <p className="text-gray-600 ">{company.email}</p>
         </div>
-        {company.images?.length && <CompanyImages company={company} />}
+        {company.images?.length ? <CompanyImages company={company} /> : null}
         <div className=" flex  max-md:flex-col-reverse items-start justify-between gap-4 ">
           <div className="flex-grow  max-md:w-full space-y-4">
             <h1 className="text-2xl font-bold ">Nosotros</h1>

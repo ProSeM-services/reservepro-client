@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function HomeHeader({ children }: PropsWithChildren) {
   return (
@@ -11,8 +12,12 @@ export default function HomeHeader({ children }: PropsWithChildren) {
         <div className="flex items-center space-x-4">
           <Link href={"/"}>
             <div className="text-2xl font-bold text-primary">
-              <span className="text-secondary-foreground">Reserve</span>
-              <span className="text-indigo-500">Pro</span>
+              <Image
+                src={"/logo.svg"}
+                width={100}
+                height={100}
+                alt="reserve pro"
+              />
             </div>
           </Link>{" "}
         </div>

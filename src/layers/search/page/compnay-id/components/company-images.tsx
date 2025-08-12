@@ -10,8 +10,8 @@ import {
 export function CompanyImages({ company }: { company: ICompany }) {
   return (
     <>
-      <section className=" w-full flex gap-4 justify-around max-md:hidden  ">
-        <div className="h-[500px]  w-full flex gap-2  items-center  ">
+      <section className=" w-full flex gap-4 justify-around max-md:hidden   ">
+        <div className="h-[500px]  w-full flex gap-2  items-center overflow-auto  ">
           {company.images?.map((image) => (
             <img
               key={image}
@@ -22,7 +22,7 @@ export function CompanyImages({ company }: { company: ICompany }) {
           ))}
         </div>
       </section>
-      <section className=" w-5/6 mx-auto flex gap-4 justify-around   md:hidden   ">
+      <section className=" w-5/6 mx-auto flex gap-4 justify-around    md:hidden   ">
         <Carousel className="w-[80%] max-w-[80%] mx-auto ">
           <CarouselContent className="">
             {company.images?.map((image) => (
