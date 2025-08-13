@@ -11,8 +11,6 @@ export const middleware: NextMiddleware = async (req) => {
 
       return NextResponse.redirect(url);
     }
-
-    console.log("en middleware ===> ", session.user);
   } else {
     if (session) {
       const url = req.nextUrl.clone();
@@ -26,5 +24,5 @@ export const middleware: NextMiddleware = async (req) => {
 };
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/login", "/"],
+  matcher: ["/dashboard/:path*", "/login"],
 };

@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/config/axios.config";
-import { ITentant } from "@/interfaces/member.iterface";
+import { ICreateTentant, ITentant } from "@/interfaces/member.iterface";
 import axios from "axios";
 
 export class AuthServices {
@@ -8,8 +8,13 @@ export class AuthServices {
 
     return response.data;
   }
-  static async register(data: ITentant): Promise<ITentant> {
+  static async register(data: ICreateTentant): Promise<ITentant> {
     const response = await axios.post(`${BASE_URL}/auth/register`, data);
+
+    return response.data;
+  }
+  static async confirmEmail(data: { token: string }): Promise<ITentant> {
+    const response = await axios.post(`${BASE_URL}/auth/confirmation`, data);
 
     return response.data;
   }

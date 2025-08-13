@@ -3,12 +3,9 @@ import { z } from "zod";
 const envZodModel = z.object({
   NEXT_PUBLIC_API: z.string().url(),
   NEXTAUTH_SECRET: z.string(),
+  NEXT_PUBLIC_APIMAPS: z.string(),
+  NEXT_PUBLIC_S3_BASE_URL: z.string().url(),
 });
-
-/*
- |TODO For the moment prevent this from passing deployment into production.
- |------>  envZodModel.parse(process.env);
-*/
 
 type EnvType = z.infer<typeof envZodModel>;
 declare global {

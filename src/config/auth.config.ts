@@ -7,12 +7,13 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
 
       credentials: {
-        email: { label: "Username", type: "text", placeholder: "jsmith" },
+        user: { label: "Username", type: "text", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
 
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials.password) return null;
+        if (!credentials?.user || !credentials.password) return null;
+
         const res = await AuthServices.login(credentials);
         if (res.status === 401) {
           return null;

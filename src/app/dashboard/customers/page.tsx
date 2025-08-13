@@ -1,5 +1,6 @@
-import React from "react";
+import { CustomersPages } from "@/layers/customers/page";
+import React, { Suspense } from "react";
 
-export default function CustomersPages() {
-  return <div>CustomersPage</div>;
+export default async function page() {
+  return <CustomersPages />;
 }

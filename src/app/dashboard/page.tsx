@@ -1,34 +1,52 @@
-import React, { Suspense } from "react";
-import CompanyList from "@/app/components/dashboard/company-list";
-import MemberList from "@/app/components/dashboard/member-list";
-import AddButton from "../components/dashboard/add-button";
+import { Card, CardTitle } from "@/components/ui/card";
+import {
+  AddButton,
+  CustomerStats,
+  MemberList,
+} from "@/layers/dashboard/components";
+import { AppointmentStats } from "@/layers/dashboard/components/appointment-stats";
+import { CalnedarAppointments } from "@/layers/dashboard/components/calendar-appointments";
+import { CompanyList } from "@/layers/dashboard/components/company-list";
+import { Users } from "lucide-react";
 
-export default async function page() {
+export default function Page() {
   return (
-    <div className=" h-full flex flex-col gap-4">
-      <section>
-        <div className="flex  flex-col gap-4">
-          <div className="flex items-center gap-2 mr-auto ">
-            <span className="">Add Company</span>
-            <AddButton type="company" />
-          </div>
-          <Suspense fallback={"Loading ..."}>
-            <CompanyList />
-          </Suspense>
+    <div>
+      <div className="flex flex-1 flex-col gap-4 ">
+        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+          <Card className=" w-full rounded-md p-2  space-y-2">
+            {" "}
+            <div className="flex items-center justify-between font-bold">
+              <CardTitle>Miembros</CardTitle>
+              <div className="flex items-center gap-2">
+                <Users />
+                <AddButton type="member" />
+              </div>
+            </div>
+            <div className=" h-[90%] max-h-[90%] overflow-y-auto ">
+              <MemberList />
+            </div>
+          </Card>
+          <Card className=" w-full rounded-md p-2  space-y-2">
+            {" "}
+            <div className="flex items-center justify-between font-bold">
+              <CardTitle>Sucursales</CardTitle>
+              <div className="flex items-center gap-2">
+                <Users />
+                <AddButton type="company" />
+              </div>
+            </div>
+            <div className=" h-[90%] max-h-[90%] overflow-y-auto ">
+              <CompanyList />
+            </div>
+          </Card>
+          <CalnedarAppointments />
         </div>
-      </section>
-      <hr />
-      <section>
-        <div className="flex  flex-col gap-4">
-          <div className="flex items-center gap-2 mr-auto ">
-            <span className="">Add Company</span>
-            <AddButton type="member" />
-          </div>
-          <Suspense fallback={"Loading ..."}>
-            <MemberList />
-          </Suspense>
+        <div className="min-h-[100vh] flex gap-4 flex-1 rounded-xl  md:min-h-min">
+          <AppointmentStats />
+          <CustomerStats />
         </div>
-      </section>
+      </div>
     </div>
   );
 }
