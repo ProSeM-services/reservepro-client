@@ -1,12 +1,7 @@
 "use client";
 
-import { ICompany, IService } from "@/interfaces";
-import {
-  getClientServiceData,
-  getServicesMembers,
-  getClientCompanyData,
-} from "@/lib/clienta-actions";
-import { formatDuration } from "@/lib/formatDuration";
+import { ICompany } from "@/interfaces";
+import { getCompanyById } from "@/lib/clienta-actions";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -18,7 +13,7 @@ export function SelectedCompanyDetail() {
   const companyId = params.get("company") || "";
   useEffect(() => {
     if (params.get("company")) {
-      getClientCompanyData(companyId).then((res) => setCompany(res));
+      getCompanyById(companyId).then((res) => setCompany(res));
     } else {
       setCompany(null);
     }

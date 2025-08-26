@@ -26,7 +26,7 @@ export default function CompanyCard({
       router.replace(`${pathname}?${params.toString()}`);
       return;
     }
-    router.push(`/search/${company.id}`);
+    router.push(`/search/${company.alias}`);
   };
 
   return (

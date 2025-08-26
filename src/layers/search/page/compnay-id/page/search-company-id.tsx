@@ -13,7 +13,6 @@ export async function SearchCompanyDetail({
   params: { id: string };
 }) {
   const company = await getClientCompanyData(params.id);
-
   return (
     <div className=" ">
       <HomeHeader>
@@ -103,7 +102,6 @@ export async function SearchCompanyDetail({
             </p>
 
             <Link
-              // href={`/search/${company.id}/booking?company=${company.id}`}
               href={`/booking?company=${company.id}`}
               className="bg-primary text-white text-center p-2 rounded-md font-semibold"
             >

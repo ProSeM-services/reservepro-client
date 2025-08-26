@@ -24,6 +24,15 @@ export class ClientServices {
     );
     return res.data;
   }
+  static async getCompanyByAlias(alias: string): Promise<ICompany> {
+    try {
+      const res = await axios.get(`${BASE_URL}/company/alias/${alias}`);
+      return res.data;
+    } catch (error) {
+      console.log("error geting by alias", error);
+      throw error;
+    }
+  }
   static async getServicesById(id: string): Promise<IService> {
     const res = await axios.get(`${BASE_URL}/services/clients/${id}`);
     return res.data;

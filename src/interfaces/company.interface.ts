@@ -14,6 +14,7 @@ export const CompanyZodSchema = z.object({
     .array(z.enum(CATEGORY_VALUES))
     .max(3, "Puedes elegir como máximo 3 categorías.")
     .min(1, "Debes elegir por lo menos 1 categoría."),
+  alias: z.string(),
   image: z.string().optional(),
   images: z.array(z.string()).optional(),
   city: z.string().optional(),
