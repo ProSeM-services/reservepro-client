@@ -21,7 +21,17 @@ export async function getClientComapnies({
   return companies;
 }
 
-export async function getClientCompanyData(id: string) {
+export async function getClientCompanyData(alias: string) {
+  const companies = await ClientServices.getCompanyByAlias(alias);
+  revalidatePath("/search");
+  return companies;
+}
+export async function getCompanyByAlias(alias: string) {
+  const companies = await ClientServices.getCompanyByAlias(alias);
+  revalidatePath("/search");
+  return companies;
+}
+export async function getCompanyById(id: string) {
   const companies = await ClientServices.getCompanyById(id);
   revalidatePath("/search");
   return companies;

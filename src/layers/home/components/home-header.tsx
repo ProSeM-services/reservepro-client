@@ -13,7 +13,7 @@ export default function HomeHeader({ children }: PropsWithChildren) {
           <Link href={"/"}>
             <div className="text-2xl font-bold text-primary">
               <Image
-                src={"/logo.svg"}
+                src={"/Logo.svg"}
                 width={100}
                 height={100}
                 alt="reserve pro"

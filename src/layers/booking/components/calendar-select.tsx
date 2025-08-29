@@ -111,10 +111,10 @@ export function CalendarSelect() {
           <p>No hay horarios disponibles</p>
         </div>
       ) : date ? (
-        <div className=" grid grid-cols-4  max-md:grid-cols-2 gap-2  h-full max-h-full max-md:h-[70vh] max-md:max-h-[70vh] w-full  overflow-y-auto">
+        <div className=" flex  flex-wrap  md:gap-2  max-h-full  max-md:max-h-[70vh] w-full  overflow-y-auto">
           {availableList.map((value) => (
             <div
-              className={`border  h-full w-full rounded-lg flex-grow  py-10  grid place-items-center    cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
+              className={`border  size-32  max-md:w-1/2  rounded-lg     grid place-items-center     cursor-pointer hover:bg-primary hover:text-white transition-all duration-300 ${
                 time === value.hs ? "bg-primary text-white" : ""
               }`}
               onClick={() => handleSelectTime(value.hs)}
